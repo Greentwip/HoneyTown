@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BB3BC34B-CA42-4B42-BF42-EE46431DD232}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoGame.Extended</RootNamespace>
+    <AssemblyName>MonoGame.Extended</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AnimationComponent.cs" />
+    <Compile Include="BitmapFonts\BitmapFont.cs" />
+    <Compile Include="BitmapFonts\BitmapFontExtensions.cs" />
+    <Compile Include="BitmapFonts\BitmapFontReader.cs" />
+    <Compile Include="BitmapFonts\BitmapFontRegion.cs" />
+    <Compile Include="Camera.cs" />
+    <Compile Include="Collections\Bag.cs" />
+    <Compile Include="Collections\Deque.cs" />
+    <Compile Include="Collections\DictionaryExtensions.cs" />
+    <Compile Include="Collections\IObservableCollection.cs" />
+    <Compile Include="Collections\IPoolable.cs" />
+    <Compile Include="Collections\ItemEventArgs.cs" />
+    <Compile Include="Collections\KeyedCollection.cs" />
+    <Compile Include="Collections\ListExtensions.cs" />
+    <Compile Include="Collections\ObjectPool.cs" />
+    <Compile Include="Collections\ObservableCollection.cs" />
+    <Compile Include="Collections\Pool.cs" />
+    <Compile Include="ColorExtensions.cs" />
+    <Compile Include="ColorHelper.cs" />
+    <Compile Include="Content\ContentManagerExtensions.cs" />
+    <Compile Include="Content\ContentReaderExtensions.cs" />
+    <Compile Include="FramesPerSecondCounter.cs" />
+    <Compile Include="FramesPerSecondCounterComponent.cs" />
+    <Compile Include="GameComponentCollectionExtensions.cs" />
+    <Compile Include="GameTimeExtensions.cs" />
+    <Compile Include="HslColor.cs" />
+    <Compile Include="IColorable.cs" />
+    <Compile Include="IEquatableByRef.cs" />
+    <Compile Include="IMovable.cs" />
+    <Compile Include="IRectangular.cs" />
+    <Compile Include="IRotatable.cs" />
+    <Compile Include="IScalable.cs" />
+    <Compile Include="ISizable.cs" />
+    <Compile Include="IUpdate.cs" />
+    <Compile Include="Math\Angle.cs" />
+    <Compile Include="Math\BoundingRectangle.cs" />
+    <Compile Include="Math\CircleF.cs" />
+    <Compile Include="Math\EllipseF.cs" />
+    <Compile Include="Math\FastRandom.cs" />
+    <Compile Include="Math\FloatHelper.cs" />
+    <Compile Include="Math\Matrix2.cs" />
+    <Compile Include="Math\MatrixExtensions.cs" />
+    <Compile Include="Math\Point2.cs" />
+    <Compile Include="Math\Point3.cs" />
+    <Compile Include="Math\PrimitivesHelper.cs" />
+    <Compile Include="Math\RandomExtensions.cs" />
+    <Compile Include="Math\Range.cs" />
+    <Compile Include="Math\Ray2.cs" />
+    <Compile Include="Math\RectangleExtensions.cs" />
+    <Compile Include="Math\RectangleF.cs" />
+    <Compile Include="Math\Segment2.cs" />
+    <Compile Include="Math\ShapeExtensions.cs" />
+    <Compile Include="Math\ShapeF.cs" />
+    <Compile Include="Math\Size.cs" />
+    <Compile Include="Math\Size2.cs" />
+    <Compile Include="Math\Size3.cs" />
+    <Compile Include="Math\Thickness.cs" />
+    <Compile Include="Math\Vector2Extensions.cs" />
+    <Compile Include="OrthographicCamera.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\ScreenManager.cs" />
+    <Compile Include="Screens\Transitions\ExpandTransition.cs" />
+    <Compile Include="Screens\Transitions\FadeTransition.cs" />
+    <Compile Include="Screens\Transitions\Transition.cs" />
+    <Compile Include="Serialization\BaseTypeJsonConverter.cs" />
+    <Compile Include="Serialization\ColorJsonConverter.cs" />
+    <Compile Include="Serialization\ContentManagerJsonConverter.cs" />
+    <Compile Include="Serialization\HslColorJsonConverter.cs" />
+    <Compile Include="Serialization\JsonContentLoader.cs" />
+    <Compile Include="Serialization\JsonContentTypeReader.cs" />
+    <Compile Include="Serialization\JsonReaderExtensions.cs" />
+    <Compile Include="Serialization\MonoGameJsonSerializer.cs" />
+    <Compile Include="Serialization\NinePatchRegion2DJsonConverter.cs" />
+    <Compile Include="Serialization\RangeJsonConverter.cs" />
+    <Compile Include="Serialization\ShortNameJsonContractResolver.cs" />
+    <Compile Include="Serialization\Size2JsonConverter.cs" />
+    <Compile Include="Serialization\TextContentLoader.cs" />
+    <Compile Include="Serialization\TextureRegion2DJsonConverter.cs" />
+    <Compile Include="Serialization\TextureRegionService.cs" />
+    <Compile Include="Serialization\ThicknessJsonConverter.cs" />
+    <Compile Include="Serialization\Vector2JsonConverter.cs" />
+    <Compile Include="Shapes\Polygon.cs" />
+    <Compile Include="Shapes\Polyline.cs" />
+    <Compile Include="SimpleDrawableGameComponent.cs" />
+    <Compile Include="SimpleGameComponent.cs" />
+    <Compile Include="Sprites\AnimatedSprite.cs" />
+    <Compile Include="Sprites\Animation.cs" />
+    <Compile Include="Sprites\ISpriteBatchDrawable.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
+    <Compile Include="Sprites\SpriteExtensions.cs" />
+    <Compile Include="Sprites\SpriteSheet.cs" />
+    <Compile Include="Sprites\SpriteSheetAnimation.cs" />
+    <Compile Include="Sprites\SpriteSheetAnimationCycle.cs" />
+    <Compile Include="Sprites\SpriteSheetAnimationData.cs" />
+    <Compile Include="Sprites\SpriteSheetAnimationFrame.cs" />
+    <Compile Include="TextureAtlases\NinePatchRegion2D.cs" />
+    <Compile Include="TextureAtlases\TextureAtlas.cs" />
+    <Compile Include="TextureAtlases\TextureAtlasExtensions.cs" />
+    <Compile Include="TextureAtlases\TextureAtlasJsonContentTypeReader.cs" />
+    <Compile Include="TextureAtlases\TextureAtlasJsonConverter.cs" />
+    <Compile Include="TextureAtlases\TextureAtlasReader.cs" />
+    <Compile Include="TextureAtlases\TexturePackerFile.cs" />
+    <Compile Include="TextureAtlases\TexturePackerMeta.cs" />
+    <Compile Include="TextureAtlases\TexturePackerPoint.cs" />
+    <Compile Include="TextureAtlases\TexturePackerRectangle.cs" />
+    <Compile Include="TextureAtlases\TexturePackerRegion.cs" />
+    <Compile Include="TextureAtlases\TexturePackerSize.cs" />
+    <Compile Include="TextureAtlases\TextureRegion2D.cs" />
+    <Compile Include="Timers\ContinuousClock.cs" />
+    <Compile Include="Timers\CountdownTimer.cs" />
+    <Compile Include="Timers\GameTimer.cs" />
+    <Compile Include="Timers\TimerState.cs" />
+    <Compile Include="Transform.cs" />
+    <Compile Include="ViewportAdapters\BoxingViewportAdapter.cs" />
+    <Compile Include="ViewportAdapters\DefaultViewportAdapter.cs" />
+    <Compile Include="ViewportAdapters\ScalingViewportAdapter.cs" />
+    <Compile Include="ViewportAdapters\ViewportAdapter.cs" />
+    <Compile Include="ViewportAdapters\WindowViewportAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\WindowsUniversal\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

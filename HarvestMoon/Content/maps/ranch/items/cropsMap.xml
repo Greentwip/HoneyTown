@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+      <Item><Key>soil_normal_001.png</Key><Value>32 41 16 16</Value></Item>
+
+      <Item><Key>soil_watered_001.png</Key><Value>50 41 16 16</Value></Item>
+
+      <Item><Key>soil_planted_normal_001.png</Key><Value>99 41 16 16</Value></Item>
+
+      <Item><Key>soil_planted_watered_001.png</Key><Value>117 41 16 16</Value></Item>
+    </Asset>
+</XnaContent>

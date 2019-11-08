@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>walk_down_001.png</Key><Value>29 122 16 24</Value></Item>
+    <Item><Key>walk_down_002.png</Key><Value>46 122 16 24</Value></Item>
+    <Item><Key>walk_down_003.png</Key><Value>63 122 16 24</Value></Item>
+
+    <Item><Key>walk_left_001.png</Key><Value>30 147 16 24</Value></Item>
+    <Item><Key>walk_left_002.png</Key><Value>47 147 16 24</Value></Item>
+    <Item><Key>walk_left_003.png</Key><Value>64 147 16 24</Value></Item>
+
+    <Item><Key>walk_up_001.png</Key><Value>31 172 16 24</Value></Item>
+    <Item><Key>walk_up_002.png</Key><Value>48 172 16 24</Value></Item>
+    <Item><Key>walk_up_003.png</Key><Value>65 172 16 24</Value></Item>
+
+    <Item><Key>walk_down_idle_001.png</Key><Value>46 122 16 24</Value></Item>
+
+    <Item><Key>walk_left_idle_001.png</Key><Value>47 147 16 24</Value></Item>
+
+    <Item><Key>walk_up_idle_001.png</Key><Value>48 172 16 24</Value></Item>
+
+    <Item><Key>run_down_001.png</Key><Value>105 117 16 25</Value></Item>
+    <Item><Key>run_down_002.png</Key><Value>121 117 16 25</Value></Item>
+
+    <Item><Key>run_left_001.png</Key><Value>94 143 16 25</Value></Item>
+    <Item><Key>run_left_002.png</Key><Value>111 143 16 25</Value></Item>
+    <Item><Key>run_left_003.png</Key><Value>128 143 16 25</Value></Item>
+
+    <Item><Key>run_up_001.png</Key><Value>96 170 16 26</Value></Item>
+    <Item><Key>run_up_002.png</Key><Value>113 170 16 26</Value></Item>
+    <Item><Key>run_up_003.png</Key><Value>130 170 16 26</Value></Item>
+
+    <Item><Key>carry_down_001.png</Key><Value>107 358 16 24</Value></Item>
+    <Item><Key>carry_down_002.png</Key><Value>124 358 16 24</Value></Item>
+    <Item><Key>carry_down_003.png</Key><Value>141 358 16 24</Value></Item>
+
+    <Item><Key>carry_left_001.png</Key><Value>56 325 16 24</Value></Item>
+    <Item><Key>carry_left_002.png</Key><Value>39 325 16 24</Value></Item>
+    <Item><Key>carry_left_003.png</Key><Value>40 359 16 24</Value></Item>
+
+    <Item><Key>carry_up_001.png</Key><Value>58 386 16 24</Value></Item>
+    <Item><Key>carry_up_002.png</Key><Value>75 386 16 24</Value></Item>
+    <Item><Key>carry_up_003.png</Key><Value>92 386 16 24</Value></Item>
+
+    <Item><Key>carry_down_idle_001.png</Key><Value>124 358 16 24</Value></Item>
+
+    <Item><Key>carry_left_idle_001.png</Key><Value>39 325 16 24</Value></Item>
+
+    <Item><Key>carry_up_idle_001.png</Key><Value>75 386 16 24</Value></Item>
+
+    <Item><Key>pack_down_001.png</Key><Value>156 167 16 23</Value></Item>
+    <Item><Key>pack_down_002.png</Key><Value>173 167 16 23</Value></Item>
+    <Item><Key>pack_down_003.png</Key><Value>190 167 16 23</Value></Item>
+
+    <Item><Key>pack_left_001.png</Key><Value>157 142 16 23</Value></Item>
+    <Item><Key>pack_left_002.png</Key><Value>174 142 16 23</Value></Item>
+    <Item><Key>pack_left_003.png</Key><Value>191 142 16 23</Value></Item>
+
+    <Item><Key>pack_up_001.png</Key><Value>158 117 16 23</Value></Item>
+    <Item><Key>pack_up_002.png</Key><Value>175 117 16 23</Value></Item>
+    <Item><Key>pack_up_003.png</Key><Value>192 117 16 23</Value></Item>
+
+    <Item><Key>sickle_down_001.png</Key><Value>22 599 24 24</Value></Item>
+    <Item><Key>sickle_down_002.png</Key><Value>50 599 24 24</Value></Item>
+    <Item><Key>sickle_down_003.png</Key><Value>74 599 24 24</Value></Item>
+    <Item><Key>sickle_down_004.png</Key><Value>97 599 24 24</Value></Item>
+
+    <Item><Key>sickle_up_001.png</Key><Value>16 627 27 24</Value></Item>
+    <Item><Key>sickle_up_002.png</Key><Value>45 627 27 24</Value></Item>
+    <Item><Key>sickle_up_003.png</Key><Value>73 627 27 24</Value></Item>
+    <Item><Key>sickle_up_004.png</Key><Value>99 627 27 24</Value></Item>
+
+    <Item><Key>sickle_left_001.png</Key><Value>23 656 25 24</Value></Item>
+    <Item><Key>sickle_left_002.png</Key><Value>48 656 25 24</Value></Item>
+    <Item><Key>sickle_left_003.png</Key><Value>73 656 25 24</Value></Item>
+    <Item><Key>sickle_left_004.png</Key><Value>98 656 25 24</Value></Item>
+
+    <Item><Key>hoe_down_001.png</Key><Value>31 720 16 31</Value></Item>
+    <Item><Key>hoe_down_002.png</Key><Value>48 720 16 31</Value></Item>
+    <Item><Key>hoe_down_003.png</Key><Value>65 720 16 31</Value></Item>
+    <Item><Key>hoe_down_004.png</Key><Value>82 720 16 31</Value></Item>
+
+    <Item><Key>hoe_up_001.png</Key><Value>31 753 19 38</Value></Item>
+    <Item><Key>hoe_up_002.png</Key><Value>50 753 19 38</Value></Item>
+    <Item><Key>hoe_up_003.png</Key><Value>68 753 18 38</Value></Item>
+    <Item><Key>hoe_up_004.png</Key><Value>85 753 18 38</Value></Item>
+
+    <Item><Key>hoe_left_001.png</Key><Value>15 795 24 28</Value></Item>
+    <Item><Key>hoe_left_002.png</Key><Value>40 795 24 28</Value></Item>
+    <Item><Key>hoe_left_003.png</Key><Value>65 795 24 28</Value></Item>
+    <Item><Key>hoe_left_004.png</Key><Value>90 795 24 28</Value></Item>
+
+    <Item><Key>hammer_down_001.png</Key><Value>178 715 16 26</Value></Item>
+    <Item><Key>hammer_down_002.png</Key><Value>195 709 16 32</Value></Item>
+    <Item><Key>hammer_down_003.png</Key><Value>212 709 23 32</Value></Item>
+    <Item><Key>hammer_down_004.png</Key><Value>236 713 16 26</Value></Item>
+
+    <Item><Key>hammer_up_001.png</Key><Value>175 759 18 24</Value></Item>
+    <Item><Key>hammer_up_002.png</Key><Value>194 743 18 40</Value></Item>
+    <Item><Key>hammer_up_003.png</Key><Value>213 760 26 23</Value></Item>
+    <Item><Key>hammer_up_004.png</Key><Value>240 760 17 23</Value></Item>
+
+    <Item><Key>hammer_left_001.png</Key><Value>191 790 19 29</Value></Item>
+    <Item><Key>hammer_left_002.png</Key><Value>181 791 26 28</Value></Item>
+    <Item><Key>hammer_left_003.png</Key><Value>208 797 32 31</Value></Item>
+    <Item><Key>hammer_left_004.png</Key><Value>241 796 25 23</Value></Item>
+
+    <Item><Key>axe_down_001.png</Key><Value>338 702 16 32</Value></Item>
+    <Item><Key>axe_down_002.png</Key><Value>355 705 16 41</Value></Item>
+    <Item><Key>axe_down_003.png</Key><Value>372 714 18 32</Value></Item>
+    <Item><Key>axe_down_004.png</Key><Value>391 714 16 32</Value></Item>
+
+    <Item><Key>axe_up_001.png</Key><Value>336 756 18 32</Value></Item>
+    <Item><Key>axe_up_002.png</Key><Value>355 747 18 40</Value></Item>
+    <Item><Key>axe_up_003.png</Key><Value>374 765 18 22</Value></Item>
+    <Item><Key>axe_up_004.png</Key><Value>393 765 18 22</Value></Item>
+
+    <Item><Key>axe_left_001.png</Key><Value>311 791 20 32</Value></Item>
+    <Item><Key>axe_left_002.png</Key><Value>332 790 31 35</Value></Item>
+    <Item><Key>axe_left_003.png</Key><Value>365 798 30 25</Value></Item>
+    <Item><Key>axe_left_004.png</Key><Value>396 798 30 25</Value></Item>
+
+    <Item><Key>watering-can_down_001.png</Key><Value>22 838 16 23</Value></Item>
+    <Item><Key>watering-can_down_002.png</Key><Value>39 836 19 25</Value></Item>
+    <Item><Key>watering-can_up_001.png</Key><Value>23 864 18 21</Value></Item>
+    <Item><Key>watering-can_up_002.png</Key><Value>42 862 19 23</Value></Item>
+    <Item><Key>watering-can_left_001.png</Key><Value>19 890 22 22</Value></Item>
+    <Item><Key>watering-can_left_002.png</Key><Value>42 886 25 26</Value></Item>
+
+    <Item><Key>seeds_down_001.png</Key><Value>309 838 20 21</Value></Item>
+    <Item><Key>seeds_down_002.png</Key><Value>330 838 23 21</Value></Item>
+    <Item><Key>seeds_down_003.png</Key><Value>379 838 22 20</Value></Item>
+    <Item><Key>seeds_down_004.png</Key><Value>403 840 22 19</Value></Item>
+    <Item><Key>seeds_down_005.png</Key><Value>403 840 22 19</Value></Item>
+    <Item><Key>seeds_down_006.png</Key><Value>94 834 25 32</Value></Item>
+    <Item><Key>seeds_down_007.png</Key><Value>120 834 25 32</Value></Item>
+    <Item><Key>seeds_down_008.png</Key><Value>146 834 26 32</Value></Item>
+    <Item><Key>seeds_down_009.png</Key><Value>173 834 26 32</Value></Item>
+    <Item><Key>seeds_down_010.png</Key><Value>200 834 26 32</Value></Item>
+    <Item><Key>seeds_down_011.png</Key><Value>427 837 18 22</Value></Item>
+    <Item><Key>seeds_down_012.png</Key><Value>446 839 18 20</Value></Item>
+
+    <Item><Key>seeds_up_001.png</Key><Value>342 865 21 22</Value></Item>
+    <Item><Key>seeds_up_002.png</Key><Value>364 865 22 23</Value></Item>
+    <Item><Key>seeds_up_003.png</Key><Value>94 834 25 32</Value></Item>
+    <Item><Key>seeds_up_004.png</Key><Value>120 834 25 32</Value></Item>
+    <Item><Key>seeds_up_005.png</Key><Value>146 834 26 32</Value></Item>
+    <Item><Key>seeds_up_006.png</Key><Value>173 834 26 32</Value></Item>
+    <Item><Key>seeds_up_007.png</Key><Value>200 834 26 32</Value></Item>
+    <Item><Key>seeds_up_008.png</Key><Value>387 865 21 23</Value></Item>
+    <Item><Key>seeds_up_009.png</Key><Value>409 865 20 23</Value></Item>
+
+    <Item><Key>seeds_left_001.png</Key><Value>344 893 16 23</Value></Item>
+    <Item><Key>seeds_left_002.png</Key><Value>361 893 17 23</Value></Item>
+    <Item><Key>seeds_left_003.png</Key><Value>94 834 25 32</Value></Item>
+    <Item><Key>seeds_left_004.png</Key><Value>120 834 25 32</Value></Item>
+    <Item><Key>seeds_left_005.png</Key><Value>146 834 26 32</Value></Item>
+    <Item><Key>seeds_left_006.png</Key><Value>173 834 26 32</Value></Item>
+    <Item><Key>seeds_left_007.png</Key><Value>200 834 26 32</Value></Item>
+    <Item><Key>seeds_left_008.png</Key><Value>379 894 23 22</Value></Item>
+    <Item><Key>seeds_left_009.png</Key><Value>403 894 24 22</Value></Item>
+
+    <Item><Key>hold_001.png</Key><Value>181 272 21 25</Value></Item>
+
+
+    </Asset>
+</XnaContent>
