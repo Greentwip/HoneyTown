@@ -66,7 +66,12 @@ namespace HarvestMoon.Screens
         public override void Initialize()
         {
             // GeonBit.UI: Init the UI manager using the "hd" built-in theme
-            UserInterface.Initialize(Content, BuiltinThemes.hd);
+
+            if(UserInterface.Active == null)
+            {
+                UserInterface.Initialize(Content, BuiltinThemes.hd);
+            }
+            
 
             // GeonBit.UI: tbd create your GUI layouts here..
 
@@ -309,7 +314,7 @@ namespace HarvestMoon.Screens
                 _textPanel = null;
             }
 
-            if(onAfterConfirmCallback != null)
+            if (onAfterConfirmCallback != null)
             {
                 _onAfterConfirmCallback = onAfterConfirmCallback;
             }
@@ -325,7 +330,17 @@ namespace HarvestMoon.Screens
 
             var paragraph = new Paragraph("");
 
-            _textAnimator = new TypeWriterAnimator();
+            if(_textAnimator == null)
+            {
+                _textAnimator = new TypeWriterAnimator();
+                _textAnimator.ShouldRemoveWhenDone = true;
+            }
+            else
+            {
+                _textAnimator.TextToType = "";
+                _textAnimator.ShouldRemoveWhenDone = true;
+            }
+            
 
             _textAnimator.TextToType = _bufferedStrings.First();
             _bufferedStrings.Remove(_bufferedStrings.First());

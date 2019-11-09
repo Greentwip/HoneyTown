@@ -137,6 +137,15 @@ namespace HarvestMoon.Screens
             }
         }
 
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+
+            UserInterface.Active.RemoveEntity(_guiTextPanel);
+            UserInterface.Active.RemoveEntity(_panels[0]);
+            UserInterface.Active.RemoveEntity(_panels[1]);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

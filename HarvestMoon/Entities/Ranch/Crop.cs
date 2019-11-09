@@ -159,7 +159,7 @@ namespace HarvestMoon.Entities.Ranch
         {
             if (CropType == "turnip")
             {
-                if (maturity >= 2)
+                if (maturity >= 2 && maturity < 4)
                 {
                     Maturity = "a";
                 }
@@ -170,7 +170,7 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if (CropType == "potato")
             {
-                if (maturity >= 2)
+                if (maturity >= 2 && maturity < 7)
                 {
                     Maturity = "a";
                 }
@@ -181,15 +181,15 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if (CropType == "tomato")
             {
-                if (maturity >= 2)
+                if (maturity >= 2 && maturity < 4)
                 {
                     Maturity = "a";
                 }
-                else if (maturity >= 4)
+                else if (maturity >= 4 && maturity < 6)
                 {
                     Maturity = "b";
                 }
-                else if(maturity >= 6)
+                else if(maturity >= 6 && maturity < 9)
                 {
                     Maturity = "c";
                 }
@@ -200,15 +200,15 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if (CropType == "corn")
             {
-                if (maturity >= 2)
+                if (maturity >= 2 && maturity < 6)
                 {
                     Maturity = "a";
                 }
-                else if (maturity >= 6)
+                else if (maturity >= 6 && maturity < 9)
                 {
                     Maturity = "b";
                 }
-                else if (maturity >= 9)
+                else if (maturity >= 9 && maturity < 12)
                 {
                     Maturity = "c";
                 }
@@ -219,15 +219,15 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if(CropType == "grass")
             {
-                if (maturity >= 2)
+                if (maturity >= 2 && maturity < 4)
                 {
                     Maturity = "a";
                 }
-                else if (maturity >= 4)
+                else if (maturity >= 4 && maturity < 6)
                 {
                     Maturity = "b";
                 }
-                else if (maturity >= 6)
+                else if (maturity >= 6 && maturity < 9)
                 {
                     Maturity = "c";
                 }

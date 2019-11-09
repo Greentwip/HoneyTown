@@ -133,9 +133,13 @@ namespace HarvestMoon.Entities.Ranch
 
         public void GrowAccordingly()
         {
-            if (IsPlanted && IsWatered)
+            if (IsPlanted)
             {
-                DaysWatered++;
+                if (IsWatered)
+                {
+                    DaysWatered++;
+                }
+                
                 Seasons.Clear();
 
                 // validate each crop type and their corresponding seasons

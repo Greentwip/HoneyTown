@@ -51,7 +51,11 @@ namespace HarvestMoon.Screens
         public override void Initialize()
         {
             // GeonBit.UI: Init the UI manager using the "hd" built-in theme
-            UserInterface.Initialize(Content, BuiltinThemes.hd);
+            if(UserInterface.Active == null)
+            {
+                UserInterface.Initialize(Content, BuiltinThemes.hd);
+            }
+            
 
             // GeonBit.UI: tbd create your GUI layouts here..
 
@@ -68,6 +72,11 @@ namespace HarvestMoon.Screens
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        }
+
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
