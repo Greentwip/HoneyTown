@@ -1057,26 +1057,71 @@ namespace HarvestMoon.Entities
                 var cellAtPosition = grid.CollisionGridSet.GetCellAtPosition(boundPosition);
                 if (cellAtPosition.Flag == CollisionGridCellFlag.Solid)
                 {
-                    Freeze();
                     var targetPosition = cellAtPosition.BoundingBox.Center + grid.CollisionGridSet.GridPosition;
 
-                    System.Diagnostics.Debug.WriteLine(ActionBoundingRectangle.Center.ToString());
+                    /*System.Diagnostics.Debug.WriteLine(ActionBoundingRectangle.Center.ToString());
                     System.Diagnostics.Debug.WriteLine(cellAtPosition.BoundingBox.Center.ToString());
                     System.Diagnostics.Debug.WriteLine(grid.CollisionGridSet.GridPosition.ToString());
-                    System.Diagnostics.Debug.WriteLine(targetPosition.ToString());
+                    System.Diagnostics.Debug.WriteLine(targetPosition.ToString());*/
 
-                    _tweener.Tween(_carryingObject, 
-                                    new { X = targetPosition.X, Y = targetPosition.Y }, 
-                                    0.125f)
-                            .Ease(Ease.ExpoInOut)
-                            .OnComplete(() =>
+                    var interactablesButSoil = _entityManager
+                                                .Entities
+                                                .Where(e => { return e is Interactable && !(e is Soil); })
+                                                .Cast<Interactable>().ToArray();
+                    bool collides = false;
+                    foreach(var interactable in interactablesButSoil) {
+                        if(interactable.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
+                        {
+                            collides = true;
+                            break;
+                        }
+                    }
+
+                    if (!collides)
+                    {
+                        if(_carryingObject is SmallRock || _carryingObject is WoodPiece)
+                        {
+                            var soilSegments = _entityManager.Entities
+                                                         .Where(e => { return e is Soil; })
+                                                         .Cast<Soil>().ToArray();
+
+                            foreach(var soilSegment in soilSegments)
                             {
-                                UnFreeze();
-                                _carryingObject.Planked = true;
-                                _carryingObject.Priority = 0;
-                                _carryingObject = null;
-                                _isCarrying = false;
-                            });
+                                if(soilSegment.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
+                                {
+                                    if (soilSegment.HasGrown)
+                                    {
+                                        collides = true;
+                                    }
+                                    else
+                                    {
+                                        soilSegment.Destroy();
+                                    }
+                                }
+
+                            }
+                        }
+                        
+                        
+                    }
+
+                    if (!collides)
+                    {
+                        Freeze();
+                        _tweener.Tween(_carryingObject,
+                               new { X = targetPosition.X, Y = targetPosition.Y },
+                               0.125f)
+                                   .Ease(Ease.ExpoInOut)
+                                   .OnComplete(() =>
+                                   {
+                                       UnFreeze();
+                                       _carryingObject.Planked = true;
+                                       _carryingObject.Priority = 0;
+                                       _carryingObject = null;
+                                       _isCarrying = false;
+                                   });
+
+                    }
                     break;
                 }
             }
@@ -1119,6 +1164,23 @@ namespace HarvestMoon.Entities
                 if (cellAtPosition.Flag == CollisionGridCellFlag.Solid)
                 {
                     var targetPosition = cellAtPosition.BoundingBox.Center + grid.CollisionGridSet.GridPosition;
+
+                    var interactablesButSoil = _entityManager
+                                                            .Entities
+                                                            .Where(e => { return e is Interactable && !(e is Soil); })
+                                                            .Cast<Interactable>().ToArray();
+
+                    bool collides = false;
+                    foreach (var interactable in interactablesButSoil)
+                    {
+                        if (interactable.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
+                        {
+                            collides = true;
+                            break;
+                        }
+                    }
+
+
                     var soilPieces = _entityManager.Entities.Where(e => e is Soil).Cast<Soil>().ToArray();
 
                     foreach (var soilPiece in soilPieces)
@@ -1126,15 +1188,31 @@ namespace HarvestMoon.Entities
                         Vector2 soilPosition = new Vector2(soilPiece.X, soilPiece.Y);
                         Vector2 targetPositionVector = new Vector2(targetPosition.X, targetPosition.Y);
 
-                        if (soilPosition == targetPositionVector)
+                        if (soilPosition == targetPositionVector && !soilPiece.HasGrown)
                         {
                             soilPiece.Destroy();
                             break;
                         }
                     }
 
-                    _entityManager.SubmitEntity(new Soil(_contentManager,
+                    foreach (var soilPiece in soilPieces)
+                    {
+                        Vector2 soilPosition = new Vector2(soilPiece.X, soilPiece.Y);
+                        Vector2 targetPositionVector = new Vector2(targetPosition.X, targetPosition.Y);
+
+                        if (soilPosition == targetPositionVector && soilPiece.HasGrown)
+                        {
+                            collides = true;
+                            break;
+                        }
+                    }
+
+                    if (!collides)
+                    {
+                        _entityManager.SubmitEntity(new Soil(_contentManager,
                                                       new Vector2(targetPosition.X, targetPosition.Y)));
+                    }
+                    
 
                     break;
                 }
