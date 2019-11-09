@@ -16,6 +16,7 @@ using GeonBit.UI.Entities;
 using GeonBit.UI.Animators;
 using System;
 using static HarvestMoon.Entities.General.NPC;
+using HarvestMoon.Entities.Ranch;
 
 namespace HarvestMoon.Screens
 {
@@ -468,6 +469,39 @@ namespace HarvestMoon.Screens
 
             }
 
+            var soilSegments = _entityManager.Entities.Where(e => e is Soil).Cast<Soil>().ToArray();
+
+            foreach (var soilSegment in soilSegments)
+            {
+                if (soilSegment.BoundingRectangle.Intersects(_player.BoundingRectangle) && soilSegment.HasGrown)
+                {
+                    var intersection = soilSegment.BoundingRectangle.Intersection(_player.BoundingRectangle);
+                    if (intersection.Height > intersection.Width)
+                    {
+                        if (_player.Position.X > soilSegment.X)
+                        {
+                            _player.Position = new Vector2(_player.Position.X + intersection.Width, _player.Position.Y);
+                        }
+                        else
+                        {
+                            _player.Position = new Vector2(_player.Position.X - intersection.Width, _player.Position.Y);
+                        }
+
+                    }
+                    else
+                    {
+                        if (_player.Position.Y > soilSegment.Y)
+                        {
+                            _player.Position = new Vector2(_player.Position.X, _player.Position.Y + intersection.Height);
+                        }
+                        else
+                        {
+                            _player.Position = new Vector2(_player.Position.X, _player.Position.Y - intersection.Height);
+                        }
+
+                    }
+                }
+            }
         }
 
 

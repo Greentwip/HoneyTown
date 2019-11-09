@@ -1033,7 +1033,7 @@ namespace HarvestMoon.Entities
                 {
                     case Facing.UP:
                         boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
-                                                    ActionBoundingRectangle.Bottom,
+                                                    ActionBoundingRectangle.Center.Y,
                                                     0);
                         break;
 

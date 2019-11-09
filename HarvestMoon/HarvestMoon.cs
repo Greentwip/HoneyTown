@@ -36,6 +36,9 @@ namespace HarvestMoon
 
         private List<string> _tools = new List<string>();
 
+
+        public List<string> Tools { get => _tools; set => _tools = value; }
+
         public bool IsToolPacked(string toolName)
         {
             return _tools.Contains(toolName);
@@ -181,6 +184,8 @@ namespace HarvestMoon
 
             public int Gold { get; set; }
 
+            public List<string> Tools { get; set; }
+
             public bool HasNotSeenTheRanch { get; set; }
 
             public List<BigLog> BigLogs { get; set; }
@@ -201,6 +206,7 @@ namespace HarvestMoon
             sg.DayName = Instance.DayName;
             sg.Season = Instance.Season;
             sg.YearNumber = Instance.YearNumber;
+            sg.Tools = Instance.Tools;
             sg.HasNotSeenTheRanch = Instance.HasNotSeenTheRanch;
 
             sg.BigLogs = new List<BigLog>(Instance.RanchState.Entities.Where(e => e is BigLog).Cast<BigLog>().ToArray());
@@ -277,8 +283,12 @@ namespace HarvestMoon
                 Instance.Season = saveGame.Season;
                 Instance.YearNumber = saveGame.YearNumber;
                 Instance.Gold = saveGame.Gold;
+
+                Instance.Tools = saveGame.Tools;
+
                 Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
 
+                
 
                 List<BigLog> bigLogs = new List<BigLog>();
                 List<BigRock> bigRocks = new List<BigRock>();
