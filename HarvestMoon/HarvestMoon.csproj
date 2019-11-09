@@ -102,7 +102,10 @@
   <ItemGroup>
     <Compile Include="Entities\General\NPC.cs" />
     <Compile Include="Entities\RanchState.cs" />
+    <Compile Include="Entities\Ranch\Crop.cs" />
     <Compile Include="Entities\Ranch\Soil.cs" />
+    <Compile Include="Entities\Tools\PotatoSeeds.cs" />
+    <Compile Include="Entities\Tools\TurnipSeeds.cs" />
     <Compile Include="Entities\Tools\Tool.cs" />
     <Compile Include="Entities\Tools\WateringCan.cs" />
     <Compile Include="Entities\Tools\GrassSeeds.cs" />

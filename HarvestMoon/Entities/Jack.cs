@@ -884,6 +884,8 @@ namespace HarvestMoon.Entities
 
             _holdingItemSprites.Add("axe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/axe")));
             _holdingItemSprites.Add("grass-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/grass-seeds")));
+            _holdingItemSprites.Add("turnip-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/turnip-seeds")));
+            _holdingItemSprites.Add("potato-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/potato-seeds")));
             _holdingItemSprites.Add("hammer", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hammer")));
             _holdingItemSprites.Add("hoe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hoe")));
             _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
@@ -1133,6 +1135,8 @@ namespace HarvestMoon.Entities
 
                     _entityManager.SubmitEntity(new Soil(_contentManager,
                                                       new Vector2(targetPosition.X, targetPosition.Y)));
+
+                    break;
                 }
             }
         }
@@ -1224,27 +1228,27 @@ namespace HarvestMoon.Entities
                                 var currentTool = HarvestMoon.Instance.GetCurrentTool();
                                 if (currentTool.Contains("grass"))
                                 {
-                                    soilPiece.Plant("grass");
+                                    soilPiece.Plant("grass", 0, HarvestMoon.Instance.Season);
                                 }
 
                                 if (currentTool.Contains("turnip"))
                                 {
-                                    soilPiece.Plant("turnip");
+                                    soilPiece.Plant("turnip", 0, HarvestMoon.Instance.Season);
                                 }
 
                                 if (currentTool.Contains("potato"))
                                 {
-                                    soilPiece.Plant("potato");
+                                    soilPiece.Plant("potato", 0, HarvestMoon.Instance.Season);
                                 }
 
                                 if (currentTool.Contains("tomato"))
                                 {
-                                    soilPiece.Plant("tomato");
+                                    soilPiece.Plant("tomato", 0, HarvestMoon.Instance.Season);
                                 }
 
                                 if (currentTool.Contains("corn"))
                                 {
-                                    soilPiece.Plant("corn");
+                                    soilPiece.Plant("corn", 0, HarvestMoon.Instance.Season);
                                 }
 
                                 if (soilPiece.IsWatered)

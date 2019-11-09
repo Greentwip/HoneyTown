@@ -1,16 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
-using MonoGame.Extended.Serialization;
-using MonoGame.Extended.Sprites;
-using MonoGame.Extended.TextureAtlases;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using MonoGame.Extended.ViewportAdapters;
 using System.Collections.Generic;
 
-using MonoGame.Extended.Content;
 using HarvestMoon.Entities;
 using System.Linq;
 using HarvestMoon.Screens;
@@ -279,6 +269,17 @@ namespace HarvestMoon
                 // Close the file
                 fileStream.Dispose();
 
+
+                Instance.PlayerName = saveGame.PlayerName;
+
+                Instance.DayNumber = saveGame.DayNumber;
+                Instance.DayName = saveGame.DayName;
+                Instance.Season = saveGame.Season;
+                Instance.YearNumber = saveGame.YearNumber;
+                Instance.Gold = saveGame.Gold;
+                Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
+
+
                 List<BigLog> bigLogs = new List<BigLog>();
                 List<BigRock> bigRocks = new List<BigRock>();
                 List<Bush> bushes = new List<Bush>();
@@ -308,7 +309,12 @@ namespace HarvestMoon
 
                 for (int i = 0; i < saveGame.SoilSegments.Count; ++i)
                 {
-                    soilSegments.Add(new Soil(Content, new Vector2(saveGame.SoilSegments[i].X, saveGame.SoilSegments[i].Y)));
+                    soilSegments.Add(new Soil(Content, 
+                                                new Vector2(saveGame.SoilSegments[i].X, saveGame.SoilSegments[i].Y),
+                                                saveGame.SoilSegments[i].IsPlanted,
+                                                saveGame.SoilSegments[i].CropType,
+                                                saveGame.SoilSegments[i].DaysWatered,
+                                                saveGame.SoilSegments[i].SeasonPlanted));
                 }
 
                 for (int i = 0; i < saveGame.WoodPieces.Count; ++i)
@@ -316,7 +322,7 @@ namespace HarvestMoon
                     woodPieces.Add(new WoodPiece(Content, new Vector2(saveGame.WoodPieces[i].X, saveGame.WoodPieces[i].Y)));
                 }
 
-
+                
 
                 RanchState.Entities.AddRange(bigLogs);
                 RanchState.Entities.AddRange(bigRocks);
@@ -326,15 +332,6 @@ namespace HarvestMoon
                 RanchState.Entities.AddRange(woodPieces);
 
                 RanchState.IsLoaded = true;
-
-                Instance.PlayerName = saveGame.PlayerName;
-
-                Instance.DayNumber = saveGame.DayNumber;
-                Instance.DayName = saveGame.DayName;
-                Instance.Season = saveGame.Season;
-                Instance.YearNumber = saveGame.YearNumber;
-                Instance.Gold = saveGame.Gold;
-                Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
             }
             catch(Exception ex)
             {

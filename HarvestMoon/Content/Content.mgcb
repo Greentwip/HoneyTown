@@ -5004,6 +5004,18 @@
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/hoe.png
 
+#begin maps/tools-room/items/potato-seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tools-room/items/potato-seeds.png
+
 #begin maps/tools-room/items/sickle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5027,6 +5039,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/tools.png
+
+#begin maps/tools-room/items/turnip-seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tools-room/items/turnip-seeds.png
 
 #begin maps/tools-room/items/watering-can.png
 /importer:TextureImporter

@@ -149,6 +149,29 @@ namespace HarvestMoon.Screens
                             _entityManager.AddEntity(new GrassSeeds(Content, objectPosition));
                         }
 
+                        if (obj.Type == "turnip-seeds")
+                        {
+
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _entityManager.AddEntity(new TurnipSeeds(Content, objectPosition));
+                        }
+
+
+                        if (obj.Type == "potato-seeds")
+                        {
+
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _entityManager.AddEntity(new PotatoSeeds(Content, objectPosition));
+                        }
+
                     }
                 }
                 else if (layer.Name == "walls")

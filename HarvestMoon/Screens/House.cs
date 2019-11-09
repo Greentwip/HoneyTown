@@ -10,6 +10,7 @@ using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
 using System.Collections.Generic;
 using System;
+using HarvestMoon.Entities.Ranch;
 
 namespace HarvestMoon.Screens
 {
@@ -41,6 +42,18 @@ namespace HarvestMoon.Screens
             {
                 HarvestMoon.Instance.LoadGameState(HarvestMoon.Instance.Diary);
             }
+
+            if (!_isFromRanch)
+            {
+                var soilSegments = HarvestMoon.Instance.RanchState.Entities.Where(e => e is Soil).Cast<Soil>().ToArray();
+
+                foreach (var soilSegment in soilSegments)
+                {
+                    soilSegment.GrowAccordingly();
+                    soilSegment.Dry();
+                }
+            }
+            
 
             // Load the compiled map
             _map = Content.Load<TiledMap>("maps/house/house");

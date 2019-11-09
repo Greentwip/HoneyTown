@@ -8,5 +8,18 @@
       <Item><Key>soil_planted_normal_001.png</Key><Value>99 41 16 16</Value></Item>
 
       <Item><Key>soil_planted_watered_001.png</Key><Value>117 41 16 16</Value></Item>
+
+      <Item><Key>turnip_a_001.png</Key><Value>13 135 16 16</Value></Item>
+      <Item><Key>turnip_a_watered_001.png</Key><Value>31 135 16 16</Value></Item>
+
+      <Item><Key>turnip_b_001.png</Key><Value>13 153 16 16</Value></Item>
+      <Item><Key>turnip_b_watered_001.png</Key><Value>31 153 16 16</Value></Item>
+
+      <Item><Key>potato_a_001.png</Key><Value>75 135 16 16</Value></Item>
+      <Item><Key>potato_a_watered_001.png</Key><Value>93 135 16 16</Value></Item>
+
+      <Item><Key>potato_b_001.png</Key><Value>75 153 16 16</Value></Item>
+      <Item><Key>potato_b_watered_001.png</Key><Value>93 153 16 16</Value></Item>
+
     </Asset>
 </XnaContent>

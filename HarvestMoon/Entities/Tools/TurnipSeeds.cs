@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework.Content;
 
 namespace HarvestMoon.Entities
 {
-    public class Axe : Tool
+    public class TurnipSeeds : Tool
     {
-        public Axe(ContentManager content, Vector2 initialPosition)
-            : base("axe", content, initialPosition, "maps/tools-room/items/axe")
+        public TurnipSeeds(ContentManager content, Vector2 initialPosition)
+        : base("turnip-seeds", content, initialPosition, "maps/tools-room/items/turnip-seeds")
         {
         }
 

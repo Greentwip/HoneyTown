@@ -12,16 +12,42 @@ namespace HarvestMoon.Entities.Ranch
     {
         private readonly AnimatedSprite _sprite;
 
+        private List<string> _seasons;
+
         public bool IsPlanted { get; set; }
         public bool IsWatered { get; set; }
+        public bool HasGrown { get; set; }
+
+        public int DaysToGrow { get; set; }
+
+        public int DaysWatered { get; set; }
+
+        public string SeasonPlanted { get; set; }
+
+        private List<string> Seasons { get => _seasons; set => _seasons = value; }
+
+        public string CropType { get; set; }
+
+        private Crop HarvestCrop { get; set; }
 
         public Soil()
         {
-
+            _seasons = new List<string>();
+            DaysWatered = 0;
         }
 
-        public Soil(ContentManager content, Vector2 initialPosition)
+        public Soil(ContentManager content, 
+                    Vector2 initialPosition, 
+                    bool isPlanted = false, 
+                    string cropType = default(string), 
+                    int daysWatered = -1,
+                    string seasonPlanted = default(string))
         {
+            _seasons = new List<string>();
+
+            DaysWatered = 0;
+
+
             var cropTexture = content.Load<Texture2D>("maps/ranch/items/crops");
             var cropMap = content.Load<Dictionary<string, Rectangle>>("maps/ranch/items/cropsMap");
             var cropAtlas = new TextureAtlas("crop", cropTexture, cropMap);
@@ -96,36 +122,143 @@ namespace HarvestMoon.Entities.Ranch
             Priority = -32;
 
             TypeName = "soil";
+
+            if (isPlanted)
+            {
+                Plant(cropType, daysWatered, seasonPlanted);
+                GrowAccordingly();
+            }
+
+        }
+
+        public void GrowAccordingly()
+        {
+            if (IsPlanted && IsWatered)
+            {
+                DaysWatered++;
+                Seasons.Clear();
+
+                // validate each crop type and their corresponding seasons
+                if (CropType == "turnip")
+                {
+                    DaysToGrow = 4;
+                    Seasons.Add("Spring");
+                }
+                else if (CropType == "potato")
+                {
+                    DaysToGrow = 7;
+                    Seasons.Add("Spring");
+                }
+                else if (CropType == "tomato")
+                {
+                    DaysToGrow = 9;
+                    Seasons.Add("Summer");
+                }
+                else if(CropType == "corn")
+                {
+                    DaysToGrow = 12;
+                    Seasons.Add("Summer");
+                }
+                else if(CropType == "grass")
+                {
+                    Seasons.Add("Spring");
+                    Seasons.Add("Summer");
+                    Seasons.Add("Autumn");
+                }
+
+                // Determine if it has grown from soil to plant
+                var cropMaturity = DaysWatered;
+
+                if (cropMaturity >= 2 && Seasons.Contains(SeasonPlanted)) // This should be Crop.CalculateMaturity(cropMaturity) == "a"
+                {
+                    HasGrown = true;
+                    HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, cropMaturity);
+                }
+
+            }
         }
 
         public void Water()
         {
-            if (IsPlanted)
+            if (HasGrown)
             {
-                _sprite.Play("soil_planted_watered");
+                HarvestCrop.Water();
             }
             else
             {
-                _sprite.Play("soil_watered");
+                if (IsPlanted)
+                {
+                    _sprite.Play("soil_planted_watered");
+                }
+                else
+                {
+                    _sprite.Play("soil_watered");
+                }
             }
+            
 
             IsWatered = true;
         }
 
-        public void Plant(string content)
+        public void Dry()
+        {
+            if (HasGrown)
+            {
+                HarvestCrop.Dry();
+            }
+            else
+            {
+                if (IsPlanted)
+                {
+                    _sprite.Play("soil_planted_normal");
+                }
+                else
+                {
+                    _sprite.Play("soil_normal");
+                }
+            }
+
+            IsWatered = false;
+        }
+
+        public void Plant(string cropType, int daysWatered, string seasonPlanted)
         {
             IsPlanted = true;
+            CropType = cropType;
+            DaysWatered = daysWatered;
+            SeasonPlanted = seasonPlanted;
+
             _sprite.Play("soil_planted_normal");
         }
 
         public override void Update(GameTime gameTime)
         {
-            _sprite.Update(gameTime);
+            if (HasGrown)
+            {
+                HarvestCrop.Update(gameTime);
+            }
+            else
+            {
+                _sprite.Update(gameTime);
+            }
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(2, 2));
+            if (HasGrown)
+            {
+                HarvestCrop.Draw(spriteBatch);
+            }
+            else
+            {
+                spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(2, 2));
+
+                if(_sprite.CurrentAnimation.Name == "soil_normal")
+                {
+
+                }
+            }            
         }
     }
 }
