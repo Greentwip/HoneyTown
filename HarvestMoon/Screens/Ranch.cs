@@ -305,6 +305,7 @@ namespace HarvestMoon.Screens
 
                 if(_player != null)
                 {
+                    _player.MapScreen = this;
                     _player.UnFreeze();
 
                     var lastDoorPosition = _player.LastVisitedDoor.BoundingRectangle.Center;

@@ -275,12 +275,10 @@ namespace HarvestMoon.Screens
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // Transform matrix is only needed if you have a Camera2D
-            // Setting the sampler state to `SamplerState.PointClamp` is reccomended to remove gaps between the tiles when rendering
-            //spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            //spriteBatch.Begin();
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+
             var cameraMatrix = _camera.GetViewMatrix();
-            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32, cameraMatrix.Translation.Z);
+            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32 * scaleY, cameraMatrix.Translation.Z);
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 

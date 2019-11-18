@@ -106,6 +106,8 @@ namespace HarvestMoon.Entities
 
         private Map _mapScreen;
 
+        public Map MapScreen { get => _mapScreen; set => _mapScreen = value; }
+
         public void OnPack(Action<string> callback)
         {
             pack = callback;

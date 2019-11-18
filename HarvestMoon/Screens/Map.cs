@@ -326,8 +326,6 @@ namespace HarvestMoon.Screens
             var paragraph = new Paragraph("");
 
             _textAnimator = new TypeWriterAnimator();
-            _textAnimator.ShouldRemoveWhenDone = true;
-
 
             _textAnimator.TextToType = _bufferedStrings.First();
             _bufferedStrings.Remove(_bufferedStrings.First());
