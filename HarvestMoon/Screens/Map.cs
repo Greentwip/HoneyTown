@@ -73,6 +73,10 @@ namespace HarvestMoon.Screens
             {
                 UserInterface.Initialize(Content, BuiltinThemes.hd);
             }
+            else
+            {
+                UserInterface.Active.Root.ClearChildren();
+            }
             
 
             // GeonBit.UI: tbd create your GUI layouts here..
@@ -488,7 +492,7 @@ namespace HarvestMoon.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            UserInterface.Active.Draw(_spriteBatch);
+            /*UserInterface.Active.Draw(_spriteBatch);
             _viewportAdapter.Reset();
 
             OnPreGuiDraw(gameTime);
@@ -496,7 +500,13 @@ namespace HarvestMoon.Screens
             var cameraMatrix = _camera.GetViewMatrix();
 
             UserInterface.Active.RenderTargetTransformMatrix = cameraMatrix;
-            UserInterface.Active.DrawMainRenderTarget(_spriteBatch);
+            UserInterface.Active.DrawMainRenderTarget(_spriteBatch);*/
+
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 480.0f;
+            UserInterface.Active.GlobalScale = scaleY;
+
+            OnPreGuiDraw(gameTime);
+            UserInterface.Active.Draw(_spriteBatch);
         }
     }
 }

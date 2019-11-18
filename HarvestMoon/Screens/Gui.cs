@@ -56,15 +56,15 @@ namespace HarvestMoon.Screens
             // call base initialize func
             base.Initialize();
 
-            UserInterface.Active.UseRenderTarget = true;
+            UserInterface.Active.UseRenderTarget = false;
+            UserInterface.Active.ShowCursor = false;
 
-            /*
-            var HM = Game as HarvestMoon;
 
-            int _ScreenWidth = HM.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-            int _ScreenHeight = HM.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
-            HM.Graphics.PreferredBackBufferWidth = (int)_ScreenWidth;
-            HM.Graphics.PreferredBackBufferHeight = (int)_ScreenHeight;
+            /*var HM = Game as HarvestMoon;
+
+            
+            HM.Graphics.PreferredBackBufferWidth = 640;
+            HM.Graphics.PreferredBackBufferHeight = 480;
             HM.Graphics.IsFullScreen = false;
             HM.Graphics.ApplyChanges();*/
 
@@ -113,6 +113,7 @@ namespace HarvestMoon.Screens
 
         public override void Draw(GameTime gameTime)
         {
+            /*
             UserInterface.Active.Draw(_spriteBatch);
 
             _viewportAdapter.Reset();
@@ -124,7 +125,12 @@ namespace HarvestMoon.Screens
             UserInterface.Active.RenderTargetTransformMatrix = cameraMatrix;
             UserInterface.Active.DrawMainRenderTarget(_spriteBatch);
 
+            */
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+            UserInterface.Active.GlobalScale = scaleY;
 
+            OnPreGuiDraw(gameTime);
+            UserInterface.Active.Draw(_spriteBatch);
 
         }
     }
