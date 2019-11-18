@@ -11,6 +11,9 @@ using System.IO;
 using Windows.Storage;
 using System;
 using HarvestMoon.Entities.Ranch;
+using Microsoft.Xna.Framework.Input;
+using Windows.Security.ExchangeActiveSyncProvisioning;
+using HarvestMoon.Input;
 
 namespace HarvestMoon
 {
@@ -29,7 +32,7 @@ namespace HarvestMoon
         private bool _loaded = false;
 
 
-        GraphicsDeviceManager _graphics;
+        public GraphicsDeviceManager Graphics;
 
         public RanchState RanchState { get; private set;}
 
@@ -38,6 +41,71 @@ namespace HarvestMoon
 
 
         public List<string> Tools { get => _tools; set => _tools = value; }
+
+
+        public string PlayerName { get; set; }
+        public int DayNumber { get; set; }
+        public string DayName { get; set; }
+        public string Season { get; set; }
+        public int YearNumber { get; set; }
+        public int Gold { get; set; }
+
+        public int FeedPieces { get; set; }
+        public int Planks { get; set; }
+
+        public bool HasNotSeenTheRanch { get; set; }
+
+        private float _dayTime;
+
+        private float _day;
+
+        private float _morning;
+        private float _evening;
+        private float _afternoon;
+
+        public float RanchDayTime { get => _dayTime; set => _dayTime = value; }
+
+        private Dictionary<DayTime, bool> _dayTimeTriggers = new Dictionary<DayTime, bool>();
+
+        public InputDevice Input;
+
+        public HarvestMoon()
+        {
+            Graphics = new GraphicsDeviceManager(this);
+
+            Content.RootDirectory = "Content";
+            Components.Add(ScreenManager);
+
+            RanchState = new RanchState();
+
+            ResetDay();
+
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += (object sender, Windows.UI.Core.BackRequestedEventArgs args) => { args.Handled = true; };
+
+            EasClientDeviceInformation deviceInfo = new EasClientDeviceInformation();
+
+            if(deviceInfo.OperatingSystem == "WINDOWS")
+            {
+
+                if (deviceInfo.SystemProductName.Contains("Xbox One"))
+                {
+                    Input = new GamepadInputDevice();
+                }
+                else
+                {
+                    Input = new KeyboardInputDevice();
+                }
+            }
+            else
+            {
+                Input = new KeyboardInputDevice();
+            }
+
+
+            Instance = this;
+
+        }
+
 
         public bool IsToolPacked(string toolName)
         {
@@ -59,19 +127,19 @@ namespace HarvestMoon
             var currentTool = GetCurrentTool();
             var otherTool = GetOtherTool();
 
-            if(currentTool == otherTool)
+            if (currentTool == otherTool)
             {
                 otherTool = default(string);
             }
 
             _tools.Clear();
 
-            if(currentTool != default(string))
+            if (currentTool != default(string))
             {
                 _tools.Add(currentTool);
             }
 
-            if(otherTool != default(string))
+            if (otherTool != default(string))
             {
                 _tools.Add(otherTool);
             }
@@ -88,11 +156,12 @@ namespace HarvestMoon
             if (_tools.Count == 3)
             {
                 _tools.Remove(lastTool);
-            } else if(_tools.Count == 1 || _tools.Count == 2)
+            }
+            else if (_tools.Count == 1 || _tools.Count == 2)
             {
                 lastTool = "none";
             }
-            
+
             return lastTool;
         }
 
@@ -106,27 +175,6 @@ namespace HarvestMoon
             Afternoon
         }
 
-        public string PlayerName { get; set; }
-        public int DayNumber { get; set; }
-        public string DayName { get; set; }
-        public string Season { get; set; }
-        public int YearNumber { get; set; }
-        public int Gold { get; set; }
-
-        public bool HasNotSeenTheRanch { get; set; }
-
-        private float _dayTime;
-
-        private float _day;
-
-        private float _morning;
-        private float _evening;
-        private float _afternoon;
-
-        public float RanchDayTime { get => _dayTime; set => _dayTime = value; }
-
-        private Dictionary<DayTime, bool> _dayTimeTriggers = new Dictionary<DayTime, bool>();
-
         public bool GetDayTimeTriggered(DayTime trigger)
         {
             return _dayTimeTriggers[trigger];
@@ -139,7 +187,7 @@ namespace HarvestMoon
 
         public DayTime GetDayTime()
         {
-            if(_dayTime < _morning)
+            if (_dayTime < _morning)
             {
                 return DayTime.Sunrise;
             }
@@ -157,20 +205,6 @@ namespace HarvestMoon
                 return DayTime.Afternoon;
             }
 
-        }
-
-        public HarvestMoon()
-        {
-            _graphics = new GraphicsDeviceManager(this);
-
-            Content.RootDirectory = "Content";
-            Components.Add(ScreenManager);
-
-            RanchState = new RanchState();
-
-            ResetDay();
-
-            Instance = this;
         }
 
         [Serializable]
@@ -195,6 +229,9 @@ namespace HarvestMoon
             public List<Soil> SoilSegments { get; set; }
             //public List<Crop> Crops { get; set; }
             public List<WoodPiece> WoodPieces { get; set; }
+
+            public int FeedPieces { get; set; }
+            public int Planks { get; set; }
         }
 
         public void SaveGameState(string diaryFile)
@@ -207,6 +244,8 @@ namespace HarvestMoon
             sg.Season = Instance.Season;
             sg.YearNumber = Instance.YearNumber;
             sg.Tools = Instance.Tools;
+            sg.FeedPieces = Instance.FeedPieces;
+            sg.Planks = Instance.Planks;
             sg.HasNotSeenTheRanch = Instance.HasNotSeenTheRanch;
 
             sg.BigLogs = new List<BigLog>(Instance.RanchState.Entities.Where(e => e is BigLog).Cast<BigLog>().ToArray());
@@ -283,7 +322,8 @@ namespace HarvestMoon
                 Instance.Season = saveGame.Season;
                 Instance.YearNumber = saveGame.YearNumber;
                 Instance.Gold = saveGame.Gold;
-
+                Instance.FeedPieces = saveGame.FeedPieces;
+                Instance.Planks = saveGame.Planks;
                 Instance.Tools = saveGame.Tools;
 
                 Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
@@ -359,8 +399,6 @@ namespace HarvestMoon
 
         }
  
-
-
         public void ResetDay()
         {
             _dayTimeTriggers[DayTime.Sunrise] = false;
@@ -489,9 +527,6 @@ namespace HarvestMoon
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            
-
-
             base.Draw(gameTime);
         }
     }

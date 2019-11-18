@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+      <Item><Key>turnip_normal_001.png</Key><Value>13 171 16 16</Value></Item>
+      <Item><Key>turnip_broken_001.png</Key><Value>31 171 16 16</Value></Item>
+
+      <Item><Key>potato_normal_001.png</Key><Value>75 171 16 16</Value></Item>
+      <Item><Key>potato_broken_001.png</Key><Value>93 171 16 16</Value></Item>
+
+      <Item><Key>tomato_normal_001.png</Key><Value>139 207 16 16</Value></Item>
+      <Item><Key>tomato_broken_001.png</Key><Value>157 207 16 16</Value></Item>
+
+      <Item><Key>corn_normal_001.png</Key><Value>202 207 16 16</Value></Item>
+      <Item><Key>corn_broken_001.png</Key><Value>220 207 16 16</Value></Item>
+
+    </Asset>
+</XnaContent>

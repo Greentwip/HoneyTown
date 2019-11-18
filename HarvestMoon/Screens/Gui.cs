@@ -16,6 +16,7 @@ using GeonBit.UI.Entities;
 using GeonBit.UI.Animators;
 using System;
 using static HarvestMoon.Entities.General.NPC;
+using HarvestMoon.Input;
 
 namespace HarvestMoon.Screens
 {
@@ -30,18 +31,11 @@ namespace HarvestMoon.Screens
         protected SpriteBatch _spriteBatch;
 
         protected OrthographicCamera _camera;
+        protected ViewportAdapter _viewportAdapter;
 
         protected bool _isActionButtonDown = false;
         protected bool _isUpButtonDown = false;
         protected bool _isDownButtonDown = false;
-
-        private bool _busy;
-
-        private bool _selectionCoolDown;
-
-        private float _coolingTimer = 0;
-
-        private float _selectionCoolingDelay = 0.3f;
 
         public GUI(Game game)
         : base(game)
@@ -61,14 +55,27 @@ namespace HarvestMoon.Screens
 
             // call base initialize func
             base.Initialize();
+
+            UserInterface.Active.UseRenderTarget = true;
+
+            /*
+            var HM = Game as HarvestMoon;
+
+            int _ScreenWidth = HM.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+            int _ScreenHeight = HM.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+            HM.Graphics.PreferredBackBufferWidth = (int)_ScreenWidth;
+            HM.Graphics.PreferredBackBufferHeight = (int)_ScreenHeight;
+            HM.Graphics.IsFullScreen = false;
+            HM.Graphics.ApplyChanges();*/
+
         }
 
         public override void LoadContent()
         {
 
-            var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 480);
+            _viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 480);
             //var viewportAdapter = new DefaultViewportAdapter(GraphicsDevice);
-            _camera = new OrthographicCamera(viewportAdapter);
+            _camera = new OrthographicCamera(_viewportAdapter);
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -83,40 +90,42 @@ namespace HarvestMoon.Screens
         {
             // GeonBit.UIL update UI manager
             UserInterface.Active.Update(gameTime);
-            var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (_selectionCoolDown)
-            {
-                _coolingTimer += deltaSeconds;
+            var keyboardState = HarvestMoon.Instance.Input;
 
-                if (_coolingTimer >= _selectionCoolingDelay)
-                {
-                    _coolingTimer = 0.0f;
-                    _selectionCoolDown = false;
-                    _busy = false;
-                }
-            }
-            var keyboardState = Keyboard.GetState();
-
-            if (keyboardState.IsKeyUp(Keys.V))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.A))
             {
                 _isActionButtonDown = false;
             }
 
-            if (keyboardState.IsKeyUp(Keys.Up))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Up))
             {
                 _isUpButtonDown = false;
             }
 
-            if (keyboardState.IsKeyUp(Keys.Down))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Down))
             {
                 _isDownButtonDown = false;
             }
         }
 
+        public abstract void OnPreGuiDraw(GameTime gameTime);
+
         public override void Draw(GameTime gameTime)
         {
             UserInterface.Active.Draw(_spriteBatch);
+
+            _viewportAdapter.Reset();
+
+            OnPreGuiDraw(gameTime);
+
+            var cameraMatrix = _camera.GetViewMatrix();
+
+            UserInterface.Active.RenderTargetTransformMatrix = cameraMatrix;
+            UserInterface.Active.DrawMainRenderTarget(_spriteBatch);
+
+
+
         }
     }
 }

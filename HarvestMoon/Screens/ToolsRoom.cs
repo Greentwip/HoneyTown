@@ -271,9 +271,9 @@ namespace HarvestMoon.Screens
 
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void OnPreGuiDraw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // Transform matrix is only needed if you have a Camera2D
             // Setting the sampler state to `SamplerState.PointClamp` is reccomended to remove gaps between the tiles when rendering
@@ -314,9 +314,6 @@ namespace HarvestMoon.Screens
             _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
             _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
             _spriteBatch.End();
-
-            base.Draw(gameTime);
-
         }
     }
 }

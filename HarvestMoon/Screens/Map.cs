@@ -17,6 +17,7 @@ using GeonBit.UI.Animators;
 using System;
 using static HarvestMoon.Entities.General.NPC;
 using HarvestMoon.Entities.Ranch;
+using HarvestMoon.Input;
 
 namespace HarvestMoon.Screens
 {
@@ -33,6 +34,7 @@ namespace HarvestMoon.Screens
         protected SpriteBatch _spriteBatch;
 
         protected OrthographicCamera _camera;
+        protected ViewportAdapter _viewportAdapter;
 
         protected Jack _player;
 
@@ -42,7 +44,6 @@ namespace HarvestMoon.Screens
 
         Action _onAfterConfirmCallback;
 
-        private bool _isGUIButtonDown = false;
         private bool _isActionButtonDown = false;
         private bool _isUpButtonDown = false;
         private bool _isDownButtonDown = false;
@@ -83,9 +84,9 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
 
-            var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 480);
-            //var viewportAdapter = new DefaultViewportAdapter(GraphicsDevice);
-            _camera = new OrthographicCamera(viewportAdapter);
+            _viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 480);
+            //_viewportAdapter = new DefaultViewportAdapter(GraphicsDevice);
+            _camera = new OrthographicCamera(_viewportAdapter);
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -109,42 +110,31 @@ namespace HarvestMoon.Screens
                 }
             }
 
-            var keyboardState = Keyboard.GetState();
+            var keyboardState = HarvestMoon.Instance.Input;
 
-            if (keyboardState.IsKeyUp(Keys.Q))
-            {
-                _isGUIButtonDown = false;
-            }
-
-            if (keyboardState.IsKeyUp(Keys.V))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.A))
             {
                 _isActionButtonDown = false;
             }
 
-            if (keyboardState.IsKeyUp(Keys.Up))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Up))
             {
                 _isUpButtonDown = false;
             }
 
-            if (keyboardState.IsKeyUp(Keys.Down))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Down))
             {
                 _isDownButtonDown = false;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Q) && !_isGUIButtonDown)
+            if ((keyboardState.IsKeyDown(InputDevice.Keys.Up) && !_isUpButtonDown) || (keyboardState.IsKeyDown(InputDevice.Keys.Down) && !_isDownButtonDown))
             {
-                _isGUIButtonDown = true;
-                ShowMessage("");
-            }
-
-            if ((keyboardState.IsKeyDown(Keys.Up) && !_isUpButtonDown) || (keyboardState.IsKeyDown(Keys.Down) && !_isDownButtonDown))
-            {
-                if (keyboardState.IsKeyDown(Keys.Up))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Up))
                 {
                     _isUpButtonDown = true;
                 }
 
-                if (keyboardState.IsKeyDown(Keys.Down))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Down))
                 {
                     _isDownButtonDown = true;
                 }
@@ -168,7 +158,7 @@ namespace HarvestMoon.Screens
             }
 
 
-            if (keyboardState.IsKeyDown(Keys.V) && !_isActionButtonDown)
+            if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown)
             {
                 _isActionButtonDown = true;
                 if (_textPanel != null)
@@ -331,17 +321,9 @@ namespace HarvestMoon.Screens
 
             var paragraph = new Paragraph("");
 
-            if(_textAnimator == null)
-            {
-                _textAnimator = new TypeWriterAnimator();
-                _textAnimator.ShouldRemoveWhenDone = true;
-            }
-            else
-            {
-                _textAnimator.TextToType = "";
-                _textAnimator.ShouldRemoveWhenDone = true;
-            }
-            
+            _textAnimator = new TypeWriterAnimator();
+            _textAnimator.ShouldRemoveWhenDone = true;
+
 
             _textAnimator.TextToType = _bufferedStrings.First();
             _bufferedStrings.Remove(_bufferedStrings.First());
@@ -409,8 +391,6 @@ namespace HarvestMoon.Screens
                             closestInteractable = interactable;
                         }
                     }
-
-                    
                 }
 
             }
@@ -504,10 +484,19 @@ namespace HarvestMoon.Screens
             }
         }
 
+        public abstract void OnPreGuiDraw(GameTime gameTime);
 
         public override void Draw(GameTime gameTime)
         {
             UserInterface.Active.Draw(_spriteBatch);
+            _viewportAdapter.Reset();
+
+            OnPreGuiDraw(gameTime);
+
+            var cameraMatrix = _camera.GetViewMatrix();
+
+            UserInterface.Active.RenderTargetTransformMatrix = cameraMatrix;
+            UserInterface.Active.DrawMainRenderTarget(_spriteBatch);
         }
     }
 }

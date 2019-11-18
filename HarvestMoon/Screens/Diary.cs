@@ -13,6 +13,7 @@ using System;
 using GeonBit.UI;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework.Input;
+using HarvestMoon.Input;
 
 namespace HarvestMoon.Screens
 {
@@ -59,8 +60,8 @@ namespace HarvestMoon.Screens
                         {
                             var objectPosition = obj.Position;
 
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                            objectPosition.X = obj.Position.X;
+                            objectPosition.Y = obj.Position.Y;
 
                             // create a panel and position in center of screen
                             var textPanel = new Panel(new Vector2(obj.Size.Width, obj.Size.Height), 
@@ -96,23 +97,23 @@ namespace HarvestMoon.Screens
 
                                 _selectionPanel = textPanel;
 
-                                _panels[0].Offset = new Vector2(170, 120);
-                                _panels[0].Size = new Vector2(470, 120);
+                                //_panels[0].Offset = new Vector2(170, 120);
+                                //_panels[0].Size = new Vector2(470, 120);
 
                             }
                             else
                             {
                                 _panels[1] = textPanel;
-                                _panels[1].Offset = new Vector2(170, 320);
-                                _panels[1].Size = new Vector2(470, 120);
+                                //_panels[1].Offset = new Vector2(170, 320);
+                                //_panels[1].Size = new Vector2(470, 120);
                             }
                         }
                         else if(obj.Type == "gui")
                         {
                             var objectPosition = obj.Position;
 
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                            objectPosition.X = obj.Position.X;
+                            objectPosition.Y = obj.Position.Y;
 
                             // create a panel and position in center of screen
                             _guiTextPanel = new Panel(new Vector2(obj.Size.Width, obj.Size.Height),
@@ -127,8 +128,8 @@ namespace HarvestMoon.Screens
                             _guiTextPanel.AddChild(paragraph);
 
 
-                            _guiTextPanel.Size = new Vector2(470, 70);
-                            _guiTextPanel.Offset = new Vector2(170, 460);
+                            //_guiTextPanel.Size = new Vector2(470, 70);
+                            //_guiTextPanel.Offset = new Vector2(170, 460);
 
                         }
                     }
@@ -151,16 +152,17 @@ namespace HarvestMoon.Screens
             base.Update(gameTime);
 
             _mapRenderer.Update(gameTime);
-            var keyboardState = Keyboard.GetState();
+            var keyboardState = HarvestMoon.Instance.Input;
 
-            if ((keyboardState.IsKeyDown(Keys.Up) && !_isUpButtonDown) || (keyboardState.IsKeyDown(Keys.Down) && !_isDownButtonDown))
+            if ((keyboardState.IsKeyDown(InputDevice.Keys.Up) && !_isUpButtonDown) || 
+                (keyboardState.IsKeyDown(InputDevice.Keys.Down) && !_isDownButtonDown))
             {
-                if (keyboardState.IsKeyDown(Keys.Up))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Up))
                 {
                     _isUpButtonDown = true;
                 }
 
-                if (keyboardState.IsKeyDown(Keys.Down))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Down))
                 {
                     _isDownButtonDown = true;
                 }
@@ -182,7 +184,7 @@ namespace HarvestMoon.Screens
 
                 _panels.First(p => p != _selectionPanel).Opacity = 150;
 
-                if (keyboardState.IsKeyDown(Keys.V) && !_isActionButtonDown && !_triggered)
+                if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown && !_triggered)
                 {
                     if (_selectionPanel == _panels[0])
                     {
@@ -204,13 +206,14 @@ namespace HarvestMoon.Screens
             }
 
 
-            _camera.LookAt(new Vector2(_map.Width * 4 / 2, _map.Height * 4 / 2));
+            //_camera.LookAt(new Vector2(_map.Width * 4 / 2, _map.Height * 4 / 2));
 
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void OnPreGuiDraw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            _guiTextPanel.Size = new Vector2(_guiTextPanel.Size.X, 64);
+            GraphicsDevice.Clear(Color.Black);
 
             var cameraMatrix = _camera.GetViewMatrix();
             cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32, cameraMatrix.Translation.Z);
@@ -225,8 +228,6 @@ namespace HarvestMoon.Screens
             }
             // End the sprite batch
             _spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

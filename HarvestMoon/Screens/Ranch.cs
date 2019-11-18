@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
+using HarvestMoon.Entities.General;
 
 namespace HarvestMoon.Screens
 {
@@ -291,6 +292,7 @@ namespace HarvestMoon.Screens
 
                                 _bushes.Add(_entityManager.AddEntity(new Bush(Content, objectPosition)));
                             }
+
                         }
                     }
                 }
@@ -435,6 +437,45 @@ namespace HarvestMoon.Screens
                 }
             }
 
+            foreach (var layer in _map.ObjectLayers)
+            {
+                if (layer.Name == "objects")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
+                        if (obj.Type == "npc")
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            var objectSize = obj.Size;
+
+                            var objectMessage = obj.Properties.First(p => p.Key.Contains("message"));
+
+                            if (obj.Name == "materials-signpost")
+                            {
+                                var replacedPieces = objectMessage.Value.Replace("number", HarvestMoon.Instance.Planks.ToString());
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, replacedPieces));
+                            }
+                            else if (obj.Name == "feed-signpost")
+                            {
+                                var replacedPieces = objectMessage.Value.Replace("number", HarvestMoon.Instance.FeedPieces.ToString());
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, replacedPieces));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, objectMessage.Value));
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+
 
         }
 
@@ -541,21 +582,58 @@ namespace HarvestMoon.Screens
             if (_player != null && !_player.IsDestroyed)
             {
                 _camera.LookAt(_player.Position);
+                var constraints = new Vector2();
+
+                if(_camera.BoundingRectangle.Center.X < 320)
+                {
+                    constraints.X = 320;
+                }
+
+                if (_camera.BoundingRectangle.Center.X > 1760)
+                {
+                    constraints.X = 1760;
+                }
+
+                if (_camera.BoundingRectangle.Center.Y < 240)
+                {
+                    constraints.Y = 240;
+                }
+
+                if (_camera.BoundingRectangle.Center.Y > 1712)
+                {
+                    constraints.Y = 1712;
+                }
+
+                if(constraints.X != 0)
+                {
+                    _camera.LookAt(new Vector2(constraints.X, _player.Position.Y));
+                }
+
+                if (constraints.Y != 0)
+                {
+                    _camera.LookAt(new Vector2(_player.Position.X, constraints.Y));
+                }
+
+                if(constraints.X != 0 && constraints.Y != 0)
+                {
+                    _camera.LookAt(new Vector2(constraints.X, constraints.Y));
+                }
+
             }
 
             CheckCollisions();
         }
                
-        public override void Draw(GameTime gameTime)
+        public override void OnPreGuiDraw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // Transform matrix is only needed if you have a Camera2D
             // Setting the sampler state to `SamplerState.PointClamp` is reccomended to remove gaps between the tiles when rendering
             //spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix(), samplerState: SamplerState.PointClamp);
             //spriteBatch.Begin();
             var cameraMatrix = _camera.GetViewMatrix();
-            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32, cameraMatrix.Translation.Z);
+            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 48, cameraMatrix.Translation.Z);
 
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
@@ -575,6 +653,13 @@ namespace HarvestMoon.Screens
             _entityManager.Draw(_spriteBatch);
             _spriteBatch.End();
 
+            _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
+
+            _mapRenderer.Draw(_map.Layers.First(l => l.Name == "Foreground"), cameraMatrix, effect: _dayTimeEffect);
+
+            _spriteBatch.End();
+
+
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
 
             var interactables = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
@@ -589,9 +674,6 @@ namespace HarvestMoon.Screens
             _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
             _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
             _spriteBatch.End();
-
-            base.Draw(gameTime);
-
         }
     }
 }

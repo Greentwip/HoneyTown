@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\General\NPC.cs" />
+    <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Entities\RanchState.cs" />
     <Compile Include="Entities\Ranch\Crop.cs" />
     <Compile Include="Entities\Ranch\Soil.cs" />
@@ -125,6 +126,9 @@
     <Compile Include="Entities\Tools\Hammer.cs" />
     <Compile Include="Entities\Ranch\WoodPiece.cs" />
     <Compile Include="Entities\Jack.cs" />
+    <Compile Include="Input\GamepadInputDevice.cs" />
+    <Compile Include="Input\InputDevice.cs" />
+    <Compile Include="Input\KeyboardInputDevice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="HarvestMoon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

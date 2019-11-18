@@ -19,6 +19,7 @@ using System;
 using HarvestMoon.Entities.Ranch;
 using HarvestMoon.Screens;
 using HarvestMoon.Entities.General;
+using HarvestMoon.Input;
 
 namespace HarvestMoon.Entities
 {
@@ -934,7 +935,7 @@ namespace HarvestMoon.Entities
                 return;
             }
 
-            var keyboardState = Keyboard.GetState();
+            var keyboardState = HarvestMoon.Instance.Input;
 
             if (interactable.Breakable)
             {
@@ -942,7 +943,7 @@ namespace HarvestMoon.Entities
             }
 
             if (_carryingObject == null && 
-                keyboardState.IsKeyDown(Keys.V) && 
+                keyboardState.IsKeyDown(InputDevice.Keys.A) && 
                 !_isInteractButtonDown && 
                 (interactable.Carryable || interactable.Packable) &&
                 interactable.Interacts)
@@ -972,13 +973,10 @@ namespace HarvestMoon.Entities
 
 
             }
-            else if(keyboardState.IsKeyDown(Keys.V) && 
-                    !_isInteractButtonDown && 
-                    interactable.IsNPC && 
-                    interactable.Interacts &&
-                !_busy)
+            else if(keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && interactable.IsNPC && interactable.Interacts && !_busy)
             {
                 _busy = true;
+                _isInteractButtonDown = true;
 
                 var npc = interactable as NPC;
                 if(npc.DeploysMenu)
@@ -1008,6 +1006,16 @@ namespace HarvestMoon.Entities
                     {
                         _npcCoolDown = true;
                     });
+                }
+            }
+            else if(keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && interactable is Soil && _carryingObject == null && !_busy)
+            {
+                var harvest = (interactable as Soil).Harvest();
+
+                if(harvest != null)
+                {
+                    _entityManager.SubmitEntity(harvest);
+                    _carryingObject = harvest;
                 }
             }
         }
@@ -1463,28 +1471,29 @@ namespace HarvestMoon.Entities
                 }
             }
 
-            var keyboardState = Keyboard.GetState();
+            var keyboardState = HarvestMoon.Instance.Input;
+
             float movementSpeed = _defaultWalkSpeed;
             bool movementHit = false;
             bool isRunning = false;
 
-            if (keyboardState.IsKeyUp(Keys.V))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.A))
             {
                 _isInteractButtonDown = false;
             }
 
-            if (keyboardState.IsKeyUp(Keys.X))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.B))
             {
                 _isToolButtonDown = false;
             }
 
-            if (keyboardState.IsKeyUp(Keys.Z))
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Y))
             {
                 _isHoldButtonDown = false;
             }
 
 
-            if (keyboardState.IsKeyDown(Keys.X) && !_isToolButtonDown && !_isCarrying && !_isFrozen)
+            if (keyboardState.IsKeyDown(InputDevice.Keys.B) && !_isToolButtonDown && !_isCarrying && !_isFrozen)
             {
                 _isToolButtonDown = true;
 
@@ -1498,7 +1507,7 @@ namespace HarvestMoon.Entities
                 //_breakPower++;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Z) && !_isHoldButtonDown && !_isCarrying && !_isFrozen)
+            if (keyboardState.IsKeyDown(InputDevice.Keys.Y) && !_isHoldButtonDown && !_isCarrying && !_isFrozen)
             {
                 _isHoldButtonDown = true;
 
@@ -1522,31 +1531,31 @@ namespace HarvestMoon.Entities
 
             if (!_isFrozen)
             {
-                if (keyboardState.IsKeyDown(Keys.C) && !_isCarrying)
+                if (keyboardState.IsKeyDown(InputDevice.Keys.X) && !_isCarrying)
                 {
                     isRunning = true;
                     movementHit = true;
                 }
 
-                if (keyboardState.IsKeyDown(Keys.Up))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Up))
                 {
                     _playerFacing = Facing.UP;
                     movementHit = true;
                 }
 
-                if (keyboardState.IsKeyDown(Keys.Down))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Down))
                 {
                     _playerFacing = Facing.DOWN;
                     movementHit = true;
                 }
 
-                if (keyboardState.IsKeyDown(Keys.Left))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Left))
                 {
                     _playerFacing = Facing.LEFT;
                     movementHit = true;
                 }
 
-                if (keyboardState.IsKeyDown(Keys.Right))
+                if (keyboardState.IsKeyDown(InputDevice.Keys.Right))
                 {
                     _playerFacing = Facing.RIGHT;
                     movementHit = true;
@@ -1794,7 +1803,7 @@ namespace HarvestMoon.Entities
                     break;
             }
 
-            if (keyboardState.IsKeyDown(Keys.V) && !_isInteractButtonDown)
+            if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown)
             {
                 if (_isCarrying && _carryingObject != null && !_isFrozen)
                 {

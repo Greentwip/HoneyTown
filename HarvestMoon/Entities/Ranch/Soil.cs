@@ -182,6 +182,11 @@ namespace HarvestMoon.Entities.Ranch
             }
         }
 
+        public Item Harvest()
+        {
+            return null;
+        }
+
         public void Water()
         {
             if (HasGrown)
