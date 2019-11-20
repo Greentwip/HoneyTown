@@ -133,6 +133,7 @@ namespace HarvestMoon.Screens
                             {
                                 _entityManager.AddEntity(new NPC(objectPosition,
                                                                  objectSize,
+                                                                 true,
                                                                  objectMessage.Value,
                                                                  true,
                                                                  NPC.NPCMenu.YesNo,
@@ -181,11 +182,11 @@ namespace HarvestMoon.Screens
                                 var replacedDayNumber = replacedDayName.Replace("number", HarvestMoon.Instance.DayNumber.ToString());
                                 var replacedSeason = replacedDayNumber.Replace("season", HarvestMoon.Instance.Season);
 
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, replacedSeason));
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedSeason));
                             }
                             else
                             {
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, objectMessage.Value));
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
                             }
                             
                         }

@@ -1004,10 +1004,49 @@ namespace HarvestMoon.Entities
                 }
                 else
                 {
-                    _mapScreen.ShowMessage(npc.Message, () =>
+                    if (npc.ShowsMessage)
                     {
+                        if(_carryingObject is Item)
+                        {
+                            _mapScreen.ShowMessage(npc.GetMessage(_carryingObject as Item), () =>
+                            {
+                                _npcCoolDown = true;
+                            });
+
+                        }
+                        else
+                        {
+                            _mapScreen.ShowMessage(npc.GetMessage(null), () =>
+                            {
+                                _npcCoolDown = true;
+                            });
+
+                        }
+                    }
+                    else
+                    {
+                        if (_carryingObject is Item)
+                        {
+                            npc.Interact(_carryingObject as Item);
+                        }
+                        else
+                        {
+                            npc.Interact(null);
+                        }
+
                         _npcCoolDown = true;
-                    });
+
+                    }
+
+                    if (_carryingObject != null)
+                    {
+                        if (_carryingObject.IsDestroyed)
+                        {
+                            _carryingObject.Priority = 0;
+                            _isCarrying = false;
+                            _carryingObject = null;
+                        }
+                    }
                 }
             }
             else if(keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && interactable is Soil && _carryingObject == null && !_busy)

@@ -28,8 +28,6 @@ namespace HarvestMoon.Entities
 
         public bool IsNPC { get; set; }
 
-        
-
         public string TypeName { get; set; }
 
         private float _x;

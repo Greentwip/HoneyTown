@@ -31,11 +31,14 @@ namespace HarvestMoon.Entities.General
 
         public bool DeploysMenu { get; set; }
 
+        public bool ShowsMessage { get; set; }
+
         public NPCMenu DeployableMenu { get; set; }
 
         public NPC(Vector2 initialPosition,
                     Size2 size,
-                    string message,
+                    bool showsMessage = false,
+                    string message = default(string),
                     bool deploysMenu = false,
                     NPCMenu deployableMenu = NPCMenu.YesNo,
                     List<string> strings = null,
@@ -55,6 +58,8 @@ namespace HarvestMoon.Entities.General
 
             _message = message;
 
+            ShowsMessage = showsMessage;
+
             DeploysMenu = deploysMenu;
 
             DeployableMenu = deployableMenu;
@@ -68,6 +73,16 @@ namespace HarvestMoon.Entities.General
             {
                 _callbacks = callbacks;
             }
+        }
+
+        public virtual string GetMessage(Item item)
+        {
+            return Message;
+        }
+
+        public virtual void Interact(Item item)
+        {
+
         }
 
         public override void Update(GameTime gameTime)

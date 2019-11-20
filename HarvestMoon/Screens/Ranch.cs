@@ -11,6 +11,7 @@ using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
+using HarvestMoon.Entities.Ranch;
 
 namespace HarvestMoon.Screens
 {
@@ -458,20 +459,32 @@ namespace HarvestMoon.Screens
                             if (obj.Name == "materials-signpost")
                             {
                                 var replacedPieces = objectMessage.Value.Replace("number", HarvestMoon.Instance.Planks.ToString());
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, replacedPieces));
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedPieces));
                             }
                             else if (obj.Name == "feed-signpost")
                             {
                                 var replacedPieces = objectMessage.Value.Replace("number", HarvestMoon.Instance.FeedPieces.ToString());
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, replacedPieces));
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedPieces));
                             }
                             else
                             {
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, objectMessage.Value));
+                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
                             }
 
                         }
 
+                        if(obj.Type == "special")
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            if (obj.Name == "shipping-box")
+                            {
+                                _entityManager.AddEntity(new ShippingBox(Content, objectPosition));
+                            }
+                        }
                     }
 
                 }
@@ -577,6 +590,9 @@ namespace HarvestMoon.Screens
 
             _dayTimeEffect.DiffuseColor = _currentDayTimeColor;
 
+            CheckCollisions();
+
+
             _mapRenderer.Update(gameTime);
             _entityManager.Update(gameTime);
 
@@ -622,7 +638,6 @@ namespace HarvestMoon.Screens
 
             }
 
-            CheckCollisions();
         }
                
         public override void OnPreGuiDraw(GameTime gameTime)
