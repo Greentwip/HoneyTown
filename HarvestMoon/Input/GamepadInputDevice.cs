@@ -18,28 +18,28 @@ namespace HarvestMoon.Input
             switch (keyType)
             {
                 case Keys.Up:
-                    if (gamePadState.IsButtonDown(Buttons.DPadUp))
+                    if (gamePadState.IsButtonDown(Buttons.DPadUp) || gamePadState.ThumbSticks.Left.Y > 0)
                     {
                         keyDown = true;
                     }
                     break;
 
                 case Keys.Down:
-                    if (gamePadState.IsButtonDown(Buttons.DPadDown))
+                    if (gamePadState.IsButtonDown(Buttons.DPadDown) || gamePadState.ThumbSticks.Left.Y < 0)
                     {
                         keyDown = true;
                     }
                     break;
 
                 case Keys.Left:
-                    if (gamePadState.IsButtonDown(Buttons.DPadLeft))
+                    if (gamePadState.IsButtonDown(Buttons.DPadLeft) || gamePadState.ThumbSticks.Left.X < 0)
                     {
                         keyDown = true;
                     }
                     break;
 
                 case Keys.Right:
-                    if (gamePadState.IsButtonDown(Buttons.DPadRight))
+                    if (gamePadState.IsButtonDown(Buttons.DPadRight) || gamePadState.ThumbSticks.Left.X > 0)
                     {
                         keyDown = true;
                     }

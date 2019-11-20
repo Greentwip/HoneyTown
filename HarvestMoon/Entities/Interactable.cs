@@ -13,7 +13,10 @@ namespace HarvestMoon.Entities
     {
         public RectangleF BoundingRectangle;
 
+        
         public bool Planked { get; set; }
+
+        public bool Shippable { get; set; }
 
         public bool Carryable { get; set; }
 
@@ -24,6 +27,8 @@ namespace HarvestMoon.Entities
         public bool Interacts { get; set; }
 
         public bool IsNPC { get; set; }
+
+        
 
         public string TypeName { get; set; }
 
@@ -50,6 +55,11 @@ namespace HarvestMoon.Entities
                 BoundingRectangle.Position = new Vector2(X - BoundingRectangle.Size.Width * 0.5f,
                                                          Y - BoundingRectangle.Size.Height * 0.5f);
             }
+        }
+
+        public virtual void OnInteractableDrop()
+        {
+
         }
 
     }

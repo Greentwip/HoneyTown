@@ -101,7 +101,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\General\NPC.cs" />
+    <Compile Include="Entities\Items\Tomato.cs" />
     <Compile Include="Entities\Items\Item.cs" />
+    <Compile Include="Entities\Items\Corn.cs" />
+    <Compile Include="Entities\Items\Potato.cs" />
+    <Compile Include="Entities\Items\Turnip.cs" />
     <Compile Include="Entities\RanchState.cs" />
     <Compile Include="Entities\Ranch\Crop.cs" />
     <Compile Include="Entities\Ranch\Soil.cs" />

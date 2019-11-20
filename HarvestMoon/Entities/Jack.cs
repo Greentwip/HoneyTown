@@ -1018,6 +1018,19 @@ namespace HarvestMoon.Entities
                 {
                     _entityManager.SubmitEntity(harvest);
                     _carryingObject = harvest;
+
+                    var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+
+                    _tweener.Tween(harvest, carryingParameters, 0.25f)
+                            .Ease(Ease.ExpoInOut)
+                            .OnBegin(() =>
+                            {
+                                Freeze();
+                                _carryingObject.Planked = false;
+                                _carryingObject.Priority = Priority;
+                                _isCarrying = true;
+                                _isPacking = true;
+                            });
                 }
             }
         }
@@ -1034,106 +1047,170 @@ namespace HarvestMoon.Entities
 
         public void Drop()
         {
-            var grids = _entityManager.Entities.Where(e => e is Grid).Cast<Grid>().ToArray();
-            foreach (var grid in grids)
+            if(_carryingObject != null)
             {
-                Vector3 boundPosition = new Vector3(0, 0, 0);
-
-                switch (_playerFacing)
+                if (_carryingObject.Shippable || _carryingObject is Bush)
                 {
-                    case Facing.UP:
-                        boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
-                                                    ActionBoundingRectangle.Center.Y,
-                                                    0);
-                        break;
+                    Vector3 boundPosition = new Vector3(0, 0, 0);
 
-                    case Facing.DOWN:
-                        boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
-                                                    ActionBoundingRectangle.Top,
-                                                    0);
-                        break;
-                    case Facing.RIGHT:
-                        boundPosition = new Vector3(ActionBoundingRectangle.Right,
-                                                    ActionBoundingRectangle.Center.Y,
-                                                    0);
-                        break;
-                    case Facing.LEFT:
-                        boundPosition = new Vector3(ActionBoundingRectangle.Left,
-                                                    ActionBoundingRectangle.Center.Y,
-                                                    0);
-                        break;
+                    switch (_playerFacing)
+                    {
+                        case Facing.UP:
+                            boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
+                                                        ActionBoundingRectangle.Center.Y,
+                                                        0);
+                            break;
+
+                        case Facing.DOWN:
+                            boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
+                                                        ActionBoundingRectangle.Top,
+                                                        0);
+                            break;
+                        case Facing.RIGHT:
+                            boundPosition = new Vector3(ActionBoundingRectangle.Right,
+                                                        ActionBoundingRectangle.Center.Y,
+                                                        0);
+                            break;
+                        case Facing.LEFT:
+                            boundPosition = new Vector3(ActionBoundingRectangle.Left,
+                                                        ActionBoundingRectangle.Center.Y,
+                                                        0);
+                            break;
+                    }
+
+                    Freeze();
+                    _tweener.Tween(_carryingObject,
+                           new { X = boundPosition.X, Y = boundPosition.Y },
+                           0.125f)
+                               .Ease(Ease.ExpoInOut)
+                               .OnComplete(() =>
+                               {
+                                   UnFreeze();
+                                   _carryingObject.Planked = true;
+                                   _carryingObject.Priority = 0;
+                                   _isCarrying = false;
+
+                                   _carryingObject.OnInteractableDrop();
+
+                                   _carryingObject = null;
+
+
+                               });
+
                 }
-                
-                var cellAtPosition = grid.CollisionGridSet.GetCellAtPosition(boundPosition);
-                if (cellAtPosition.Flag == CollisionGridCellFlag.Solid)
+                else
                 {
-                    var targetPosition = cellAtPosition.BoundingBox.Center + grid.CollisionGridSet.GridPosition;
+                    var grids = _entityManager.Entities.Where(e => e is Grid).Cast<Grid>().ToArray();
+                    foreach (var grid in grids)
+                    {
+                        Vector3 boundPosition = new Vector3(0, 0, 0);
 
-                    /*System.Diagnostics.Debug.WriteLine(ActionBoundingRectangle.Center.ToString());
-                    System.Diagnostics.Debug.WriteLine(cellAtPosition.BoundingBox.Center.ToString());
-                    System.Diagnostics.Debug.WriteLine(grid.CollisionGridSet.GridPosition.ToString());
-                    System.Diagnostics.Debug.WriteLine(targetPosition.ToString());*/
-
-                    var interactablesButSoil = _entityManager
-                                                .Entities
-                                                .Where(e => { return e is Interactable && !(e is Soil); })
-                                                .Cast<Interactable>().ToArray();
-                    bool collides = false;
-                    foreach(var interactable in interactablesButSoil) {
-                        if(interactable.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
+                        switch (_playerFacing)
                         {
-                            collides = true;
+                            case Facing.UP:
+                                boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
+                                                            ActionBoundingRectangle.Center.Y,
+                                                            0);
+                                break;
+
+                            case Facing.DOWN:
+                                boundPosition = new Vector3(ActionBoundingRectangle.Center.X,
+                                                            ActionBoundingRectangle.Top,
+                                                            0);
+                                break;
+                            case Facing.RIGHT:
+                                boundPosition = new Vector3(ActionBoundingRectangle.Right,
+                                                            ActionBoundingRectangle.Center.Y,
+                                                            0);
+                                break;
+                            case Facing.LEFT:
+                                boundPosition = new Vector3(ActionBoundingRectangle.Left,
+                                                            ActionBoundingRectangle.Center.Y,
+                                                            0);
+                                break;
+                        }
+
+                        var cellAtPosition = grid.CollisionGridSet.GetCellAtPosition(boundPosition);
+                        if (cellAtPosition.Flag == CollisionGridCellFlag.Solid)
+                        {
+                            var targetPosition = cellAtPosition.BoundingBox.Center + grid.CollisionGridSet.GridPosition;
+
+                            /*System.Diagnostics.Debug.WriteLine(ActionBoundingRectangle.Center.ToString());
+                            System.Diagnostics.Debug.WriteLine(cellAtPosition.BoundingBox.Center.ToString());
+                            System.Diagnostics.Debug.WriteLine(grid.CollisionGridSet.GridPosition.ToString());
+                            System.Diagnostics.Debug.WriteLine(targetPosition.ToString());*/
+
+                            var interactablesButSoil = _entityManager
+                                                        .Entities
+                                                        .Where(e => { return e is Interactable && !(e is Soil); })
+                                                        .Cast<Interactable>().ToArray();
+                            bool collides = false;
+                            foreach (var interactable in interactablesButSoil)
+                            {
+                                if (interactable.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
+                                {
+                                    collides = true;
+                                    break;
+                                }
+                            }
+
+                            if (!collides)
+                            {
+                                if (_carryingObject is SmallRock || _carryingObject is WoodPiece)
+                                {
+                                    var soilSegments = _entityManager.Entities
+                                                                 .Where(e => { return e is Soil; })
+                                                                 .Cast<Soil>().ToArray();
+
+                                    foreach (var soilSegment in soilSegments)
+                                    {
+                                        if (soilSegment.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
+                                        {
+                                            if (soilSegment.HasGrown)
+                                            {
+                                                collides = true;
+                                            }
+                                            else
+                                            {
+                                                soilSegment.Destroy();
+                                            }
+                                        }
+
+                                    }
+                                }
+
+
+                            }
+
+                            if (!collides)
+                            {
+                                Freeze();
+                                _tweener.Tween(_carryingObject,
+                                       new { X = targetPosition.X, Y = targetPosition.Y },
+                                       0.125f)
+                                           .Ease(Ease.ExpoInOut)
+                                           .OnComplete(() =>
+                                           {
+                                               UnFreeze();
+                                               _carryingObject.Planked = true;
+                                               _carryingObject.Priority = 0;
+                                               _isCarrying = false;
+
+                                               _carryingObject.OnInteractableDrop();
+
+                                               _carryingObject = null;
+
+
+                                           });
+
+                            }
                             break;
                         }
                     }
 
-                    if (!collides)
-                    {
-                        if(_carryingObject is SmallRock || _carryingObject is WoodPiece)
-                        {
-                            var soilSegments = _entityManager.Entities
-                                                         .Where(e => { return e is Soil; })
-                                                         .Cast<Soil>().ToArray();
 
-                            foreach(var soilSegment in soilSegments)
-                            {
-                                if(soilSegment.BoundingRectangle.Contains(new Point2(targetPosition.X, targetPosition.Y)))
-                                {
-                                    if (soilSegment.HasGrown)
-                                    {
-                                        collides = true;
-                                    }
-                                    else
-                                    {
-                                        soilSegment.Destroy();
-                                    }
-                                }
-
-                            }
-                        }
-                        
-                        
-                    }
-
-                    if (!collides)
-                    {
-                        Freeze();
-                        _tweener.Tween(_carryingObject,
-                               new { X = targetPosition.X, Y = targetPosition.Y },
-                               0.125f)
-                                   .Ease(Ease.ExpoInOut)
-                                   .OnComplete(() =>
-                                   {
-                                       UnFreeze();
-                                       _carryingObject.Planked = true;
-                                       _carryingObject.Priority = 0;
-                                       _carryingObject = null;
-                                       _isCarrying = false;
-                                   });
-
-                    }
-                    break;
                 }
+
             }
 
         }

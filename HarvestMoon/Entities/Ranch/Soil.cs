@@ -37,7 +37,8 @@ namespace HarvestMoon.Entities.Ranch
         }
 
         public Soil(ContentManager content, 
-                    Vector2 initialPosition, 
+                    Vector2 initialPosition,
+                    bool isWatered = false,
                     bool isPlanted = false, 
                     string cropType = default(string), 
                     int daysWatered = -1,
@@ -125,6 +126,8 @@ namespace HarvestMoon.Entities.Ranch
 
             if (isPlanted)
             {
+                IsWatered = isWatered;
+
                 Plant(cropType, daysWatered, seasonPlanted);
                 GrowAccordingly();
             }
@@ -184,7 +187,25 @@ namespace HarvestMoon.Entities.Ranch
 
         public Item Harvest()
         {
-            return null;
+            Item harvest = null;
+
+            if (HasGrown)
+            {
+                harvest = HarvestCrop.Harvest();
+
+                if(harvest != null)
+                {
+                    if (CropType == "turnip" || CropType == "potato")
+                    {
+                        Reset();
+                    }
+                }
+                
+            }
+
+
+
+            return harvest;
         }
 
         public void Water()
@@ -230,6 +251,17 @@ namespace HarvestMoon.Entities.Ranch
             IsWatered = false;
         }
 
+        private void Reset()
+        {
+            IsPlanted = false;
+            CropType = "none";
+            DaysToGrow = -1;
+            DaysWatered = 0;
+            HasGrown = false;
+            _sprite.Play("soil_normal");
+
+        }
+
         public void Plant(string cropType, int daysWatered, string seasonPlanted)
         {
             IsPlanted = true;
@@ -262,11 +294,6 @@ namespace HarvestMoon.Entities.Ranch
             else
             {
                 spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(2, 2));
-
-                if(_sprite.CurrentAnimation.Name == "soil_normal")
-                {
-
-                }
             }            
         }
     }

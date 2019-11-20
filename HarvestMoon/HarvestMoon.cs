@@ -361,6 +361,7 @@ namespace HarvestMoon
                 {
                     soilSegments.Add(new Soil(Content, 
                                                 new Vector2(saveGame.SoilSegments[i].X, saveGame.SoilSegments[i].Y),
+                                                saveGame.SoilSegments[i].IsWatered,
                                                 saveGame.SoilSegments[i].IsPlanted,
                                                 saveGame.SoilSegments[i].CropType,
                                                 saveGame.SoilSegments[i].DaysWatered,

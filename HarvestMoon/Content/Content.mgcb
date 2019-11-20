@@ -4862,6 +4862,11 @@
 /processorParam:TextureFormat=Color
 /build:maps/ranch/items/bush.png
 
+#begin maps/ranch/items/cropItemsMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:maps/ranch/items/cropItemsMap.xml
+
 #begin maps/ranch/items/crops.png
 /importer:TextureImporter
 /processor:TextureProcessor

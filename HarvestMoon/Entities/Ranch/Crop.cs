@@ -5,6 +5,7 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
+using HarvestMoon.Entities.Items;
 
 namespace HarvestMoon.Entities.Ranch
 {
@@ -21,8 +22,12 @@ namespace HarvestMoon.Entities.Ranch
         private float X;
         private float Y;
 
+        ContentManager Content;
+
         public Crop(ContentManager content, Vector2 initialPosition, string cropType, int maturity)
         {
+            Content = content;
+
             var cropTexture = content.Load<Texture2D>("maps/ranch/items/crops");
             var cropMap = content.Load<Dictionary<string, Rectangle>>("maps/ranch/items/cropsMap");
             var cropAtlas = new TextureAtlas("crop", cropTexture, cropMap);
@@ -236,6 +241,46 @@ namespace HarvestMoon.Entities.Ranch
                     Maturity = "d";
                 }
             }
+        }
+
+        public Item Harvest()
+        {
+            Item harvest = null;
+
+            if (CropType == "turnip")
+            {
+                if (Maturity == "b")
+                {
+                    harvest = new Turnip(Content, new Vector2(X, Y));
+                }
+            }
+            else if (CropType == "potato")
+            {
+                if (Maturity == "b")
+                {
+                    harvest = new Potato(Content, new Vector2(X, Y));
+                }
+            }
+            else if (CropType == "tomato")
+            {
+                if (Maturity == "d")
+                {
+                    harvest = new Tomato(Content, new Vector2(X, Y));
+                }
+            }
+            else if (CropType == "corn")
+            {
+                if (Maturity == "d")
+                {
+                    harvest = new Corn(Content, new Vector2(X, Y));
+                }
+            }
+            else if (CropType == "grass")
+            {
+                harvest = null;
+            }
+
+            return harvest;
         }
 
         public void Water()
