@@ -41,6 +41,9 @@ namespace HarvestMoon.Entities
         private const float _defaultWalkSpeed = 100.0f;
         private const float _defaultRunSpeed = 180.0f;
 
+        private int _hammerPower;
+        private int _axePower;
+
         private Facing _playerFacing = Facing.RIGHT;
 
         public Facing PlayerFacing { get => _playerFacing; set => _playerFacing = value; }
@@ -1406,6 +1409,41 @@ namespace HarvestMoon.Entities
             }
         }
 
+        public void Sickle()
+        {
+            if(_currentInteractable != null)
+            {
+                if (_currentInteractable.Cuttable)
+                {
+                    _currentInteractable.OnCut();
+                }
+            }
+        }
+
+        public void Hammer()
+        {
+            if (_currentInteractable != null)
+            {
+                if (_currentInteractable.Hammerable)
+                {
+                    _hammerPower++;
+                    _currentInteractable.OnHammer(_hammerPower);
+                }
+            }
+        }
+
+        public void Axe()
+        {
+            if (_currentInteractable != null)
+            {
+                if (_currentInteractable.Splittable)
+                {
+                    _axePower++;
+                    _currentInteractable.OnAxe(_axePower);
+                }
+            }
+        }
+
         public void Plant()
         {
             var grids = _entityManager.Entities.Where(e => e is Grid).Cast<Grid>().ToArray();
@@ -1567,6 +1605,18 @@ namespace HarvestMoon.Entities
                     {
                         Water();
                     }
+                    else if(currentTool == "sickle")
+                    {
+                        Sickle();
+                    }
+                    else if(currentTool == "hammer")
+                    {
+                        Hammer();
+                    }
+                    else if (currentTool == "axe")
+                    {
+                        Axe();
+                    }
 
                     if (currentTool.Contains("seeds"))
                     {
@@ -1689,6 +1739,9 @@ namespace HarvestMoon.Entities
 
                 if (movementHit)
                 {
+                    _hammerPower = 0;
+                    _axePower = 0;
+
                     switch (_playerFacing)
                     {
                         case Facing.UP:

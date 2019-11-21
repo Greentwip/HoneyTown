@@ -20,6 +20,12 @@ namespace HarvestMoon.Entities
 
         public bool Carryable { get; set; }
 
+        public bool Cuttable { get; set; }
+
+        public bool Hammerable { get; set; }
+
+        public bool Splittable { get; set; }
+
         public bool Packable { get; set; }
 
         public bool Breakable { get; set; }
@@ -56,6 +62,21 @@ namespace HarvestMoon.Entities
         }
 
         public virtual void OnInteractableDrop()
+        {
+
+        }
+
+        public virtual void OnCut()
+        {
+
+        }
+
+        public virtual void OnHammer(int power)
+        {
+
+        }
+
+        public virtual void OnAxe(int power)
         {
 
         }

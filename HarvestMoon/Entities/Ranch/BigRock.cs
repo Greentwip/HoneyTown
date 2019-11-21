@@ -34,10 +34,20 @@ namespace HarvestMoon.Entities
 
             Carryable = false;
 
+            Hammerable = true;
+
             Interacts = true;
 
             TypeName = "big-rock";
 
+        }
+
+        public override void OnHammer(int power)
+        {
+            if(power >= 4)
+            {
+                Destroy();
+            }
         }
 
         public override void Update(GameTime gameTime)

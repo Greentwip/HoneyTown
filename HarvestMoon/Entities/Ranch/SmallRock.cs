@@ -40,12 +40,23 @@ namespace HarvestMoon.Entities
             Planked = true;
 
             Carryable = true;
+            Hammerable = true;
 
             Interacts = true;
 
             TypeName = "small-rock";
 
         }
+
+        public override void OnHammer(int power)
+        {
+            if(power >= 1)
+            {
+                Destroy();
+            }
+            
+        }
+
 
         public override void Update(GameTime gameTime)
         {

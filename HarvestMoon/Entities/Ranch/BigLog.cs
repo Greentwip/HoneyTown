@@ -40,11 +40,20 @@ namespace HarvestMoon.Entities
             Planked = true;
 
             Carryable = false;
+            Splittable = true;
 
             Interacts = true;
 
             TypeName = "big-log";
 
+        }
+
+        public override void OnAxe(int power)
+        {
+            if(power >= 6)
+            {
+                Destroy();
+            }
         }
 
         public override void Update(GameTime gameTime)

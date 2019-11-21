@@ -113,6 +113,7 @@ namespace HarvestMoon.Screens
 
         public override void Draw(GameTime gameTime)
         {
+            _viewportAdapter.Reset();
             /*
             UserInterface.Active.Draw(_spriteBatch);
 

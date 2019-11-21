@@ -120,6 +120,8 @@ namespace HarvestMoon.Entities.Ranch
             Planked = true;
             Carryable = false;
             Interacts = true;
+            Cuttable = true;
+
             Priority = -32;
 
             TypeName = "soil";
@@ -270,6 +272,15 @@ namespace HarvestMoon.Entities.Ranch
             SeasonPlanted = seasonPlanted;
 
             _sprite.Play("soil_planted_normal");
+        }
+
+        public override void OnCut()
+        {
+            if (HasGrown)
+            {
+                Reset();
+            }
+            
         }
 
         public override void Update(GameTime gameTime)

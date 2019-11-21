@@ -45,8 +45,15 @@ namespace HarvestMoon.Entities
 
             Interacts = true;
 
+            Cuttable = true;
+
             TypeName = "bush";
 
+        }
+
+        public override void OnCut()
+        {
+            OnInteractableDrop();
         }
 
         public override void Update(GameTime gameTime)

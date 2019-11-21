@@ -33,8 +33,18 @@ namespace HarvestMoon.Entities
 
             Carryable = true;
 
+            Hammerable = true;
+
             Interacts = true;
             TypeName = "wood-piece";
+        }
+
+        public override void OnHammer(int power)
+        {
+            if(power >= 1)
+            {
+                Destroy();
+            }
         }
 
         public override void Update(GameTime gameTime)
