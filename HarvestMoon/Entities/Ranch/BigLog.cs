@@ -53,6 +53,7 @@ namespace HarvestMoon.Entities
             if(power >= 6)
             {
                 Destroy();
+                HarvestMoon.Instance.Planks += 6;
             }
         }
 

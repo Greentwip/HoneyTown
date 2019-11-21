@@ -44,6 +44,7 @@ namespace HarvestMoon.Entities.Ranch
             {
                 if (item.Shippable)
                 {
+                    HarvestMoon.Instance.TodayGold += item.SellPrice;
                     item.Destroy();
                 }
             }            

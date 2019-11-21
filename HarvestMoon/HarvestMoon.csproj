@@ -108,8 +108,10 @@
     <Compile Include="Entities\Items\Turnip.cs" />
     <Compile Include="Entities\RanchState.cs" />
     <Compile Include="Entities\Ranch\Crop.cs" />
+    <Compile Include="Entities\Ranch\FooderSignPost.cs" />
     <Compile Include="Entities\Ranch\ShippingBox.cs" />
     <Compile Include="Entities\Ranch\Soil.cs" />
+    <Compile Include="Entities\Ranch\WoodSignPost.cs" />
     <Compile Include="Entities\Tools\PotatoSeeds.cs" />
     <Compile Include="Entities\Tools\TurnipSeeds.cs" />
     <Compile Include="Entities\Tools\Tool.cs" />

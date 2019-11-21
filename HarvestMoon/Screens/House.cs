@@ -45,6 +45,9 @@ namespace HarvestMoon.Screens
 
             if (!_isFromRanch)
             {
+                HarvestMoon.Instance.Gold += HarvestMoon.Instance.TodayGold;
+                HarvestMoon.Instance.TodayGold = 0;
+
                 var soilSegments = HarvestMoon.Instance.RanchState.Entities.Where(e => e is Soil).Cast<Soil>().ToArray();
 
                 foreach (var soilSegment in soilSegments)

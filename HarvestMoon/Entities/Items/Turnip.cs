@@ -60,6 +60,8 @@ namespace HarvestMoon.Entities.Items
             X = initialPosition.X;
             Y = initialPosition.Y;
 
+            SellPrice = 60;
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)

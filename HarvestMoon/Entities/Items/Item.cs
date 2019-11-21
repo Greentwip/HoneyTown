@@ -39,6 +39,8 @@ namespace HarvestMoon.Entities
 
             _destroyDelay = 2.0f;
 
+            SellPrice = 0;
+
         }
 
 

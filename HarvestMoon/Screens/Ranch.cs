@@ -458,13 +458,11 @@ namespace HarvestMoon.Screens
 
                             if (obj.Name == "materials-signpost")
                             {
-                                var replacedPieces = objectMessage.Value.Replace("number", HarvestMoon.Instance.Planks.ToString());
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedPieces));
+                                _entityManager.AddEntity(new WoodSignPost(objectPosition, objectSize, true, objectMessage.Value));
                             }
                             else if (obj.Name == "feed-signpost")
                             {
-                                var replacedPieces = objectMessage.Value.Replace("number", HarvestMoon.Instance.FeedPieces.ToString());
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedPieces));
+                                _entityManager.AddEntity(new FooderSignPost(objectPosition, objectSize, true, objectMessage.Value));
                             }
                             else
                             {
@@ -582,6 +580,21 @@ namespace HarvestMoon.Screens
                     if(HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
                     {
                         HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Afternoon, true);
+
+                        if(HarvestMoon.Instance.TodayGold != 0)
+                        {
+                            string harvest = "Is that all you are shipping today? It costs " +
+                                            HarvestMoon.Instance.TodayGold.ToString() + "G" + " in total." +
+                                            "I'll put money in the box tomorrow";
+
+                            ShowMessage(harvest, null);
+                        }
+                        else
+                        {
+                            string harvest = "Is there no shipping today? Ok, bye.";
+                            ShowMessage(harvest, null);
+                        }
+                        
                     }
                     
                 }

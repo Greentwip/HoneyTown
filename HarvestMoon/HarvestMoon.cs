@@ -49,6 +49,7 @@ namespace HarvestMoon
         public string Season { get; set; }
         public int YearNumber { get; set; }
         public int Gold { get; set; }
+        public int TodayGold { get; set; }
 
         public int FeedPieces { get; set; }
         public int Planks { get; set; }
@@ -217,6 +218,7 @@ namespace HarvestMoon
             public int YearNumber { get; set; }
 
             public int Gold { get; set; }
+            public int TodayGold { get; set; }
 
             public List<string> Tools { get; set; }
 
@@ -243,6 +245,8 @@ namespace HarvestMoon
             sg.DayName = Instance.DayName;
             sg.Season = Instance.Season;
             sg.YearNumber = Instance.YearNumber;
+            sg.Gold = Instance.Gold;
+            sg.TodayGold = Instance.TodayGold;
             sg.Tools = Instance.Tools;
             sg.FeedPieces = Instance.FeedPieces;
             sg.Planks = Instance.Planks;
@@ -322,6 +326,7 @@ namespace HarvestMoon
                 Instance.Season = saveGame.Season;
                 Instance.YearNumber = saveGame.YearNumber;
                 Instance.Gold = saveGame.Gold;
+                Instance.TodayGold = saveGame.TodayGold;
                 Instance.FeedPieces = saveGame.FeedPieces;
                 Instance.Planks = saveGame.Planks;
                 Instance.Tools = saveGame.Tools;
