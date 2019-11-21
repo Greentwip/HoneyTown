@@ -286,7 +286,7 @@ namespace HarvestMoon.Screens
             }
 
             // create a panel and position in center of screen
-            _textPanel = new Panel(new Vector2(620, 150), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel = new Panel(new Vector2(480, 150), PanelSkin.Default, Anchor.BottomCenter);
 
             UserInterface.Active.AddEntity(_textPanel);
 
@@ -319,7 +319,7 @@ namespace HarvestMoon.Screens
             _bufferedStrings = SplitByLength(message, 130);
 
             // create a panel and position in center of screen
-            _textPanel = new Panel(new Vector2(620, 150), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel = new Panel(new Vector2(480, 150), PanelSkin.Default, Anchor.BottomCenter);
 
             UserInterface.Active.AddEntity(_textPanel);
 
@@ -503,8 +503,9 @@ namespace HarvestMoon.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            /*UserInterface.Active.Draw(_spriteBatch);
             _viewportAdapter.Reset();
+
+            /*UserInterface.Active.Draw(_spriteBatch);
 
             OnPreGuiDraw(gameTime);
 
