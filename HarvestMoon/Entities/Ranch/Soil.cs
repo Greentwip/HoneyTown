@@ -117,7 +117,7 @@ namespace HarvestMoon.Entities.Ranch
             X = initialPosition.X;
             Y = initialPosition.Y;
 
-            Planked = false;
+            Planked = true;
             Carryable = false;
             Interacts = true;
             Priority = -32;

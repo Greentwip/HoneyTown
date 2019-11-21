@@ -15,16 +15,18 @@ using Microsoft.Xna.Framework.Content;
 
 namespace HarvestMoon.Entities
 {
-    public class Bush : Interactable
+    public class Bush : Item
     {
         private readonly Sprite _sprite;
 
         public Bush()
+            : base(new Vector2(0, 0))
         {
 
         }
 
         public Bush(ContentManager content, Vector2 initialPosition)
+            : base(initialPosition)
         {
             var bushTexture = content.Load<Texture2D>("maps/ranch/items/bush");
             
@@ -49,7 +51,7 @@ namespace HarvestMoon.Entities
 
         public override void Update(GameTime gameTime)
         {
-
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

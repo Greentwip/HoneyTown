@@ -340,11 +340,7 @@ namespace HarvestMoon.Screens
 
         protected void CheckCollisions()
         {
-            var interactables = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
-
-            bool foundInteractable = false;
-            Interactable closestInteractable = null;
-
+            var interactables = _entityManager.Entities.Where(e => { return e is Interactable && !(e is Soil); }).Cast<Interactable>().ToArray();
             foreach (var interactable in interactables)
             {
                 if (interactable.BoundingRectangle.Intersects(_player.BoundingRectangle) && interactable.Planked)
@@ -375,6 +371,16 @@ namespace HarvestMoon.Screens
 
                     }
                 }
+            }
+
+            interactables = _entityManager.Entities.Where(e => { return e is Interactable; }).Cast<Interactable>().ToArray();
+
+            bool foundInteractable = false;
+            Interactable closestInteractable = null;
+
+            foreach (var interactable in interactables)
+            {
+                
 
                 if (interactable.BoundingRectangle.Intersects(_player.ActionBoundingRectangle))
                 {
@@ -382,7 +388,11 @@ namespace HarvestMoon.Screens
 
                     if(closestInteractable == null)
                     {
-                        closestInteractable = interactable;
+                        if (interactable.Planked)
+                        {
+                            closestInteractable = interactable;
+                        }
+                            
                     }
                     else
                     {
@@ -390,7 +400,10 @@ namespace HarvestMoon.Screens
                         Vector2 interactablePosition = new Vector2(interactable.X, interactable.Y);
                         if (Vector2.Distance(_player.Position, interactablePosition) < Vector2.Distance(_player.Position, closestInteractablePosition))
                         {
-                            closestInteractable = interactable;
+                            if (interactable.Planked)
+                            {
+                                closestInteractable = interactable;
+                            }
                         }
                     }
                 }

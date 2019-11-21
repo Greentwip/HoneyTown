@@ -71,7 +71,7 @@ namespace HarvestMoon.Entities
         public RectangleF ActionBoundingRectangle = RectangleF.Empty;
 
         private Interactable _carryingObject = null;
-        private Interactable _breakableObject = null;
+        private Interactable _currentInteractable = null;
         private readonly Tweener _tweener = new Tweener();
         private bool _isCarrying = false;
         private bool _isPacking = false;
@@ -933,36 +933,42 @@ namespace HarvestMoon.Entities
         {
             if(interactable == null)
             {
-                _breakableObject = null;
+                _currentInteractable = null;
                 return;
             }
 
-            var keyboardState = HarvestMoon.Instance.Input;
-
             if (interactable.Breakable)
             {
-                _breakableObject = interactable;
+               // _breakableObject = interactable;
             }
 
-            if (_carryingObject == null && 
-                keyboardState.IsKeyDown(InputDevice.Keys.A) && 
-                !_isInteractButtonDown && 
-                (interactable.Carryable || interactable.Packable) &&
-                interactable.Interacts)
+            _currentInteractable = interactable;
+
+        }
+
+        public void CheckInteractions()
+        {
+            var keyboardState = HarvestMoon.Instance.Input;
+
+            if (_carryingObject == null &&
+                keyboardState.IsKeyDown(InputDevice.Keys.A) &&
+                !_isInteractButtonDown &&
+                (_currentInteractable.Carryable || _currentInteractable.Packable) &&
+                _currentInteractable.Interacts)
             {
                 _isInteractButtonDown = true;
 
 
-                _carryingObject = interactable;
+                _carryingObject = _currentInteractable;
 
                 var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
 
-                if (interactable.Packable)
+                if (_currentInteractable.Packable)
                 {
                     carryingParameters = new { X = _packingPosition.X, Y = _packingPosition.Y };
                 }
 
-                _tweener.Tween(interactable, carryingParameters, 0.25f)
+                _tweener.Tween(_currentInteractable, carryingParameters, 0.25f)
                         .Ease(Ease.ExpoInOut)
                         .OnBegin(() =>
                         {
@@ -975,20 +981,21 @@ namespace HarvestMoon.Entities
 
 
             }
-            else if(keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && interactable.IsNPC && interactable.Interacts && !_busy)
+            else if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && _currentInteractable.IsNPC && _currentInteractable.Interacts && !_busy)
             {
                 _busy = true;
                 _isInteractButtonDown = true;
 
-                var npc = interactable as NPC;
-                if(npc.DeploysMenu)
+                var npc = _currentInteractable as NPC;
+                if (npc.DeploysMenu)
                 {
-                    switch (npc.DeployableMenu) {
+                    switch (npc.DeployableMenu)
+                    {
                         case NPC.NPCMenu.YesNo:
                             _mapScreen.ShowMessage(npc.Message, () =>
                             {
-                                _mapScreen.ShowYesNoMessage(npc.Strings[0], 
-                                                            npc.Strings[1], 
+                                _mapScreen.ShowYesNoMessage(npc.Strings[0],
+                                                            npc.Strings[1],
                                                             () =>
                                                             {
                                                                 npc.Callbacks[0]();
@@ -1006,7 +1013,7 @@ namespace HarvestMoon.Entities
                 {
                     if (npc.ShowsMessage)
                     {
-                        if(_carryingObject is Item)
+                        if (_carryingObject is Item)
                         {
                             _mapScreen.ShowMessage(npc.GetMessage(_carryingObject as Item), () =>
                             {
@@ -1049,11 +1056,11 @@ namespace HarvestMoon.Entities
                     }
                 }
             }
-            else if(keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && interactable is Soil && _carryingObject == null && !_busy)
+            else if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && _currentInteractable is Soil && _carryingObject == null && !_busy)
             {
-                var harvest = (interactable as Soil).Harvest();
+                var harvest = (_currentInteractable as Soil).Harvest();
 
-                if(harvest != null)
+                if (harvest != null)
                 {
                     _entityManager.SubmitEntity(harvest);
                     _carryingObject = harvest;
@@ -1072,6 +1079,7 @@ namespace HarvestMoon.Entities
                             });
                 }
             }
+            
         }
 
         public void Busy()
@@ -1565,7 +1573,7 @@ namespace HarvestMoon.Entities
                         Plant();
                     }
                     
-                    if(_breakableObject != null)
+                    //if(_breakableObject != null)
                     {
                         //try_break(_breakableObject, _breakingPower);
                     }
@@ -1921,18 +1929,19 @@ namespace HarvestMoon.Entities
                     break;
             }
 
-            if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown)
+            if(_currentInteractable != null)
             {
-                if (_isCarrying && _carryingObject != null && !_isFrozen)
-                {
-                    _isInteractButtonDown = true;
-
-                    Drop();
-                }
-                
+                CheckInteractions();
             }
 
-            if(_carryingObject != null && _isCarrying)
+            if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && _isCarrying && _carryingObject != null && !_isFrozen && !_busy)
+            {
+                _isInteractButtonDown = true;
+
+                Drop();
+            }
+
+            if (_carryingObject != null && _isCarrying)
             {
                 _carryingObject.X = _carryingPosition.X;
                 _carryingObject.Y = _carryingPosition.Y;
