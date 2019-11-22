@@ -51,6 +51,7 @@ namespace MonoGame.Extended.ViewportAdapters
 
         private void OnClientSizeChanged(object sender, EventArgs eventArgs)
         {
+
             var clientBounds = _window.ClientBounds;
 
             var worldScaleX = (float)clientBounds.Width / VirtualWidth;

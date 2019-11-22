@@ -584,7 +584,7 @@ namespace HarvestMoon.Screens
                         if(HarvestMoon.Instance.TodayGold != 0)
                         {
                             string harvest = "Is that all you are shipping today? It costs " +
-                                            HarvestMoon.Instance.TodayGold.ToString() + "G" + " in total." +
+                                            HarvestMoon.Instance.TodayGold.ToString() + "G" + " in total. " +
                                             "I'll put money in the box tomorrow";
 
                             ShowMessage(harvest, null);
