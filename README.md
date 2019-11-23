@@ -8,7 +8,7 @@ This project aim is to bring Harvest Moon towards the Open Source community.
 To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One
 
 ## What works so far
-* Seeds (Turnips and potatos only)
+* Seeds (Turnips and potatos only, corn, tomato and grass seeds do not work)
 * Watering Can
 * Hammer
 * Hoe
