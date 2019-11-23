@@ -5,7 +5,7 @@ An open source engine remake of the SNES classic Harvest Moon released in the 90
 
 This project aim is to bring Harvest Moon towards the Open Source community. 
 
-To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One
+To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One, be sure to also install the latest MonoGame libraries.
 
 ## What works so far
 * Seeds (Turnips and potatos only, corn, tomato and grass seeds do not work)
