@@ -264,6 +264,7 @@ namespace HarvestMoon.Screens
 
         NPCMenu _npcMenu;
 
+        // This must be on a separated class
         public void ShowYesNoMessage(string yesString, string noString, Action yesCallback, Action noCallback)
         {
             _isDisplayingMenu = true;
@@ -499,8 +500,6 @@ namespace HarvestMoon.Screens
             }
         }
 
-        public abstract void OnPreGuiDraw(GameTime gameTime);
-
         public override void Draw(GameTime gameTime)
         {
             _viewportAdapter.Reset();
@@ -517,7 +516,6 @@ namespace HarvestMoon.Screens
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 480.0f;
             UserInterface.Active.GlobalScale = scaleY;
 
-            OnPreGuiDraw(gameTime);
             UserInterface.Active.Draw(_spriteBatch);
         }
     }

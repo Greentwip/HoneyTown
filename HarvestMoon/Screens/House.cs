@@ -235,7 +235,7 @@ namespace HarvestMoon.Screens
         }
 
         // Must be Draw(GameTime gametime)
-        public override void OnPreGuiDraw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
 
@@ -274,6 +274,8 @@ namespace HarvestMoon.Screens
             _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
             _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
     }
 }

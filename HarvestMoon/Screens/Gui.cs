@@ -109,8 +109,6 @@ namespace HarvestMoon.Screens
             }
         }
 
-        public abstract void OnPreGuiDraw(GameTime gameTime);
-
         public override void Draw(GameTime gameTime)
         {
             _viewportAdapter.Reset();
@@ -130,7 +128,6 @@ namespace HarvestMoon.Screens
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
             UserInterface.Active.GlobalScale = scaleY;
 
-            OnPreGuiDraw(gameTime);
             UserInterface.Active.Draw(_spriteBatch);
 
         }

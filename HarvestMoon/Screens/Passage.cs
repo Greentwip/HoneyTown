@@ -95,66 +95,8 @@ namespace HarvestMoon.Screens
 
                             var objectMessage = obj.Properties.First(p => p.Key.Contains("message"));
 
-                            if(obj.Name == "diary")
-                            {
-                                _entityManager.AddEntity(new NPC(objectPosition,
-                                                                 objectSize,
-                                                                 true,
-                                                                 objectMessage.Value,
-                                                                 true,
-                                                                 NPC.NPCMenu.YesNo,
-                                                                 new List<string>() { "Yes", "No" },
-                                                                 new List<Action>() {
-                                                                     () => {
+                            _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
 
-                                                                        _player.Freeze();
-                                                                        _player.Busy();
-                                                                        _player.Cooldown();
-                                                                        HarvestMoon.Instance.ResetDay();
-                                                                        HarvestMoon.Instance.IncrementDay();
-                                                                        HarvestMoon.Instance.SaveGameState(HarvestMoon.Instance.Diary);
-
-                                                                        var screen = new House(Game, HarvestMoon.Arrival.Wake);
-                                                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
-                                                                        ScreenManager.LoadScreen(screen, transition);
-
-                                                                     },
-                                                                     () => {
-                                                                        ShowYesNoMessage("I'm going to bed.",
-                                                                                         "Oh, I've got something to do.",
-                                                                                        () =>
-                                                                                        {
-
-                                                                                            _player.Freeze();
-                                                                                            _player.Busy();
-                                                                                            _player.Cooldown();
-                                                                                            HarvestMoon.Instance.ResetDay();
-                                                                                            HarvestMoon.Instance.IncrementDay();
-                                                                                            var screen = new House(Game, HarvestMoon.Arrival.Wake);
-                                                                                            var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
-                                                                                            ScreenManager.LoadScreen(screen, transition);
-
-                                                                                        },
-                                                                                        () =>
-                                                                                        {
-                                                                                            _player.UnFreeze();
-                                                                                            _player.Cooldown();
-                                                                                        });
-                                                                 } }));
-                            }
-                            else if(obj.Name == "calendar")
-                            {
-                                var replacedDayName = objectMessage.Value.Replace("day", HarvestMoon.Instance.DayName);
-                                var replacedDayNumber = replacedDayName.Replace("number", HarvestMoon.Instance.DayNumber.ToString());
-                                var replacedSeason = replacedDayNumber.Replace("season", HarvestMoon.Instance.Season);
-
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedSeason));
-                            }
-                            else
-                            {
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
-                            }
-                            
                         }
 
                     }
@@ -234,7 +176,7 @@ namespace HarvestMoon.Screens
 
         }
 
-        public override void OnPreGuiDraw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
 
@@ -273,6 +215,8 @@ namespace HarvestMoon.Screens
             _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
             _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
     }
 }

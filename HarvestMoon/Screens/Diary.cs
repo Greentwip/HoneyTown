@@ -210,7 +210,7 @@ namespace HarvestMoon.Screens
 
         }
 
-        public override void OnPreGuiDraw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             _guiTextPanel.Size = new Vector2(_guiTextPanel.Size.X, 64);
             GraphicsDevice.Clear(Color.Black);
@@ -228,6 +228,8 @@ namespace HarvestMoon.Screens
             }
             // End the sprite batch
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
     }
 }
