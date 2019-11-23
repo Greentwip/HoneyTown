@@ -33,8 +33,6 @@ namespace HarvestMoon.Entities
             RIGHT
         }
 
-        public Door LastVisitedDoor { get; set; }
-
         private readonly AnimatedSprite _sprite;
         private readonly Transform2 _transform;
 

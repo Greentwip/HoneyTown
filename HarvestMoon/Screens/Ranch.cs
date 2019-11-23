@@ -326,14 +326,56 @@ namespace HarvestMoon.Screens
                     _player.MapScreen = this;
                     _player.UnFreeze();
 
-                    var lastDoorPosition = _player.LastVisitedDoor.BoundingRectangle.Center;
-                    var lastDoorSize = _player.LastVisitedDoor.BoundingRectangle.Size;
 
-                    _player.Position = new Vector2(lastDoorPosition.X,
-                                                    lastDoorPosition.Y + lastDoorSize.Height * 0.5f +
-                                                        _player.BoundingRectangle.Size.Height * 0.5f + 2);
+                    foreach (var layer in _map.ObjectLayers)
+                    {
+                        if (layer.Name == "objects")
+                        {
+                            foreach (var obj in layer.Objects)
+                            {
+                                if (obj.Type == "player_start" && obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
+                                {
+                                    var objectPosition = obj.Position;
 
-                    _player.PlayerFacing = Jack.Facing.DOWN;
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.DOWN;
+                                }
+                                else if (obj.Type == "player_start" && obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
+                                {
+                                    var objectPosition = obj.Position;
+
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.RIGHT;
+
+                                }
+                                else if (obj.Type == "player_start" && obj.Name == "tools-room" && _arrival == HarvestMoon.Arrival.Tools)
+                                {
+                                    var objectPosition = obj.Position;
+
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.DOWN;
+
+                                }
+                            }
+
+                        }
+                    }
+
                 }
                 else
                 {
@@ -401,7 +443,6 @@ namespace HarvestMoon.Screens
                                     if (!door.Triggered)
                                     {
                                         _player.Freeze();
-                                        _player.LastVisitedDoor = door;
 
                                         door.Triggered = true;
                                         var screen = new ToolsRoom(Game);
@@ -417,7 +458,6 @@ namespace HarvestMoon.Screens
                                     if (!door.Triggered)
                                     {
                                         _player.Freeze();
-                                        _player.LastVisitedDoor = door;
 
                                         door.Triggered = true;
                                         var screen = new House(Game, HarvestMoon.Arrival.Ranch);
@@ -433,7 +473,6 @@ namespace HarvestMoon.Screens
                                     if (!door.Triggered)
                                     {
                                         _player.Freeze();
-                                        _player.LastVisitedDoor = door;
 
                                         door.Triggered = true;
                                         var screen = new Passage(Game, HarvestMoon.Arrival.Ranch);
