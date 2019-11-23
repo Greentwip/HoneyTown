@@ -16,16 +16,12 @@ namespace HarvestMoon.Screens
 {
     public class House : Map
     {
-        private bool _isWakeUp;
-        private bool _isFromRanch;
-        private bool _isFromDiary;
+        private HarvestMoon.Arrival _arrival;
 
-        public House(Game game, bool isWakeUp = false, bool isFromRanch = false, bool isFromDiary = false)
+        public House(Game game, HarvestMoon.Arrival arrival)
             : base(game)
         {
-            _isWakeUp = isWakeUp;
-            _isFromRanch = isFromRanch;
-            _isFromDiary = isFromDiary;
+            _arrival = arrival;
         }
 
         public override void Initialize()
@@ -38,12 +34,12 @@ namespace HarvestMoon.Screens
         {
             base.LoadContent();
 
-            if (!_isFromRanch && _isFromDiary)
+            if (_arrival == HarvestMoon.Arrival.Diary)
             {
                 HarvestMoon.Instance.LoadGameState(HarvestMoon.Instance.Diary);
             }
 
-            if (!_isFromRanch)
+            if (_arrival != HarvestMoon.Arrival.Ranch)
             {
                 HarvestMoon.Instance.Gold += HarvestMoon.Instance.TodayGold;
                 HarvestMoon.Instance.TodayGold = 0;
@@ -71,7 +67,7 @@ namespace HarvestMoon.Screens
                     {
                         if (obj.Type == "player_start")
                         {
-                            if(obj.Name == "start" && !_isWakeUp)
+                            if(obj.Name == "start" && _arrival == HarvestMoon.Arrival.Ranch)
                             {
                                 var objectPosition = obj.Position;
 
@@ -81,7 +77,7 @@ namespace HarvestMoon.Screens
                                 _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
                                 _player.PlayerFacing = Jack.Facing.UP;
                             }
-                            else if(obj.Name == "wake" && _isWakeUp)
+                            else if(obj.Name == "wake" && (_arrival == HarvestMoon.Arrival.Wake || _arrival == HarvestMoon.Arrival.Diary))
                             {
                                 var objectPosition = obj.Position;
 
@@ -113,7 +109,7 @@ namespace HarvestMoon.Screens
                                     if (!door.Triggered)
                                     {
                                         door.Triggered = true;
-                                        var screen = new Ranch(Game);
+                                        var screen = new Ranch(Game, HarvestMoon.Arrival.House);
                                         var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                         ScreenManager.LoadScreen(screen, transition);
                                     }
@@ -151,7 +147,7 @@ namespace HarvestMoon.Screens
                                                                         HarvestMoon.Instance.IncrementDay();
                                                                         HarvestMoon.Instance.SaveGameState(HarvestMoon.Instance.Diary);
 
-                                                                        var screen = new House(Game, true);
+                                                                        var screen = new House(Game, HarvestMoon.Arrival.Wake);
                                                                         var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
                                                                         ScreenManager.LoadScreen(screen, transition);
 
@@ -167,7 +163,7 @@ namespace HarvestMoon.Screens
                                                                                             _player.Cooldown();
                                                                                             HarvestMoon.Instance.ResetDay();
                                                                                             HarvestMoon.Instance.IncrementDay();
-                                                                                            var screen = new House(Game, true);
+                                                                                            var screen = new House(Game, HarvestMoon.Arrival.Wake);
                                                                                             var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
                                                                                             ScreenManager.LoadScreen(screen, transition);
 
@@ -238,17 +234,13 @@ namespace HarvestMoon.Screens
 
         }
 
+        // Must be Draw(GameTime gametime)
         public override void OnPreGuiDraw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
 
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
-
-            // Transform matrix is only needed if you have a Camera2D
-            // Setting the sampler state to `SamplerState.PointClamp` is reccomended to remove gaps between the tiles when rendering
-            //spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            //spriteBatch.Begin();
             var cameraMatrix = _camera.GetViewMatrix();
             cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32 * scaleY, cameraMatrix.Translation.Z);
 
@@ -257,8 +249,6 @@ namespace HarvestMoon.Screens
 
             for (int i = 0; i < _map.Layers.Count; ++i)
             {
-                // map Should be the `TiledMap`
-                // Once again, the transform matrix is only needed if you have a Camera2D
                 _mapRenderer.Draw(_map.Layers[i], cameraMatrix);
 
             }

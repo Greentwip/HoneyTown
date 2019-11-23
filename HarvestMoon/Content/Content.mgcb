@@ -4850,6 +4850,40 @@
 /processorParam:TextureFormat=Color
 /build:maps/house/house-tileset.png
 
+#begin maps/mountain/screen.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/mountain/screen.tmx
+
+#begin maps/mountain/tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/mountain/tileset.png
+
+#begin maps/passage/screen.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/passage/screen.tmx
+
+#begin maps/passage/tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/passage/tileset.png
+
 #begin maps/ranch/items/bush.png
 /importer:TextureImporter
 /processor:TextureProcessor

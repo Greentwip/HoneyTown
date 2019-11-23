@@ -31,6 +31,18 @@ namespace HarvestMoon
         private ScreenManager ScreenManager = new ScreenManager();
         private bool _loaded = false;
 
+        public enum Arrival
+        {
+            Diary,
+            Wake,
+            House,
+            Tools,
+            Ranch,
+            Passage,
+            Mountain,
+            Hill,
+            Town
+        }
 
         public GraphicsDeviceManager Graphics;
 

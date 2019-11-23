@@ -141,6 +141,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\Diary.cs" />
     <Compile Include="Screens\GUI.cs" />
+    <Compile Include="Screens\Passage.cs" />
     <Compile Include="Screens\Map.cs" />
     <Compile Include="Screens\House.cs" />
     <Compile Include="Screens\ToolsRoom.cs" />

@@ -198,7 +198,7 @@ namespace HarvestMoon.Screens
                     if (!_triggered)
                     {
                         _triggered = true;
-                        var screen = new House(Game, true, false, true);
+                        var screen = new House(Game, HarvestMoon.Arrival.Diary);
                         var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
                         ScreenManager.LoadScreen(screen, transition);
                     }

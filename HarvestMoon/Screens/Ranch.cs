@@ -111,9 +111,14 @@ namespace HarvestMoon.Screens
         private float _evening;
         private float _afternoon;
 
-        public Ranch(Game game)
+        private bool _isFromHouse;
+
+        private HarvestMoon.Arrival _arrival;
+
+        public Ranch(Game game, HarvestMoon.Arrival arrival)
             : base(game)
         {
+            _arrival = arrival;
             _entityManager = HarvestMoon.Instance.RanchState;
         }
 
@@ -217,7 +222,7 @@ namespace HarvestMoon.Screens
                     {
                         foreach (var obj in layer.Objects)
                         {
-                            if (obj.Type == "player_start")
+                            if (obj.Type == "player_start" && obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
                             {
                                 var objectPosition = obj.Position;
 
@@ -227,6 +232,18 @@ namespace HarvestMoon.Screens
                                 _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
                                 _player.UnFreeze();
                                 _player.PlayerFacing = Jack.Facing.DOWN;
+                            }
+                            else if(obj.Type == "player_start" && obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
+                            {
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                                _player.UnFreeze();
+                                _player.PlayerFacing = Jack.Facing.RIGHT;
+
                             }
                         }
                     }
@@ -326,7 +343,7 @@ namespace HarvestMoon.Screens
                         {
                             foreach (var obj in layer.Objects)
                             {
-                                if (obj.Type == "player_start")
+                                if (obj.Type == "player_start" && obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
                                 {
                                     var objectPosition = obj.Position;
 
@@ -336,6 +353,18 @@ namespace HarvestMoon.Screens
                                     _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
+                                }
+                                else if (obj.Type == "player_start" && obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
+                                {
+                                    var objectPosition = obj.Position;
+
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.RIGHT;
+
                                 }
                             }
                         }
@@ -391,7 +420,23 @@ namespace HarvestMoon.Screens
                                         _player.LastVisitedDoor = door;
 
                                         door.Triggered = true;
-                                        var screen = new House(Game, false, true);
+                                        var screen = new House(Game, HarvestMoon.Arrival.Ranch);
+                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                        ScreenManager.LoadScreen(screen, transition);
+                                    }
+                                });
+                            }
+                            else if (obj.Name == "passage")
+                            {
+                                door.OnTrigger(() =>
+                                {
+                                    if (!door.Triggered)
+                                    {
+                                        _player.Freeze();
+                                        _player.LastVisitedDoor = door;
+
+                                        door.Triggered = true;
+                                        var screen = new Passage(Game, HarvestMoon.Arrival.Ranch);
                                         var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                         ScreenManager.LoadScreen(screen, transition);
                                     }

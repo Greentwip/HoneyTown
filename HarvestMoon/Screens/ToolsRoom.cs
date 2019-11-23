@@ -75,7 +75,7 @@ namespace HarvestMoon.Screens
                                     if (!door.Triggered)
                                     {
                                         door.Triggered = true;
-                                        var screen = new Ranch(Game);
+                                        var screen = new Ranch(Game, HarvestMoon.Arrival.Tools);
                                         var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                         ScreenManager.LoadScreen(screen, transition);
                                     }
@@ -271,6 +271,7 @@ namespace HarvestMoon.Screens
 
         }
 
+        // Must be Draw(GameTime gametime)
         public override void OnPreGuiDraw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
