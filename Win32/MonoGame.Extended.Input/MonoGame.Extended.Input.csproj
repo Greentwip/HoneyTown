@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA76EC60-2984-4E0C-BB6D-EF800B071EB3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoGame.Extended.Input</RootNamespace>
+    <AssemblyName>MonoGame.Extended.Input</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\ExtendedPlayerIndex.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\GamePadEventArgs.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\GamePadListener.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\GamePadListenerSettings.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\IInputService.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\InputListener.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\InputListenerComponent.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\InputListenerSettings.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\KeyboardEventArgs.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\KeyboardListener.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\KeyboardListenerSettings.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\KeyboardModifiers.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\MouseEventArgs.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\MouseListener.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\MouseListenerSettings.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\TouchEventArgs.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\TouchListener.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\InputListeners\TouchListenerSettings.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\KeyboardExtended.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\KeyboardStateExtended.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\MouseButton.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\MouseExtended.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Input\MouseStateExtended.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoGame.Extended\MonoGame.Extended.csproj">
+      <Project>{44375199-dadb-4bad-a86f-077ed2c5ad9b}</Project>
+      <Name>MonoGame.Extended</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets'))" />
+  </Target>
+</Project>

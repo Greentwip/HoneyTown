@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F36C38BC-AE20-4607-B945-AFBF895721DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeonBit.UI</RootNamespace>
+    <AssemblyName>GeonBit.UI</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\FadeOutAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\FloatUpDownAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\IAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\TextWaveAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\TypeWriterAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\DrawUtils.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Button.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\CheckBox.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\ColoredRectangle.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\DropDown.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Entity.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Header.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\HorizontalLine.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Icon.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Image.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Label.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\LineSpace.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Panel.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\PanelBase.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\PanelTabs.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Paragraph.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\ProgressBar.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\RadioButton.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\RichParagraph.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\RootPanel.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\SelectList.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Slider.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\StyleSheet.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\TextInput.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\TextInputValidators.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\VerticalScrollbar.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Exceptions.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Input\DefaultInputProvider.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Input\IKeyboardInput.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Input\IMouseInput.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Resources.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\UserInterface.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\Forms.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\MessageBox.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\PanelsGrid.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\SerializedDictionary.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\SimpleFileMenu.cs" />
+    <EmbeddedResource Include="Properties\GeonBit.UI.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.WindowsUniversal">
+      <Version>3.7.1.189</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.Serialization.Formatters">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTypes\DataTypes.csproj">
+      <Project>{8003be11-cefc-4226-96b1-4b9a8f346516}</Project>
+      <Name>DataTypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

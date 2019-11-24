@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{035F5D37-322F-4D6E-A0AA-38B58C922D23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeonBit.UI</RootNamespace>
+    <AssemblyName>GeonBit.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\FadeOutAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\FloatUpDownAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\IAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\TextWaveAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Animators\TypeWriterAnimator.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\DrawUtils.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Button.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\CheckBox.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\ColoredRectangle.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\DropDown.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Entity.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Header.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\HorizontalLine.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Icon.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Image.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Label.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\LineSpace.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Panel.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\PanelBase.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\PanelTabs.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Paragraph.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\ProgressBar.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\RadioButton.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\RichParagraph.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\RootPanel.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\SelectList.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\Slider.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\StyleSheet.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\TextInput.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\TextInputValidators.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Entities\VerticalScrollbar.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Exceptions.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Input\DefaultInputProvider.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Input\IKeyboardInput.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Input\IMouseInput.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Resources.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\UserInterface.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\Forms.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\MessageBox.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\PanelsGrid.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\SerializedDictionary.cs" />
+    <Compile Include=".\..\..\Source\GeonBit.UI\Source\Utils\SimpleFileMenu.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTypes\DataTypes.csproj">
+      <Project>{3649ee30-b55a-4b1b-9beb-7c4046de4679}</Project>
+      <Name>DataTypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets'))" />
+  </Target>
+</Project>

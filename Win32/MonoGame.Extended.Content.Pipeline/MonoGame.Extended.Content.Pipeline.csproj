@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78F403CD-F3EB-48F0-9BB6-FA1364FB61BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoGame.Extended.Content.Pipeline</RootNamespace>
+    <AssemblyName>MonoGame.Extended.Content.Pipeline</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Content.Pipeline, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.Content.Pipeline.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.Content.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Animations\AstridAnimatorAnimation.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Animations\AstridAnimatorFile.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Animations\AstridAnimatorImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Animations\AstridAnimatorProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Animations\AstridAnimatorProcessorResult.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Animations\AstridAnimatorWriter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontChar.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontCommon.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontFile.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontInfo.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontKerning.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontPage.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontProcessorResult.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\BitmapFonts\BitmapFontWriter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\ContentImporterResult.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\ContentItem.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\ContentLogger.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\ContentWriterExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Json\JsonContentImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Json\JsonContentProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Json\JsonContentProcessorResult.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Json\JsonContentTypeWriter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\PathExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\SpriteFactory\SpriteFactoryContentImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\SpriteFactory\SpriteFactoryContentProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\TextureAtlases\TexturePackerJsonImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\TextureAtlases\TexturePackerProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\TextureAtlases\TexturePackerProcessorResult.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\TextureAtlases\TexturePackerWriter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\ContentWriterExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapContentItem.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapObjectTemplateImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapTilesetContentItem.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapTilesetImporter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapTilesetProcessor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapTilesetWriter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended.Content.Pipeline\Tiled\TiledMapWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoGame.Extended.Graphics\MonoGame.Extended.Graphics.csproj">
+      <Project>{b1ff2add-ee93-4d24-b2ad-f218bbc524b8}</Project>
+      <Name>MonoGame.Extended.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoGame.Extended.Tiled\MonoGame.Extended.Tiled.csproj">
+      <Project>{bfd725d8-7ed0-4a28-a7b9-dc9283d0b713}</Project>
+      <Name>MonoGame.Extended.Tiled</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoGame.Extended\MonoGame.Extended.csproj">
+      <Project>{44375199-dadb-4bad-a86f-077ed2c5ad9b}</Project>
+      <Name>MonoGame.Extended</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

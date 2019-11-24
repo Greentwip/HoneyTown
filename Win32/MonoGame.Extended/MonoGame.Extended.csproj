@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44375199-DADB-4BAD-A86F-077ED2C5AD9B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoGame.Extended</RootNamespace>
+    <AssemblyName>MonoGame.Extended</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include=".\..\..\Source\MonoGame.Extended\AnimationComponent.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\BitmapFonts\BitmapFont.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\BitmapFonts\BitmapFontExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\BitmapFonts\BitmapFontReader.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\BitmapFonts\BitmapFontRegion.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Camera.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\Bag.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\Deque.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\DictionaryExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\IObservableCollection.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\IPoolable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\ItemEventArgs.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\KeyedCollection.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\ListExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\ObjectPool.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\ObservableCollection.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Collections\Pool.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ColorExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ColorHelper.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Content\ContentManagerExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Content\ContentReaderExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\FramesPerSecondCounter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\FramesPerSecondCounterComponent.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\GameComponentCollectionExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\GameTimeExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\HslColor.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IColorable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IEquatableByRef.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IMovable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IRectangular.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IRotatable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IScalable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ISizable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\IUpdate.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Angle.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\BoundingRectangle.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\CircleF.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\EllipseF.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\FastRandom.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\FloatHelper.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Matrix2.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\MatrixExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Point2.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Point3.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\PrimitivesHelper.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\RandomExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Range.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Ray2.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\RectangleExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\RectangleF.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Segment2.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\ShapeExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\ShapeF.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Size.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Size2.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Size3.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Thickness.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Math\Vector2Extensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\OrthographicCamera.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Screens\GameScreen.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Screens\Screen.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Screens\ScreenManager.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Screens\Transitions\ExpandTransition.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Screens\Transitions\FadeTransition.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Screens\Transitions\Transition.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\BaseTypeJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\ColorJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\ContentManagerJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\HslColorJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\JsonContentLoader.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\JsonContentTypeReader.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\JsonReaderExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\MonoGameJsonSerializer.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\NinePatchRegion2DJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\RangeJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\ShortNameJsonContractResolver.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\Size2JsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\TextContentLoader.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\TextureRegion2DJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\TextureRegionService.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\ThicknessJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Serialization\Vector2JsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Shapes\Polygon.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Shapes\Polyline.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\SimpleDrawableGameComponent.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\SimpleGameComponent.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\AnimatedSprite.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\Animation.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\ISpriteBatchDrawable.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\Sprite.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\SpriteExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\SpriteSheet.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\SpriteSheetAnimation.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\SpriteSheetAnimationCycle.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\SpriteSheetAnimationData.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Sprites\SpriteSheetAnimationFrame.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\NinePatchRegion2D.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TextureAtlas.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TextureAtlasExtensions.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TextureAtlasJsonContentTypeReader.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TextureAtlasJsonConverter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TextureAtlasReader.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TexturePackerFile.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TexturePackerMeta.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TexturePackerPoint.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TexturePackerRectangle.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TexturePackerRegion.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TexturePackerSize.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\TextureAtlases\TextureRegion2D.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Timers\ContinuousClock.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Timers\CountdownTimer.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Timers\GameTimer.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Timers\TimerState.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\Transform.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ViewportAdapters\BoxingViewportAdapter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ViewportAdapters\DefaultViewportAdapter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ViewportAdapters\ScalingViewportAdapter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ViewportAdapters\ViewportAdapter.cs" />
+    <Compile Include=".\..\..\Source\MonoGame.Extended\ViewportAdapters\WindowViewportAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets'))" />
+  </Target>
+</Project>
