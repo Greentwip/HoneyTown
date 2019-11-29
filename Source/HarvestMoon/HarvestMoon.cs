@@ -30,6 +30,7 @@ namespace HarvestMoon
         public int TurnipSeeds { get; set; }
         public int PotatoSeeds { get; set; }
         public int CornSeeds { get; set; }
+        public int TomatoSeeds { get; set; }
 
         private ScreenManager ScreenManager = new ScreenManager();
         private bool _loaded = false;
@@ -419,12 +420,13 @@ namespace HarvestMoon
 
                 for (int i = 0; i < saveGame.SoilSegments.Count; ++i)
                 {
-                    soilSegments.Add(new Soil(Content, 
+                    soilSegments.Add(new Soil(Content,
                                                 new Vector2(saveGame.SoilSegments[i].X, saveGame.SoilSegments[i].Y),
                                                 saveGame.SoilSegments[i].IsWatered,
                                                 saveGame.SoilSegments[i].IsPlanted,
                                                 saveGame.SoilSegments[i].CropType,
                                                 saveGame.SoilSegments[i].DaysWatered,
+                                                saveGame.SoilSegments[i].DaysPlanted,
                                                 saveGame.SoilSegments[i].SeasonPlanted));
                 }
 
@@ -518,9 +520,9 @@ namespace HarvestMoon
                 }
                 else if(Instance.Season == "Summer")
                 {
-                    Instance.Season = "Autumn";
+                    Instance.Season = "Fall";
                 }
-                else if(Instance.Season == "Autumn")
+                else if(Instance.Season == "Fall")
                 {
                     Instance.Season = "Winter";
                 }

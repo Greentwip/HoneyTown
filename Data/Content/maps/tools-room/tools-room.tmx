@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="128" height="112" tilewidth="4" tileheight="4" infinite="0" nextlayerid="10" nextobjectid="28">
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="128" height="112" tilewidth="4" tileheight="4" infinite="0" nextlayerid="10" nextobjectid="28">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="tools-room-tilemap.png" width="256" height="256"/>
  </tileset>
@@ -59,7 +59,7 @@
   <object id="23" name="start" type="player_start" x="235" y="371" width="32" height="32"/>
   <object id="24" name="turnip-seeds" type="turnip-seeds" x="388" y="199" width="32" height="32"/>
   <object id="25" name="potato-seeds" type="potato-seeds" x="356" y="199" width="32" height="32"/>
-  <object id="26" name="grass-seeds" type="grass-seeds" x="324" y="199" width="32" height="32"/>
-  <object id="27" name="grass-seeds" type="grass-seeds" x="292" y="199" width="32" height="32"/>
+  <object id="26" name="tomato-seeds" type="tomato-seeds" x="324" y="199" width="32" height="32"/>
+  <object id="27" name="corn-seeds" type="corn-seeds" x="292" y="199" width="32" height="32"/>
  </objectgroup>
 </map>

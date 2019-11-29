@@ -17,7 +17,7 @@ namespace HarvestMoon.Entities.Ranch
 
         private string CropType { get; set; }
 
-        private string Maturity { get; set; }
+        public string Maturity { get; set; }
 
         private float X;
         private float Y;
@@ -143,7 +143,236 @@ namespace HarvestMoon.Entities.Ranch
                                 new SpriteSheetAnimationFrame(11)
                             }
                         }
+                    },
+                    {
+                        "tomato_a", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(12)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_a_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(13)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_b", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(14)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_b_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(15)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_c", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(16)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_c_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(17)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_d", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(18)
+                            }
+                        }
+                    },
+                    {
+                        "tomato_d_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(19)
+                            }
+                        }
+                    },
+                    {
+                        "corn_a", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(20)
+                            }
+                        }
+                    },
+                    {
+                        "corn_a_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(21)
+                            }
+                        }
+                    },
+                    {
+                        "corn_b", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(22)
+                            }
+                        }
+                    },
+                    {
+                        "corn_b_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(23)
+                            }
+                        }
+                    },
+                    {
+                        "corn_c", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(24)
+                            }
+                        }
+                    },
+                    {
+                        "corn_c_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(25)
+                            }
+                        }
+                    },
+                    {
+                        "corn_d", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(26)
+                            }
+                        }
+                    },
+                    {
+                        "corn_d_watered", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(27)
+                            }
+                        }
+                    },
+                    {
+                        "grass_a", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(29)
+                            }
+                        }
+                    },
+                    {
+                        "grass_b", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(30)
+                            }
+                        }
+                    },
+                    {
+                        "grass_c", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(31)
+                            }
+                        }
                     }
+
 
 
                 }
@@ -224,21 +453,17 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if(CropType == "grass")
             {
-                if (maturity >= 2 && maturity < 4)
+                if (maturity >= 3 && maturity < 6)
                 {
                     Maturity = "a";
                 }
-                else if (maturity >= 4 && maturity < 6)
+                else if (maturity >= 6 && maturity < 9)
                 {
                     Maturity = "b";
                 }
-                else if (maturity >= 6 && maturity < 9)
-                {
-                    Maturity = "c";
-                }
                 else if (maturity >= 9)
                 {
-                    Maturity = "d";
+                    Maturity = "c";
                 }
             }
         }
@@ -285,7 +510,15 @@ namespace HarvestMoon.Entities.Ranch
 
         public void Water()
         {
-            _sprite.Play(CropType + "_" + Maturity + "_" + "watered");
+            if(CropType != "grass")
+            {
+                _sprite.Play(CropType + "_" + Maturity + "_" + "watered");
+            }
+            else
+            {
+                _sprite.Play(CropType + "_" + Maturity);
+            }
+            
 
             IsWatered = true;
         }

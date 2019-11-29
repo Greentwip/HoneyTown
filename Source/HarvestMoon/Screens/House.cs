@@ -11,11 +11,14 @@ using HarvestMoon.Entities.General;
 using System.Collections.Generic;
 using System;
 using HarvestMoon.Entities.Ranch;
+using Microsoft.Xna.Framework.Media;
 
 namespace HarvestMoon.Screens
 {
     public class House : Map
     {
+        Song _song;
+
         private HarvestMoon.Arrival _arrival;
 
         public House(Game game, HarvestMoon.Arrival arrival)
@@ -33,6 +36,12 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
             base.LoadContent();
+
+            _song = Content.Load<Song>("audio/music/ranch");
+
+            //MediaPlayer.Play(_song);
+
+
 
             if (_arrival == HarvestMoon.Arrival.Diary)
             {
@@ -255,9 +264,17 @@ namespace HarvestMoon.Screens
             // End the sprite batch
             _spriteBatch.End();
 
+
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
             _entityManager.Draw(_spriteBatch);
             _spriteBatch.End();
+
+            _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
+
+            _mapRenderer.Draw(_map.Layers.First(l => l.Name == "Foreground"), cameraMatrix);
+
+            _spriteBatch.End();
+
 
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
 

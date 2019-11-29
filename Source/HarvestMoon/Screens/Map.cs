@@ -215,6 +215,9 @@ namespace HarvestMoon.Screens
                                     _textPanel = null;
                                     _player.UnFreeze();
 
+                                    _player.Busy();
+                                    _player.Cooldown();
+
                                     _npcCoolDown = true;
                                     _busy = true;
 

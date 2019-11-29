@@ -14,6 +14,7 @@ using GeonBit.UI;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework.Input;
 using HarvestMoon.Input;
+using MonoGame.Extended.Sprites;
 
 namespace HarvestMoon.Screens
 {
@@ -27,12 +28,30 @@ namespace HarvestMoon.Screens
 
         private bool _triggered;
 
+        private Sprite _sosTexture;
+        private Sprite _tilesTexture;
+
+        private Vector2 _mainSquareBottomPosition = new Vector2(320 - 640, 320 + 640);
+        private Vector2 _mainSquareCenterPosition = new Vector2(320, 320);
+        private Vector2 _mainSquareTopPosition = new Vector2(320 + 640, 320 - 640);
+
+        private Vector2 _mainSquareCurrentPosition = new Vector2(320, 320);
+
+        private Vector2 _sosTextureBottomPosition = new Vector2(320 - 640, 320 + 640);
+        private Vector2 _sosTextureCenterPosition = new Vector2(320, 320);
+        private Vector2 _sosTextureTopPosition = new Vector2(320 + 640, 320 - 640);
+
+        private Vector2 _sosTextureCurrentPosition = new Vector2(320 + 640, 320 - 640);
+
+
         public Diary(Game game)
             : base(game)
         {
             _panels = new List<Panel>();
             _panels.Add(null);
             _panels.Add(null);
+
+
         }
 
         public override void Initialize()
@@ -44,6 +63,9 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
             base.LoadContent();
+
+            _sosTexture = new Sprite(Content.Load<Texture2D>("animations/sos"));
+            _tilesTexture = new Sprite(Content.Load<Texture2D>("animations/title-squares"));
 
             // Load the compiled map
             _map = Content.Load<TiledMap>("maps/diary/screen");
@@ -205,6 +227,18 @@ namespace HarvestMoon.Screens
                 }
             }
 
+            _mainSquareCurrentPosition = new Vector2(_mainSquareCurrentPosition.X - 1, _mainSquareCurrentPosition.Y + 1);
+            _sosTextureCurrentPosition = new Vector2(_mainSquareCurrentPosition.X - 1, _mainSquareCurrentPosition.Y + 1);
+
+            if (_mainSquareCurrentPosition == _mainSquareBottomPosition)
+            {
+                _mainSquareCurrentPosition = _mainSquareTopPosition;
+            }
+
+            if(_sosTextureCurrentPosition == _sosTextureBottomPosition)
+            {
+                _sosTextureCurrentPosition = _sosTextureTopPosition;
+            }
 
             //_camera.LookAt(new Vector2(_map.Width * 4 / 2, _map.Height * 4 / 2));
 
@@ -214,9 +248,24 @@ namespace HarvestMoon.Screens
         {
             _guiTextPanel.Size = new Vector2(_guiTextPanel.Size.X, 64);
             GraphicsDevice.Clear(Color.Black);
-
             var cameraMatrix = _camera.GetViewMatrix();
-            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32, cameraMatrix.Translation.Z);
+
+            _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
+
+            _spriteBatch.Draw(_tilesTexture, _mainSquareCurrentPosition);
+
+            _spriteBatch.Draw(_tilesTexture, new Vector2(_mainSquareCurrentPosition.X, _mainSquareCurrentPosition.Y - 640));
+            _spriteBatch.Draw(_tilesTexture, new Vector2(_mainSquareCurrentPosition.X + 640, _mainSquareCurrentPosition.Y));
+            _spriteBatch.Draw(_tilesTexture, new Vector2(_mainSquareCurrentPosition.X + 640, _mainSquareCurrentPosition.Y - 640));
+            _spriteBatch.Draw(_tilesTexture, new Vector2(_mainSquareCurrentPosition.X - 640, _mainSquareCurrentPosition.Y));
+            _spriteBatch.Draw(_tilesTexture, new Vector2(_mainSquareCurrentPosition.X - 640, _mainSquareCurrentPosition.Y + 640));
+            _spriteBatch.Draw(_tilesTexture, new Vector2(_mainSquareCurrentPosition.X, _mainSquareCurrentPosition.Y + 640));
+
+            _spriteBatch.Draw(_sosTexture, _sosTextureCurrentPosition);
+
+            _spriteBatch.End();
+
+            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 24, cameraMatrix.Translation.Z);
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 

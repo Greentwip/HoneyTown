@@ -21,5 +21,35 @@
       <Item><Key>potato_b_001.png</Key><Value>75 153 16 16</Value></Item>
       <Item><Key>potato_b_watered_001.png</Key><Value>93 153 16 16</Value></Item>
 
+      <Item><Key>tomato_a_001.png</Key><Value>139 132 16 16</Value></Item>
+      <Item><Key>tomato_a_watered_001.png</Key><Value>157 132 16 16</Value></Item>
+
+      <Item><Key>tomato_b_001.png</Key><Value>139 150 16 16</Value></Item>
+      <Item><Key>tomato_b_watered_001.png</Key><Value>157 150 16 16</Value></Item>
+
+      <Item><Key>tomato_c_001.png</Key><Value>139 168 16 16</Value></Item>
+      <Item><Key>tomato_c_watered_001.png</Key><Value>157 168 16 16</Value></Item>
+
+      <Item><Key>tomato_d_001.png</Key><Value>139 186 16 16</Value></Item>
+      <Item><Key>tomato_d_watered_001.png</Key><Value>157 186 16 16</Value></Item>
+
+      <Item><Key>corn_a_001.png</Key><Value>202 132 16 16</Value></Item>
+      <Item><Key>corn_a_watered_001.png</Key><Value>220 132 16 16</Value></Item>
+
+      <Item><Key>corn_b_001.png</Key><Value>202 150 16 16</Value></Item>
+      <Item><Key>corn_b_watered_001.png</Key><Value>220 150 16 16</Value></Item>
+
+      <Item><Key>corn_c_001.png</Key><Value>202 168 16 16</Value></Item>
+      <Item><Key>corn_c_watered_001.png</Key><Value>220 168 16 16</Value></Item>
+
+      <Item><Key>corn_d_001.png</Key><Value>202 186 16 16</Value></Item>
+      <Item><Key>corn_d_watered_001.png</Key><Value>220 186 16 16</Value></Item>
+
+      <Item><Key>soil_planted_grass_001.png</Key><Value>13 190 16 16</Value></Item>
+
+      <Item><Key>grass_a_001.png</Key><Value>32 190 16 16</Value></Item>
+      <Item><Key>grass_b_001.png</Key><Value>51 190 16 16</Value></Item>
+      <Item><Key>grass_c_001.png</Key><Value>13 208 16 16</Value></Item>
+
     </Asset>
 </XnaContent>

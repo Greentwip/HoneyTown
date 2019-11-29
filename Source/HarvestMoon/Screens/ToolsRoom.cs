@@ -8,6 +8,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
+using HarvestMoon.Entities.Tools;
 
 namespace HarvestMoon.Screens
 {
@@ -146,7 +147,7 @@ namespace HarvestMoon.Screens
                             objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
                             objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            _entityManager.AddEntity(new GrassSeeds(Content, objectPosition));
+                            _entityManager.AddEntity(new GrassSeeds(Content, objectPosition)); //Not working yet
                         }
 
                         if (obj.Type == "turnip-seeds")
@@ -171,6 +172,30 @@ namespace HarvestMoon.Screens
 
                             _entityManager.AddEntity(new PotatoSeeds(Content, objectPosition));
                         }
+
+                        if (obj.Type == "corn-seeds")
+                        {
+
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _entityManager.AddEntity(new CornSeeds(Content, objectPosition));
+                        }
+
+                        if (obj.Type == "tomato-seeds")
+                        {
+
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _entityManager.AddEntity(new TomatoSeeds(Content, objectPosition));
+                        }
+
+
 
                     }
                 }

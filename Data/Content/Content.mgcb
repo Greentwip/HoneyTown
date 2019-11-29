@@ -49,6 +49,36 @@
 /processor:PassThroughProcessor
 /build:animations/kunioMap.xml
 
+#begin animations/sos.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/sos.png
+
+#begin animations/title-squares.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/title-squares.png
+
+#begin audio/music/ranch.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/music/ranch.mp3
+
 #begin GeonBit.UI/themes/editor/effects/disabled.fx
 /importer:EffectImporter
 /processor:EffectProcessor
@@ -5019,6 +5049,18 @@
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/axe.png
 
+#begin maps/tools-room/items/corn-seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tools-room/items/corn-seeds.png
+
 #begin maps/tools-room/items/grass-seeds.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5078,6 +5120,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/sickle.png
+
+#begin maps/tools-room/items/tomato-seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tools-room/items/tomato-seeds.png
 
 #begin maps/tools-room/items/tools.png
 /importer:TextureImporter

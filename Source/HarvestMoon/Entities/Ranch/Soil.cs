@@ -22,6 +22,8 @@ namespace HarvestMoon.Entities.Ranch
 
         public int DaysWatered { get; set; }
 
+        public int DaysPlanted { get; set; }
+
         public string SeasonPlanted { get; set; }
 
         private List<string> Seasons { get => _seasons; set => _seasons = value; }
@@ -42,6 +44,7 @@ namespace HarvestMoon.Entities.Ranch
                     bool isPlanted = false, 
                     string cropType = default(string), 
                     int daysWatered = -1,
+                    int daysPlanted = -1,
                     string seasonPlanted = default(string))
         {
             _seasons = new List<string>();
@@ -104,6 +107,18 @@ namespace HarvestMoon.Entities.Ranch
                                 new SpriteSheetAnimationFrame(3)
                             }
                         }
+                    },
+                    {
+                        "soil_planted_grass", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = false,
+                            IsPingPong = false,
+                            FrameDuration = 1.0f,
+                            Frames =
+                            {
+                                new SpriteSheetAnimationFrame(28)
+                            }
+                        }
                     }
                 }
             };
@@ -130,7 +145,7 @@ namespace HarvestMoon.Entities.Ranch
             {
                 IsWatered = isWatered;
 
-                Plant(cropType, daysWatered, seasonPlanted);
+                Plant(cropType, daysWatered, daysPlanted, seasonPlanted);
                 GrowAccordingly();
             }
 
@@ -140,10 +155,6 @@ namespace HarvestMoon.Entities.Ranch
         {
             if (IsPlanted)
             {
-                if (IsWatered)
-                {
-                    DaysWatered++;
-                }
                 
                 Seasons.Clear();
 
@@ -172,17 +183,39 @@ namespace HarvestMoon.Entities.Ranch
                 {
                     Seasons.Add("Spring");
                     Seasons.Add("Summer");
-                    Seasons.Add("Autumn");
+                    Seasons.Add("Fall");
+
+                    DaysToGrow = 9;
                 }
 
                 // Determine if it has grown from soil to plant
-                var cropMaturity = DaysWatered;
+                int cropMaturity = 0;
+
+                if(CropType != "grass")
+                {
+                    cropMaturity = DaysWatered;
+                }
+                else
+                {
+                    cropMaturity = DaysPlanted;
+                }
+
+                if (Seasons.Contains(SeasonPlanted))
+                {
+                    if (IsWatered)
+                    {
+                        DaysWatered++;
+                    }
+
+                    DaysPlanted++;
+                }
 
                 if (cropMaturity >= 2 && Seasons.Contains(SeasonPlanted)) // This should be Crop.CalculateMaturity(cropMaturity) == "a"
                 {
                     HasGrown = true;
                     HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, cropMaturity);
-                }
+                } 
+               
 
             }
         }
@@ -195,11 +228,37 @@ namespace HarvestMoon.Entities.Ranch
             {
                 harvest = HarvestCrop.Harvest();
 
+                if(HarvestMoon.Instance.Season == "Fall")
+                {
+                    harvest = null;
+                }
+
                 if(harvest != null)
                 {
                     if (CropType == "turnip" || CropType == "potato")
                     {
                         Reset();
+                    }
+                    else
+                    {
+                        HasGrown = true;
+                        if (CropType == "tomato")
+                        {
+                            HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, 6);
+                        }
+                        else if (CropType == "corn")
+                        {
+                            HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, 9);
+                        }
+
+                        if (IsWatered)
+                        {
+                            HarvestCrop.Water();
+                        }
+                        else
+                        {
+                            HarvestCrop.Dry();
+                        }
                     }
                 }
                 
@@ -208,6 +267,30 @@ namespace HarvestMoon.Entities.Ranch
 
 
             return harvest;
+        }
+
+        public override void OnCut()
+        {
+            if (HasGrown)
+            {
+                if(CropType != "grass")
+                {
+                    Reset();
+                }
+                else
+                {
+                    if(HarvestCrop.Maturity == "d")
+                    {
+                        DaysWatered = 0;
+                        DaysPlanted = 1;
+                        HasGrown = false;
+                        HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, 1);
+                        HarvestMoon.Instance.FeedPieces++;
+                    }
+                }
+                
+            }
+
         }
 
         public void Water()
@@ -220,7 +303,14 @@ namespace HarvestMoon.Entities.Ranch
             {
                 if (IsPlanted)
                 {
-                    _sprite.Play("soil_planted_watered");
+                    if(CropType != "grass")
+                    {
+                        _sprite.Play("soil_planted_watered");
+                    }
+                    else
+                    {
+                        _sprite.Play("soil_planted_grass");
+                    }
                 }
                 else
                 {
@@ -259,28 +349,28 @@ namespace HarvestMoon.Entities.Ranch
             CropType = "none";
             DaysToGrow = -1;
             DaysWatered = 0;
+            DaysPlanted = 0;
             HasGrown = false;
             _sprite.Play("soil_normal");
 
         }
 
-        public void Plant(string cropType, int daysWatered, string seasonPlanted)
+        public void Plant(string cropType, int daysWatered, int daysPlanted, string seasonPlanted)
         {
             IsPlanted = true;
             CropType = cropType;
             DaysWatered = daysWatered;
+            DaysPlanted = daysPlanted;
             SeasonPlanted = seasonPlanted;
 
-            _sprite.Play("soil_planted_normal");
-        }
-
-        public override void OnCut()
-        {
-            if (HasGrown)
+            if(CropType != "grass")
             {
-                Reset();
+                _sprite.Play("soil_planted_normal");
             }
-            
+            else
+            {
+                _sprite.Play("soil_planted_grass");
+            }
         }
 
         public override void Update(GameTime gameTime)

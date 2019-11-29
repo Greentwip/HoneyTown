@@ -13,5 +13,8 @@
       <Item><Key>corn_normal_001.png</Key><Value>202 207 16 16</Value></Item>
       <Item><Key>corn_broken_001.png</Key><Value>220 207 16 16</Value></Item>
 
+      <Item><Key>grass_normal_001.png</Key><Value>32 208 16 16</Value></Item>
+      <Item><Key>grass_broken_001.png</Key><Value>32 208 16 16</Value></Item>
+
     </Asset>
 </XnaContent>
