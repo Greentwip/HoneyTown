@@ -8,9 +8,6 @@ using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
-using System.Collections.Generic;
-using System;
-using HarvestMoon.Entities.Ranch;
 
 namespace HarvestMoon.Screens
 {
@@ -93,9 +90,11 @@ namespace HarvestMoon.Screens
 
                             var objectSize = obj.Size;
 
-                            var objectMessage = obj.Properties.First(p => p.Key.Contains("message"));
+                            var objectMessageKP = obj.Properties.First(p => p.Key.Contains("message"));
 
-                            _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
+                            var objectMessage = HarvestMoon.Instance.Strings.Get(objectMessageKP.Value);
+
+                            _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
 
                         }
 

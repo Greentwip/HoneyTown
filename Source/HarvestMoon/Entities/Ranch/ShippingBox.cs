@@ -38,7 +38,7 @@ namespace HarvestMoon.Entities.Ranch
             base.Update(gameTime);
         }
 
-        public override void Interact(Item item)
+        public override void Interact(Item item, Action onInteractionStart, Action onInteractionEnd)
         {
             if(item != null)
             {

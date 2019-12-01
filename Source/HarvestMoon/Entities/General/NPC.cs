@@ -11,6 +11,7 @@ namespace HarvestMoon.Entities.General
 {
     public class NPC : Interactable
     {
+
         public enum NPCMenu
         {
             YesNo,
@@ -18,31 +19,8 @@ namespace HarvestMoon.Entities.General
             FarmGoods
         }
 
-        protected List<Action> _callbacks = new List<Action>();
-
-        protected List<string> _strings = new List<string>();
-
-        protected string _message;
-
-        public string Message => _message;
-
-        public List<string> Strings => _strings;
-        public List<Action> Callbacks => _callbacks;
-
-        public bool DeploysMenu { get; set; }
-
-        public bool ShowsMessage { get; set; }
-
-        public NPCMenu DeployableMenu { get; set; }
-
         public NPC(Vector2 initialPosition,
-                    Size2 size,
-                    bool showsMessage = false,
-                    string message = default(string),
-                    bool deploysMenu = false,
-                    NPCMenu deployableMenu = NPCMenu.YesNo,
-                    List<string> strings = null,
-                    List<Action> callbacks = null)
+                    Size2 size)
         {
             BoundingRectangle = new RectangleF(new Vector2(initialPosition.X - 32,
                                                             initialPosition.Y - 32),
@@ -56,36 +34,14 @@ namespace HarvestMoon.Entities.General
             Interacts = true;
             IsNPC = true;
 
-            _message = message;
-
-            ShowsMessage = showsMessage;
-
-            DeploysMenu = deploysMenu;
-
-            DeployableMenu = deployableMenu;
-
-            if (strings != null)
-            {
-                _strings = strings;
-            }
-
-            if(callbacks != null)
-            {
-                _callbacks = callbacks;
-            }
-        }
-
-        public virtual string GetMessage(Item item)
-        {
-            return Message;
-        }
-
-        public virtual void Interact(Item item)
-        {
-
         }
 
         public override void Update(GameTime gameTime)
+        {
+
+        }
+
+        public virtual void Interact(Item item, Action onInteractionStart, Action onInteractionEnd)
         {
 
         }

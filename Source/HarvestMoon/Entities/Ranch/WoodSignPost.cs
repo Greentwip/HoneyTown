@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace HarvestMoon.Entities.Ranch
 {
-    public class WoodSignPost : NPC
+    public class WoodSignPost : BasicMessage
     {
-        public WoodSignPost(Vector2 initialPosition, Size2 size, bool displaysMessage, string message)
-            : base(initialPosition, size, displaysMessage, message)
+        public WoodSignPost(Vector2 initialPosition, Size2 size, string message)
+            : base(initialPosition, size, message)
         {
 
         }
 
-        public override string GetMessage(Item item)
+        public override string GetMessage()
         {
             var replacedPieces = Message.Replace("number", HarvestMoon.Instance.Planks.ToString());
             return replacedPieces;

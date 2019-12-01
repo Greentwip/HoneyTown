@@ -538,19 +538,21 @@ namespace HarvestMoon.Screens
 
                             var objectSize = obj.Size;
 
-                            var objectMessage = obj.Properties.First(p => p.Key.Contains("message"));
+                            var objectMessageKP = obj.Properties.First(p => p.Key.Contains("message"));
+
+                            string objectMessage = HarvestMoon.Instance.Strings.Get(objectMessageKP.Value);
 
                             if (obj.Name == "materials-signpost")
                             {
-                                _entityManager.AddEntity(new WoodSignPost(objectPosition, objectSize, true, objectMessage.Value));
+                                _entityManager.AddEntity(new WoodSignPost(objectPosition, objectSize, objectMessage));
                             }
                             else if (obj.Name == "feed-signpost")
                             {
-                                _entityManager.AddEntity(new FooderSignPost(objectPosition, objectSize, true, objectMessage.Value));
+                                _entityManager.AddEntity(new FooderSignPost(objectPosition, objectSize, objectMessage));
                             }
                             else
                             {
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
+                                _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
                             }
 
                         }
@@ -664,21 +666,24 @@ namespace HarvestMoon.Screens
                     if(HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
                     {
                         HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Afternoon, true);
+                        string harvest = "STR_NOSHIPPING";
 
-                        if(HarvestMoon.Instance.TodayGold != 0)
+                        if (HarvestMoon.Instance.TodayGold != 0)
                         {
-                            string harvest = "Is that all you are shipping today? It costs " +
-                                            HarvestMoon.Instance.TodayGold.ToString() + "G" + " in total. " +
-                                            "I'll put money in the box tomorrow";
+                            harvest = "STR_SHIPPINGTODAY";
 
-                            ShowMessage(harvest, null);
+                            harvest = HarvestMoon.Instance.Strings.Get(harvest);
+
+                            harvest = harvest.Replace("gold", HarvestMoon.Instance.TodayGold.ToString());
                         }
                         else
                         {
-                            string harvest = "Is there no shipping today? Ok, bye.";
-                            ShowMessage(harvest, null);
+                            harvest = HarvestMoon.Instance.Strings.Get(harvest);
                         }
-                        
+                            HarvestMoon.Instance.GUI.ShowMessage(harvest, 
+                                ()=> { _player.Freeze(); _player.Busy(); }, 
+                                ()=> { _player.UnFreeze(); _player.Cooldown(); });
+
                     }
                     
                 }

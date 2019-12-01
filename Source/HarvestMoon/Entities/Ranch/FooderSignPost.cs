@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace HarvestMoon.Entities.Ranch
 {
-    public class FooderSignPost : NPC
+    public class FooderSignPost : BasicMessage
     {
-        public FooderSignPost(Vector2 initialPosition, Size2 size, bool displaysMessage, string message)
-            : base(initialPosition, size, displaysMessage, message)
+        public FooderSignPost(Vector2 initialPosition, Size2 size, string message)
+            : base(initialPosition, size, message)
         {
 
         }
 
-        public override string GetMessage(Item item)
+        public override string GetMessage()
         {
             var replacedPieces = Message.Replace("number", HarvestMoon.Instance.FeedPieces.ToString());
             return replacedPieces;

@@ -61,37 +61,37 @@
   <object id="15" name="start" type="player_start" x="238" y="346" width="32" height="32"/>
   <object id="17" name="kitchen_1" type="npc" x="65" y="297" width="32" height="32">
    <properties>
-    <property name="message" value="Confirm the origin of fire!"/>
+    <property name="message" value="STR_KITCHEN1"/>
    </properties>
   </object>
   <object id="18" name="kitchen_2" type="npc" x="97" y="297" width="32" height="32">
    <properties>
-    <property name="message" value="The main tap of gas is off!"/>
+    <property name="message" value="STR_KITCHEN2"/>
    </properties>
   </object>
-  <object id="19" name="kitchen_3" type="npc" x="129" y="297" width="32" height="32">
+  <object id="19" name="kitchen_3" type="npc" x="125" y="297" width="32" height="32">
    <properties>
-    <property name="message" value="Everything is all right!"/>
+    <property name="message" value="STR_KITCHEN3"/>
    </properties>
   </object>
   <object id="20" name="diary" type="npc" x="122" y="70" width="28" height="40">
    <properties>
-    <property name="message" value="Shall I write in my diary before I go to bed?"/>
+    <property name="message" value="STR_DIARY"/>
    </properties>
   </object>
   <object id="21" name="calendar" type="npc" x="167" y="96" width="28" height="40">
    <properties>
-    <property name="message" value="day, number of season."/>
+    <property name="message" value="STR_CALENDAR"/>
    </properties>
   </object>
   <object id="22" name="stats" type="npc" x="325" y="109" width="28" height="40">
    <properties>
-    <property name="message" value="The ranch stats are looking fine!"/>
+    <property name="message" value="STR_RANCHSTATS"/>
    </properties>
   </object>
   <object id="23" name="tv" type="npc" x="356" y="109" width="57" height="40">
    <properties>
-    <property name="message" value="A TV"/>
+    <property name="message" value="STR_TV"/>
    </properties>
   </object>
   <object id="24" name="wake" type="player_start" x="260" y="207" width="16" height="24"/>

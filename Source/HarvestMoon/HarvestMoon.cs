@@ -17,6 +17,9 @@ using HarvestMoon.Entities.Ranch;
 using Microsoft.Xna.Framework.Input;
 
 using HarvestMoon.Input;
+using HarvestMoon.Text;
+using HarvestMoon.GUI;
+using GeonBit.UI;
 
 namespace HarvestMoon
 {
@@ -86,6 +89,10 @@ namespace HarvestMoon
 
         public InputDevice Input;
 
+        public StringsManager Strings;
+
+        public GUIManager GUI;
+
         public HarvestMoon()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -121,6 +128,10 @@ namespace HarvestMoon
 #else
             Input = new KeyboardInputDevice();
 #endif
+
+            Strings = new StringsManager();
+
+            GUI = new GUIManager();
 
             Instance = this;
 
@@ -546,6 +557,13 @@ namespace HarvestMoon
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            // GeonBit.UI: Init the UI manager using the "hd" built-in theme
+            if (UserInterface.Active == null)
+            {
+                UserInterface.Initialize(Content, BuiltinThemes.hd);
+            }
+
         }
 
         /// <summary>
@@ -579,8 +597,8 @@ namespace HarvestMoon
                 _loaded = true;
                 ScreenManager.LoadScreen(new Diary(this), new FadeTransition(GraphicsDevice, Color.Black, 1.0f));
             }
-            
 
+            GUI.Update(gameTime);
         }
 
 

@@ -135,23 +135,22 @@ namespace HarvestMoon.Screens
 
                             var objectSize = obj.Size;
 
-                            var objectMessage = obj.Properties.First(p => p.Key.Contains("message"));
+                            var objectMessageKP = obj.Properties.First(p => p.Key.Contains("message"));
 
-                            if(obj.Name == "diary")
+                            var objectMessage = HarvestMoon.Instance.Strings.Get(objectMessageKP.Value);
+
+                            var yes = HarvestMoon.Instance.Strings.Get("STR_YES");
+                            var no = HarvestMoon.Instance.Strings.Get("STR_NO");
+
+                            if (obj.Name == "diary")
                             {
-                                _entityManager.AddEntity(new NPC(objectPosition,
+                                _entityManager.AddEntity(new YesNoMessage(objectPosition,
                                                                  objectSize,
-                                                                 true,
-                                                                 objectMessage.Value,
-                                                                 true,
-                                                                 NPC.NPCMenu.YesNo,
-                                                                 new List<string>() { "Yes", "No" },
+                                                                 objectMessage,
+                                                                 new List<string>() { yes, no},
                                                                  new List<Action>() {
                                                                      () => {
 
-                                                                        _player.Freeze();
-                                                                        _player.Busy();
-                                                                        _player.Cooldown();
                                                                         HarvestMoon.Instance.ResetDay();
                                                                         HarvestMoon.Instance.IncrementDay();
                                                                         HarvestMoon.Instance.SaveGameState(HarvestMoon.Instance.Diary);
@@ -162,14 +161,10 @@ namespace HarvestMoon.Screens
 
                                                                      },
                                                                      () => {
-                                                                        ShowYesNoMessage("I'm going to bed.",
+                                                                        /*ShowYesNoMessage("I'm going to bed.",
                                                                                          "Oh, I've got something to do.",
                                                                                         () =>
                                                                                         {
-
-                                                                                            _player.Freeze();
-                                                                                            _player.Busy();
-                                                                                            _player.Cooldown();
                                                                                             HarvestMoon.Instance.ResetDay();
                                                                                             HarvestMoon.Instance.IncrementDay();
                                                                                             var screen = new House(Game, HarvestMoon.Arrival.Wake);
@@ -179,22 +174,20 @@ namespace HarvestMoon.Screens
                                                                                         },
                                                                                         () =>
                                                                                         {
-                                                                                            _player.UnFreeze();
-                                                                                            _player.Cooldown();
-                                                                                        });
+                                                                                        });*/
                                                                  } }));
                             }
                             else if(obj.Name == "calendar")
                             {
-                                var replacedDayName = objectMessage.Value.Replace("day", HarvestMoon.Instance.DayName);
+                                var replacedDayName = objectMessage.Replace("day", HarvestMoon.Instance.DayName);
                                 var replacedDayNumber = replacedDayName.Replace("number", HarvestMoon.Instance.DayNumber.ToString());
                                 var replacedSeason = replacedDayNumber.Replace("season", HarvestMoon.Instance.Season);
 
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, replacedSeason));
+                                _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, replacedSeason));
                             }
                             else
                             {
-                                _entityManager.AddEntity(new NPC(objectPosition, objectSize, true, objectMessage.Value));
+                                _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
                             }
                             
                         }

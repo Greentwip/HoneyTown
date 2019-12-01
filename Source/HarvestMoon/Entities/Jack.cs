@@ -990,72 +990,23 @@ namespace HarvestMoon.Entities
                 _isInteractButtonDown = true;
 
                 var npc = _currentInteractable as NPC;
-                if (npc.DeploysMenu)
-                {
-                    switch (npc.DeployableMenu)
-                    {
-                        case NPC.NPCMenu.YesNo:
-                            _mapScreen.ShowMessage(npc.Message, () =>
-                            {
-                                _mapScreen.ShowYesNoMessage(npc.Strings[0],
-                                                            npc.Strings[1],
-                                                            () =>
-                                                            {
-                                                                npc.Callbacks[0]();
-                                                            },
-                                                            () =>
-                                                            {
-                                                                npc.Callbacks[1]();
-                                                            });
-                            });
 
-                            break;
-                    }
+                if (_carryingObject is Item)
+                {
+                    npc.Interact(_carryingObject as Item, () => { Freeze(); Busy(); }, () => { UnFreeze(); Cooldown(); });
                 }
                 else
                 {
-                    if (npc.ShowsMessage)
+                    npc.Interact(null, () => { Freeze(); Busy(); }, () => { UnFreeze(); Cooldown(); });
+                }
+
+                if (_carryingObject != null)
+                {
+                    if (_carryingObject.IsDestroyed)
                     {
-                        if (_carryingObject is Item)
-                        {
-                            _mapScreen.ShowMessage(npc.GetMessage(_carryingObject as Item), () =>
-                            {
-                                _npcCoolDown = true;
-                            });
-
-                        }
-                        else
-                        {
-                            _mapScreen.ShowMessage(npc.GetMessage(null), () =>
-                            {
-                                _npcCoolDown = true;
-                            });
-
-                        }
-                    }
-                    else
-                    {
-                        if (_carryingObject is Item)
-                        {
-                            npc.Interact(_carryingObject as Item);
-                        }
-                        else
-                        {
-                            npc.Interact(null);
-                        }
-
-                        _npcCoolDown = true;
-
-                    }
-
-                    if (_carryingObject != null)
-                    {
-                        if (_carryingObject.IsDestroyed)
-                        {
-                            _carryingObject.Priority = 0;
-                            _isCarrying = false;
-                            _carryingObject = null;
-                        }
+                        _carryingObject.Priority = 0;
+                        _isCarrying = false;
+                        _carryingObject = null;
                     }
                 }
             }
