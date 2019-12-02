@@ -5203,3 +5203,8 @@
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/tools-room-tilemap.png
 
+#begin maps/town/screen.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/town/screen.tmx
+
