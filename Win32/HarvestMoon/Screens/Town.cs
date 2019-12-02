@@ -8,6 +8,7 @@ using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
+using HarvestMoon.Entities.Town;
 
 namespace HarvestMoon.Screens
 {
@@ -67,11 +68,25 @@ namespace HarvestMoon.Screens
 
                             var objectSize = obj.Size;
 
-                            var objectMessageKP = obj.Properties.First(p => p.Key.Contains("message"));
+                            string objectMessage = "";
 
-                            var objectMessage = HarvestMoon.Instance.Strings.Get(objectMessageKP.Value);
+                            foreach (var property in obj.Properties)
+                            {
+                                if (property.Key.Contains("message"))
+                                {
+                                    objectMessage = HarvestMoon.Instance.Strings.Get(property.Value);
+                                }
+                            }
+                            
+                            if (obj.Name == "Ann") {
+                                _entityManager.AddEntity(new Ann(Content, objectPosition, objectSize));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
+                            }
 
-                            _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
+                            
 
                         }
 

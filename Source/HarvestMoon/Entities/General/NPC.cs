@@ -19,6 +19,9 @@ namespace HarvestMoon.Entities.General
             FarmGoods
         }
 
+        public int Affection { get; set; }
+        public string Name { get; set; }
+
         public NPC(Vector2 initialPosition,
                     Size2 size)
         {

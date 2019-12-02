@@ -15,6 +15,23 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin animations/ann.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/ann.png
+
+#begin animations/annMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/annMap.xml
+
 #begin animations/jack.png
 /importer:TextureImporter
 /processor:TextureProcessor

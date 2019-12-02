@@ -32,12 +32,12 @@
   <object id="36" name="mountain-start" type="player_start" x="312" y="40" width="16" height="24"/>
   <object id="39" name="direction-signpost" type="npc" x="412" y="154" width="32" height="32">
    <properties>
-    <property name="message" value="Neighbor town - Straight left, Back hill - All way up"/>
+    <property name="message" value="STR_PASSAGE_SIGNPOST"/>
    </properties>
   </object>
   <object id="40" name="chicken-signpost" type="npc" x="125" y="167" width="32" height="32">
    <properties>
-    <property name="message" value="It looks like an ornament of a chicken but what is it? It interests me."/>
+    <property name="message" value="STR_PASSAGE_ORNAMENT"/>
    </properties>
   </object>
  </objectgroup>

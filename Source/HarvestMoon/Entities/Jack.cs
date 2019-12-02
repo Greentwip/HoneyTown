@@ -880,7 +880,7 @@ namespace HarvestMoon.Entities
 
             BoundingRectangle = new RectangleF(new Vector2(_transform.Position.X - 8, 
                                                             _transform.Position.Y - 12), 
-                                               new Size2(16, 22));
+                                               new Size2(16, 24));
 
             _carryingPosition = new Vector2(initialPosition.X, BoundingRectangle.Top - 16);
 
@@ -1969,7 +1969,7 @@ namespace HarvestMoon.Entities
                 _sprite.Effect = SpriteEffects.None;
             }
 
-            spriteBatch.Draw(_sprite, Position, 0.0f, new Vector2(1.8f, 1.8f));
+            spriteBatch.Draw(_sprite, Position, 0.0f, new Vector2(2.0f, 2.0f));
 
             if (_isHolding)
             {

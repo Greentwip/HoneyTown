@@ -11,7 +11,7 @@ namespace HarvestMoon.Entities.General
 
         protected string _message;
 
-        public string Message => _message;
+        public string Message { get => _message; protected set => _message = value; }
 
         public BasicMessage(Vector2 initialPosition, Size2 size, string message)
             : base(initialPosition, size)
