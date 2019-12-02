@@ -67,7 +67,7 @@ namespace HarvestMoon.Screens
 
                                 _player.PlayerFacing = Jack.Facing.DOWN;
                             }
-                            else if (obj.Name == "village-start" && _arrival == HarvestMoon.Arrival.Town)
+                            else if (obj.Name == "town-start" && _arrival == HarvestMoon.Arrival.Town)
                             {
                                 var objectPosition = obj.Position;
 
@@ -124,6 +124,20 @@ namespace HarvestMoon.Screens
                                     {
                                         door.Triggered = true;
                                         var screen = new Ranch(Game, HarvestMoon.Arrival.Passage);
+                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                        ScreenManager.LoadScreen(screen, transition);
+                                    }
+                                });
+                            }
+
+                            if (obj.Name == "town")
+                            {
+                                door.OnTrigger(() =>
+                                {
+                                    if (!door.Triggered)
+                                    {
+                                        door.Triggered = true;
+                                        var screen = new Town(Game, HarvestMoon.Arrival.Passage);
                                         var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                         ScreenManager.LoadScreen(screen, transition);
                                     }

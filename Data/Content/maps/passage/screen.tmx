@@ -28,7 +28,7 @@
  </objectgroup>
  <objectgroup id="6" name="objects">
   <object id="38" name="ranch-start" type="player_start" x="588" y="255" width="16" height="24"/>
-  <object id="34" name="village-start" type="player_start" x="36" y="258" width="16" height="24"/>
+  <object id="34" name="town-start" type="player_start" x="36" y="258" width="16" height="24"/>
   <object id="36" name="mountain-start" type="player_start" x="312" y="40" width="16" height="24"/>
   <object id="39" name="direction-signpost" type="npc" x="412" y="154" width="32" height="32">
    <properties>
@@ -42,20 +42,8 @@
   </object>
  </objectgroup>
  <objectgroup id="13" name="doors">
-  <object id="41" name="ranch" type="door" x="608" y="186" width="32" height="168">
-   <properties>
-    <property name="target" value="maps/ranch/level"/>
-   </properties>
-  </object>
-  <object id="42" name="mountain" type="door" x="204" y="0" width="247" height="32">
-   <properties>
-    <property name="target" value="maps/ranch/level"/>
-   </properties>
-  </object>
-  <object id="43" name="village" type="door" x="0" y="181" width="32" height="173">
-   <properties>
-    <property name="target" value="maps/ranch/level"/>
-   </properties>
-  </object>
+  <object id="41" name="ranch" type="door" x="608" y="186" width="32" height="168"/>
+  <object id="42" name="mountain" type="door" x="204" y="0" width="247" height="32"/>
+  <object id="43" name="town" type="door" x="0" y="181" width="32" height="173"/>
  </objectgroup>
 </map>
