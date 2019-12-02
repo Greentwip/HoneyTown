@@ -78,7 +78,7 @@ namespace HarvestMoon.Screens
                                 }
                             }
                             
-                            if (obj.Name == "Ann") {
+                            if (obj.Name == "ann") {
                                 _entityManager.AddEntity(new Ann(Content, objectPosition, objectSize));
                             }
                             else
