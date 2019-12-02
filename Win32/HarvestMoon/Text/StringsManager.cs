@@ -37,7 +37,7 @@ namespace HarvestMoon.Text
 
             if(value == null)
             {
-                value = _database.GetCollection("game").Find(LiteDB.Query.EQ("STRING", query)).Where(x => x["EN"] != null).FirstOrDefault()[_culture];
+                value = _database.GetCollection("game").Find(LiteDB.Query.EQ("STRING", query)).Where(x => x["EN"] != null).First()["EN"];
             }
 
             return value.AsString;
