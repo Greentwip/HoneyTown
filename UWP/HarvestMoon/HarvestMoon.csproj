@@ -112,6 +112,8 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\WateringCan.cs" Link="Entities\Tools\WateringCan.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\GrassSeeds.cs" Link="Entities\Tools\GrassSeeds.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\Hoe.cs" Link="Entities\Tools\Hoe.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\CornSeeds.cs" Link="Entities\Tools\CornSeeds.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\TomatoSeeds.cs" Link="Entities\Tools\TomatoSeeds.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Ranch\BigLog.cs" Link="Entities\Ranch\BigLog.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Ranch\BigRock.cs" Link="Entities\Ranch\BigRock.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Entity.cs" Link="Entities\Entity.cs" />
@@ -137,6 +139,7 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\GUI.cs" Link="Screens\Gui.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Passage.cs" Link="Screens\Passage.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Map.cs" Link="Screens\Map.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Screens\OptionsDialog.cs" Link="Screens\OptionsDialog.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\House.cs" Link="Screens\House.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\ToolsRoom.cs" Link="Screens\ToolsRoom.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Ranch.cs" Link="Screens\Ranch.cs" />
