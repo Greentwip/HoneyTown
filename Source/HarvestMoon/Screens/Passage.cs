@@ -130,6 +130,20 @@ namespace HarvestMoon.Screens
                                 });
                             }
 
+                            if (obj.Name == "mountain")
+                            {
+                                door.OnTrigger(() =>
+                                {
+                                    if (!door.Triggered)
+                                    {
+                                        door.Triggered = true;
+                                        var screen = new Mountain(Game, HarvestMoon.Arrival.Passage);
+                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                        ScreenManager.LoadScreen(screen, transition);
+                                    }
+                                });
+                            }
+
                             if (obj.Name == "town")
                             {
                                 door.OnTrigger(() =>

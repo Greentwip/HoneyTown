@@ -101,6 +101,7 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberLerper.cs" Link="Tweening\MemberLerper.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tween.cs" Link="Tweening\Tween.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tweener.cs" Link="Tweening\Tweener.cs" />
+    <Compile Include="Screens\Mountain.cs" />
     <Compile Include="Screens\Town.cs" />
     <Compile Include="Text\StringsManager.cs" />
   </ItemGroup>

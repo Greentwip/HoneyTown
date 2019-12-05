@@ -4902,7 +4902,7 @@
 /processor:TiledMapProcessor
 /build:maps/mountain/screen.tmx
 
-#begin maps/mountain/tileset.png
+#begin maps/mountain/tileset-a.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -4912,7 +4912,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:maps/mountain/tileset.png
+/build:maps/mountain/tileset-a.png
+
+#begin maps/mountain/tileset-b.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/mountain/tileset-b.png
+
+#begin maps/mountain/tileset-c.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/mountain/tileset-c.png
 
 #begin maps/passage/screen.tmx
 /importer:TiledMapImporter
