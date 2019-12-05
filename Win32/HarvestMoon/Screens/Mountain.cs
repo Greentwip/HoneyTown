@@ -150,7 +150,44 @@ namespace HarvestMoon.Screens
 
             if (_player != null && !_player.IsDestroyed)
             {
-                _camera.LookAt(new Vector2(_player.Position.X, _player.Position.Y));
+                _camera.LookAt(_player.Position);
+
+                var constraints = new Vector2();
+
+                if (_camera.BoundingRectangle.Center.X < 320)
+                {
+                    constraints.X = 320;
+                }
+
+                if (_camera.BoundingRectangle.Center.X > 1408)
+                {
+                    constraints.X = 1408;
+                }
+
+                if (_camera.BoundingRectangle.Center.Y < 240)
+                {
+                    constraints.Y = 240;
+                }
+
+                if (_camera.BoundingRectangle.Center.Y > 1444)
+                {
+                    constraints.Y = 1444;
+                }
+
+                if (constraints.X != 0)
+                {
+                    _camera.LookAt(new Vector2(constraints.X, _player.Position.Y));
+                }
+
+                if (constraints.Y != 0)
+                {
+                    _camera.LookAt(new Vector2(_player.Position.X, constraints.Y));
+                }
+
+                if (constraints.X != 0 && constraints.Y != 0)
+                {
+                    _camera.LookAt(new Vector2(constraints.X, constraints.Y));
+                }
             }
 
             CheckCollisions();
@@ -179,6 +216,16 @@ namespace HarvestMoon.Screens
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
             _entityManager.Draw(_spriteBatch);
             _spriteBatch.End();
+
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
+
+            foreach (var layer in _map.Layers.Where(l => l.Name.Contains("Foreground")))
+            {
+                _mapRenderer.Draw(layer, cameraMatrix);
+            }
+
+            _spriteBatch.End();
+
 
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
 
