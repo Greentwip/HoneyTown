@@ -61,7 +61,7 @@ namespace HarvestMoon.Screens
                     soilSegment.Dry();
                 }
             }
-            
+
 
             // Load the compiled map
             _map = Content.Load<TiledMap>("maps/house/house");
@@ -147,8 +147,7 @@ namespace HarvestMoon.Screens
                                 _entityManager.AddEntity(new YesNoMessage(objectPosition,
                                                                  objectSize,
                                                                  objectMessage,
-                                                                 new List<string>() { yes, no},
-                                                                 new List<Action>() {
+                                                                 yes, no,
                                                                      () => {
 
                                                                         HarvestMoon.Instance.ResetDay();
@@ -175,7 +174,7 @@ namespace HarvestMoon.Screens
                                                                                         () =>
                                                                                         {
                                                                                         });*/
-                                                                 } }));
+                                                                 }));
                             }
                             else if(obj.Name == "calendar")
                             {
@@ -189,7 +188,7 @@ namespace HarvestMoon.Screens
                             {
                                 _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
                             }
-                            
+
                         }
 
                     }
@@ -212,7 +211,7 @@ namespace HarvestMoon.Screens
                         }
                     }
                 }
-            }            
+            }
         }
 
         public override void Update(GameTime gameTime)

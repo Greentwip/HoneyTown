@@ -15,8 +15,10 @@ using GeonBit.UI.Entities;
 
 using GeonBit.UI.Animators;
 using System;
+using HarvestMoon.Entities.General;
 using static HarvestMoon.Entities.General.NPC;
 using HarvestMoon.Entities.Ranch;
+using HarvestMoon.General;
 using HarvestMoon.Input;
 
 
@@ -94,23 +96,9 @@ namespace HarvestMoon.GUI
 
                 if (_isDisplayingMenu)
                 {
-                    switch (_npcMenu)
-                    {
-                        case NPCMenu.YesNo:
-                            if (_textParagraph.Text == "> " + _menuStrings.First() + "\n" + "  " + _menuStrings.Last())
-                            {
-                                _textParagraph.Text = "  " + _menuStrings.First() + "\n" + "> " + _menuStrings.Last();
-                            }
-                            else
-                            {
-                                _textParagraph.Text = "> " + _menuStrings.First() + "\n" + "  " + _menuStrings.Last();
-                            }
-
-                            break;
-                    }
+                    _textParagraph.Text = _menu.Text(_isDownButtonDown, _isUpButtonDown);
                 }
             }
-
 
             if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown)
             {
@@ -119,30 +107,13 @@ namespace HarvestMoon.GUI
                 {
                     if (_isDisplayingMenu)
                     {
-                        switch (_npcMenu)
-                        {
-                            case NPCMenu.YesNo:
-                                if (_textParagraph.Text == "> " + _menuStrings.First() + "\n" + "  " + _menuStrings.Last())
-                                {
-                                    UserInterface.Active.RemoveEntity(_textPanel);
-                                    _textPanel = null;
-                                    _npcCoolDown = true;
-                                    _busy = true;
-                                    _isDisplayingMenu = false;
-                                    _menuCallbacks[0]();
-                                }
-                                else
-                                {
-                                    UserInterface.Active.RemoveEntity(_textPanel);
-                                    _textPanel = null;
-                                    _npcCoolDown = true;
-                                    _busy = true;
-                                    _isDisplayingMenu = false;
-                                    _menuCallbacks[1]();
-                                }
-
-                                break;
-                        }
+                        UserInterface.Active.RemoveEntity(_textPanel);
+                        _textPanel = null;
+                        _npcCoolDown = true;
+                        _busy = true;
+                        _isDisplayingMenu = false;
+                        _menu.CurrentMessage.Callback?.Invoke();
+                        _menu = false;
                     }
                     else
                     {
@@ -203,25 +174,11 @@ namespace HarvestMoon.GUI
 
         private bool _isDisplayingMenu;
 
-        private List<string> _menuStrings;
-        private List<Action> _menuCallbacks;
+        private SelectableMenu _menu;
 
-        NPCMenu _npcMenu;
-
-        // This must be on a separated class
-        public void ShowYesNoMessage(string yesString, string noString, Action yesCallback, Action noCallback)
+        public void ShowSelectableMenu(SelectableMenu menu)
         {
             _isDisplayingMenu = true;
-
-            _menuStrings = new List<string>();
-            _menuStrings.Add(yesString);
-            _menuStrings.Add(noString);
-
-            _menuCallbacks = new List<Action>();
-
-            _menuCallbacks.Add(yesCallback);
-            _menuCallbacks.Add(noCallback);
-
             if (_textPanel != null)
             {
                 UserInterface.Active.RemoveEntity(_textPanel);
@@ -229,21 +186,13 @@ namespace HarvestMoon.GUI
             }
 
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
-
             // create a panel and position in bottom center of screen
             _textPanel = new Panel(new Vector2(320 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
-
             UserInterface.Active.AddEntity(_textPanel);
-
-            _textParagraph = new Paragraph("");
-
-            _textParagraph.Text = "> " + _menuStrings.First() + "\n" + "  " + _menuStrings.Last();
-
+            _textParagraph = new Paragraph("") {Text = menu.Text()};
             _textPanel.AddChild(_textParagraph);
-
             _textPanel.Opacity = 200;
-
-            _npcMenu = NPCMenu.YesNo;
+            _menu = menu;
         }
 
         public void ShowMessage(string message, Action onStartCallback, Action onAfterConfirmCallback)
@@ -279,7 +228,6 @@ namespace HarvestMoon.GUI
             _textPanel.Opacity = 200;
 
             onStartCallback();
-
         }
     }
 }

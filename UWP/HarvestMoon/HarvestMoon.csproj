@@ -95,6 +95,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\NPC.cs" Link="Entities\General\NPC.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\BasicMessage.cs" Link="Entities\General\BasicMessage.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\YesNoMessage.cs" Link="Entities\General\YesNoMessage.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\Message.cs" Link="Entities\General\Message.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\SelectableMenu.cs" Link="Entities\General\SelectableMenu.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Items\Tomato.cs" Link="Entities\Items\Tomato.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Items\Item.cs" Link="Entities\Items\Item.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Items\Corn.cs" Link="Entities\Items\Corn.cs" />
