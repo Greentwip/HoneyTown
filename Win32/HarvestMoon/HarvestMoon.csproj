@@ -45,6 +45,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\NPC.cs" Link="Entities\General\NPC.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\BasicMessage.cs" Link="Entities\General\BasicMessage.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\YesNoMessage.cs" Link="Entities\General\YesNoMessage.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Items\Tomato.cs" Link="Entities\Items\Tomato.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Items\Item.cs" Link="Entities\Items\Item.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Items\Corn.cs" Link="Entities\Items\Corn.cs" />
@@ -62,6 +64,8 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\WateringCan.cs" Link="Entities\Tools\WateringCan.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\GrassSeeds.cs" Link="Entities\Tools\GrassSeeds.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\Hoe.cs" Link="Entities\Tools\Hoe.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\CornSeeds.cs" Link="Entities\Tools\CornSeeds.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\TomatoSeeds.cs" Link="Entities\Tools\TomatoSeeds.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Ranch\BigLog.cs" Link="Entities\Ranch\BigLog.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Ranch\BigRock.cs" Link="Entities\Ranch\BigRock.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Entity.cs" Link="Entities\Entity.cs" />
@@ -77,33 +81,30 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\Hammer.cs" Link="Entities\Tools\Hammer.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Ranch\WoodPiece.cs" Link="Entities\Ranch\WoodPiece.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Jack.cs" Link="Entities\Jack.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Entities\Town\Ann.cs" Link="Entities\Town\Ann.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\GamepadInputDevice.cs" Link="Input\GamepadInputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\InputDevice.cs" Link="Input\InputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\KeyboardInputDevice.cs" Link="Input\KeyboardInputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Program.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\HarvestMoon.cs" />
-    <Compile Include="Entities\General\BasicMessage.cs" />
-    <Compile Include="Entities\General\YesNoMessage.cs" />
-    <Compile Include="Entities\Tools\CornSeeds.cs" />
-    <Compile Include="Entities\Tools\TomatoSeeds.cs" />
-    <Compile Include="Entities\Town\Ann.cs" />
-    <Compile Include="GUI\GUIManager.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\HarvestMoon.cs" />    
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\GUI\GUIManager.cs" Link="GUI\GUIManager.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Diary.cs" Link="Screens\Diary.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\GUI.cs" Link="Screens\Gui.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Passage.cs" Link="Screens\Passage.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Map.cs" Link="Screens\Map.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Screens\OptionsDialog.cs" Link="Screens\OptionsDialog.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\House.cs" Link="Screens\House.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\ToolsRoom.cs" Link="Screens\ToolsRoom.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Ranch.cs" Link="Screens\Ranch.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Mountain.cs" Link="Screens\Mountain.cs"/>
+    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Town.cs" Link="Screens\Town.cs"/>
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Ease.cs" Link="Tweening\Ease.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberAccessor.cs" Link="Tweening\MemberAccessor.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberLerper.cs" Link="Tweening\MemberLerper.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tween.cs" Link="Tweening\Tween.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tweener.cs" Link="Tweening\Tweener.cs" />
-    <Compile Include="Screens\Mountain.cs" />
-    <Compile Include="Screens\Town.cs" />
-    <Compile Include="Text\StringsManager.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Text\StringsManager.cs" Link="Text\StringsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
