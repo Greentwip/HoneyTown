@@ -290,8 +290,8 @@ namespace HarvestMoon.Screens
             UserInterface.Active.RenderTargetTransformMatrix = cameraMatrix;
             UserInterface.Active.DrawMainRenderTarget(_spriteBatch);*/
 
-            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 480.0f;
-            UserInterface.Active.GlobalScale = scaleY;
+            //float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 480.0f;
+            //UserInterface.Active.GlobalScale = scaleY;
 
             UserInterface.Active.Draw(_spriteBatch);
         }

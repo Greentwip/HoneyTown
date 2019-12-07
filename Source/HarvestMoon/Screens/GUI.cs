@@ -65,7 +65,7 @@ namespace HarvestMoon.Screens
             
             HM.Graphics.PreferredBackBufferWidth = 640;
             HM.Graphics.PreferredBackBufferHeight = 480;
-            HM.Graphics.IsFullScreen = false;
+            HM.Graphics.IsFullScreen = false; 
             HM.Graphics.ApplyChanges();*/
 
         }
@@ -125,8 +125,8 @@ namespace HarvestMoon.Screens
             UserInterface.Active.DrawMainRenderTarget(_spriteBatch);
 
             */
-            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
-            UserInterface.Active.GlobalScale = scaleY;
+            //float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+            //UserInterface.Active.GlobalScale = scaleY;
 
             UserInterface.Active.Draw(_spriteBatch);
 
