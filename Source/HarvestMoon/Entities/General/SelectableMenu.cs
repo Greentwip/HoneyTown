@@ -18,6 +18,8 @@ namespace HarvestMoon.Entities.General
 
         public Message CurrentMessage => _menuItems[_messageIndex];
 
+        private Action _onInteractionEnd;
+
         public SelectableMenu(Vector2 initialPosition, Size2 size, string initialMessage, List<Message> menuItems)
             : base(initialPosition, size)
         {
@@ -50,11 +52,19 @@ namespace HarvestMoon.Entities.General
             return menuBuilder.ToString();
         }
 
+
+        public void SelectCurrent()
+        {
+            CurrentMessage?.Callback?.Invoke();
+            _onInteractionEnd?.Invoke();
+            _onInteractionEnd = null;
+        }
+
         public override void Interact(Item item, Action onInteractionStart, Action onInteractionEnd)
         {
+            _onInteractionEnd = onInteractionEnd;
             HarvestMoon.Instance.GUI.ShowMessage(_initialMessage, onInteractionStart, () =>
             {
-                // TODO: Curry onInteractionEnd
                 HarvestMoon.Instance.GUI.ShowSelectableMenu(this);
             });
         }

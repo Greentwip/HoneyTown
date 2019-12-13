@@ -97,9 +97,9 @@ namespace HarvestMoon.GUI
                         UserInterface.Active.RemoveEntity(_textPanel);
                         _textPanel = null;
                         _npcCoolDown = true;
-                        _busy = false;
+                        _busy = true;
                         _isDisplayingMenu = false;
-                        _menu?.CurrentMessage?.Callback?.Invoke();
+                        _menu?.SelectCurrent();
                         _menu = null;
                     }
                     else
@@ -135,30 +135,6 @@ namespace HarvestMoon.GUI
 
         }
 
-        public List<string> SplitByLength(string sentence, int partLength)
-        {
-            string[] words = sentence.Split(' ');
-            var parts = new List<string>();
-            string part = string.Empty;
-            int partCounter = 0;
-            foreach (var word in words)
-            {
-                if (part.Length + word.Length < partLength)
-                {
-                    part += string.IsNullOrEmpty(part) ? word : " " + word;
-                }
-                else
-                {
-                    parts.Add(part);
-                    part = word;
-                    partCounter++;
-                }
-            }
-            parts.Add(part);
-
-            return parts;
-        }
-
         private bool _isDisplayingMenu;
 
         private SelectableMenu _menu;
@@ -190,7 +166,7 @@ namespace HarvestMoon.GUI
 
             _onAfterConfirmCallback = onAfterConfirmCallback;
 
-            _bufferedStrings = SplitByLength(message, 130);
+            _bufferedStrings = message.SplitByLength(130);
 
             _textPanel = NewTextPanel();
 
@@ -216,7 +192,7 @@ namespace HarvestMoon.GUI
         {
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / (1.0f * Screens.GUI.PixelHeight);
 
-            return new Panel(new Vector2(Screens.GUI.PixelWidth * scaleY, Screens.GUI.PixelHeight / 4f * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+            return new Panel(new Vector2(Screens.GUI.PixelWidth / 2f * scaleY, Screens.GUI.PixelHeight / 4f * scaleY), PanelSkin.Default, Anchor.BottomCenter);
         }
     }
 }

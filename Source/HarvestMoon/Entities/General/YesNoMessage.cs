@@ -9,7 +9,7 @@ namespace HarvestMoon.Entities.General
     {
         public YesNoMessage(Vector2 initialPosition, Size2 size, string message, string yesText, string noText,
             Action yesCallback, Action noCallback)
-            : base(initialPosition, size, "",
+            : base(initialPosition, size, message,
             new List<Message>(2) {new Message(yesText, yesCallback), new Message(noText, noCallback)})
         {
 

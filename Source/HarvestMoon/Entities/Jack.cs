@@ -123,7 +123,7 @@ namespace HarvestMoon.Entities
             Priority = 256;
 
             float frameDuration = 1.0f / 7.5f;
-            
+
             var characterTexture = content.Load<Texture2D>("animations/jack");
             var characterMap = content.Load<Dictionary<string, Rectangle>>("animations/jackMap");
             var characterAtlas = new TextureAtlas("jack", characterTexture, characterMap);
@@ -206,7 +206,7 @@ namespace HarvestMoon.Entities
                             {
                                 // TODO: Fix per frame duration
                                 new SpriteSheetAnimationFrame(9)
-                                
+
                             }
                         }
                     },
@@ -218,7 +218,7 @@ namespace HarvestMoon.Entities
                             FrameDuration = frameDuration,
                             Frames =
                             {
-                                new SpriteSheetAnimationFrame(10)                             
+                                new SpriteSheetAnimationFrame(10)
                             }
                         }
                     },
@@ -878,8 +878,8 @@ namespace HarvestMoon.Entities
                 Position = initialPosition
             };
 
-            BoundingRectangle = new RectangleF(new Vector2(_transform.Position.X - 8, 
-                                                            _transform.Position.Y - 12), 
+            BoundingRectangle = new RectangleF(new Vector2(_transform.Position.X - 8,
+                                                            _transform.Position.Y - 12),
                                                new Size2(16, 24));
 
             _carryingPosition = new Vector2(initialPosition.X, BoundingRectangle.Top - 16);
@@ -1033,7 +1033,7 @@ namespace HarvestMoon.Entities
                             });
                 }
             }
-            
+
         }
 
         public void Busy()
@@ -1300,7 +1300,7 @@ namespace HarvestMoon.Entities
                         _entityManager.SubmitEntity(new Soil(_contentManager,
                                                       new Vector2(targetPosition.X, targetPosition.Y)));
                     }
-                    
+
 
                     break;
                 }
@@ -1461,7 +1461,7 @@ namespace HarvestMoon.Entities
                         }
                     }
                 }
-                
+
             }
         }
 
@@ -1539,7 +1539,7 @@ namespace HarvestMoon.Entities
                                 totalWaitTime *= 2;
                                 break;
                         }
-                        
+
                     }
                 }
 
@@ -1573,7 +1573,7 @@ namespace HarvestMoon.Entities
                     {
                         Plant();
                     }
-                    
+
                     //if(_breakableObject != null)
                     {
                         //try_break(_breakableObject, _breakingPower);
@@ -1630,7 +1630,7 @@ namespace HarvestMoon.Entities
                     _isTooling = true;
                     Freeze();
                 }
-                
+
                 //_breakPower++;
             }
 
@@ -1761,7 +1761,7 @@ namespace HarvestMoon.Entities
                     currentTool = "seeds";
                 }
             }
-            
+
 
             switch (_playerFacing)
             {

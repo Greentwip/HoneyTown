@@ -94,6 +94,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include=".\..\..\Source\HarvestMoon\Extension\StringExtensions.cs" Link="Extension\StringExtensions.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\NPC.cs" Link="Entities\General\NPC.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\BasicMessage.cs" Link="Entities\General\BasicMessage.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\General\YesNoMessage.cs" Link="Entities\General\YesNoMessage.cs" />
