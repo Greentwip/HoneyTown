@@ -8,7 +8,7 @@ namespace HarvestMoon.Entities.General
 {
     public class SelectableMenu : NPC
     {
-        private static readonly string SelectedItem = "> ";
+        private static readonly string SelectedItemPadding = "> ";
         private static readonly string NonSelectedItemPadding = "  ";
 
         private readonly string _initialMessage;
@@ -36,16 +36,16 @@ namespace HarvestMoon.Entities.General
             {
                 if (_messageIndex == i)
                 {
-                    menuBuilder.Append(SelectedItem);
+                    menuBuilder.Append(SelectedItemPadding);
                 }
                 else
                 {
                     menuBuilder.Append(NonSelectedItemPadding);
                 }
 
-                menuBuilder.Append(_menuItems[_messageIndex]);
+                menuBuilder.Append(_menuItems[i]);
+                menuBuilder.AppendLine();
             }
-            menuBuilder.AppendLine();
 
             return menuBuilder.ToString();
         }

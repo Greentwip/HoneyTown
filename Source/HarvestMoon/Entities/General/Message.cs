@@ -13,5 +13,10 @@ namespace HarvestMoon.Entities.General
             Text = text;
             Callback = callback;
         }
+
+        public override string ToString()
+        {
+            return Text;
+        }
     }
 }

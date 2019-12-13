@@ -22,6 +22,9 @@ namespace HarvestMoon.Screens
 {
     public abstract class GUI : GameScreen
     {
+        public static readonly int PixelWidth = 640;
+        public static readonly int PixelHeight = 480;
+
 
         // The tile map
         protected TiledMap _map;
@@ -49,7 +52,7 @@ namespace HarvestMoon.Screens
             {
                 UserInterface.Initialize(Content, BuiltinThemes.hd);
             }
-            
+
 
             // GeonBit.UI: tbd create your GUI layouts here..
 
@@ -62,10 +65,10 @@ namespace HarvestMoon.Screens
 
             /*var HM = Game as HarvestMoon;
 
-            
+
             HM.Graphics.PreferredBackBufferWidth = 640;
             HM.Graphics.PreferredBackBufferHeight = 480;
-            HM.Graphics.IsFullScreen = false; 
+            HM.Graphics.IsFullScreen = false;
             HM.Graphics.ApplyChanges();*/
 
         }
@@ -73,7 +76,7 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
 
-            _viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 480);
+            _viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, PixelWidth, PixelHeight);
             //var viewportAdapter = new DefaultViewportAdapter(GraphicsDevice);
             _camera = new OrthographicCamera(_viewportAdapter);
             // Create a new SpriteBatch, which can be used to draw textures.

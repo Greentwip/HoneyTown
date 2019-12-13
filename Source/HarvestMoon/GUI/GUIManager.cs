@@ -1,25 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using MonoGame.Extended.Screens;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using MonoGame.Extended.ViewportAdapters;
-using System.Collections.Generic;
-using HarvestMoon.Entities;
-using System.Linq;
-
-using GeonBit.UI;
-using GeonBit.UI.Entities;
-
+﻿using GeonBit.UI;
 using GeonBit.UI.Animators;
-using System;
+using GeonBit.UI.Entities;
 using HarvestMoon.Entities.General;
-using static HarvestMoon.Entities.General.NPC;
-using HarvestMoon.Entities.Ranch;
-using HarvestMoon.General;
 using HarvestMoon.Input;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace HarvestMoon.GUI
@@ -110,10 +97,10 @@ namespace HarvestMoon.GUI
                         UserInterface.Active.RemoveEntity(_textPanel);
                         _textPanel = null;
                         _npcCoolDown = true;
-                        _busy = true;
+                        _busy = false;
                         _isDisplayingMenu = false;
-                        _menu.CurrentMessage.Callback?.Invoke();
-                        _menu = false;
+                        _menu?.CurrentMessage?.Callback?.Invoke();
+                        _menu = null;
                     }
                     else
                     {
@@ -185,9 +172,7 @@ namespace HarvestMoon.GUI
                 _textPanel = null;
             }
 
-            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
-            // create a panel and position in bottom center of screen
-            _textPanel = new Panel(new Vector2(320 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel = NewTextPanel();
             UserInterface.Active.AddEntity(_textPanel);
             _textParagraph = new Paragraph("") {Text = menu.Text()};
             _textPanel.AddChild(_textParagraph);
@@ -207,10 +192,7 @@ namespace HarvestMoon.GUI
 
             _bufferedStrings = SplitByLength(message, 130);
 
-            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
-
-            // create a panel and position in bottom center of screen
-            _textPanel = new Panel(new Vector2(320 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel = NewTextPanel();
 
             UserInterface.Active.AddEntity(_textPanel);
 
@@ -228,6 +210,13 @@ namespace HarvestMoon.GUI
             _textPanel.Opacity = 200;
 
             onStartCallback();
+        }
+
+        private static Panel NewTextPanel()
+        {
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / (1.0f * Screens.GUI.PixelHeight);
+
+            return new Panel(new Vector2(Screens.GUI.PixelWidth * scaleY, Screens.GUI.PixelHeight / 4f * scaleY), PanelSkin.Default, Anchor.BottomCenter);
         }
     }
 }
