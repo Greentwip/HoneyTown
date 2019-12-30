@@ -24,6 +24,12 @@ namespace HarvestMoon.GUI
 {
     public class GUIManager
     {
+        public enum NPCMenu
+        {
+            YesNo,
+            UpfrontStore
+        }
+
         Panel _textPanel;
         Paragraph _textParagraph;
         TypeWriterAnimator _textAnimator;
@@ -41,8 +47,33 @@ namespace HarvestMoon.GUI
         private float _npcCoolingDelay = 0.3f;
 
         private bool _isActionButtonDown = false;
+        private bool _isCancelButtonDown = false;
         private bool _isUpButtonDown = false;
         private bool _isDownButtonDown = false;
+
+        private bool _isDisplayingMenu;
+
+        private List<string> _menuStrings;
+        private List<Action> _menuCallbacks;
+
+
+        // upfront store
+        private int _selectedIndex;
+        private int _selectedAmount;
+        private int _selectedTotal;
+        private List<string> _items;
+        private List<int> _prices;
+
+        private Paragraph _gParagraph;
+        private Paragraph _amountParagraph;
+        private Paragraph _totalParagraph;
+
+        SelectList _upfrontStoreList;
+
+        private System.Action<string, int, int> _onPurchaseCallback;
+
+
+        NPCMenu _npcMenu;
 
 
         public void Update(GameTime gameTime)
@@ -68,6 +99,11 @@ namespace HarvestMoon.GUI
             if (keyboardState.IsKeyUp(InputDevice.Keys.A))
             {
                 _isActionButtonDown = false;
+            }
+
+            if (keyboardState.IsKeyUp(InputDevice.Keys.B))
+            {
+                _isCancelButtonDown = false;
             }
 
             if (keyboardState.IsKeyUp(InputDevice.Keys.Up))
@@ -107,10 +143,71 @@ namespace HarvestMoon.GUI
                             }
 
                             break;
+
+                        case NPCMenu.UpfrontStore:
+                            if (_isDownButtonDown)
+                            {
+                                _selectedIndex++;
+
+                                if (_selectedIndex == _upfrontStoreList.Items.Length)
+                                {
+                                    _selectedIndex = 1;
+                                }
+                            }
+
+                            if (_isUpButtonDown)
+                            {
+                                _selectedIndex--;
+
+                                if(_selectedIndex == 0)
+                                {
+                                    _selectedIndex = _upfrontStoreList.Items.Length - 1;
+                                }
+                            }
+                            break;
                     }
                 }
             }
 
+            if (_isDisplayingMenu)
+            {
+                if(_npcMenu == NPCMenu.UpfrontStore)
+                {
+                    _gParagraph = new Paragraph("Current G: " + HarvestMoon.Instance.Gold.ToString());
+
+                    if (_upfrontStoreList.SelectedIndex != _selectedIndex)
+                    {
+                        _upfrontStoreList.SelectedIndex = _selectedIndex;
+                        _selectedAmount = 0;
+                        _selectedTotal = 0;
+                    }
+
+                    _amountParagraph = new Paragraph("Amount: " + _selectedAmount.ToString());
+                    _totalParagraph = new Paragraph("Total: " + (_selectedAmount * _prices[_selectedIndex - 1]).ToString());
+
+                }
+            }
+
+            if(keyboardState.IsKeyDown(InputDevice.Keys.B) && !_isCancelButtonDown)
+            {
+                _isCancelButtonDown = true;
+
+                if (_textPanel != null)
+                {
+                    if (_isDisplayingMenu)
+                    {
+                        if(_npcMenu == NPCMenu.UpfrontStore)
+                        {
+                            UserInterface.Active.RemoveEntity(_textPanel);
+                            _textPanel = null;
+                            _npcCoolDown = true;
+                            _busy = true;
+                            _isDisplayingMenu = false;
+                        }
+                    }
+                }
+
+            }
 
             if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown)
             {
@@ -141,6 +238,13 @@ namespace HarvestMoon.GUI
                                     _menuCallbacks[1]();
                                 }
 
+                                break;
+
+                            case NPCMenu.UpfrontStore:
+                                _npcCoolDown = true;
+                                _busy = true;
+
+                                _onPurchaseCallback?.Invoke(_items[_selectedIndex - 1], _selectedAmount, _selectedTotal);
                                 break;
                         }
                     }
@@ -201,14 +305,81 @@ namespace HarvestMoon.GUI
             return parts;
         }
 
-        private bool _isDisplayingMenu;
 
-        private List<string> _menuStrings;
-        private List<Action> _menuCallbacks;
+        // onPurchaseCallback name, amount, total
+        public void ShowUpfrontStore(string title, 
+                                     List<string> items, 
+                                     List<string> classes, 
+                                     List<int> prices, 
+                                     System.Action<string, int, int> onPurchaseCallback)
+        {
+            _isDisplayingMenu = true;
 
-        NPCMenu _npcMenu;
+            if (_textPanel != null)
+            {
+                UserInterface.Active.RemoveEntity(_textPanel);
+                _textPanel = null;
+            }
 
-        // This must be on a separated class
+            _selectedIndex = 1;
+            _selectedAmount = 0;
+            _selectedTotal = 0;
+
+            _items = items;
+            _prices = prices;
+
+            _onPurchaseCallback = null;
+            _onPurchaseCallback = onPurchaseCallback;
+
+
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+
+            // create panel and add to list of panels and manager
+            Panel panel = new Panel(new Vector2(620 * scaleY, -1));
+
+            _textPanel = panel;
+
+            UserInterface.Active.AddEntity(panel);
+
+            // list title
+            panel.AddChild(new Header(title));
+            panel.AddChild(new HorizontalLine());
+
+            _gParagraph = new Paragraph("Current G: " + HarvestMoon.Instance.Gold.ToString());
+            _amountParagraph = new Paragraph("Amount: " + "0");
+            _totalParagraph = new Paragraph("Total: " + "0G");
+
+            panel.AddChild(_gParagraph);
+            panel.AddChild(_totalParagraph);
+
+            // create the list
+            _upfrontStoreList = new SelectList(new Vector2(0, 280));
+
+            // lock and create title
+            _upfrontStoreList.LockedItems[0] = true;
+            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10}", "{{RED}}", "Name", "Class", "Price"));
+
+
+            for(int i = 0; i< items.Count; ++i)
+            {
+                // add items as formatted table
+                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10}", items[i], classes[i], prices[i].ToString()));
+            }
+
+            if(_upfrontStoreList.Items.Length >= 2)
+            {
+                _upfrontStoreList.SelectedIndex = _selectedIndex;
+            }
+            else
+            {
+                _selectedIndex = 0;
+            }
+
+            panel.AddChild(_upfrontStoreList);
+
+            _npcMenu = NPCMenu.UpfrontStore;
+        }
+
         public void ShowYesNoMessage(string yesString, string noString, Action yesCallback, Action noCallback)
         {
             _isDisplayingMenu = true;

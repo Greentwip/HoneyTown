@@ -9,6 +9,7 @@ using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Town;
+using System.Collections.Generic;
 
 namespace HarvestMoon.Screens
 {
@@ -80,6 +81,25 @@ namespace HarvestMoon.Screens
                             
                             if (obj.Name == "ann") {
                                 _entityManager.AddEntity(new Ann(Content, objectPosition, objectSize));
+                            }
+                            else if(obj.Name == "livestock-dealer")
+                            {
+
+                                List<string> items = new List<string> { "Cow", "Sheep", "Chicken" };
+                                List<string> classes = new List<string> { "Cattle", "Cattle", "Poultry" };
+                                List<int> prices = new List<int> { 5000, 3000, 1000 };
+
+                                _entityManager.AddEntity(new UpfrontStore(objectPosition,
+                                                                            objectSize,
+                                                                            "Any purchase will be shipped",
+                                                                            "Livestock",
+                                                                            items,
+                                                                            classes,
+                                                                            prices,
+                                                                            (string purchase, int amount, int total) =>
+                                                                            {
+
+                                                                            }));
                             }
                             else
                             {

@@ -86,7 +86,8 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Input\InputDevice.cs" Link="Input\InputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\KeyboardInputDevice.cs" Link="Input\KeyboardInputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Program.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\HarvestMoon.cs" />    
+    <Compile Include=".\..\..\Source\HarvestMoon\HarvestMoon.cs" />
+    <Compile Include="Entities\General\UpfrontStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\GUI\GUIManager.cs" Link="GUI\GUIManager.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Diary.cs" Link="Screens\Diary.cs" />
@@ -97,8 +98,8 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\House.cs" Link="Screens\House.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\ToolsRoom.cs" Link="Screens\ToolsRoom.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Ranch.cs" Link="Screens\Ranch.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Mountain.cs" Link="Screens\Mountain.cs"/>
-    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Town.cs" Link="Screens\Town.cs"/>
+    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Mountain.cs" Link="Screens\Mountain.cs" />
+    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Town.cs" Link="Screens\Town.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Ease.cs" Link="Tweening\Ease.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberAccessor.cs" Link="Tweening\MemberAccessor.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberLerper.cs" Link="Tweening\MemberLerper.cs" />

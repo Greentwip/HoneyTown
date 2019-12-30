@@ -11,14 +11,6 @@ namespace HarvestMoon.Entities.General
 {
     public class NPC : Interactable
     {
-
-        public enum NPCMenu
-        {
-            YesNo,
-            Livestock,
-            FarmGoods
-        }
-
         public int Affection { get; set; }
         public string Name { get; set; }
 
