@@ -91,14 +91,80 @@ namespace HarvestMoon.Screens
 
                                 _entityManager.AddEntity(new UpfrontStore(objectPosition,
                                                                             objectSize,
-                                                                            "Any purchase will be shipped",
+                                                                            "All purchases will be delivered the same day you make them.",
                                                                             "Livestock",
                                                                             items,
                                                                             classes,
                                                                             prices,
-                                                                            (string purchase, int amount, int total) =>
+                                                                            (List<string> purchases, List<int> amounts, int total) =>
                                                                             {
+                                                                                if(purchases.Count == 0) {
+                                                                                    return "There is nothing to buy";
+                                                                                }
 
+                                                                                if(total > HarvestMoon.Instance.Gold)
+                                                                                {
+                                                                                    return "Not enough Gold";
+                                                                                }
+
+                                                                                for(int i = 0; i<purchases.Count; ++i)
+                                                                                {
+                                                                                    string purchase = purchases[i].ToLower();
+
+                                                                                    if (purchase == "cow")
+                                                                                    {
+                                                                                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
+                                                                                        {
+                                                                                            return "You can't have more than 10 Cows";
+                                                                                        }
+                                                                                    }
+
+
+                                                                                    if (purchase == "sheep")
+                                                                                    {
+                                                                                        if (amounts[i] + HarvestMoon.Instance.Sheeps > 10)
+                                                                                        {
+                                                                                            return "You can't have more than 10 Sheeps";
+                                                                                        }
+                                                                                    }
+
+
+                                                                                    if (purchase == "chicken")
+                                                                                    {
+                                                                                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
+                                                                                        {
+                                                                                            return "You can't have more than 10 Chickens";
+                                                                                        }
+                                                                                    }
+
+                                                                                }
+
+                                                                                for (int i = 0; i < purchases.Count; ++i)
+                                                                                {
+                                                                                    string purchase = purchases[i].ToLower();
+
+                                                                                    if (purchase == "cow")
+                                                                                    {
+                                                                                        HarvestMoon.Instance.Cows += amounts[i];
+                                                                                    }
+
+
+                                                                                    if (purchase == "sheep")
+                                                                                    {
+                                                                                        HarvestMoon.Instance.Sheeps += amounts[i];
+                                                                                    }
+
+
+                                                                                    if (purchase == "chicken")
+                                                                                    {
+                                                                                        HarvestMoon.Instance.Chickens += amounts[i];
+                                                                                    }
+
+                                                                                }
+
+                                                                                HarvestMoon.Instance.Gold -= total;
+
+                                                                                return "Thanks for your purchase";
                                                                             }));
                             }
                             else

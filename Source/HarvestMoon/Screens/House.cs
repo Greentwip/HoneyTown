@@ -41,7 +41,7 @@ namespace HarvestMoon.Screens
 
             //MediaPlayer.Play(_song);
 
-
+            HarvestMoon.Instance.Stamina = 60;
 
             if (_arrival == HarvestMoon.Arrival.Diary)
             {

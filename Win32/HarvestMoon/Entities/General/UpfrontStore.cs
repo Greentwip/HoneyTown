@@ -14,7 +14,7 @@ namespace HarvestMoon.Entities.General
         protected List<string> _classes = new List<string>();
         protected List<int> _prices = new List<int>();
 
-        private System.Action<string, int, int> _onPurchaseCallback;
+        private Func<List<string>, List<int>, int, string> _onPurchaseCallback;
 
         protected string _message;
 
@@ -27,7 +27,7 @@ namespace HarvestMoon.Entities.General
                             List<string> items, 
                             List<string> classes, 
                             List<int> prices,
-                            System.Action<string, int, int> onPurchaseCallback)
+                            Func<List<string>, List<int>, int, string> onPurchaseCallback)
             : base(initialPosition, size)
         {
             _message = message;
@@ -50,10 +50,9 @@ namespace HarvestMoon.Entities.General
             HarvestMoon.Instance.GUI.ShowMessage(GetMessage(), onInteractionStart, () =>
             {
 
-                HarvestMoon.Instance.GUI.ShowUpfrontStore(_title, _items, _classes, _prices, (string purchase, int amount, int price)=> {
+                HarvestMoon.Instance.GUI.ShowUpfrontStore(_title, _items, _classes, _prices, onInteractionEnd, (List<string> purchases, List<int> amounts, int price)=> {
 
-                    _onPurchaseCallback?.Invoke(purchase, amount, price);
-                    onInteractionEnd();
+                    return _onPurchaseCallback?.Invoke(purchases, amounts, price);
 
                 });
             });

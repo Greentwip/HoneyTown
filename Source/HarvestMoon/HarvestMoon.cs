@@ -34,6 +34,11 @@ namespace HarvestMoon
         public int PotatoSeeds { get; set; }
         public int CornSeeds { get; set; }
         public int TomatoSeeds { get; set; }
+        public int Cows { get; set; }
+        public int Sheeps { get; set; }
+        public int Chickens { get; set; }
+
+        public int Stamina { get; set; }
 
         private ScreenManager ScreenManager = new ScreenManager();
         private bool _loaded = false;
@@ -262,6 +267,10 @@ namespace HarvestMoon
             //public List<Crop> Crops { get; set; }
             public List<WoodPiece> WoodPieces { get; set; }
 
+            public int Cows { get; set; }
+            public int Sheeps { get; set; }
+            public int Chickens { get; set; }
+
             public int FeedPieces { get; set; }
             public int Planks { get; set; }
         }
@@ -281,6 +290,9 @@ namespace HarvestMoon
             sg.FeedPieces = Instance.FeedPieces;
             sg.Planks = Instance.Planks;
             sg.HasNotSeenTheRanch = Instance.HasNotSeenTheRanch;
+            sg.Cows = Instance.Cows;
+            sg.Sheeps = Instance.Sheeps;
+            sg.Chickens = Instance.Chickens;
 
             sg.BigLogs = new List<BigLog>(Instance.RanchState.Entities.Where(e => e is BigLog).Cast<BigLog>().ToArray());
             sg.BigRocks = new List<BigRock>(Instance.RanchState.Entities.Where(e => e is BigRock).Cast<BigRock>().ToArray());
@@ -397,6 +409,10 @@ namespace HarvestMoon
                 Instance.FeedPieces = saveGame.FeedPieces;
                 Instance.Planks = saveGame.Planks;
                 Instance.Tools = saveGame.Tools;
+
+                Instance.Cows = saveGame.Cows;
+                Instance.Sheeps = saveGame.Sheeps;
+                Instance.Chickens = saveGame.Chickens;
 
                 Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
 

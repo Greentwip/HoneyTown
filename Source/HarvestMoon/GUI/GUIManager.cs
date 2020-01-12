@@ -35,6 +35,7 @@ namespace HarvestMoon.GUI
         TypeWriterAnimator _textAnimator;
 
         Action _onAfterConfirmCallback;
+        Action _storeOnAfterConfirmCallback;
 
         private List<string> _bufferedStrings;
 
@@ -50,6 +51,8 @@ namespace HarvestMoon.GUI
         private bool _isCancelButtonDown = false;
         private bool _isUpButtonDown = false;
         private bool _isDownButtonDown = false;
+        private bool _isLeftButtonDown = false;
+        private bool _isRightButtonDown = false;
 
         private bool _isDisplayingMenu;
 
@@ -62,15 +65,16 @@ namespace HarvestMoon.GUI
         private int _selectedAmount;
         private int _selectedTotal;
         private List<string> _items;
+        private List<string> _classes;
         private List<int> _prices;
+        private List<int> _amounts;
 
         private Paragraph _gParagraph;
-        private Paragraph _amountParagraph;
         private Paragraph _totalParagraph;
 
         SelectList _upfrontStoreList;
 
-        private System.Action<string, int, int> _onPurchaseCallback;
+        private Func<List<string>, List<int>, int, string> _onPurchaseCallback;
 
 
         NPCMenu _npcMenu;
@@ -114,6 +118,87 @@ namespace HarvestMoon.GUI
             if (keyboardState.IsKeyUp(InputDevice.Keys.Down))
             {
                 _isDownButtonDown = false;
+            }
+
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Left))
+            {
+                _isLeftButtonDown = false;
+            }
+
+            if (keyboardState.IsKeyUp(InputDevice.Keys.Right))
+            {
+                _isRightButtonDown = false;
+            }
+
+            if ((keyboardState.IsKeyDown(InputDevice.Keys.Left) && !_isLeftButtonDown))
+            {
+                _isLeftButtonDown = true;
+
+                if (_isDisplayingMenu)
+                {
+                    switch (_npcMenu)
+                    {
+                        case NPCMenu.UpfrontStore:
+                            _upfrontStoreList.ClearItems();
+
+                            _upfrontStoreList.LockedItems[0] = true;
+                            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
+
+                            _amounts[_selectedIndex - 1] = _amounts[_selectedIndex - 1] - 1;
+
+                            if (_amounts[_selectedIndex - 1] < 0)
+                            {
+                                _amounts[_selectedIndex - 1] = 0;
+                            }
+
+                            for (int i = 0; i < _items.Count; ++i)
+                            {
+                                // add items as formatted table
+                                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                            }
+
+                            UpdateTotal();
+
+                            break;
+                    }
+
+                }
+
+            }
+
+            if ((keyboardState.IsKeyDown(InputDevice.Keys.Right) && !_isRightButtonDown))
+            {
+                _isRightButtonDown = true;
+
+
+                if (_isDisplayingMenu)
+                {
+                    switch (_npcMenu)
+                    {
+                        case NPCMenu.UpfrontStore:
+                            _upfrontStoreList.ClearItems();
+
+                            _upfrontStoreList.LockedItems[0] = true;
+                            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
+
+                            _amounts[_selectedIndex - 1] = _amounts[_selectedIndex - 1] + 1;
+
+                            if (_amounts[_selectedIndex - 1] > 10)
+                            {
+                                _amounts[_selectedIndex - 1] = 10;
+                            }
+
+                            for (int i = 0; i < _items.Count; ++i)
+                            {
+                                // add items as formatted table
+                                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                            }
+
+                            UpdateTotal();
+
+                            break;
+                    }
+                }
             }
 
             if ((keyboardState.IsKeyDown(InputDevice.Keys.Up) && !_isUpButtonDown) || (keyboardState.IsKeyDown(InputDevice.Keys.Down) && !_isDownButtonDown))
@@ -173,7 +258,7 @@ namespace HarvestMoon.GUI
             {
                 if(_npcMenu == NPCMenu.UpfrontStore)
                 {
-                    _gParagraph = new Paragraph("Current G: " + HarvestMoon.Instance.Gold.ToString());
+                    _gParagraph.Text = "Current G: " + HarvestMoon.Instance.Gold.ToString() + "G";
 
                     if (_upfrontStoreList.SelectedIndex != _selectedIndex)
                     {
@@ -181,9 +266,6 @@ namespace HarvestMoon.GUI
                         _selectedAmount = 0;
                         _selectedTotal = 0;
                     }
-
-                    _amountParagraph = new Paragraph("Amount: " + _selectedAmount.ToString());
-                    _totalParagraph = new Paragraph("Total: " + (_selectedAmount * _prices[_selectedIndex - 1]).ToString());
 
                 }
             }
@@ -203,6 +285,9 @@ namespace HarvestMoon.GUI
                             _npcCoolDown = true;
                             _busy = true;
                             _isDisplayingMenu = false;
+
+                            _storeOnAfterConfirmCallback?.Invoke();
+                            _storeOnAfterConfirmCallback = null;
                         }
                     }
                 }
@@ -244,7 +329,41 @@ namespace HarvestMoon.GUI
                                 _npcCoolDown = true;
                                 _busy = true;
 
-                                _onPurchaseCallback?.Invoke(_items[_selectedIndex - 1], _selectedAmount, _selectedTotal);
+                                List<string> items = new List<string>();
+                                List<int> amounts = new List<int>();
+
+                                for (int i = 0; i < _items.Count; ++i)
+                                {
+                                    if (_amounts[i] > 0)
+                                    {
+                                        items.Add(_items[i]);
+                                        amounts.Add(_amounts[i]);
+                                    }
+                                }
+
+                                UpdateTotal();
+
+                                var result = _onPurchaseCallback?.Invoke(items, amounts, _selectedTotal);
+
+                                for(int i = 0; i<_amounts.Count; ++i)
+                                {
+                                    _amounts[i] = 0;
+                                }
+
+                                UpdateTotal(result);
+
+                                _upfrontStoreList.ClearItems();
+
+                                _upfrontStoreList.LockedItems[0] = true;
+                                _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
+
+                                for (int i = 0; i < _items.Count; ++i)
+                                {
+                                    // add items as formatted table
+                                    _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                                }
+
+
                                 break;
                         }
                     }
@@ -266,12 +385,8 @@ namespace HarvestMoon.GUI
                                     _npcCoolDown = true;
                                     _busy = true;
 
-                                    if (_onAfterConfirmCallback != null)
-                                    {
-                                        _onAfterConfirmCallback();
-                                        _onAfterConfirmCallback = null;
-                                    }
-
+                                    _onAfterConfirmCallback?.Invoke();
+                                    _onAfterConfirmCallback = null;
                                 }
                             }
                         }
@@ -279,6 +394,18 @@ namespace HarvestMoon.GUI
                 }
             }
 
+        }
+
+        private void UpdateTotal(string withMessage = "")
+        {
+            _selectedTotal = 0;
+
+            for (int i = 0; i < _amounts.Count; ++i)
+            {
+                _selectedTotal += _amounts[i] * _prices[i];
+            }
+
+            _totalParagraph.Text = "Total: " + _selectedTotal.ToString() + "G" + " " + withMessage;
         }
 
         public List<string> SplitByLength(string sentence, int partLength)
@@ -311,7 +438,8 @@ namespace HarvestMoon.GUI
                                      List<string> items, 
                                      List<string> classes, 
                                      List<int> prices, 
-                                     System.Action<string, int, int> onPurchaseCallback)
+                                     Action onInteractionEnd,
+                                     Func<List<string>, List<int>, int, string> onPurchaseCallback)
         {
             _isDisplayingMenu = true;
 
@@ -326,7 +454,11 @@ namespace HarvestMoon.GUI
             _selectedTotal = 0;
 
             _items = items;
+            _classes = classes;
             _prices = prices;
+            _amounts = new List<int>();
+
+            _storeOnAfterConfirmCallback = onInteractionEnd;
 
             _onPurchaseCallback = null;
             _onPurchaseCallback = onPurchaseCallback;
@@ -346,7 +478,6 @@ namespace HarvestMoon.GUI
             panel.AddChild(new HorizontalLine());
 
             _gParagraph = new Paragraph("Current G: " + HarvestMoon.Instance.Gold.ToString());
-            _amountParagraph = new Paragraph("Amount: " + "0");
             _totalParagraph = new Paragraph("Total: " + "0G");
 
             panel.AddChild(_gParagraph);
@@ -357,13 +488,14 @@ namespace HarvestMoon.GUI
 
             // lock and create title
             _upfrontStoreList.LockedItems[0] = true;
-            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10}", "{{RED}}", "Name", "Class", "Price"));
+            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
 
 
             for(int i = 0; i< items.Count; ++i)
             {
                 // add items as formatted table
-                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10}", items[i], classes[i], prices[i].ToString()));
+                _amounts.Add(0);
+                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", items[i], classes[i], prices[i].ToString(), _amounts[i].ToString()));   
             }
 
             if(_upfrontStoreList.Items.Length >= 2)
@@ -402,7 +534,7 @@ namespace HarvestMoon.GUI
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
             // create a panel and position in bottom center of screen
-            _textPanel = new Panel(new Vector2(320 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel = new Panel(new Vector2(620 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
 
             UserInterface.Active.AddEntity(_textPanel);
 
@@ -432,7 +564,7 @@ namespace HarvestMoon.GUI
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
             // create a panel and position in bottom center of screen
-            _textPanel = new Panel(new Vector2(320 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel = new Panel(new Vector2(620 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
 
             UserInterface.Active.AddEntity(_textPanel);
 
