@@ -18,7 +18,9 @@ using System;
 using static HarvestMoon.Entities.General.NPC;
 using HarvestMoon.Entities.Ranch;
 using HarvestMoon.Input;
-
+using Microsoft.Xna.Framework.Content;
+using MonoGame.Extended.Sprites;
+using MonoGame.Extended.TextureAtlases;
 
 namespace HarvestMoon.GUI
 {
@@ -79,9 +81,149 @@ namespace HarvestMoon.GUI
 
         NPCMenu _npcMenu;
 
+        private AnimatedSprite _dayToolSprite;
+        private AnimatedSprite _goldSprite;
+        private List<AnimatedSprite> _staminaSprites = new List<AnimatedSprite>();
+
+        private Dictionary<string, Sprite> _holdingItemSprites = new Dictionary<string, Sprite>();
+
+        private Paragraph _numberDaySeasonParagraph;
+
+        public GUIManager(ContentManager content)
+        {
+            float frameDuration = 1.0f / 7.5f;
+
+            var characterTexture = content.Load<Texture2D>("ui/objects");
+            var characterMap = content.Load<Dictionary<string, Rectangle>>("ui/uiMap");
+            var characterAtlas = new TextureAtlas("ui", characterTexture, characterMap);
+            var characterAnimationFactory = new SpriteSheet
+            {
+                TextureAtlas = characterAtlas,
+                Cycles =
+                {
+                    {
+                        "day_tool", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(0)
+                            }
+                        }
+                    },
+                    {
+                        "gold", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(1)
+                            }
+                        }
+                    },
+                    {
+                        "heart_full", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(2)
+                            }
+                        }
+                    },
+                    {
+                        "heart_quarter", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(3)
+                            }
+                        }
+                    },
+                    {
+                        "heart_half", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(4)
+                            }
+                        }
+                    },
+                    {
+                        "heart_three_quarters", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(5)
+                            }
+                        }
+                    },
+                    {
+                        "heart_empty", new SpriteSheetAnimationCycle
+                        {
+                            IsLooping = true,
+                            IsPingPong = false,
+                            FrameDuration = frameDuration,
+                            Frames =
+                            {
+                                // TODO: Fix per frame duration
+                                new SpriteSheetAnimationFrame(6)
+                            }
+                        }
+                    }
+                }
+            };
+
+            _dayToolSprite = new AnimatedSprite(characterAnimationFactory, "day_tool");
+            _goldSprite = new AnimatedSprite(characterAnimationFactory, "gold");
+            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
+            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
+            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
+            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
+
+            _holdingItemSprites.Add("axe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/axe")));
+            _holdingItemSprites.Add("grass-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/grass-seeds")));
+            _holdingItemSprites.Add("turnip-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/turnip-seeds")));
+            _holdingItemSprites.Add("potato-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/potato-seeds")));
+            _holdingItemSprites.Add("tomato-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/tomato-seeds")));
+            _holdingItemSprites.Add("corn-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/corn-seeds")));
+            _holdingItemSprites.Add("hammer", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hammer")));
+            _holdingItemSprites.Add("hoe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hoe")));
+            _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
+            _holdingItemSprites.Add("watering-can", new Sprite(content.Load<Texture2D>("maps/tools-room/items/watering-can")));
+        }
 
         public void Update(GameTime gameTime)
         {
+            _dayToolSprite.Update(gameTime);
+            _goldSprite.Update(gameTime);
+
+            foreach(var staminaSprite in _staminaSprites)
+            {
+                staminaSprite.Update(gameTime);
+            }
+
             // GeonBit.UIL update UI manager
             UserInterface.Active.Update(gameTime);
             var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -583,6 +725,92 @@ namespace HarvestMoon.GUI
 
             onStartCallback();
 
+        }
+
+        public void ShowGUI()
+        {
+
+            float scaleX = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Width / 640.0f;
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+
+            var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + HarvestMoon.Instance.DayName;
+
+            // create a panel and position in bottom center of screen
+            _numberDaySeasonParagraph = new Paragraph(numberDaySeasonText, Anchor.TopLeft, null, new Vector2(12 * scaleX, (80 - 16) * scaleY));
+
+            UserInterface.Active.AddEntity(_numberDaySeasonParagraph);
+
+        }
+
+        private void DrawHeart(SpriteBatch spriteBatch, AnimatedSprite staminaSprite, int offset, Vector2 position)
+        {
+
+            if (HarvestMoon.Instance.MaxStamina >= 60 + offset)
+            {
+                if (HarvestMoon.Instance.Stamina == 0 + offset)
+                {
+                    staminaSprite.Play("heart_empty");
+                }
+                else if (HarvestMoon.Instance.Stamina > 0 + offset && HarvestMoon.Instance.Stamina <= 15 + offset)
+                {
+                    staminaSprite.Play("heart_three_quarters");
+                }
+                else if (HarvestMoon.Instance.Stamina > 15 + offset && HarvestMoon.Instance.Stamina <= 30 + offset)
+                {
+                    staminaSprite.Play("heart_half");
+                }
+                else if (HarvestMoon.Instance.Stamina > 30 + offset && HarvestMoon.Instance.Stamina <= 45 + offset)
+                {
+                    staminaSprite.Play("heart_quarter");
+                }
+                else if (HarvestMoon.Instance.Stamina > 45 + offset && HarvestMoon.Instance.Stamina <= 60 + offset)
+                {
+                    staminaSprite.Play("heart_full");
+                }
+                else if (HarvestMoon.Instance.Stamina > 60 + offset)
+                {
+                    staminaSprite.Play("heart_full");
+                }
+
+                spriteBatch.Draw(staminaSprite, position, 0, new Vector2(2, 2));
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
+            var rectangle = _dayToolSprite.GetBoundingRectangle(new Transform2(new Vector2(0, 0)));
+            spriteBatch.Draw(_dayToolSprite, new Vector2(rectangle.Width, rectangle.Height), 0, new Vector2(2, 2));
+            var currentTool = HarvestMoon.Instance.GetCurrentTool();
+            var otherTool = HarvestMoon.Instance.GetOtherTool();
+
+            if (currentTool != default(string))
+            {
+                var currentToolSprite = _holdingItemSprites[currentTool];
+
+                spriteBatch.Draw(currentToolSprite, new Vector2(28, 32));
+            }
+
+            if (otherTool != default(string) && otherTool != currentTool)
+            {
+                var currentToolSprite = _holdingItemSprites[otherTool];
+
+                spriteBatch.Draw(currentToolSprite, new Vector2(82, 32));
+            }
+
+            DrawHeart(spriteBatch, _staminaSprites[0], 0, new Vector2(128, 16));
+            DrawHeart(spriteBatch, _staminaSprites[1], 0, new Vector2(128 + 28, 16));
+            DrawHeart(spriteBatch, _staminaSprites[2], 0, new Vector2(128, 16 + 26));
+            DrawHeart(spriteBatch, _staminaSprites[3], 0, new Vector2(128 + 28, 16 + 26));
+
+            spriteBatch.End();
+
+            var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + HarvestMoon.Instance.DayName;
+
+            _numberDaySeasonParagraph.Text = numberDaySeasonText;
+
+
+            UserInterface.Active.Draw(spriteBatch);
         }
     }
 }

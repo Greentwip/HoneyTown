@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>day_tool_001.png</Key><Value>0 0 81 47</Value></Item>
+    <Item><Key>gold_001.png</Key><Value>1 60 63 25</Value></Item>
+    <Item><Key>heart_full_001.png</Key><Value>81 3 14 13</Value></Item>
+    <Item><Key>heart_quarter_001.png</Key><Value>97 3 14 13</Value></Item>
+    <Item><Key>heart_half_001.png</Key><Value>81 22 14 13</Value></Item>
+    <Item><Key>heart_three_quarters_001.png</Key><Value>97 22 14 13</Value></Item>
+    <Item><Key>heart_empty_001.png</Key><Value>81 39 14 13</Value></Item>
+    </Asset>
+</XnaContent>

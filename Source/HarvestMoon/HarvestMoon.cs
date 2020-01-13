@@ -39,6 +39,7 @@ namespace HarvestMoon
         public int Chickens { get; set; }
 
         public int Stamina { get; set; }
+        public int MaxStamina { get; set; }
 
         private ScreenManager ScreenManager = new ScreenManager();
         private bool _loaded = false;
@@ -136,9 +137,9 @@ namespace HarvestMoon
 
             Strings = new StringsManager();
 
-            GUI = new GUIManager();
-
             Instance = this;
+
+            MaxStamina = 60;
 
         }
 
@@ -255,6 +256,8 @@ namespace HarvestMoon
             public int Gold { get; set; }
             public int TodayGold { get; set; }
 
+            public int MaxStamina { get; set; }
+
             public List<string> Tools { get; set; }
 
             public bool HasNotSeenTheRanch { get; set; }
@@ -293,6 +296,8 @@ namespace HarvestMoon
             sg.Cows = Instance.Cows;
             sg.Sheeps = Instance.Sheeps;
             sg.Chickens = Instance.Chickens;
+
+            sg.MaxStamina = Instance.MaxStamina;
 
             sg.BigLogs = new List<BigLog>(Instance.RanchState.Entities.Where(e => e is BigLog).Cast<BigLog>().ToArray());
             sg.BigRocks = new List<BigRock>(Instance.RanchState.Entities.Where(e => e is BigRock).Cast<BigRock>().ToArray());
@@ -413,6 +418,8 @@ namespace HarvestMoon
                 Instance.Cows = saveGame.Cows;
                 Instance.Sheeps = saveGame.Sheeps;
                 Instance.Chickens = saveGame.Chickens;
+
+                Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 60;
 
                 Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
 
@@ -574,12 +581,16 @@ namespace HarvestMoon
 
             base.Initialize();
 
+            Window.Title = "PROJECT LILA";
+
+
             // GeonBit.UI: Init the UI manager using the "hd" built-in theme
             if (UserInterface.Active == null)
             {
                 UserInterface.Initialize(Content, BuiltinThemes.hd);
             }
 
+            GUI = new GUIManager(Content);
         }
 
         /// <summary>

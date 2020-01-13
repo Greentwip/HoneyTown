@@ -1624,26 +1624,32 @@ namespace HarvestMoon.Entities
             {
                 _isToolButtonDown = true;
 
-                int lessStamina = 0;
+                if(currentTool != default(string))
+                {
+                    int lessStamina = 0;
 
-                if (!currentTool.Contains("seeds"))
-                {
-                    lessStamina = -2;
-                }
-                else
-                {
-                    lessStamina = -1;
-                }
-
-                if(HarvestMoon.Instance.Stamina - lessStamina >= 0)
-                {
-                    if (currentTool != default(string))
+                    if (!currentTool.Contains("seeds"))
                     {
+                        lessStamina = 2;
+                    }
+                    else
+                    {
+                        lessStamina = 1;
+                    }
+
+                    if (HarvestMoon.Instance.Stamina - lessStamina >= 0)
+                    {
+                        HarvestMoon.Instance.Stamina -= lessStamina;
                         _isTooling = true;
                         Freeze();
                     }
+                    else
+                    {
+                        HarvestMoon.Instance.Stamina = 0;
+                    }
+
                 }
-                                
+
                 //_breakPower++;
             }
 

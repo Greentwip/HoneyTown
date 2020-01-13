@@ -41,8 +41,6 @@ namespace HarvestMoon.Screens
 
             //MediaPlayer.Play(_song);
 
-            HarvestMoon.Instance.Stamina = 60;
-
             if (_arrival == HarvestMoon.Arrival.Diary)
             {
                 HarvestMoon.Instance.LoadGameState(HarvestMoon.Instance.Diary);
@@ -50,6 +48,8 @@ namespace HarvestMoon.Screens
 
             if (_arrival != HarvestMoon.Arrival.Ranch)
             {
+                HarvestMoon.Instance.Stamina = 60;
+
                 HarvestMoon.Instance.Gold += HarvestMoon.Instance.TodayGold;
                 HarvestMoon.Instance.TodayGold = 0;
 

@@ -60,7 +60,8 @@ namespace HarvestMoon.Screens
             {
                 UserInterface.Active.Root.ClearChildren();
             }
-            
+
+            HarvestMoon.Instance.GUI.ShowGUI();
 
             // GeonBit.UI: tbd create your GUI layouts here..
 
@@ -293,7 +294,7 @@ namespace HarvestMoon.Screens
             //float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 480.0f;
             //UserInterface.Active.GlobalScale = scaleY;
 
-            UserInterface.Active.Draw(_spriteBatch);
+            HarvestMoon.Instance.GUI.Draw(_spriteBatch);
         }
     }
 }
