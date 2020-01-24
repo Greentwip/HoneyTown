@@ -178,7 +178,7 @@ namespace HarvestMoon.Screens
             base.LoadContent();
 
             // Load the compiled map
-            _map = Content.Load<TiledMap>("maps/ranch/level");
+            _map = Content.Load<TiledMap>("maps/Ranch");
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
@@ -218,11 +218,11 @@ namespace HarvestMoon.Screens
 
                 foreach (var layer in _map.ObjectLayers)
                 {
-                    if (layer.Name == "objects")
+                    if (layer.Name == "Arrivals")
                     {
                         foreach (var obj in layer.Objects)
                         {
-                            if (obj.Type == "player_start" && obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
+                            if (obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
                             {
                                 var objectPosition = obj.Position;
 
@@ -233,7 +233,7 @@ namespace HarvestMoon.Screens
                                 _player.UnFreeze();
                                 _player.PlayerFacing = Jack.Facing.DOWN;
                             }
-                            else if(obj.Type == "player_start" && obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
+                            else if(obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
                             {
                                 var objectPosition = obj.Position;
 
@@ -243,6 +243,19 @@ namespace HarvestMoon.Screens
                                 _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
                                 _player.UnFreeze();
                                 _player.PlayerFacing = Jack.Facing.RIGHT;
+
+                            }
+                            else if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Barn)
+                            {
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                                _player.UnFreeze();
+
+                                _player.PlayerFacing = Jack.Facing.DOWN;
 
                             }
                         }
@@ -329,11 +342,11 @@ namespace HarvestMoon.Screens
 
                     foreach (var layer in _map.ObjectLayers)
                     {
-                        if (layer.Name == "objects")
+                        if (layer.Name == "Arrivals")
                         {
                             foreach (var obj in layer.Objects)
                             {
-                                if (obj.Type == "player_start" && obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
+                                if (obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
                                 {
                                     var objectPosition = obj.Position;
 
@@ -345,7 +358,7 @@ namespace HarvestMoon.Screens
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
                                 }
-                                else if (obj.Type == "player_start" && obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
+                                else if (obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
                                 {
                                     var objectPosition = obj.Position;
 
@@ -358,7 +371,7 @@ namespace HarvestMoon.Screens
                                     _player.PlayerFacing = Jack.Facing.RIGHT;
 
                                 }
-                                else if (obj.Type == "player_start" && obj.Name == "tools-room" && _arrival == HarvestMoon.Arrival.Tools)
+                                else if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Barn)
                                 {
                                     var objectPosition = obj.Position;
 
@@ -381,11 +394,11 @@ namespace HarvestMoon.Screens
                 {
                     foreach (var layer in _map.ObjectLayers)
                     {
-                        if (layer.Name == "objects")
+                        if (layer.Name == "Arrivals")
                         {
                             foreach (var obj in layer.Objects)
                             {
-                                if (obj.Type == "player_start" && obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
+                                if (obj.Name == "house" && _arrival == HarvestMoon.Arrival.House)
                                 {
                                     var objectPosition = obj.Position;
 
@@ -396,7 +409,7 @@ namespace HarvestMoon.Screens
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
                                 }
-                                else if (obj.Type == "player_start" && obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
+                                else if (obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
                                 {
                                     var objectPosition = obj.Position;
 
@@ -406,6 +419,18 @@ namespace HarvestMoon.Screens
                                     _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.RIGHT;
+
+                                }
+                                else if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Barn)
+                                {
+                                    var objectPosition = obj.Position;
+
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.DOWN;
 
                                 }
                             }
@@ -418,71 +443,64 @@ namespace HarvestMoon.Screens
 
             foreach (var layer in _map.ObjectLayers)
             {
-                if (layer.Name == "doors")
+                if (layer.Name == "Doors")
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "door")
+                        var objectPosition = obj.Position;
+
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                        var objectSize = obj.Size;
+
+
+                        if (obj.Name == "barn")
                         {
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            var objectSize = obj.Size;
-
-                            var door = new Door(objectPosition, objectSize);
+                            var door = new BarnDoor(Content, objectPosition, objectSize);
                             _entityManager.AddEntity(door);
 
                             door.Name = obj.Name;
 
-                            if (obj.Name == "tools-room")
+                            door.OnTriggerStart(() =>
                             {
-                                door.OnTrigger(() =>
-                                {
-                                    if (!door.Triggered)
-                                    {
-                                        _player.Freeze();
+                                _player.Freeze();
+                            });
 
-                                        door.Triggered = true;
-                                        var screen = new ToolsRoom(Game);
-                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                        ScreenManager.LoadScreen(screen, transition);
-                                    }
-                                });
-                            }
-                            else if (obj.Name == "house")
+                            door.OnTriggerEnd(() =>
                             {
-                                door.OnTrigger(() =>
+                                if (!door.Triggered)
                                 {
-                                    if (!door.Triggered)
-                                    {
-                                        _player.Freeze();
-
-                                        door.Triggered = true;
-                                        var screen = new House(Game, HarvestMoon.Arrival.Ranch);
-                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                        ScreenManager.LoadScreen(screen, transition);
-                                    }
-                                });
-                            }
-                            else if (obj.Name == "passage")
-                            {
-                                door.OnTrigger(() =>
-                                {
-                                    if (!door.Triggered)
-                                    {
-                                        _player.Freeze();
-
-                                        door.Triggered = true;
-                                        var screen = new Passage(Game, HarvestMoon.Arrival.Ranch);
-                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                        ScreenManager.LoadScreen(screen, transition);
-                                    }
-                                });
-                            }
+                                    door.Triggered = true;
+                                    var screen = new Barn(Game, HarvestMoon.Arrival.Ranch);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
                         }
+                        else if (obj.Name == "house")
+                        {
+                            var door = new RanchDoor(Content, objectPosition, objectSize);
+                            _entityManager.AddEntity(door);
 
+                            door.Name = obj.Name;
+
+                            door.OnTriggerStart(() =>
+                            {
+                                _player.Freeze();
+                            });
+
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new House(Game, HarvestMoon.Arrival.Ranch);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
                     }
                 }
                 if (layer.Name == "grids")
@@ -750,7 +768,7 @@ namespace HarvestMoon.Screens
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
             var cameraMatrix = _camera.GetViewMatrix();
-            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32 * scaleY, cameraMatrix.Translation.Z);
+            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y, cameraMatrix.Translation.Z);
 
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
@@ -772,7 +790,17 @@ namespace HarvestMoon.Screens
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
-            _mapRenderer.Draw(_map.Layers.First(l => l.Name == "Foreground"), cameraMatrix, effect: _dayTimeEffect);
+            foreach(var foregroundLayer in _map.Layers.Where(l => l is TiledMapGroupLayer))
+            {
+                var foregroundLayers = (foregroundLayer as TiledMapGroupLayer).Layers.Where(l => l.Name.Contains("-Foreground"));
+
+                foreach(var layer in foregroundLayers)
+                {
+                    _mapRenderer.Draw(layer, cameraMatrix, effect: _dayTimeEffect);
+
+                }
+            }
+
 
             _spriteBatch.End();
 

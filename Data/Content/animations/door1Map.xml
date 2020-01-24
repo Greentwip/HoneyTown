@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>open_001</Key><Value>202 7 44 62</Value></Item>
+    <Item><Key>open_002</Key><Value>202 103 44 62</Value></Item>
+    <Item><Key>open_003</Key><Value>202 199 44 62</Value></Item>
+    <Item><Key>open_004</Key><Value>202 295 44 62</Value></Item>
+
+    <Item><Key>closed_001</Key><Value>202 7 44 62</Value></Item>
+
+    </Asset>
+</XnaContent>

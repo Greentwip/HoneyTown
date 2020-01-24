@@ -50,6 +50,7 @@ namespace HarvestMoon
             Wake,
             House,
             Tools,
+            Barn,
             Ranch,
             Passage,
             Mountain,

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>walk_down_001</Key><Value>282 0 47 46</Value></Item>
+    <Item><Key>walk_down_002</Key><Value>329 0 47 46</Value></Item>
+    <Item><Key>walk_down_003</Key><Value>376 0 47 46</Value></Item>
+    <Item><Key>walk_down_004</Key><Value>329 0 47 46</Value></Item>
+
+    <Item><Key>walk_left_001</Key><Value>282 46 47 46</Value></Item>
+    <Item><Key>walk_left_002</Key><Value>329 46 47 46</Value></Item>
+    <Item><Key>walk_left_003</Key><Value>376 46 47 46</Value></Item>
+    <Item><Key>walk_left_004</Key><Value>329 46 47 46</Value></Item>
+
+    <Item><Key>walk_right_001</Key><Value>282 92 47 46</Value></Item>
+    <Item><Key>walk_right_002</Key><Value>329 92 47 46</Value></Item>
+    <Item><Key>walk_right_003</Key><Value>376 92 47 46</Value></Item>
+    <Item><Key>walk_right_004</Key><Value>329 92 47 46</Value></Item>
+
+    <Item><Key>walk_up_001</Key><Value>282 138 47 46</Value></Item>
+    <Item><Key>walk_up_002</Key><Value>329 138 47 46</Value></Item>
+    <Item><Key>walk_up_003</Key><Value>376 138 47 46</Value></Item>
+    <Item><Key>walk_up_004</Key><Value>329 138 47 46</Value></Item>
+
+    <Item><Key>walk_down_idle_001</Key><Value>329 0 47 46</Value></Item>
+
+    <Item><Key>walk_left_idle_001</Key><Value>329 46 47 46</Value></Item>
+
+    <Item><Key>walk_right_idle_001</Key><Value>329 92 47 46</Value></Item>
+
+    <Item><Key>walk_up_idle_001</Key><Value>329 138 47 46</Value></Item>
+
+    </Asset>
+</XnaContent>

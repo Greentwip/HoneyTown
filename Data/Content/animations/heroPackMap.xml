@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>pack_down_001</Key><Value>0 0 32 45</Value></Item>
+    <Item><Key>pack_down_002</Key><Value>32 0 32 45</Value></Item>
+    <Item><Key>pack_down_003</Key><Value>64 0 32 45</Value></Item>
+
+    <Item><Key>pack_left_001</Key><Value>0 45 32 45</Value></Item>
+    <Item><Key>pack_left_002</Key><Value>32 45 32 45</Value></Item>
+    <Item><Key>pack_left_003</Key><Value>64 45 32 45</Value></Item>
+
+    <Item><Key>pack_right_001</Key><Value>0 90 32 45</Value></Item>
+    <Item><Key>pack_right_002</Key><Value>32 90 32 45</Value></Item>
+    <Item><Key>pack_right_003</Key><Value>64 90 32 45</Value></Item>
+
+    <Item><Key>pack_up_001</Key><Value>0 135 32 45</Value></Item>
+    <Item><Key>pack_up_002</Key><Value>32 135 32 45</Value></Item>
+    <Item><Key>pack_up_003</Key><Value>64 135 32 45</Value></Item>
+
+    </Asset>
+</XnaContent>

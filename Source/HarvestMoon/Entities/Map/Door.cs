@@ -1,25 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
-using MonoGame.Extended.Serialization;
-using MonoGame.Extended.Sprites;
-using MonoGame.Extended.TextureAtlases;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using MonoGame.Extended.ViewportAdapters;
-using System.Collections.Generic;
-
-using MonoGame.Extended.Content;
-using Microsoft.Xna.Framework.Content;
-using MonoGame.Extended.Collisions;
 using System;
 
 namespace HarvestMoon.Entities
 {
     public class Door : Entity
     {
-        private Action trigger;
+        private Action _triggerEnd;
+        private Action _triggerStart;
 
         public RectangleF BoundingRectangle;
 
@@ -49,14 +38,30 @@ namespace HarvestMoon.Entities
                                                new Size2(doorSize.Width, doorSize.Height));
         }
 
-        public void OnTrigger(Action callback)
+        public void OnTriggerStart(Action callback)
         {
-            trigger = callback;
+            _triggerStart = callback;
         }
 
-        public void Trigger()
+        public void OnTriggerEnd(Action callback)
         {
-            trigger?.Invoke();
+            _triggerEnd = callback;
+        }
+
+        public virtual void TriggerStart()
+        {
+            _triggerStart?.Invoke();
+        }
+
+        public virtual void TriggerEnd()
+        {
+            _triggerEnd?.Invoke();
+        }
+
+        public virtual void Trigger()
+        {
+            TriggerStart();
+            TriggerEnd();
         }
 
 

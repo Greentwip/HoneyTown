@@ -20,6 +20,7 @@ using HarvestMoon.Entities.Ranch;
 using HarvestMoon.Screens;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Input;
+using HarvestMoon.Animation;
 
 namespace HarvestMoon.Entities
 {
@@ -33,8 +34,14 @@ namespace HarvestMoon.Entities
             RIGHT
         }
 
-        private readonly AnimatedSprite _sprite;
+        private AnimatedSprite _sprite;
         private readonly Transform2 _transform;
+
+        private readonly AnimatedSprite _heroSprite;
+        private readonly AnimatedSprite _heroPackSprite;
+        private readonly AnimatedSprite _heroHoldSprite;
+
+        private readonly Dictionary<string, AnimatedSprite> _toolingSprites = new Dictionary<string, AnimatedSprite>();
 
         private const float _defaultWalkSpeed = 100.0f;
         private const float _defaultRunSpeed = 180.0f;
@@ -123,755 +130,68 @@ namespace HarvestMoon.Entities
             Priority = 256;
 
             float frameDuration = 1.0f / 7.5f;
-            
-            var characterTexture = content.Load<Texture2D>("animations/jack");
-            var characterMap = content.Load<Dictionary<string, Rectangle>>("animations/jackMap");
-            var characterAtlas = new TextureAtlas("jack", characterTexture, characterMap);
-            var characterAnimationFactory = new SpriteSheet
-            {
-                TextureAtlas = characterAtlas,
-                Cycles =
-                {
-                    {
-                        "walk_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = true,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(0),
-                                new SpriteSheetAnimationFrame(1),
-                                new SpriteSheetAnimationFrame(2),
-                                new SpriteSheetAnimationFrame(1)
-                            }
-                        }
-                    },
-                    {
-                        "walk_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = true,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(3),
-                                new SpriteSheetAnimationFrame(4),
-                                new SpriteSheetAnimationFrame(5),
-                                new SpriteSheetAnimationFrame(4)
-                            }
-                        }
-                    },
-                    {
-                        "walk_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = true,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(3),
-                                new SpriteSheetAnimationFrame(4),
-                                new SpriteSheetAnimationFrame(5),
-                                new SpriteSheetAnimationFrame(4)
-                            }
-                        }
-                    },
-                    {
-                        "walk_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = true,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(6),
-                                new SpriteSheetAnimationFrame(7),
-                                new SpriteSheetAnimationFrame(8),
-                                new SpriteSheetAnimationFrame(7)
-                            }
-                        }
-                    },
-                    {
-                        "walk_down_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(9)
-                                
-                            }
-                        }
-                    },
-                    {
-                        "walk_left_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(10)                             
-                            }
-                        }
-                    },
-                    {
-                        "walk_right_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(10)
-                            }
-                        }
-                    },
-                    {
-                        "walk_up_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(11)
-                            }
-                        }
-                    },
-                    {
-                        "run_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(12),
-                                new SpriteSheetAnimationFrame(1),
-                                new SpriteSheetAnimationFrame(13),
-                                new SpriteSheetAnimationFrame(1)
-                            }
-                        }
-                    },
-                    {
-                        "run_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(14),
-                                new SpriteSheetAnimationFrame(15),
-                                new SpriteSheetAnimationFrame(16),
-                                new SpriteSheetAnimationFrame(15)
 
-                            }
-                        }
-                    },
-                    {
-                        "run_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(14),
-                                new SpriteSheetAnimationFrame(15),
-                                new SpriteSheetAnimationFrame(16),
-                                new SpriteSheetAnimationFrame(15)
-                            }
-                        }
-                    },
-                    {
-                        "run_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(17),
-                                new SpriteSheetAnimationFrame(18),
-                                new SpriteSheetAnimationFrame(19),
-                                new SpriteSheetAnimationFrame(18)
-                            }
-                        }
-                    },
-                    {
-                        "carry_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(20),
-                                new SpriteSheetAnimationFrame(21),
-                                new SpriteSheetAnimationFrame(22),
-                                new SpriteSheetAnimationFrame(21)
-                            }
-                        }
-                    },
-                    {
-                        "carry_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(23),
-                                new SpriteSheetAnimationFrame(24),
-                                new SpriteSheetAnimationFrame(25),
-                                new SpriteSheetAnimationFrame(24)
-                            }
-                        }
-                    },
-                    {
-                        "carry_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(23),
-                                new SpriteSheetAnimationFrame(24),
-                                new SpriteSheetAnimationFrame(25),
-                                new SpriteSheetAnimationFrame(24)
-                            }
-                        }
-                    },
-                    {
-                        "carry_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(26),
-                                new SpriteSheetAnimationFrame(27),
-                                new SpriteSheetAnimationFrame(28),
-                                new SpriteSheetAnimationFrame(27)
-                            }
-                        }
-                    },
-                    {
-                        "carry_down_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(29)
-                            }
-                        }
-                    },
-                    {
-                        "carry_left_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(30)
-                            }
-                        }
-                    },
-                    {
-                        "carry_right_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(30)
-                            }
-                        }
-                    },
-                    {
-                        "carry_up_idle", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(31)
-                            }
-                        }
-                    },
-                    {
-                        "pack_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(32),
-                                new SpriteSheetAnimationFrame(33),
-                                new SpriteSheetAnimationFrame(34)
-                            }
-                        }
-                    },
-                    {
-                        "pack_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(35),
-                                new SpriteSheetAnimationFrame(36),
-                                new SpriteSheetAnimationFrame(37)
-                            }
-                        }
-                    },
-                    {
-                        "pack_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(35),
-                                new SpriteSheetAnimationFrame(36),
-                                new SpriteSheetAnimationFrame(37)
-                            }
-                        }
-                    },
-                    {
-                        "pack_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(38),
-                                new SpriteSheetAnimationFrame(39),
-                                new SpriteSheetAnimationFrame(40)
-                            }
-                        }
-                    },
-                    {
-                        "sickle_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(41),
-                                new SpriteSheetAnimationFrame(42),
-                                new SpriteSheetAnimationFrame(43),
-                                new SpriteSheetAnimationFrame(44)
-                            }
-                        }
-                    },
-                    {
-                        "sickle_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(45),
-                                new SpriteSheetAnimationFrame(46),
-                                new SpriteSheetAnimationFrame(47),
-                                new SpriteSheetAnimationFrame(48)
-                            }
-                        }
-                    },
-                    {
-                        "sickle_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(49),
-                                new SpriteSheetAnimationFrame(50),
-                                new SpriteSheetAnimationFrame(51),
-                                new SpriteSheetAnimationFrame(52)
-                            }
-                        }
-                    },
-                    {
-                        "sickle_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(49),
-                                new SpriteSheetAnimationFrame(50),
-                                new SpriteSheetAnimationFrame(51),
-                                new SpriteSheetAnimationFrame(52)
-                            }
-                        }
-                    },
-                    {
-                        "hoe_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(53),
-                                new SpriteSheetAnimationFrame(54),
-                                new SpriteSheetAnimationFrame(55),
-                                new SpriteSheetAnimationFrame(56)
-                            }
-                        }
-                    },
-                    {
-                        "hoe_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(57),
-                                new SpriteSheetAnimationFrame(58),
-                                new SpriteSheetAnimationFrame(59),
-                                new SpriteSheetAnimationFrame(60)
-                            }
-                        }
-                    },
-                    {
-                        "hoe_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(61),
-                                new SpriteSheetAnimationFrame(62),
-                                new SpriteSheetAnimationFrame(63),
-                                new SpriteSheetAnimationFrame(64)
-                            }
-                        }
-                    },
-                    {
-                        "hoe_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(61),
-                                new SpriteSheetAnimationFrame(62),
-                                new SpriteSheetAnimationFrame(63),
-                                new SpriteSheetAnimationFrame(64)
-                            }
-                        }
-                    },
-                    {
-                        "hammer_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(65),
-                                new SpriteSheetAnimationFrame(66),
-                                new SpriteSheetAnimationFrame(67),
-                                new SpriteSheetAnimationFrame(68)
-                            }
-                        }
-                    },
-                    {
-                        "hammer_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(69),
-                                new SpriteSheetAnimationFrame(70),
-                                new SpriteSheetAnimationFrame(71),
-                                new SpriteSheetAnimationFrame(72)
-                            }
-                        }
-                    },
-                    {
-                        "hammer_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(73),
-                                new SpriteSheetAnimationFrame(74),
-                                new SpriteSheetAnimationFrame(75),
-                                new SpriteSheetAnimationFrame(76)
-                            }
-                        }
-                    },
-                    {
-                        "hammer_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(73),
-                                new SpriteSheetAnimationFrame(74),
-                                new SpriteSheetAnimationFrame(75),
-                                new SpriteSheetAnimationFrame(76)
-                            }
-                        }
-                    },
-                    {
-                        "axe_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(77),
-                                new SpriteSheetAnimationFrame(78),
-                                new SpriteSheetAnimationFrame(79),
-                                new SpriteSheetAnimationFrame(80)
-                            }
-                        }
-                    },
-                    {
-                        "axe_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(81),
-                                new SpriteSheetAnimationFrame(82),
-                                new SpriteSheetAnimationFrame(83),
-                                new SpriteSheetAnimationFrame(84)
-                            }
-                        }
-                    },
-                    {
-                        "axe_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(85),
-                                new SpriteSheetAnimationFrame(86),
-                                new SpriteSheetAnimationFrame(87),
-                                new SpriteSheetAnimationFrame(88)
-                            }
-                        }
-                    },
-                    {
-                        "axe_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(85),
-                                new SpriteSheetAnimationFrame(86),
-                                new SpriteSheetAnimationFrame(87),
-                                new SpriteSheetAnimationFrame(88)
-                            }
-                        }
-                    },
-                    {
-                        "watering-can_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(89),
-                                new SpriteSheetAnimationFrame(90),
-                                new SpriteSheetAnimationFrame(90),
-                                new SpriteSheetAnimationFrame(90)
-                            }
-                        }
-                    },
-                    {
-                        "watering-can_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(91),
-                                new SpriteSheetAnimationFrame(92),
-                                new SpriteSheetAnimationFrame(92),
-                                new SpriteSheetAnimationFrame(92)
-                            }
-                        }
-                    },
-                    {
-                        "watering-can_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(93),
-                                new SpriteSheetAnimationFrame(94),
-                                new SpriteSheetAnimationFrame(94),
-                                new SpriteSheetAnimationFrame(94)
-                            }
-                        }
-                    },
-                    {
-                        "watering-can_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(93),
-                                new SpriteSheetAnimationFrame(94),
-                                new SpriteSheetAnimationFrame(94),
-                                new SpriteSheetAnimationFrame(94)
-                            }
-                        }
-                    },
-                    {
-                        "seeds_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(95),
-                                new SpriteSheetAnimationFrame(96),
-                                new SpriteSheetAnimationFrame(97),
-                                new SpriteSheetAnimationFrame(98),
-                                new SpriteSheetAnimationFrame(99),
-                                new SpriteSheetAnimationFrame(100),
-                                new SpriteSheetAnimationFrame(101),
-                                new SpriteSheetAnimationFrame(102),
-                                new SpriteSheetAnimationFrame(103),
-                                new SpriteSheetAnimationFrame(104),
-                                new SpriteSheetAnimationFrame(105),
-                                new SpriteSheetAnimationFrame(106)
-                            }
-                        }
-                    },
-                    {
-                        "seeds_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(107),
-                                new SpriteSheetAnimationFrame(108),
-                                new SpriteSheetAnimationFrame(109),
-                                new SpriteSheetAnimationFrame(110),
-                                new SpriteSheetAnimationFrame(111),
-                                new SpriteSheetAnimationFrame(112),
-                                new SpriteSheetAnimationFrame(113),
-                                new SpriteSheetAnimationFrame(114),
-                                new SpriteSheetAnimationFrame(115)
-                            }
-                        }
-                    },
-                    {
-                        "seeds_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(116),
-                                new SpriteSheetAnimationFrame(117),
-                                new SpriteSheetAnimationFrame(118),
-                                new SpriteSheetAnimationFrame(119),
-                                new SpriteSheetAnimationFrame(120),
-                                new SpriteSheetAnimationFrame(121),
-                                new SpriteSheetAnimationFrame(122),
-                                new SpriteSheetAnimationFrame(123),
-                                new SpriteSheetAnimationFrame(124)
-                            }
-                        }
-                    },
-                    {
-                        "seeds_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(116),
-                                new SpriteSheetAnimationFrame(117),
-                                new SpriteSheetAnimationFrame(118),
-                                new SpriteSheetAnimationFrame(119),
-                                new SpriteSheetAnimationFrame(120),
-                                new SpriteSheetAnimationFrame(121),
-                                new SpriteSheetAnimationFrame(122),
-                                new SpriteSheetAnimationFrame(123),
-                                new SpriteSheetAnimationFrame(124)
-                            }
-                        }
-                    },
-                    {
-                        "hold", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(125)
-                            }
-                        }
-                    }
-                }
-            };
+            _heroSprite = AnimationLoader.LoadAnimatedSprite(content, 
+                                                             "animations/hero", 
+                                                             "animations/heroMap", 
+                                                             "hero", 
+                                                             frameDuration,
+                                                             true);
 
-            var characterSpriteAnimation = new AnimatedSprite(characterAnimationFactory, "walk_right");
+            _sprite = _heroSprite;
 
-            _sprite = characterSpriteAnimation;
+            _heroPackSprite = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/heroPack",
+                                                                 "animations/heroPackMap",
+                                                                 "heroPack",
+                                                                 frameDuration,
+                                                                 false);
+
+            _heroHoldSprite = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/heroHold",
+                                                                 "animations/heroHoldMap",
+                                                                 "heroHold",
+                                                                 frameDuration,
+                                                                 false);
+
+
+
+            var heroAxeAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/heroAxe",
+                                                                      "animations/heroAxeMap",
+                                                                      "heroAxe",
+                                                                      frameDuration,
+                                                                      false);
+
+
+            var heroHammerAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/heroHammer",
+                                                                      "animations/heroHammerMap",
+                                                                      "heroHammer",
+                                                                      frameDuration,
+                                                                      false);
+
+
+            var heroHoeAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/heroHoe",
+                                                                      "animations/heroHoeMap",
+                                                                      "heroHoe",
+                                                                      frameDuration,
+                                                                      false);
+
+            var heroSickleAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/heroSickle",
+                                                                      "animations/heroSickleMap",
+                                                                      "heroSickle",
+                                                                      frameDuration,
+                                                                      false);
+
+
+            _toolingSprites.Add("axe", heroAxeAnimation);
+            _toolingSprites.Add("hammer", heroHammerAnimation);
+            _toolingSprites.Add("hoe", heroHoeAnimation);
+            _toolingSprites.Add("sickle", heroSickleAnimation);
+
             _transform = new Transform2
             {
                 Scale = Vector2.One,
@@ -1548,7 +868,10 @@ namespace HarvestMoon.Entities
                     _toolTimer = 0.0f;
                     _isTooling = false;
 
-                    if(currentTool == "hoe")
+                    _sprite.CurrentAnimation.Rewind();
+
+
+                    if (currentTool == "hoe")
                     {
                         Hoe();
                     }
@@ -1593,6 +916,7 @@ namespace HarvestMoon.Entities
                 {
                     _holdTimer = 0.0f;
                     _isHolding = false;
+                    _sprite.CurrentAnimation.Rewind();
 
                     UnFreeze();
                 }
@@ -1778,6 +1102,27 @@ namespace HarvestMoon.Entities
                 if (currentTool.Contains("seeds"))
                 {
                     currentTool = "seeds";
+                }
+            }
+            HarvestMoon.Instance.Stamina = 50;
+
+            if (_isTooling)
+            {
+                _sprite = _toolingSprites[currentTool];
+            }
+            else
+            {
+                if (_isPacking)
+                {
+                    _sprite = _heroPackSprite;
+                }
+                else if (_isHolding)
+                {
+                    _sprite = _heroHoldSprite;
+                }
+                else
+                {
+                    _sprite = _heroSprite;
                 }
             }
             
@@ -1979,16 +1324,28 @@ namespace HarvestMoon.Entities
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (_playerFacing == Facing.RIGHT)
+            float scale = 1.0f;
+
+            if (_isTooling)
             {
-                _sprite.Effect = SpriteEffects.FlipHorizontally;
+
+                if(_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                {
+                    spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 8), 0.0f, new Vector2(scale, scale));
+                }
+                else
+                {
+                    spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 4), 0.0f, new Vector2(scale, scale));
+
+                }
             }
             else
             {
-                _sprite.Effect = SpriteEffects.None;
+                spriteBatch.Draw(_sprite, Position, 0.0f, new Vector2(scale, scale));
+
             }
 
-            spriteBatch.Draw(_sprite, Position, 0.0f, new Vector2(2.0f, 2.0f));
+
 
             if (_isHolding)
             {

@@ -89,6 +89,9 @@ namespace HarvestMoon.GUI
 
         private Paragraph _numberDaySeasonParagraph;
 
+        private Texture2D _window_11Texture;
+
+
         public GUIManager(ContentManager content)
         {
             float frameDuration = 1.0f / 7.5f;
@@ -212,6 +215,8 @@ namespace HarvestMoon.GUI
             _holdingItemSprites.Add("hoe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hoe")));
             _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
             _holdingItemSprites.Add("watering-can", new Sprite(content.Load<Texture2D>("maps/tools-room/items/watering-can")));
+
+            _window_11Texture = content.Load<Texture2D>("ui/window_11");
         }
 
         public void Update(GameTime gameTime)
@@ -677,6 +682,8 @@ namespace HarvestMoon.GUI
 
             // create a panel and position in bottom center of screen
             _textPanel = new Panel(new Vector2(620 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+            _textPanel.SetCustomSkin(_window_11Texture);
+
 
             UserInterface.Active.AddEntity(_textPanel);
 
@@ -707,6 +714,8 @@ namespace HarvestMoon.GUI
 
             // create a panel and position in bottom center of screen
             _textPanel = new Panel(new Vector2(620 * scaleY, 120 * scaleY), PanelSkin.Default, Anchor.BottomCenter);
+
+            _textPanel.SetCustomSkin(_window_11Texture);
 
             UserInterface.Active.AddEntity(_textPanel);
 

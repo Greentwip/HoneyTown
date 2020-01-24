@@ -113,7 +113,7 @@ namespace HarvestMoon.Screens
 
                             if (obj.Name == "ranch")
                             {
-                                door.OnTrigger(() =>
+                                door.OnTriggerEnd(() =>
                                 {
                                     if (!door.Triggered)
                                     {

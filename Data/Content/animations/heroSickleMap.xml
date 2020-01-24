@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>sickle_down_001</Key><Value>0 0 64 60</Value></Item>
+    <Item><Key>sickle_down_002</Key><Value>0 60 64 60</Value></Item>
+    <Item><Key>sickle_down_003</Key><Value>0 120 64 60</Value></Item>
+    <Item><Key>sickle_down_004</Key><Value>0 180 64 60</Value></Item>
+
+    <Item><Key>sickle_up_001</Key><Value>0 240 64 60</Value></Item>
+    <Item><Key>sickle_up_002</Key><Value>0 300 64 60</Value></Item>
+    <Item><Key>sickle_up_003</Key><Value>0 360 64 60</Value></Item>
+    <Item><Key>sickle_up_004</Key><Value>0 420 64 60</Value></Item>
+
+    <Item><Key>sickle_left_001</Key><Value>0 480 64 60</Value></Item>
+    <Item><Key>sickle_left_002</Key><Value>0 540 64 60</Value></Item>
+    <Item><Key>sickle_left_003</Key><Value>0 600 64 60</Value></Item>
+    <Item><Key>sickle_left_004</Key><Value>0 660 64 60</Value></Item>
+
+    <Item><Key>sickle_right_001</Key><Value>0 720 64 60</Value></Item>
+    <Item><Key>sickle_right_002</Key><Value>0 780 64 60</Value></Item>
+    <Item><Key>sickle_right_003</Key><Value>0 840 64 60</Value></Item>
+    <Item><Key>sickle_right_004</Key><Value>0 900 64 60</Value></Item>
+    </Asset>
+</XnaContent>

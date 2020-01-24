@@ -118,7 +118,7 @@ namespace HarvestMoon.Screens
 
                             if (obj.Name == "ranch")
                             {
-                                door.OnTrigger(() =>
+                                door.OnTriggerEnd(() =>
                                 {
                                     if (!door.Triggered)
                                     {
@@ -132,7 +132,7 @@ namespace HarvestMoon.Screens
 
                             if (obj.Name == "mountain")
                             {
-                                door.OnTrigger(() =>
+                                door.OnTriggerEnd(() =>
                                 {
                                     if (!door.Triggered)
                                     {
@@ -146,7 +146,7 @@ namespace HarvestMoon.Screens
 
                             if (obj.Name == "town")
                             {
-                                door.OnTrigger(() =>
+                                door.OnTriggerEnd(() =>
                                 {
                                     if (!door.Triggered)
                                     {

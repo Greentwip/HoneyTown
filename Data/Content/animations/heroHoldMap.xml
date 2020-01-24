@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>hold_001</Key><Value>0 0 32 45</Value></Item>
+    <Item><Key>hold_002</Key><Value>32 0 32 45</Value></Item>
+    <Item><Key>hold_003</Key><Value>64 0 32 45</Value></Item>
+    </Asset>
+</XnaContent>

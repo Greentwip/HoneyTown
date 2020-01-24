@@ -87,7 +87,11 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Input\KeyboardInputDevice.cs" Link="Input\KeyboardInputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Program.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\HarvestMoon.cs" />
+    <Compile Include="Animation\AnimationLoader.cs" />
     <Compile Include="Entities\General\UpfrontStore.cs" />
+    <Compile Include="Entities\Ranch\Cow.cs" />
+    <Compile Include="Entities\Ranch\BarnDoor.cs" />
+    <Compile Include="Entities\Ranch\RanchDoor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\GUI\GUIManager.cs" Link="GUI\GUIManager.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Diary.cs" Link="Screens\Diary.cs" />
@@ -106,6 +110,7 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tween.cs" Link="Tweening\Tween.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tweener.cs" Link="Tweening\Tweener.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Text\StringsManager.cs" Link="Text\StringsManager.cs" />
+    <Compile Include="Screens\Barn.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">

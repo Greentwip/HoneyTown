@@ -101,7 +101,7 @@ namespace HarvestMoon.Screens
 
                             if (obj.Name == "passage")
                             {
-                                door.OnTrigger(() =>
+                                door.OnTriggerEnd(() =>
                                 {
                                     if (!door.Triggered)
                                     {
