@@ -112,6 +112,23 @@
 /processor:PassThroughProcessor
 /build:animations/heroAxeMap.xml
 
+#begin animations/heroCarry.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/heroCarry.png
+
+#begin animations/heroCarryMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroCarryMap.xml
+
 #begin animations/heroHammer.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -180,10 +197,44 @@
 /processorParam:TextureFormat=Color
 /build:animations/heroPack.png
 
+#begin animations/heroPack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/heroPack.png
+
 #begin animations/heroPackMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:animations/heroPackMap.xml
+
+#begin animations/heroPackMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroPackMap.xml
+
+#begin animations/heroRun.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/heroRun.png
+
+#begin animations/heroRunMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroRunMap.xml
 
 #begin animations/heroSickle.png
 /importer:TextureImporter
@@ -201,6 +252,23 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:animations/heroSickleMap.xml
+
+#begin animations/IconSet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/IconSet.png
+
+#begin animations/iconSetMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/iconSetMap.xml
 
 #begin animations/sos.png
 /importer:TextureImporter

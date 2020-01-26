@@ -503,25 +503,21 @@ namespace HarvestMoon.Screens
                         }
                     }
                 }
-                if (layer.Name == "grids")
+                if (layer.Name == "Plot")
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "grid")
-                        {
+                        var objectPosition = obj.Position;
 
-                            var objectPosition = obj.Position;
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                        var objectSize = obj.Size;
 
-                            var objectSize = obj.Size;
-
-                            _grids.Add(_entityManager.AddEntity(new Grid(objectPosition, objectSize)));
-                        }
+                        _grids.Add(_entityManager.AddEntity(new Grid(objectPosition, objectSize)));
                     }
                 }
-                if (layer.Name == "walls")
+                if (layer.Name == "Walls")
                 {
                     foreach (var obj in layer.Objects)
                     {
@@ -721,14 +717,14 @@ namespace HarvestMoon.Screens
                 _camera.LookAt(_player.Position);
                 var constraints = new Vector2();
 
-                if(_camera.BoundingRectangle.Center.X < 320)
+                if (_camera.BoundingRectangle.Center.X < 320)
                 {
                     constraints.X = 320;
                 }
 
-                if (_camera.BoundingRectangle.Center.X > 1760)
+                if (_camera.BoundingRectangle.Center.X > _map.Width * _map.TileWidth - 320)
                 {
-                    constraints.X = 1760;
+                    constraints.X = _map.Width * _map.TileWidth - 320;
                 }
 
                 if (_camera.BoundingRectangle.Center.Y < 240)
@@ -736,9 +732,9 @@ namespace HarvestMoon.Screens
                     constraints.Y = 240;
                 }
 
-                if (_camera.BoundingRectangle.Center.Y > 1712)
+                if (_camera.BoundingRectangle.Center.Y > _map.Height * _map.TileHeight - 240)
                 {
-                    constraints.Y = 1712;
+                    constraints.Y = _map.Height * _map.TileHeight - 240;
                 }
 
                 if(constraints.X != 0)
@@ -802,22 +798,6 @@ namespace HarvestMoon.Screens
             }
 
 
-            _spriteBatch.End();
-
-
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-
-            var interactables = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
-
-            foreach (var interactable in interactables)
-            {
-                _spriteBatch.DrawRectangle(interactable.BoundingRectangle, Color.Fuchsia);
-            }
-            _spriteBatch.End();
-
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-            _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
-            _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
             _spriteBatch.End();
 
             base.Draw(gameTime);

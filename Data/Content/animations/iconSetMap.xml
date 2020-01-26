@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>watering-can_001</Key><Value>0 48 24 24</Value></Item>
+
+    <Item><Key>hoe_001</Key><Value>24 0 24 24</Value></Item>
+    <Item><Key>pick_001</Key><Value>24 24 24 24</Value></Item>
+    <Item><Key>axe_001</Key><Value>24 48 24 24</Value></Item>
+    <Item><Key>hammer_001</Key><Value>24 72 24 24</Value></Item>
+    <Item><Key>shovel_001</Key><Value>24 96 24 24</Value></Item>
+    <Item><Key>sickle_001</Key><Value>24 120 24 24</Value></Item>
+
+    </Asset>
+</XnaContent>

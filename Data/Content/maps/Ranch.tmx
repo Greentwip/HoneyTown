@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="39" nextobjectid="5">
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="39" nextobjectid="6">
  <tileset firstgid="1" name="TileA5" tilewidth="16" tileheight="16" tilecount="512" columns="16">
   <image source="Tileset/TileA5.png" width="256" height="512"/>
  </tileset>
@@ -1866,6 +1866,8 @@
    <object id="1" name="house" x="152" y="208" width="16" height="24"/>
    <object id="4" name="barn" x="472" y="208" width="16" height="24"/>
   </objectgroup>
-  <objectgroup id="37" name="Plot"/>
+  <objectgroup id="37" name="Plot">
+   <object id="5" x="136" y="352" width="608" height="576"/>
+  </objectgroup>
  </group>
 </map>

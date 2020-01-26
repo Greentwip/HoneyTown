@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>carry_down_001</Key><Value>0 0 32 45</Value></Item>
+    <Item><Key>carry_down_002</Key><Value>32 0 32 45</Value></Item>
+    <Item><Key>carry_down_003</Key><Value>64 0 32 45</Value></Item>
+    <Item><Key>carry_down_004</Key><Value>32 0 32 45</Value></Item>
+
+    <Item><Key>carry_left_001</Key><Value>0 45 32 45</Value></Item>
+    <Item><Key>carry_left_002</Key><Value>32 45 32 45</Value></Item>
+    <Item><Key>carry_left_003</Key><Value>64 45 32 45</Value></Item>
+    <Item><Key>carry_left_004</Key><Value>32 45 32 45</Value></Item>
+
+    <Item><Key>carry_right_001</Key><Value>0 90 32 45</Value></Item>
+    <Item><Key>carry_right_002</Key><Value>32 90 32 45</Value></Item>
+    <Item><Key>carry_right_003</Key><Value>64 90 32 45</Value></Item>
+    <Item><Key>carry_right_004</Key><Value>32 90 32 45</Value></Item>
+
+    <Item><Key>carry_up_001</Key><Value>0 135 32 45</Value></Item>
+    <Item><Key>carry_up_002</Key><Value>32 135 32 45</Value></Item>
+    <Item><Key>carry_up_003</Key><Value>64 135 32 45</Value></Item>
+    <Item><Key>carry_up_004</Key><Value>32 135 32 45</Value></Item>
+
+    <Item><Key>carry_down_idle_001</Key><Value>32 0 32 45</Value></Item>
+
+    <Item><Key>carry_left_idle_001</Key><Value>32 45 32 45</Value></Item>
+
+    <Item><Key>carry_right_idle_001</Key><Value>32 90 32 45</Value></Item>
+
+    <Item><Key>carry_up_idle_001</Key><Value>32 135 32 45</Value></Item>
+
+    </Asset>
+</XnaContent>

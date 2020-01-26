@@ -41,6 +41,9 @@ namespace HarvestMoon.Entities
         private readonly AnimatedSprite _heroPackSprite;
         private readonly AnimatedSprite _heroHoldSprite;
 
+        private readonly AnimatedSprite _heroCarrySprite;
+        private readonly AnimatedSprite _heroRunSprite;
+
         private readonly Dictionary<string, AnimatedSprite> _toolingSprites = new Dictionary<string, AnimatedSprite>();
 
         private const float _defaultWalkSpeed = 100.0f;
@@ -153,6 +156,21 @@ namespace HarvestMoon.Entities
                                                                  "heroHold",
                                                                  frameDuration,
                                                                  false);
+
+            _heroCarrySprite = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/heroCarry",
+                                                                 "animations/heroCarryMap",
+                                                                 "heroCarry",
+                                                                 frameDuration,
+                                                                 true);
+
+
+            _heroRunSprite = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/heroRun",
+                                                                 "animations/heroRunMap",
+                                                                 "heroRun",
+                                                                 frameDuration,
+                                                                 true);
 
 
 
@@ -1106,15 +1124,36 @@ namespace HarvestMoon.Entities
             }
             HarvestMoon.Instance.Stamina = 50;
 
-            if (_isTooling)
+            if (movementHit)
             {
-                _sprite = _toolingSprites[currentTool];
+                if (_isCarrying)
+                {
+                    _sprite = _heroCarrySprite;
+                }
+                else if (isRunning)
+                {
+                    _sprite = _heroRunSprite;
+                }
+                else
+                {
+                    _sprite = _heroSprite;
+                }
+
             }
             else
             {
-                if (_isPacking)
+
+                if (_isCarrying && _isPacking)
                 {
                     _sprite = _heroPackSprite;
+                }
+                else if (_isCarrying)
+                {
+                    _sprite = _heroCarrySprite;
+                }
+                else if (_isTooling)
+                {
+                    _sprite = _toolingSprites[currentTool];
                 }
                 else if (_isHolding)
                 {
@@ -1124,8 +1163,10 @@ namespace HarvestMoon.Entities
                 {
                     _sprite = _heroSprite;
                 }
+
+
             }
-            
+
 
             switch (_playerFacing)
             {

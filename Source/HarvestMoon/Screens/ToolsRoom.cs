@@ -30,17 +30,18 @@ namespace HarvestMoon.Screens
             base.LoadContent();
 
             // Load the compiled map
-            _map = Content.Load<TiledMap>("maps/tools-room/tools-room");
+            _map = Content.Load<TiledMap>("maps/ToolsRoom");
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
             foreach (var layer in _map.ObjectLayers)
             {
-                if (layer.Name == "objects")
+                if (layer.Name == "Arrivals")
                 {
-                    foreach (var obj in layer.Objects)
+
+                    foreach(var obj in layer.Objects)
                     {
-                        if (obj.Type == "player_start")
+                        if(obj.Name == "from-house")
                         {
                             var objectPosition = obj.Position;
 
@@ -53,170 +54,182 @@ namespace HarvestMoon.Screens
                                 PackTool(toolName);
                             });
 
-                            _player.PlayerFacing = Jack.Facing.UP;
+                            _player.PlayerFacing = Jack.Facing.RIGHT;
 
                         }
-
-                        if (obj.Type == "door")
-                        {
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            var objectSize = obj.Size;
-
-                            var door = new Door(objectPosition, objectSize);
-                            _entityManager.AddEntity(door);
-
-                            if (obj.Name == "ranch")
-                            {
-                                door.OnTriggerEnd(() =>
-                                {
-                                    if (!door.Triggered)
-                                    {
-                                        door.Triggered = true;
-                                        var screen = new Ranch(Game, HarvestMoon.Arrival.Tools);
-                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                        ScreenManager.LoadScreen(screen, transition);
-                                    }
-                                });
-                            }
-                        }
-
-                        if (obj.Type == "sickle")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new Sickle(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "hoe")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new Hoe(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "hammer")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new Hammer(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "axe")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new Axe(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "watering-can")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new WateringCan(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "grass-seeds")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new GrassSeeds(Content, objectPosition)); //Not working yet
-                        }
-
-                        if (obj.Type == "turnip-seeds")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new TurnipSeeds(Content, objectPosition));
-                        }
-
-
-                        if (obj.Type == "potato-seeds")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new PotatoSeeds(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "corn-seeds")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new CornSeeds(Content, objectPosition));
-                        }
-
-                        if (obj.Type == "tomato-seeds")
-                        {
-
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            _entityManager.AddEntity(new TomatoSeeds(Content, objectPosition));
-                        }
-
-
-
                     }
                 }
-                else if (layer.Name == "walls")
+                else if (layer.Name == "Walls")
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "wall")
+                        var objectPosition = obj.Position;
+
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                        var objectSize = obj.Size;
+
+                        _entityManager.AddEntity(new Wall(objectPosition, objectSize));
+                    }
+                }
+                else if(layer.Name == "Doors")
+                {
+                    foreach(var obj in layer.Objects)
+                    {
+                        var objectPosition = obj.Position;
+
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                        var objectSize = obj.Size;
+
+                        var door = new Door(objectPosition, objectSize);
+                        _entityManager.AddEntity(door);
+
+                        door.OnTriggerStart(() =>
                         {
+                            _player.Freeze();
+                        });
 
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            var objectSize = obj.Size;
-
-                            _entityManager.AddEntity(new Wall(objectPosition, objectSize));
+                        if (obj.Name == "house")
+                        {
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new House(Game, HarvestMoon.Arrival.Tools);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
                         }
                     }
                 }
+                else if(layer.Name == "Interactables")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
+                        if(obj.Type == "tool")
+                        {
+                            if (obj.Name == "sickle")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new Sickle(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "hoe")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new Hoe(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "hammer")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new Hammer(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "axe")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new Axe(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "watering-can")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new WateringCan(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "grass-seeds")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new GrassSeeds(Content, objectPosition)); //Not working yet
+                            }
+
+                            if (obj.Name == "turnip-seeds")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new TurnipSeeds(Content, objectPosition));
+                            }
+
+
+                            if (obj.Name == "potato-seeds")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new PotatoSeeds(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "corn-seeds")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new CornSeeds(Content, objectPosition));
+                            }
+
+                            if (obj.Name == "tomato-seeds")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new TomatoSeeds(Content, objectPosition));
+                            }
+                        }
+
+
+                    }
+
+                }
+
             }
 
             var tools = _entityManager.Entities.Where(e => e is Tool).Cast<Tool>().ToArray();
@@ -288,7 +301,7 @@ namespace HarvestMoon.Screens
 
             if (_player != null && !_player.IsDestroyed)
             {
-                _camera.LookAt(new Vector2(_map.Width * 4 / 2, _map.Height * 4 / 2));
+                _camera.LookAt(new Vector2(_map.Width * _map.TileWidth / 2, _map.Height * _map.TileHeight / 2));
             }
 
             CheckCollisions();
@@ -304,7 +317,7 @@ namespace HarvestMoon.Screens
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
             var cameraMatrix = _camera.GetViewMatrix();
-            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32 * scaleY, cameraMatrix.Translation.Z);
+            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y, cameraMatrix.Translation.Z);
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
@@ -323,21 +336,23 @@ namespace HarvestMoon.Screens
             _entityManager.Draw(_spriteBatch);
             _spriteBatch.End();
 
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
+            _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
-            var interactables = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
-
-            foreach (var interactable in interactables)
+            foreach (var foregroundLayer in _map.Layers.Where(l => l is TiledMapGroupLayer))
             {
-                _spriteBatch.DrawRectangle(interactable.BoundingRectangle, Color.Fuchsia);
+                var foregroundLayers = (foregroundLayer as TiledMapGroupLayer).Layers.Where(l => l.Name.Contains("-Foreground"));
+
+                foreach (var layer in foregroundLayers)
+                {
+                    _mapRenderer.Draw(layer, cameraMatrix);
+
+                }
             }
+
+
             _spriteBatch.End();
 
 
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-            _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
-            _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
-            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

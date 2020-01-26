@@ -216,7 +216,7 @@ namespace HarvestMoon.GUI
             _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
             _holdingItemSprites.Add("watering-can", new Sprite(content.Load<Texture2D>("maps/tools-room/items/watering-can")));
 
-            _window_11Texture = content.Load<Texture2D>("ui/window_11");
+            _window_11Texture = content.Load<Texture2D>("ui/window_10");
         }
 
         public void Update(GameTime gameTime)
@@ -808,9 +808,9 @@ namespace HarvestMoon.GUI
             }
 
             DrawHeart(spriteBatch, _staminaSprites[0], 0, new Vector2(128, 16));
-            DrawHeart(spriteBatch, _staminaSprites[1], 0, new Vector2(128 + 28, 16));
-            DrawHeart(spriteBatch, _staminaSprites[2], 0, new Vector2(128, 16 + 26));
-            DrawHeart(spriteBatch, _staminaSprites[3], 0, new Vector2(128 + 28, 16 + 26));
+            DrawHeart(spriteBatch, _staminaSprites[1], 60, new Vector2(128 + 28, 16));
+            DrawHeart(spriteBatch, _staminaSprites[2], 120, new Vector2(128, 16 + 26));
+            DrawHeart(spriteBatch, _staminaSprites[3], 180, new Vector2(128 + 28, 16 + 26));
 
             spriteBatch.End();
 
