@@ -31,7 +31,7 @@ namespace HarvestMoon.Entities.Ranch
                                                          frameDuration,
                                                          true);
 
-            _sprite.Play("walking_down_idle");
+            _sprite.Play("walk_down_idle");
 
             X = initialPosition.X;
             Y = initialPosition.Y;

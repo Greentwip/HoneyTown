@@ -1,4 +1,5 @@
-﻿using HarvestMoon.Entities.General;
+﻿using HarvestMoon.Animation;
+using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -23,70 +24,16 @@ namespace HarvestMoon.Entities.Town
         {
             float frameDuration = 1.0f / 7.5f;
 
-            var characterTexture = content.Load<Texture2D>("animations/ann");
-            var characterMap = content.Load<Dictionary<string, Rectangle>>("animations/annMap");
-            var characterAtlas = new TextureAtlas("ann", characterTexture, characterMap);
-            var characterAnimationFactory = new SpriteSheet
-            {
-                TextureAtlas = characterAtlas,
-                Cycles =
-                {
-                    {
-                        "idle_down", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(0)
-                            }
-                        }
-                    },
-                    {
-                        "idle_up", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(1)
-                            }
-                        }
-                    },
-                    {
-                        "idle_left", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(2)
-                            }
-                        }
-                    },
-                    {
-                        "idle_right", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(3)
-                            }
-                        }
-                    }
-                }
-            };
+            var annAnimatedSprite = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/ann",
+                                                                 "animations/annMap",
+                                                                 "ann",
+                                                                 frameDuration,
+                                                                 true);
 
-            _sprite = new AnimatedSprite(characterAnimationFactory, "idle_down");
+
+            _sprite = annAnimatedSprite;
+            _sprite.Play("ann_idle_down");
 
             X = initialPosition.X;
             Y = initialPosition.Y;

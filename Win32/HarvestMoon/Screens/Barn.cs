@@ -9,6 +9,8 @@ using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Town;
+using HarvestMoon.Entities.Ranch;
+using System.Collections.Generic;
 
 namespace HarvestMoon.Screens
 {
@@ -16,10 +18,24 @@ namespace HarvestMoon.Screens
     {
         private HarvestMoon.Arrival _arrival;
 
+
+        private List<CowPlacement> _cowPlacements;
+
+        struct CowPlacement
+        {
+            public Vector2 Position;
+            public Size2 Size;
+        }
+
         public Barn(Game game, HarvestMoon.Arrival arrival)
             : base(game)
         {
             _arrival = arrival;
+
+            for(int i = 0; i<8; ++i)
+            {
+                _cowPlacements.Add(new CowPlacement());
+            }
         }
 
         public override void Initialize()
@@ -118,6 +134,35 @@ namespace HarvestMoon.Screens
                         _entityManager.AddEntity(new Wall(objectPosition, objectSize));
                     }
                 }
+                else if (layer.Name == "Special")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
+                        var objectPosition = obj.Position;
+
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                        var objectSize = obj.Size;
+
+                        var placementName = obj.Name;
+                        int lastIndexOf = placementName.LastIndexOf("-");
+                        string specialName = placementName.Substring(0, lastIndexOf);
+                        string specialPosition = placementName.Substring(lastIndexOf + 1, placementName.Length - specialName.Length - 1);
+
+                        var cowPlacement = new CowPlacement();
+                        cowPlacement.Position = objectPosition;
+                        cowPlacement.Size = objectSize;
+
+                        _cowPlacements[int.Parse(specialPosition)] = cowPlacement;
+                    }
+
+                }
+            }
+
+            for(int i = 0; i<HarvestMoon.Instance.Cows; ++i)
+            {
+                _entityManager.AddEntity(new Cow(Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
             }
 
             LoadPlayer();
