@@ -48,6 +48,16 @@ namespace HarvestMoon.Screens
             _entityManager = new EntityManager();
         }
 
+        public void LoadPlayer()
+        {
+            _player.UnFreeze();
+
+            if (_player.IsCarrying)
+            {
+                _entityManager.AddEntity(_player.CarryingObject);
+            }
+        }
+
         public override void Initialize()
         {
             // GeonBit.UI: Init the UI manager using the "hd" built-in theme

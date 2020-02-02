@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+      <Item><Key>soil_normal_001.png</Key><Value>96 256 32 64</Value></Item>
+      <Item><Key>soil_watered_001.png</Key><Value>128 256 32 64</Value></Item>
+
+      <Item><Key>soil_planted_normal_001.png</Key><Value>224 256 32 64</Value></Item>
+      <Item><Key>soil_planted_watered_001.png</Key><Value>256 256 32 64</Value></Item>
+
+      <Item><Key>potato_a_001.png</Key><Value>192 128 32 64</Value></Item>
+      <Item><Key>potato_a_watered_001.png</Key><Value>192 192 32 64</Value></Item>
+
+      <Item><Key>potato_b_001.png</Key><Value>256 128 32 64</Value></Item>
+      <Item><Key>potato_b_watered_001.png</Key><Value>256 192 32 64</Value></Item>
+
+      <Item><Key>soil_planted_grass_001.png</Key><Value>224 256 32 64</Value></Item>
+
+      <Item><Key>grass_a_001.png</Key><Value>192 0 32 64</Value></Item>
+      <Item><Key>grass_b_001.png</Key><Value>224 0 32 64</Value></Item>
+      <Item><Key>grass_c_001.png</Key><Value>256 0 32 64</Value></Item>
+
+    </Asset>
+</XnaContent>

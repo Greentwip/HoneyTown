@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>seeds_left_001</Key><Value>0 0 35 59</Value></Item>
+    <Item><Key>seeds_left_002</Key><Value>35 0 35 59</Value></Item>
+    <Item><Key>seeds_left_003</Key><Value>70 0 35 59</Value></Item>
+    <Item><Key>seeds_left_004</Key><Value>105 0 35 59</Value></Item>
+    <Item><Key>seeds_left_005</Key><Value>140 0 35 59</Value></Item>
+    <Item><Key>seeds_left_006</Key><Value>175 0 35 59</Value></Item>
+    <Item><Key>seeds_left_007</Key><Value>210 0 35 59</Value></Item>
+    <Item><Key>seeds_left_008</Key><Value>245 0 35 59</Value></Item>
+    <Item><Key>seeds_left_009</Key><Value>280 0 35 59</Value></Item>
+    <Item><Key>seeds_left_010</Key><Value>315 0 35 59</Value></Item>
+    <Item><Key>seeds_left_011</Key><Value>350 0 35 59</Value></Item>
+
+    <Item><Key>seeds_right_001</Key><Value>0 0 35 59</Value></Item>
+    <Item><Key>seeds_right_002</Key><Value>35 0 35 59</Value></Item>
+    <Item><Key>seeds_right_003</Key><Value>70 0 35 59</Value></Item>
+    <Item><Key>seeds_right_004</Key><Value>105 0 35 59</Value></Item>
+    <Item><Key>seeds_right_005</Key><Value>140 0 35 59</Value></Item>
+    <Item><Key>seeds_right_006</Key><Value>175 0 35 59</Value></Item>
+    <Item><Key>seeds_right_007</Key><Value>210 0 35 59</Value></Item>
+    <Item><Key>seeds_right_008</Key><Value>245 0 35 59</Value></Item>
+    <Item><Key>seeds_right_009</Key><Value>280 0 35 59</Value></Item>
+    <Item><Key>seeds_right_010</Key><Value>315 0 35 59</Value></Item>
+    <Item><Key>seeds_right_011</Key><Value>350 0 35 59</Value></Item>
+
+    <Item><Key>seeds_down_001</Key><Value>0 0 35 59</Value></Item>
+    <Item><Key>seeds_down_002</Key><Value>35 0 35 59</Value></Item>
+    <Item><Key>seeds_down_003</Key><Value>70 0 35 59</Value></Item>
+    <Item><Key>seeds_down_004</Key><Value>105 0 35 59</Value></Item>
+    <Item><Key>seeds_down_005</Key><Value>140 0 35 59</Value></Item>
+    <Item><Key>seeds_down_006</Key><Value>175 0 35 59</Value></Item>
+    <Item><Key>seeds_down_007</Key><Value>210 0 35 59</Value></Item>
+    <Item><Key>seeds_down_008</Key><Value>245 0 35 59</Value></Item>
+    <Item><Key>seeds_down_009</Key><Value>280 0 35 59</Value></Item>
+    <Item><Key>seeds_down_010</Key><Value>315 0 35 59</Value></Item>
+    <Item><Key>seeds_down_011</Key><Value>350 0 35 59</Value></Item>
+
+    <Item><Key>seeds_up_001</Key><Value>0 0 35 59</Value></Item>
+    <Item><Key>seeds_up_002</Key><Value>35 0 35 59</Value></Item>
+    <Item><Key>seeds_up_003</Key><Value>70 0 35 59</Value></Item>
+    <Item><Key>seeds_up_004</Key><Value>105 0 35 59</Value></Item>
+    <Item><Key>seeds_up_005</Key><Value>140 0 35 59</Value></Item>
+    <Item><Key>seeds_up_006</Key><Value>175 0 35 59</Value></Item>
+    <Item><Key>seeds_up_007</Key><Value>210 0 35 59</Value></Item>
+    <Item><Key>seeds_up_008</Key><Value>245 0 35 59</Value></Item>
+    <Item><Key>seeds_up_009</Key><Value>280 0 35 59</Value></Item>
+    <Item><Key>seeds_up_010</Key><Value>315 0 35 59</Value></Item>
+    <Item><Key>seeds_up_011</Key><Value>350 0 35 59</Value></Item>
+
+
+    </Asset>
+</XnaContent>

@@ -4,22 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+
 using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
-using HarvestMoon.Entities.General;
-using HarvestMoon.Entities.Town;
+using HarvestMoon.Entities.Tools;
 
 namespace HarvestMoon.Screens
 {
-    public class Barn : Map
+    public class Library : Map
     {
-        private HarvestMoon.Arrival _arrival;
-
-        public Barn(Game game, HarvestMoon.Arrival arrival)
+        public Library(Game game)
             : base(game)
         {
-            _arrival = arrival;
         }
 
         public override void Initialize()
@@ -33,7 +30,7 @@ namespace HarvestMoon.Screens
             base.LoadContent();
 
             // Load the compiled map
-            _map = Content.Load<TiledMap>("maps/Barn");
+            _map = Content.Load<TiledMap>("maps/Library");
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
@@ -43,12 +40,13 @@ namespace HarvestMoon.Screens
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Ranch)
+                        if (obj.Name == "from-city")
                         {
                             var objectPosition = obj.Position;
 
                             objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
                             objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
 
                             _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
 
@@ -64,44 +62,8 @@ namespace HarvestMoon.Screens
                             _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
 
                             _player.PlayerFacing = Jack.Facing.UP;
+
                         }
-
-                    }
-                }
-                else if (layer.Name == "Doors")
-                {
-                    foreach (var obj in layer.Objects)
-                    {
-                        var objectPosition = obj.Position;
-
-                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                        var objectSize = obj.Size;
-
-                        var door = new Door(objectPosition, objectSize);
-                        _entityManager.AddEntity(door);
-
-                        if (obj.Name == "ranch")
-                        {
-
-                            door.OnTriggerStart(() =>
-                            {
-                                _player.Freeze();
-                            });
-
-                            door.OnTriggerEnd(() =>
-                            {
-                                if (!door.Triggered)
-                                {
-                                    door.Triggered = true;
-                                    var screen = new Ranch(Game, HarvestMoon.Arrival.Barn);
-                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                    ScreenManager.LoadScreen(screen, transition);
-                                }
-                            });
-                        }
-
                     }
                 }
                 else if (layer.Name == "Walls")
@@ -118,6 +80,49 @@ namespace HarvestMoon.Screens
                         _entityManager.AddEntity(new Wall(objectPosition, objectSize));
                     }
                 }
+                else if (layer.Name == "Doors")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
+                        var objectPosition = obj.Position;
+
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                        var objectSize = obj.Size;
+
+                        var door = new Door(objectPosition, objectSize);
+                        _entityManager.AddEntity(door);
+
+                        door.OnTriggerStart(() =>
+                        {
+                            _player.Freeze();
+                        });
+
+                        if (obj.Name == "city")
+                        {
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new Town(Game, HarvestMoon.Arrival.Library);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
+                    }
+                }
+                else if (layer.Name == "Interactables")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
+
+                    }
+
+                }
+
             }
 
             LoadPlayer();
@@ -140,22 +145,24 @@ namespace HarvestMoon.Screens
             }
 
             CheckCollisions();
+
+
         }
 
+        // Must be Draw(GameTime gametime)
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
             var cameraMatrix = _camera.GetViewMatrix();
             cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y, cameraMatrix.Translation.Z);
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
-
             for (int i = 0; i < _map.Layers.Count; ++i)
             {
+                // map Should be the `TiledMap`
+                // Once again, the transform matrix is only needed if you have a Camera2D
                 _mapRenderer.Draw(_map.Layers[i], cameraMatrix);
 
             }
@@ -166,7 +173,7 @@ namespace HarvestMoon.Screens
             _entityManager.Draw(_spriteBatch);
             _spriteBatch.End();
 
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
+            _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
             foreach (var foregroundLayer in _map.Layers.Where(l => l is TiledMapGroupLayer))
             {
@@ -181,25 +188,7 @@ namespace HarvestMoon.Screens
 
             _spriteBatch.End();
 
-
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-
-            var interactables = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
-
-            foreach (var interactable in interactables)
-            {
-                _spriteBatch.DrawRectangle(interactable.BoundingRectangle, Color.Fuchsia);
-            }
-            _spriteBatch.End();
-
-
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-            _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
-            _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
-            _spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
-
 }

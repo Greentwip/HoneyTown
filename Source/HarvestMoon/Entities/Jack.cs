@@ -90,6 +90,10 @@ namespace HarvestMoon.Entities
 
         private bool _isTooling = false;
         private bool _isHolding = false;
+        private bool _isRunning = false;
+
+        public bool IsCarrying => _isCarrying;
+        public Interactable CarryingObject => _carryingObject;
 
         private readonly ContentManager _contentManager;
         private readonly EntityManager _entityManager;
@@ -205,10 +209,29 @@ namespace HarvestMoon.Entities
                                                                       false);
 
 
+            var heroSeedsAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/heroSeeds",
+                                                                      "animations/heroSeedsMap",
+                                                                      "heroSeeds",
+                                                                      frameDuration,
+                                                                      false);
+
+
+
+            var heroWateringCanAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/heroMisc",
+                                                                      "animations/heroWateringCanMap",
+                                                                      "heroSeeds",
+                                                                      frameDuration,
+                                                                      false);
+
+
             _toolingSprites.Add("axe", heroAxeAnimation);
             _toolingSprites.Add("hammer", heroHammerAnimation);
             _toolingSprites.Add("hoe", heroHoeAnimation);
             _toolingSprites.Add("sickle", heroSickleAnimation);
+            _toolingSprites.Add("seeds", heroSeedsAnimation);
+            _toolingSprites.Add("watering-can", heroWateringCanAnimation);
 
             _transform = new Transform2
             {
@@ -874,7 +897,7 @@ namespace HarvestMoon.Entities
                                 break;
 
                             default:
-                                totalWaitTime *= 2;
+                                totalWaitTime *= 3;
                                 break;
                         }
                         
@@ -887,7 +910,6 @@ namespace HarvestMoon.Entities
                     _isTooling = false;
 
                     _sprite.CurrentAnimation.Rewind();
-
 
                     if (currentTool == "hoe")
                     {
@@ -1019,7 +1041,7 @@ namespace HarvestMoon.Entities
 
             if (!_isFrozen)
             {
-                if (keyboardState.IsKeyDown(InputDevice.Keys.X) && !_isCarrying)
+                if (keyboardState.IsKeyDown(InputDevice.Keys.X))
                 {
                     isRunning = true;
                     movementHit = true;
@@ -1115,6 +1137,8 @@ namespace HarvestMoon.Entities
                 Velocity = new Vector2(0, 0);
             }
 
+            _isRunning = isRunning;
+
             if (currentTool != default(string))
             {
                 if (currentTool.Contains("seeds"))
@@ -1123,6 +1147,7 @@ namespace HarvestMoon.Entities
                 }
             }
             HarvestMoon.Instance.Stamina = 50;
+            HarvestMoon.Instance.Gold = 10000;
 
             if (movementHit)
             {
@@ -1370,19 +1395,55 @@ namespace HarvestMoon.Entities
             if (_isTooling)
             {
 
-                if(_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                var currentTool = HarvestMoon.Instance.GetCurrentTool();
+
+
+                if(currentTool == "watering-can")
                 {
-                    spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 8), 0.0f, new Vector2(scale, scale));
+
+                    if (_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                    {
+                        spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 8), 0.0f, new Vector2(scale, scale));
+                    }
+                    else
+                    {
+                        if(_sprite.CurrentAnimation.CurrentFrameIndex == 1)
+                        {
+                            spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y), 0.0f, new Vector2(scale, scale));
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y-4), 0.0f, new Vector2(scale, scale));
+                        }
+
+                    }
+
                 }
                 else
                 {
-                    spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 4), 0.0f, new Vector2(scale, scale));
+
+                    if (_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                    {
+                        spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 8), 0.0f, new Vector2(scale, scale));
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 4), 0.0f, new Vector2(scale, scale));
+
+                    }
 
                 }
             }
             else
             {
-                spriteBatch.Draw(_sprite, Position, 0.0f, new Vector2(scale, scale));
+                if (_isRunning)
+                {
+                    spriteBatch.Draw(_sprite, new Vector2(Position.X + 1, Position.Y + 1), 0.0f, new Vector2(scale, scale));
+                }
+                else
+                {
+                    spriteBatch.Draw(_sprite, Position, 0.0f, new Vector2(scale, scale));
+                }
 
             }
 

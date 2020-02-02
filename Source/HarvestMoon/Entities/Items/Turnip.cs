@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HarvestMoon.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,43 +20,19 @@ namespace HarvestMoon.Entities.Items
         public Turnip(ContentManager content, Vector2 initialPosition)
             : base(initialPosition)
         {
-            var cropTexture = content.Load<Texture2D>("maps/ranch/items/crops");
-            var cropMap = content.Load<Dictionary<string, Rectangle>>("maps/ranch/items/cropItemsMap");
-            var cropAtlas = new TextureAtlas("crop", cropTexture, cropMap);
-            var cropAnimationFactory = new SpriteSheet
-            {
-                TextureAtlas = cropAtlas,
-                Cycles =
-                {
-                    {
-                        "turnip_normal", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(0)
-                            }
-                        }
-                    },
-                    {
-                        "turnip_broken", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(1)
-                            }
-                        }
-                    }
+            var cropItems = AnimationLoader.LoadAnimatedSprite(content,
+                                                                "animations/iconSet",
+                                                                "animations/cropItemsMap",
+                                                                "turnipItem",
+                                                                1.0f / 7.5f,
+                                                                false);
 
-                }
-            };
 
-            _sprite = new AnimatedSprite(cropAnimationFactory, "turnip_normal");
+
+            _sprite = cropItems;
+
+
+            _sprite.Play("turnip_normal");
 
             X = initialPosition.X;
             Y = initialPosition.Y;
@@ -66,7 +43,7 @@ namespace HarvestMoon.Entities.Items
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(2, 2));
+            spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(1, 1));
         }
 
         public override void Update(GameTime gameTime)

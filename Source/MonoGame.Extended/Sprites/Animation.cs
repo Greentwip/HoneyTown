@@ -69,6 +69,7 @@ namespace MonoGame.Extended.Sprites
 
         public void Rewind()
         {
+            IsComplete = false;
             CurrentTime = 0;
         }
 

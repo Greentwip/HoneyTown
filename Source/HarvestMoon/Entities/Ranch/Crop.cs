@@ -6,12 +6,16 @@ using MonoGame.Extended.TextureAtlases;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using HarvestMoon.Entities.Items;
+using HarvestMoon.Animation;
 
 namespace HarvestMoon.Entities.Ranch
 {
     public class Crop
     {
-        private readonly AnimatedSprite _sprite;
+        private AnimatedSprite _sprite;
+
+        private readonly AnimatedSprite _cropsA;
+        private readonly AnimatedSprite _cropsB;
 
         private bool IsWatered { get; set; }
 
@@ -28,357 +32,28 @@ namespace HarvestMoon.Entities.Ranch
         {
             Content = content;
 
-            var cropTexture = content.Load<Texture2D>("maps/ranch/items/crops");
-            var cropMap = content.Load<Dictionary<string, Rectangle>>("maps/ranch/items/cropsMap");
-            var cropAtlas = new TextureAtlas("crop", cropTexture, cropMap);
-            var cropAnimationFactory = new SpriteSheet
-            {
-                TextureAtlas = cropAtlas,
-                Cycles =
-                {
-                    {
-                        "soil_normal", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(0)
-                            }
-                        }
-                    },
-                    {
-                        "turnip_a", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(4)
-                            }
-                        }
-                    },
-                    {
-                        "turnip_a_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(5)
-                            }
-                        }
-                    },
-                    {
-                        "turnip_b", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(6)
-                            }
-                        }
-                    },
-                    {
-                        "turnip_b_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(7)
-                            }
-                        }
-                    },
-                    {
-                        "potato_a", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(8)
-                            }
-                        }
-                    },
-                    {
-                        "potato_a_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(9)
-                            }
-                        }
-                    },
-                    {
-                        "potato_b", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(10)
-                            }
-                        }
-                    },
-                    {
-                        "potato_b_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(11)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_a", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(12)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_a_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(13)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_b", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(14)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_b_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(15)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_c", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(16)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_c_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(17)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_d", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(18)
-                            }
-                        }
-                    },
-                    {
-                        "tomato_d_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(19)
-                            }
-                        }
-                    },
-                    {
-                        "corn_a", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(20)
-                            }
-                        }
-                    },
-                    {
-                        "corn_a_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(21)
-                            }
-                        }
-                    },
-                    {
-                        "corn_b", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(22)
-                            }
-                        }
-                    },
-                    {
-                        "corn_b_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(23)
-                            }
-                        }
-                    },
-                    {
-                        "corn_c", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(24)
-                            }
-                        }
-                    },
-                    {
-                        "corn_c_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(25)
-                            }
-                        }
-                    },
-                    {
-                        "corn_d", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(26)
-                            }
-                        }
-                    },
-                    {
-                        "corn_d_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(27)
-                            }
-                        }
-                    },
-                    {
-                        "grass_a", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(29)
-                            }
-                        }
-                    },
-                    {
-                        "grass_b", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(30)
-                            }
-                        }
-                    },
-                    {
-                        "grass_c", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(31)
-                            }
-                        }
-                    }
+            var cropsA = AnimationLoader.LoadAnimatedSprite(content,
+                                                            "animations/cropsA",
+                                                            "animations/cropsAMap",
+                                                            "cropsA",
+                                                            1.0f / 7.5f,
+                                                            false);
 
 
+            var cropsB = AnimationLoader.LoadAnimatedSprite(content,
+                                                            "animations/cropsB",
+                                                            "animations/cropsBMap",
+                                                            "cropsB",
+                                                            1.0f / 7.5f,
+                                                            false);
 
-                }
-            };
 
-            _sprite = new AnimatedSprite(cropAnimationFactory, "soil_normal");
+            _sprite = cropsB;
+
+            _cropsA = cropsA;
+            _cropsB = cropsB;
+
+            _sprite.Play("soil_normal");
 
             X = initialPosition.X;
             Y = initialPosition.Y;
@@ -393,6 +68,8 @@ namespace HarvestMoon.Entities.Ranch
         {
             if (CropType == "turnip")
             {
+                _sprite = _cropsA;
+
                 if (maturity >= 2 && maturity < 4)
                 {
                     Maturity = "a";
@@ -404,6 +81,8 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if (CropType == "potato")
             {
+                _sprite = _cropsB;
+
                 if (maturity >= 2 && maturity < 7)
                 {
                     Maturity = "a";
@@ -415,6 +94,8 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if (CropType == "tomato")
             {
+                _sprite = _cropsA;
+
                 if (maturity >= 2 && maturity < 4)
                 {
                     Maturity = "a";
@@ -434,6 +115,8 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if (CropType == "corn")
             {
+                _sprite = _cropsA;
+
                 if (maturity >= 2 && maturity < 6)
                 {
                     Maturity = "a";
@@ -453,6 +136,8 @@ namespace HarvestMoon.Entities.Ranch
             }
             else if(CropType == "grass")
             {
+                _sprite = _cropsB;
+
                 if (maturity >= 3 && maturity < 6)
                 {
                     Maturity = "a";
@@ -536,7 +221,7 @@ namespace HarvestMoon.Entities.Ranch
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(2, 2));
+            spriteBatch.Draw(_sprite, new Vector2(X, Y - 16), 0.0f, new Vector2(1, 1));
         }
     }
 }

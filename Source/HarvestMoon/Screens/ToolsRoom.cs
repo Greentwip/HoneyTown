@@ -48,7 +48,20 @@ namespace HarvestMoon.Screens
                             objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
                             objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if (_player == null)
+                            {
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
+
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
                             _player.OnPack((toolName) =>
                             {
                                 PackTool(toolName);
@@ -231,6 +244,8 @@ namespace HarvestMoon.Screens
                 }
 
             }
+
+            LoadPlayer();
 
             var tools = _entityManager.Entities.Where(e => e is Tool).Cast<Tool>().ToArray();
 

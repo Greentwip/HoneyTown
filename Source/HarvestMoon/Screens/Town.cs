@@ -10,6 +10,7 @@ using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Town;
 using System.Collections.Generic;
+using HarvestMoon.Entities.Ranch;
 
 namespace HarvestMoon.Screens
 {
@@ -34,32 +35,66 @@ namespace HarvestMoon.Screens
             base.LoadContent();
 
             // Load the compiled map
-            _map = Content.Load<TiledMap>("maps/town/screen");
+            _map = Content.Load<TiledMap>("maps/City");
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
             foreach (var layer in _map.ObjectLayers)
             {
-                if (layer.Name == "objects")
+                if (layer.Name == "Arrivals")
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "player_start")
+                        if (obj.Name == "from-ranch" && _arrival == HarvestMoon.Arrival.Ranch)
                         {
+                            var objectPosition = obj.Position;
 
-                            if (obj.Name == "passage-start" && _arrival == HarvestMoon.Arrival.Passage)
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if (_player == null)
                             {
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
                                 _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
-
-                                _player.PlayerFacing = Jack.Facing.LEFT;
                             }
-                        }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
 
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                            _player.PlayerFacing = Jack.Facing.UP;
+                        }
+                        else if (obj.Name == "from-library" && _arrival == HarvestMoon.Arrival.Library)
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if (_player == null)
+                            {
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
+
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                            _player.PlayerFacing = Jack.Facing.DOWN;
+                        }
+                    }
+                }
+                else if (layer.Name == "Interactables")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
                         if (obj.Type == "npc")
                         {
                             var objectPosition = obj.Position;
@@ -78,158 +113,100 @@ namespace HarvestMoon.Screens
                                     objectMessage = HarvestMoon.Instance.Strings.Get(property.Value);
                                 }
                             }
-                            
-                            if (obj.Name == "ann") {
+
+                            if (obj.Name == "ann")
+                            {
                                 _entityManager.AddEntity(new Ann(Content, objectPosition, objectSize));
                             }
-                            else if(obj.Name == "livestock-dealer")
+                            else if (obj.Name == "livestock-dealer")
                             {
-
-                                List<string> items = new List<string> { "Cow", "Sheep", "Chicken" };
-                                List<string> classes = new List<string> { "Cattle", "Cattle", "Poultry" };
-                                List<int> prices = new List<int> { 5000, 3000, 1000 };
-
-                                _entityManager.AddEntity(new UpfrontStore(objectPosition,
-                                                                            objectSize,
-                                                                            "All purchases will be delivered the same day you make them.",
-                                                                            "Livestock",
-                                                                            items,
-                                                                            classes,
-                                                                            prices,
-                                                                            (List<string> purchases, List<int> amounts, int total) =>
-                                                                            {
-                                                                                if(purchases.Count == 0) {
-                                                                                    return "There is nothing to buy";
-                                                                                }
-
-                                                                                if(total > HarvestMoon.Instance.Gold)
-                                                                                {
-                                                                                    return "Not enough Gold";
-                                                                                }
-
-                                                                                for(int i = 0; i<purchases.Count; ++i)
-                                                                                {
-                                                                                    string purchase = purchases[i].ToLower();
-
-                                                                                    if (purchase == "cow")
-                                                                                    {
-                                                                                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
-                                                                                        {
-                                                                                            return "You can't have more than 10 Cows";
-                                                                                        }
-                                                                                    }
-
-
-                                                                                    if (purchase == "sheep")
-                                                                                    {
-                                                                                        if (amounts[i] + HarvestMoon.Instance.Sheeps > 10)
-                                                                                        {
-                                                                                            return "You can't have more than 10 Sheeps";
-                                                                                        }
-                                                                                    }
-
-
-                                                                                    if (purchase == "chicken")
-                                                                                    {
-                                                                                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
-                                                                                        {
-                                                                                            return "You can't have more than 10 Chickens";
-                                                                                        }
-                                                                                    }
-
-                                                                                }
-
-                                                                                for (int i = 0; i < purchases.Count; ++i)
-                                                                                {
-                                                                                    string purchase = purchases[i].ToLower();
-
-                                                                                    if (purchase == "cow")
-                                                                                    {
-                                                                                        HarvestMoon.Instance.Cows += amounts[i];
-                                                                                    }
-
-
-                                                                                    if (purchase == "sheep")
-                                                                                    {
-                                                                                        HarvestMoon.Instance.Sheeps += amounts[i];
-                                                                                    }
-
-
-                                                                                    if (purchase == "chicken")
-                                                                                    {
-                                                                                        HarvestMoon.Instance.Chickens += amounts[i];
-                                                                                    }
-
-                                                                                }
-
-                                                                                HarvestMoon.Instance.Gold -= total;
-
-                                                                                return "Thanks for your purchase";
-                                                                            }));
+                                _entityManager.AddEntity(new LivestockDealerStore(objectPosition,
+                                                                                    objectSize,
+                                                                                    "All purchases will be delivered the same day you make them.",
+                                                                                    "Livestock"));
                             }
                             else
                             {
                                 _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
                             }
-
-                            
-
                         }
-
                     }
                 }
-                else if (layer.Name == "doors")
+                else if (layer.Name == "Doors")
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "door")
+
+                        var objectPosition = obj.Position;
+
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                        var objectSize = obj.Size;
+
+                        if (obj.Name == "ranch")
                         {
-                            var objectPosition = obj.Position;
-
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                            var objectSize = obj.Size;
-
                             var door = new Door(objectPosition, objectSize);
                             _entityManager.AddEntity(door);
 
-                            if (obj.Name == "passage")
+                            door.OnTriggerStart(() =>
                             {
-                                door.OnTriggerEnd(() =>
-                                {
-                                    if (!door.Triggered)
-                                    {
-                                        door.Triggered = true;
-                                        var screen = new Passage(Game, HarvestMoon.Arrival.Town);
-                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                        ScreenManager.LoadScreen(screen, transition);
-                                    }
-                                });
-                            }
-                        }
+                                _player.Freeze();
+                            });
 
+
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new Ranch(Game, HarvestMoon.Arrival.Town);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
+                        else if (obj.Name == "library")
+                        {
+                            var door = new RanchDoor(Content, objectPosition, objectSize);
+                            _entityManager.AddEntity(door);
+
+                            door.OnTriggerStart(() =>
+                            {
+                                _player.Freeze();
+                            });
+
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new Library(Game);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
                     }
                 }
-                else if (layer.Name == "walls")
+                else if (layer.Name == "Walls")
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "wall")
-                        {
 
-                            var objectPosition = obj.Position;
+                        var objectPosition = obj.Position;
 
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            var objectSize = obj.Size;
+                        var objectSize = obj.Size;
 
-                            _entityManager.AddEntity(new Wall(objectPosition, objectSize));
-                        }
+                        _entityManager.AddEntity(new Wall(objectPosition, objectSize));
                     }
                 }
             }
+
+            LoadPlayer();
         }
 
         public override void Update(GameTime gameTime)
@@ -245,8 +222,46 @@ namespace HarvestMoon.Screens
 
             if (_player != null && !_player.IsDestroyed)
             {
-                _camera.LookAt(new Vector2(_player.Position.X, _player.Position.Y));
+                _camera.LookAt(_player.Position);
+                var constraints = new Vector2();
+
+                if (_camera.BoundingRectangle.Center.X < 320)
+                {
+                    constraints.X = 320;
+                }
+
+                if (_camera.BoundingRectangle.Center.X > _map.Width * _map.TileWidth - 320)
+                {
+                    constraints.X = _map.Width * _map.TileWidth - 320;
+                }
+
+                if (_camera.BoundingRectangle.Center.Y < 240)
+                {
+                    constraints.Y = 240;
+                }
+
+                if (_camera.BoundingRectangle.Center.Y > _map.Height * _map.TileHeight - 240)
+                {
+                    constraints.Y = _map.Height * _map.TileHeight - 240;
+                }
+
+                if (constraints.X != 0)
+                {
+                    _camera.LookAt(new Vector2(constraints.X, _player.Position.Y));
+                }
+
+                if (constraints.Y != 0)
+                {
+                    _camera.LookAt(new Vector2(_player.Position.X, constraints.Y));
+                }
+
+                if (constraints.X != 0 && constraints.Y != 0)
+                {
+                    _camera.LookAt(new Vector2(constraints.X, constraints.Y));
+                }
+
             }
+
 
             CheckCollisions();
         }
@@ -255,17 +270,18 @@ namespace HarvestMoon.Screens
         {
             GraphicsDevice.Clear(Color.Black);
 
-            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
-
             var cameraMatrix = _camera.GetViewMatrix();
-            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y - 32 * scaleY, cameraMatrix.Translation.Z);
+            cameraMatrix.Translation = new Vector3(cameraMatrix.Translation.X, cameraMatrix.Translation.Y, cameraMatrix.Translation.Z);
+
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
-
             for (int i = 0; i < _map.Layers.Count; ++i)
             {
-                _mapRenderer.Draw(_map.Layers[i], cameraMatrix);
+
+                // map Should be the `TiledMap`
+                // Once again, the transform matrix is only needed if you have a Camera2D
+                _mapRenderer.Draw(_map.Layers[i], cameraMatrix, effect: HarvestMoon.Instance.DayTimeEffect);
 
             }
             // End the sprite batch
@@ -275,20 +291,20 @@ namespace HarvestMoon.Screens
             _entityManager.Draw(_spriteBatch);
             _spriteBatch.End();
 
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
+            _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);
 
-            var interactables = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
-
-            foreach (var interactable in interactables)
+            foreach (var foregroundLayer in _map.Layers.Where(l => l is TiledMapGroupLayer))
             {
-                _spriteBatch.DrawRectangle(interactable.BoundingRectangle, Color.Fuchsia);
+                var foregroundLayers = (foregroundLayer as TiledMapGroupLayer).Layers.Where(l => l.Name.Contains("-Foreground"));
+
+                foreach (var layer in foregroundLayers)
+                {
+                    _mapRenderer.Draw(layer, cameraMatrix, effect: HarvestMoon.Instance.DayTimeEffect);
+
+                }
             }
-            _spriteBatch.End();
 
 
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-            _spriteBatch.DrawRectangle(_player.BoundingRectangle, Color.Fuchsia);
-            _spriteBatch.DrawRectangle(_player.ActionBoundingRectangle, Color.Fuchsia);
             _spriteBatch.End();
 
             base.Draw(gameTime);

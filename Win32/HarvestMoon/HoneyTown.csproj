@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HarvestMoon</RootNamespace>
-    <AssemblyName>HarvestMoon</AssemblyName>
+    <AssemblyName>HoneyTown</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -96,7 +96,6 @@
     <Compile Include=".\..\..\Source\HarvestMoon\GUI\GUIManager.cs" Link="GUI\GUIManager.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Diary.cs" Link="Screens\Diary.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\GUI.cs" Link="Screens\Gui.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Screens\Passage.cs" Link="Screens\Passage.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Map.cs" Link="Screens\Map.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\OptionsDialog.cs" Link="Screens\OptionsDialog.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\House.cs" Link="Screens\House.cs" />
@@ -111,6 +110,7 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tweener.cs" Link="Tweening\Tweener.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Text\StringsManager.cs" Link="Text\StringsManager.cs" />
     <Compile Include="Screens\Barn.cs" />
+    <Compile Include="Screens\Library.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">

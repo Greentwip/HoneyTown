@@ -5,6 +5,7 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
+using HarvestMoon.Animation;
 
 namespace HarvestMoon.Entities.Ranch
 {
@@ -51,79 +52,18 @@ namespace HarvestMoon.Entities.Ranch
 
             DaysWatered = 0;
 
+            var cropsB = AnimationLoader.LoadAnimatedSprite(content,
+                                                            "animations/cropsB",
+                                                            "animations/cropsBMap",
+                                                            "cropsB",
+                                                            1.0f / 7.5f,
+                                                            false);
 
-            var cropTexture = content.Load<Texture2D>("maps/ranch/items/crops");
-            var cropMap = content.Load<Dictionary<string, Rectangle>>("maps/ranch/items/cropsMap");
-            var cropAtlas = new TextureAtlas("crop", cropTexture, cropMap);
-            var cropAnimationFactory = new SpriteSheet
-            {
-                TextureAtlas = cropAtlas,
-                Cycles =
-                {
-                    {
-                        "soil_normal", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(0)
-                            }
-                        }
-                    },
-                    {
-                        "soil_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(1)
-                            }
-                        }
-                    },
-                    {
-                        "soil_planted_normal", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(2)
-                            }
-                        }
-                    },
-                    {
-                        "soil_planted_watered", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(3)
-                            }
-                        }
-                    },
-                    {
-                        "soil_planted_grass", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = false,
-                            IsPingPong = false,
-                            FrameDuration = 1.0f,
-                            Frames =
-                            {
-                                new SpriteSheetAnimationFrame(28)
-                            }
-                        }
-                    }
-                }
-            };
 
-            _sprite = new AnimatedSprite(cropAnimationFactory, "soil_normal");
+
+            _sprite = cropsB;
+
+            _sprite.Play("soil_normal");
 
             BoundingRectangle = new RectangleF(new Vector2(initialPosition.X - 16,
                                                             initialPosition.Y - 16),
@@ -394,7 +334,7 @@ namespace HarvestMoon.Entities.Ranch
             }
             else
             {
-                spriteBatch.Draw(_sprite, new Vector2(X, Y), 0.0f, new Vector2(2, 2));
+                spriteBatch.Draw(_sprite, new Vector2(X, Y - BoundingRectangle.Height / 2), 0.0f, new Vector2(1, 1));
             }            
         }
     }

@@ -81,7 +81,20 @@ namespace HarvestMoon.Screens
                             objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
                             objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if(_player == null)
+                            {
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
+
+                            
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
                             _player.PlayerFacing = Jack.Facing.UP;
                         }
                         else if (obj.Name == "from-diary" && (_arrival == HarvestMoon.Arrival.Wake || _arrival == HarvestMoon.Arrival.Diary))
@@ -93,6 +106,9 @@ namespace HarvestMoon.Screens
 
                             _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
                             _player.PlayerFacing = Jack.Facing.DOWN;
+
+                            HarvestMoon.Instance.ResetDayTime();
+
                         }
                         else if (obj.Name == "from-tools" && _arrival == HarvestMoon.Arrival.Tools)
                         {
@@ -101,7 +117,19 @@ namespace HarvestMoon.Screens
                             objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
                             objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if (_player == null)
+                            {
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
+
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
                             _player.PlayerFacing = Jack.Facing.LEFT;
                         }
                     }
@@ -240,7 +268,9 @@ namespace HarvestMoon.Screens
                         _entityManager.AddEntity(new Wall(objectPosition, objectSize));
                     }
                 }
-            }            
+            }
+
+            LoadPlayer();
         }
 
         public override void Update(GameTime gameTime)

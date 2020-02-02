@@ -92,27 +92,6 @@ namespace HarvestMoon.Screens
         private List<Bush> _bushes = new List<Bush>();
         private List<Grid> _grids = new List<Grid>();
         
-        TiledMapEffect _dayTimeEffect;
-
-        Slide<Color> _sunriseToMorningColor;
-        Slide<Color> _morningToEveningColor;
-        Slide<Color> _eveningToAfternoonColor;
-        Slide<Color> _afternoonToSunriseColor;
-
-        Slide<Color> _currentDayTimeColorSlider;
-
-        Color _currentDayTimeColor;
-
-        private float _dayTime;
-
-        private float _day;
-
-        private float _morning;
-        private float _evening;
-        private float _afternoon;
-
-        private bool _isFromHouse;
-
         private HarvestMoon.Arrival _arrival;
 
         public Ranch(Game game, HarvestMoon.Arrival arrival)
@@ -128,51 +107,6 @@ namespace HarvestMoon.Screens
             base.Initialize();
         }
 
-
-        private void ResetDayTime()
-        {
-            _dayTime = 0.0f;
-
-            _day = 2.5f;
-
-            _morning = (_day * 60.0f / 3) * 1;
-            _evening = (_day * 60.0f / 3) * 2;
-            _afternoon = (_day * 60.0f / 3) * 3;
-
-
-            _sunriseToMorningColor = new Slide<Color>(Color.White, Color.LightYellow, 2000d, Color.Lerp);
-            _morningToEveningColor = new Slide<Color>(Color.LightYellow, new Color(220, 220, 180), 2000d, Color.Lerp);
-            _eveningToAfternoonColor = new Slide<Color>(new Color(220, 220, 180), Color.DarkGray, 2000d, Color.Lerp);
-            _afternoonToSunriseColor = new Slide<Color>(Color.DarkGray, Color.White, 2000d, Color.Lerp);
-
-            _currentDayTimeColorSlider = _afternoonToSunriseColor;
-        }
-
-        private void AdvanceDayTime()
-        {
-            if(_currentDayTimeColorSlider == _afternoonToSunriseColor)
-            {
-                _currentDayTimeColorSlider = _sunriseToMorningColor;
-            }
-            else if(_currentDayTimeColorSlider == _sunriseToMorningColor)
-            {
-                _currentDayTimeColorSlider = _morningToEveningColor;
-            }
-            else if(_currentDayTimeColorSlider == _morningToEveningColor)
-            {
-                _currentDayTimeColorSlider = _eveningToAfternoonColor;
-            }
-            /*else if(_currentDayTimeColor == _eveningToAfternoonColor)
-            {
-                _currentDayTimeColor = _afternoonToSunriseColor;
-            }
-            else
-            {
-                ResetDayTime();
-            }*/
-        }
-
-
         public override void LoadContent()
         {
             base.LoadContent();
@@ -182,34 +116,7 @@ namespace HarvestMoon.Screens
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
-            _dayTimeEffect = new TiledMapEffect(GraphicsDevice);
-
-            _dayTimeEffect.TextureEnabled = true;
-            _dayTimeEffect.DiffuseColor = Color.White;
-
-            ResetDayTime();
-
             _dayTime = HarvestMoon.Instance.RanchDayTime;
-
-            switch (HarvestMoon.Instance.GetDayTime())
-            {
-                case HarvestMoon.DayTime.Sunrise:
-                    _currentDayTimeColorSlider = _afternoonToSunriseColor;
-                    break;
-
-                case HarvestMoon.DayTime.Morning:
-                    _currentDayTimeColorSlider = _sunriseToMorningColor;
-                    break;
-
-                case HarvestMoon.DayTime.Evening:
-                    _currentDayTimeColorSlider = _morningToEveningColor;
-                    break;
-
-                case HarvestMoon.DayTime.Afternoon:
-                    _currentDayTimeColorSlider = _eveningToAfternoonColor;
-                    break;
-            }
-
 
             var ranchState = _entityManager as RanchState;
             if(!ranchState.IsLoaded || HarvestMoon.Instance.HasNotSeenTheRanch)
@@ -233,18 +140,6 @@ namespace HarvestMoon.Screens
                                 _player.UnFreeze();
                                 _player.PlayerFacing = Jack.Facing.DOWN;
                             }
-                            else if(obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
-                            {
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
-                                _player.UnFreeze();
-                                _player.PlayerFacing = Jack.Facing.RIGHT;
-
-                            }
                             else if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Barn)
                             {
                                 var objectPosition = obj.Position;
@@ -257,6 +152,18 @@ namespace HarvestMoon.Screens
 
                                 _player.PlayerFacing = Jack.Facing.DOWN;
 
+                            }
+                            else if(obj.Name == "from-city" && _arrival == HarvestMoon.Arrival.Town)
+                            {
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                                _player.UnFreeze();
+
+                                _player.PlayerFacing = Jack.Facing.DOWN;
                             }
                         }
                     }
@@ -358,19 +265,6 @@ namespace HarvestMoon.Screens
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
                                 }
-                                else if (obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
-                                {
-                                    var objectPosition = obj.Position;
-
-                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                    _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
-
-                                    _player.UnFreeze();
-                                    _player.PlayerFacing = Jack.Facing.RIGHT;
-
-                                }
                                 else if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Barn)
                                 {
                                     var objectPosition = obj.Position;
@@ -383,6 +277,18 @@ namespace HarvestMoon.Screens
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
 
+                                }
+                                else if (obj.Name == "from-city" && _arrival == HarvestMoon.Arrival.Town)
+                                {
+                                    var objectPosition = obj.Position;
+
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.DOWN;
                                 }
                             }
 
@@ -409,18 +315,6 @@ namespace HarvestMoon.Screens
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
                                 }
-                                else if (obj.Name == "passage" && _arrival == HarvestMoon.Arrival.Passage)
-                                {
-                                    var objectPosition = obj.Position;
-
-                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                    _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
-                                    _player.UnFreeze();
-                                    _player.PlayerFacing = Jack.Facing.RIGHT;
-
-                                }
                                 else if (obj.Name == "barn" && _arrival == HarvestMoon.Arrival.Barn)
                                 {
                                     var objectPosition = obj.Position;
@@ -432,6 +326,18 @@ namespace HarvestMoon.Screens
                                     _player.UnFreeze();
                                     _player.PlayerFacing = Jack.Facing.DOWN;
 
+                                }
+                                else if (obj.Name == "from-city" && _arrival == HarvestMoon.Arrival.Town)
+                                {
+                                    var objectPosition = obj.Position;
+
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                    _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+
+                                    _player.UnFreeze();
+                                    _player.PlayerFacing = Jack.Facing.DOWN;
                                 }
                             }
                         }
@@ -501,6 +407,29 @@ namespace HarvestMoon.Screens
                                 }
                             });
                         }
+                        else if(obj.Name == "city")
+                        {
+                            var door = new Door(objectPosition, objectSize);
+                            _entityManager.AddEntity(door);
+
+                            door.Name = obj.Name;
+
+                            door.OnTriggerStart(() =>
+                            {
+                                _player.Freeze();
+                            });
+
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new Town(Game, HarvestMoon.Arrival.Ranch);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
                     }
                 }
                 if (layer.Name == "Plot")
@@ -521,25 +450,22 @@ namespace HarvestMoon.Screens
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if (obj.Type == "wall")
-                        {
 
-                            var objectPosition = obj.Position;
+                        var objectPosition = obj.Position;
 
-                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            var objectSize = obj.Size;
+                        var objectSize = obj.Size;
 
-                            _entityManager.AddEntity(new Wall(objectPosition, objectSize));
-                        }
+                        _entityManager.AddEntity(new Wall(objectPosition, objectSize));
                     }
                 }
             }
 
             foreach (var layer in _map.ObjectLayers)
             {
-                if (layer.Name == "objects")
+                if (layer.Name == "Interactables")
                 {
                     foreach (var obj in layer.Objects)
                     {
@@ -591,6 +517,8 @@ namespace HarvestMoon.Screens
 
         }
 
+        private float _dayTime;
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -598,88 +526,20 @@ namespace HarvestMoon.Screens
             // TODO: Add your update logic here
             // Update the map
             // map Should be the `TiledMap`
-            var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            _dayTime += deltaSeconds;
+            var dayTimeEffect = HarvestMoon.Instance.DayTimeEffect;
 
-            if(_dayTime >= _morning && _dayTime <= _evening)
+            var currentDayTimeColor = dayTimeEffect.DiffuseColor;
+
+
+            if (currentDayTimeColor == Color.DarkGray)
             {
-                if(_currentDayTimeColorSlider == _afternoonToSunriseColor)
+                if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
                 {
-                    AdvanceDayTime();
-                }
-                
-            }
-            else if(_dayTime >= _evening && _dayTime <= _afternoon)
-            {
-                if (_currentDayTimeColorSlider == _sunriseToMorningColor)
-                {
-                    AdvanceDayTime();
-                }
-
-            }
-            else if(_dayTime >= _afternoon)
-            {
-                if (_currentDayTimeColorSlider == _morningToEveningColor)
-                {
-                    AdvanceDayTime();
-                }
-            }
-
-            HarvestMoon.Instance.RanchDayTime = _dayTime;
-
-            if (HarvestMoon.Instance.GetDayTimeTriggered(HarvestMoon.Instance.GetDayTime()))
-            {
-                switch (HarvestMoon.Instance.GetDayTime())
-                {
-                    case HarvestMoon.DayTime.Sunrise:
-                        _currentDayTimeColor = Color.White;
-                        break;
-
-                    case HarvestMoon.DayTime.Morning:
-                        _currentDayTimeColor = Color.LightYellow;
-                        break;
-
-                    case HarvestMoon.DayTime.Evening:
-                        _currentDayTimeColor = new Color(220, 220, 180);
-                        break;
-
-                    case HarvestMoon.DayTime.Afternoon:
-                        _currentDayTimeColor = Color.DarkGray;
-                        break;
-                }
-            }
-            else
-            {
-                _currentDayTimeColor = _currentDayTimeColorSlider.Update(gameTime);
-                
-                if(_currentDayTimeColor == Color.White)
-                {
-                    if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Sunrise)
+                    if (!HarvestMoon.Instance.HasNightTriggered())
                     {
-                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Sunrise, true);
-                    }
-                }
-                else if(_currentDayTimeColor == Color.LightYellow)
-                {
-                    if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Morning)
-                    {
-                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Morning, true);
-                    }
-                }
-                else if(_currentDayTimeColor == new Color(220, 220, 180))
-                {
-                    if(HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Evening)
-                    {
-                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Evening, true);
-                    }
-                    
-                }
-                else if(_currentDayTimeColor == Color.DarkGray)
-                {
-                    if(HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
-                    {
-                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Afternoon, true);
+                        HarvestMoon.Instance.SetNightTriggered(true);
+
                         string harvest = "STR_NOSHIPPING";
 
                         if (HarvestMoon.Instance.TodayGold != 0)
@@ -694,17 +554,15 @@ namespace HarvestMoon.Screens
                         {
                             harvest = HarvestMoon.Instance.Strings.Get(harvest);
                         }
-                            HarvestMoon.Instance.GUI.ShowMessage(harvest, 
-                                ()=> { _player.Freeze(); _player.Busy(); }, 
-                                ()=> { _player.UnFreeze(); _player.Cooldown(); });
+                        HarvestMoon.Instance.GUI.ShowMessage(harvest,
+                            () => { _player.Freeze(); _player.Busy(); },
+                            () => { _player.UnFreeze(); _player.Cooldown(); });
 
                     }
-                    
+
                 }
 
             }
-
-            _dayTimeEffect.DiffuseColor = _currentDayTimeColor;
 
             CheckCollisions();
 
@@ -774,7 +632,7 @@ namespace HarvestMoon.Screens
 
                 // map Should be the `TiledMap`
                 // Once again, the transform matrix is only needed if you have a Camera2D
-                _mapRenderer.Draw(_map.Layers[i], cameraMatrix, effect: _dayTimeEffect);
+                _mapRenderer.Draw(_map.Layers[i], cameraMatrix, effect: HarvestMoon.Instance.DayTimeEffect);
 
             }
             // End the sprite batch
@@ -792,7 +650,7 @@ namespace HarvestMoon.Screens
 
                 foreach(var layer in foregroundLayers)
                 {
-                    _mapRenderer.Draw(layer, cameraMatrix, effect: _dayTimeEffect);
+                    _mapRenderer.Draw(layer, cameraMatrix, effect: HarvestMoon.Instance.DayTimeEffect);
 
                 }
             }

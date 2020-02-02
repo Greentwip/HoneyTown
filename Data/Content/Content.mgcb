@@ -49,6 +49,79 @@
 /processor:PassThroughProcessor
 /build:animations/cowMap.xml
 
+#begin animations/cropItemsMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/cropItemsMap.xml
+
+#begin animations/cropsA.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/cropsA.png
+
+#begin animations/cropsA.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/cropsA.png
+
+#begin animations/cropsAMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/cropsAMap.xml
+
+#begin animations/cropsAMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/cropsAMap.xml
+
+#begin animations/cropsB.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/cropsB.png
+
+#begin animations/cropsB.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/cropsB.png
+
+#begin animations/cropsBMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/cropsBMap.xml
+
+#begin animations/cropsBMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/cropsBMap.xml
+
 #begin animations/door1Map.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -185,7 +258,7 @@
 /processor:PassThroughProcessor
 /build:animations/heroMap.xml
 
-#begin animations/heroPack.png
+#begin animations/heroMisc.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -195,7 +268,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:animations/heroPack.png
+/build:animations/heroMisc.png
 
 #begin animations/heroPack.png
 /importer:TextureImporter
@@ -208,11 +281,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/heroPack.png
-
-#begin animations/heroPackMap.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:animations/heroPackMap.xml
 
 #begin animations/heroPackMap.xml
 /importer:XmlImporter
@@ -236,6 +304,23 @@
 /processor:PassThroughProcessor
 /build:animations/heroRunMap.xml
 
+#begin animations/heroSeeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/heroSeeds.png
+
+#begin animations/heroSeedsMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroSeedsMap.xml
+
 #begin animations/heroSickle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -252,6 +337,11 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:animations/heroSickleMap.xml
+
+#begin animations/heroWateringCanMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroWateringCanMap.xml
 
 #begin animations/IconSet.png
 /importer:TextureImporter
@@ -5072,6 +5162,11 @@
 /processor:TiledMapProcessor
 /build:maps/Barn.tmx
 
+#begin maps/City.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/City.tmx
+
 #begin maps/diary/screen.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -5094,22 +5189,10 @@
 /processor:TiledMapProcessor
 /build:maps/House.tmx
 
-#begin maps/house/house.tmx
+#begin maps/Library.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/house/house.tmx
-
-#begin maps/house/house-tileset.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/house/house-tileset.png
+/build:maps/Library.tmx
 
 #begin maps/mountain/screen.tmx
 /importer:TiledMapImporter
@@ -5152,23 +5235,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/mountain/tileset-c.png
 
-#begin maps/passage/screen.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:maps/passage/screen.tmx
-
-#begin maps/passage/tileset.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/passage/tileset.png
-
 #begin maps/Ranch.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -5185,28 +5251,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/ranch/items/bush.png
-
-#begin maps/ranch/items/cropItemsMap.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:maps/ranch/items/cropItemsMap.xml
-
-#begin maps/ranch/items/crops.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/ranch/items/crops.png
-
-#begin maps/ranch/items/cropsMap.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:maps/ranch/items/cropsMap.xml
 
 #begin maps/ranch/items/log-big.png
 /importer:TextureImporter
@@ -5279,23 +5323,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/ranch/items/wood-broken.png
-
-#begin maps/ranch/level.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:maps/ranch/level.tmx
-
-#begin maps/ranch/ranch-tilemap.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/ranch/ranch-tilemap.png
 
 #begin maps/Tileset/TileA1.png
 /importer:TextureImporter
@@ -5453,6 +5480,18 @@
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileB_interior_recolour.png
 
+#begin maps/Tileset/TileB_interior_recolour.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/Tileset/TileB_interior_recolour.png
+
 #begin maps/Tileset/TileC_exterior_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5489,6 +5528,18 @@
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileC_interior.png
 
+#begin maps/Tileset/TileC_interior.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/Tileset/TileC_interior.png
+
 #begin maps/Tileset/TileD_exterior_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5512,6 +5563,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileD_exterior_1.png
+
+#begin maps/Tileset/TileD_interior.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/Tileset/TileD_interior.png
 
 #begin maps/Tileset/TileD_interior.png
 /importer:TextureImporter
@@ -5650,18 +5713,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/tomato-seeds.png
 
-#begin maps/tools-room/items/tools.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/tools-room/items/tools.png
-
 #begin maps/tools-room/items/turnip-seeds.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5685,23 +5736,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/watering-can.png
-
-#begin maps/tools-room/tools-room.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:maps/tools-room/tools-room.tmx
-
-#begin maps/tools-room/tools-room-tilemap.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/tools-room/tools-room-tilemap.png
 
 #begin maps/town/screen.tmx
 /importer:TiledMapImporter

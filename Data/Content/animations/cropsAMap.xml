@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+
+      <Item><Key>corn_a_001.png</Key><Value>0 0 32 64</Value></Item>
+      <Item><Key>corn_a_watered_001.png</Key><Value>0 64 32 64</Value></Item>
+
+      <Item><Key>corn_b_001.png</Key><Value>32 0 32 64</Value></Item>
+      <Item><Key>corn_b_watered_001.png</Key><Value>32 64 32 64</Value></Item>
+
+      <Item><Key>corn_c_001.png</Key><Value>32 0 32 64</Value></Item>
+      <Item><Key>corn_c_watered_001.png</Key><Value>32 64 32 64</Value></Item>
+
+      <Item><Key>corn_d_001.png</Key><Value>64 0 32 64</Value></Item>
+      <Item><Key>corn_d_watered_001.png</Key><Value>64 64 32 64</Value></Item>
+
+      <Item><Key>tomato_a_001.png</Key><Value>96 0 32 64</Value></Item>
+      <Item><Key>tomato_a_watered_001.png</Key><Value>96 64 32 64</Value></Item>
+
+      <Item><Key>tomato_b_001.png</Key><Value>128 0 32 64</Value></Item>
+      <Item><Key>tomato_b_watered_001.png</Key><Value>128 64 32 64</Value></Item>
+
+      <Item><Key>tomato_c_001.png</Key><Value>128 0 32 64</Value></Item>
+      <Item><Key>tomato_c_watered_001.png</Key><Value>128 64 32 64</Value></Item>
+
+      <Item><Key>tomato_d_001.png</Key><Value>160 0 32 64</Value></Item>
+      <Item><Key>tomato_d_watered_001.png</Key><Value>160 64 32 64</Value></Item>
+
+
+      <Item><Key>turnip_a_001.png</Key><Value>192 128 32 64</Value></Item>
+      <Item><Key>turnip_a_watered_001.png</Key><Value>192 192 32 64</Value></Item>
+
+      <Item><Key>turnip_b_001.png</Key><Value>256 128 32 64</Value></Item>
+      <Item><Key>turnip_b_watered_001.png</Key><Value>256 192 32 64</Value></Item>
+
+
+    </Asset>
+</XnaContent>

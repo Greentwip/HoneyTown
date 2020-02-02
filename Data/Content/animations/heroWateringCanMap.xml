@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
+    <Item><Key>watering-can_down_001</Key><Value>0 0 64 60</Value></Item>
+    <Item><Key>watering-can_down_002</Key><Value>0 60 64 60</Value></Item>
+    <Item><Key>watering-can_down_003</Key><Value>0 120 64 60</Value></Item>
+    <Item><Key>watering-can_down_004</Key><Value>0 180 64 60</Value></Item>
+
+    <Item><Key>watering-can_up_001</Key><Value>192 0 64 60</Value></Item>
+    <Item><Key>watering-can_up_002</Key><Value>192 64 64 60</Value></Item>
+    <Item><Key>watering-can_up_003</Key><Value>192 120 64 60</Value></Item>
+    <Item><Key>watering-can_up_004</Key><Value>192 180 64 60</Value></Item>
+
+    <Item><Key>watering-can_left_001</Key><Value>384 0 64 60</Value></Item>
+    <Item><Key>watering-can_left_002</Key><Value>384 64 64 60</Value></Item>
+    <Item><Key>watering-can_left_003</Key><Value>384 120 64 60</Value></Item>
+    <Item><Key>watering-can_left_004</Key><Value>384 180 64 60</Value></Item>
+
+    <Item><Key>watering-can_right_001</Key><Value>576 0 64 60</Value></Item>
+    <Item><Key>watering-can_right_002</Key><Value>576 64 64 60</Value></Item>
+    <Item><Key>watering-can_right_003</Key><Value>576 120 64 60</Value></Item>
+    <Item><Key>watering-can_right_004</Key><Value>576 180 64 60</Value></Item>
+    </Asset>
+</XnaContent>

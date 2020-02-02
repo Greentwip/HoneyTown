@@ -71,7 +71,7 @@ namespace MonoGame.Extended.Sprites
                 return IsComplete;
             }
 
-            var frameIndex = (int) (CurrentTime/FrameDuration);
+            var frameIndex = (int) Math.Floor((CurrentTime/FrameDuration));
             var length = KeyFrames.Length;
 
             if (IsPingPong)

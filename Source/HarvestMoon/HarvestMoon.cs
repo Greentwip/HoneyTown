@@ -20,6 +20,7 @@ using HarvestMoon.Input;
 using HarvestMoon.Text;
 using HarvestMoon.GUI;
 using GeonBit.UI;
+using MonoGame.Extended.Tiled.Renderers;
 
 namespace HarvestMoon
 {
@@ -52,7 +53,7 @@ namespace HarvestMoon
             Tools,
             Barn,
             Ranch,
-            Passage,
+            Library,
             Mountain,
             Hill,
             Town
@@ -213,9 +214,21 @@ namespace HarvestMoon
             Afternoon
         }
 
+        private bool _nightTriggered;
+
         public bool GetDayTimeTriggered(DayTime trigger)
         {
             return _dayTimeTriggers[trigger];
+        }
+
+        public bool HasNightTriggered()
+        {
+            return _nightTriggered;
+        }
+
+        public void SetNightTriggered(bool triggered)
+        {
+            _nightTriggered = triggered;
         }
 
         public void SetDayTimeTriggered(DayTime trigger, bool triggered)
@@ -592,6 +605,9 @@ namespace HarvestMoon
             }
 
             GUI = new GUIManager(Content);
+
+            ResetDayTime();
+
         }
 
         /// <summary>
@@ -611,6 +627,88 @@ namespace HarvestMoon
             // TODO: Unload any non ContentManager content here
         }
 
+        public TiledMapEffect DayTimeEffect;
+
+        Slide<Color> _sunriseToMorningColor;
+        Slide<Color> _morningToEveningColor;
+        Slide<Color> _eveningToAfternoonColor;
+        Slide<Color> _afternoonToSunriseColor;
+
+        Slide<Color> _currentDayTimeColorSlider;
+
+        Color _currentDayTimeColor;
+
+        private void AdvanceDayTime()
+        {
+            if (_currentDayTimeColorSlider == _afternoonToSunriseColor)
+            {
+                _currentDayTimeColorSlider = _sunriseToMorningColor;
+            }
+            else if (_currentDayTimeColorSlider == _sunriseToMorningColor)
+            {
+                _currentDayTimeColorSlider = _morningToEveningColor;
+            }
+            else if (_currentDayTimeColorSlider == _morningToEveningColor)
+            {
+                _currentDayTimeColorSlider = _eveningToAfternoonColor;
+            }
+            /*else if(_currentDayTimeColor == _eveningToAfternoonColor)
+            {
+                _currentDayTimeColor = _afternoonToSunriseColor;
+            }
+            else
+            {
+                ResetDayTime();
+            }*/
+        }
+
+        public void ResetDayTime()
+        {
+            _dayTime = 0.0f;
+
+            _day = 2.5f;
+
+            _morning = (_day * 60.0f / 3) * 1;
+            _evening = (_day * 60.0f / 3) * 2;
+            _afternoon = (_day * 60.0f / 3) * 3;
+
+
+            _sunriseToMorningColor = new Slide<Color>(Color.White, Color.LightYellow, 2000d, Color.Lerp);
+            _morningToEveningColor = new Slide<Color>(Color.LightYellow, new Color(220, 220, 180), 2000d, Color.Lerp);
+            _eveningToAfternoonColor = new Slide<Color>(new Color(220, 220, 180), Color.DarkGray, 2000d, Color.Lerp);
+            _afternoonToSunriseColor = new Slide<Color>(Color.DarkGray, Color.White, 2000d, Color.Lerp);
+
+            _currentDayTimeColorSlider = _afternoonToSunriseColor;
+
+            DayTimeEffect = new TiledMapEffect(GraphicsDevice);
+
+            DayTimeEffect.TextureEnabled = true;
+            DayTimeEffect.DiffuseColor = Color.White;
+
+            /*
+            switch (HarvestMoon.Instance.GetDayTime())
+            {
+                case HarvestMoon.DayTime.Sunrise:
+                    _currentDayTimeColorSlider = _afternoonToSunriseColor;
+                    break;
+
+                case HarvestMoon.DayTime.Morning:
+                    _currentDayTimeColorSlider = _sunriseToMorningColor;
+                    break;
+
+                case HarvestMoon.DayTime.Evening:
+                    _currentDayTimeColorSlider = _morningToEveningColor;
+                    break;
+
+                case HarvestMoon.DayTime.Afternoon:
+                    _currentDayTimeColorSlider = _eveningToAfternoonColor;
+                    break;
+            }
+            */
+
+        }
+
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -618,15 +716,105 @@ namespace HarvestMoon
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             if (!_loaded)
             {
                 _loaded = true;
                 ScreenManager.LoadScreen(new Diary(this), new FadeTransition(GraphicsDevice, Color.Black, 1.0f));
             }
 
+            var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            _dayTime += deltaSeconds;
+
+            if (_dayTime >= _morning && _dayTime <= _evening)
+            {
+                if (_currentDayTimeColorSlider == _afternoonToSunriseColor)
+                {
+                    AdvanceDayTime();
+                }
+
+            }
+            else if (_dayTime >= _evening && _dayTime <= _afternoon)
+            {
+                if (_currentDayTimeColorSlider == _sunriseToMorningColor)
+                {
+                    AdvanceDayTime();
+                }
+
+            }
+            else if (_dayTime >= _afternoon)
+            {
+                if (_currentDayTimeColorSlider == _morningToEveningColor)
+                {
+                    AdvanceDayTime();
+                }
+            }
+
+            if (HarvestMoon.Instance.GetDayTimeTriggered(HarvestMoon.Instance.GetDayTime()))
+            {
+                switch (HarvestMoon.Instance.GetDayTime())
+                {
+                    case HarvestMoon.DayTime.Sunrise:
+                        _currentDayTimeColor = Color.White;
+                        break;
+
+                    case HarvestMoon.DayTime.Morning:
+                        _currentDayTimeColor = Color.LightYellow;
+                        break;
+
+                    case HarvestMoon.DayTime.Evening:
+                        _currentDayTimeColor = new Color(220, 220, 180);
+                        break;
+
+                    case HarvestMoon.DayTime.Afternoon:
+                        _currentDayTimeColor = Color.DarkGray;
+                        break;
+                }
+            }
+            else
+            {
+                _currentDayTimeColor = _currentDayTimeColorSlider.Update(gameTime);
+
+                if (_currentDayTimeColor == Color.White)
+                {
+                    if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Sunrise)
+                    {
+                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Sunrise, true);
+                    }
+                }
+                else if (_currentDayTimeColor == Color.LightYellow)
+                {
+                    if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Morning)
+                    {
+                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Morning, true);
+                    }
+                }
+                else if (_currentDayTimeColor == new Color(220, 220, 180))
+                {
+                    if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Evening)
+                    {
+                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Evening, true);
+                    }
+
+                }
+                else if (_currentDayTimeColor == Color.DarkGray)
+                {
+                    if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
+                    {
+                        HarvestMoon.Instance.SetDayTimeTriggered(HarvestMoon.DayTime.Afternoon, true);
+                    }
+
+                }
+
+            }
+
+            DayTimeEffect.DiffuseColor = _currentDayTimeColor;
+
+
             GUI.Update(gameTime);
+
+            base.Update(gameTime);
+
         }
 
 

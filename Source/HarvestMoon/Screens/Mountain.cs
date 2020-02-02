@@ -46,17 +46,6 @@ namespace HarvestMoon.Screens
                         if (obj.Type == "player_start")
                         {
 
-                            if (obj.Name == "mountain-start" && _arrival == HarvestMoon.Arrival.Passage)
-                            {
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
-
-                                _player.PlayerFacing = Jack.Facing.UP;
-                            }
                         }
 
                         if (obj.Type == "npc")
@@ -106,9 +95,9 @@ namespace HarvestMoon.Screens
                                     if (!door.Triggered)
                                     {
                                         door.Triggered = true;
-                                        var screen = new Passage(Game, HarvestMoon.Arrival.Mountain);
-                                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                        ScreenManager.LoadScreen(screen, transition);
+                                        //var screen = new Passage(Game, HarvestMoon.Arrival.Mountain);
+                                        //var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                        //ScreenManager.LoadScreen(screen, transition);
                                     }
                                 });
                             }

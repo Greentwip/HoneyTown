@@ -22,7 +22,7 @@ namespace HarvestMoon.Entities
         {
             BoundingRectangle = new RectangleF(new Vector2(initialPosition.X - 16,
                                                             initialPosition.Y - 16), 
-                                               new Size2(32, 32));
+                                               new Size2(24, 24));
 
             X = initialPosition.X;
             Y = initialPosition.Y;
