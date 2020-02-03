@@ -37,10 +37,13 @@ namespace HarvestMoon.Screens
         {
             base.LoadContent();
 
-            var song = Content.Load<Song>("audio/music/town");
+            if (MediaPlayer.State == MediaState.Stopped)
+            {
+                var song = Content.Load<Song>("audio/music/town");
 
-            MediaPlayer.Play(song);
-            MediaPlayer.IsRepeating = true;
+                MediaPlayer.Play(song);
+                MediaPlayer.IsRepeating = true;
+            }
 
 
             // Load the compiled map
