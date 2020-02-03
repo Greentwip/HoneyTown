@@ -27,6 +27,18 @@
 /processorParam:TextureFormat=Color
 /build:animations/animals.png
 
+#begin animations/animals.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/animals.png
+
 #begin animations/ann.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -166,6 +178,11 @@
 /processor:PassThroughProcessor
 /build:animations/eddMap.xml
 
+#begin animations/gameItemsMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/gameItemsMap.xml
+
 #begin animations/hero.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -267,6 +284,11 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:animations/heroMap.xml
+
+#begin animations/heroMilkerMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroMilkerMap.xml
 
 #begin animations/heroMisc.png
 /importer:TextureImporter
@@ -5812,6 +5834,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/hoe.png
+
+#begin maps/tools-room/items/milker.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tools-room/items/milker.png
 
 #begin maps/tools-room/items/potato-seeds.png
 /importer:TextureImporter

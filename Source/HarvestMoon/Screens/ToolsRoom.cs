@@ -264,6 +264,17 @@ namespace HarvestMoon.Screens
 
                                 _entityManager.AddEntity(new TomatoSeeds(Content, objectPosition));
                             }
+
+                            if (obj.Name == "milker")
+                            {
+
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                _entityManager.AddEntity(new Milker(Content, objectPosition));
+                            }
                         }
 
 

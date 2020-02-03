@@ -21,6 +21,7 @@ using HarvestMoon.Screens;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Input;
 using HarvestMoon.Animation;
+using HarvestMoon.Entities.Items;
 
 namespace HarvestMoon.Entities
 {
@@ -223,6 +224,12 @@ namespace HarvestMoon.Entities
                                                                       frameDuration,
                                                                       false);
 
+            var heroMilkerAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/hero",
+                                                                      "animations/heroMilkerMap",
+                                                                      "heroMilker",
+                                                                      frameDuration,
+                                                                      false);
 
             _toolingSprites.Add("axe", heroAxeAnimation);
             _toolingSprites.Add("hammer", heroHammerAnimation);
@@ -230,6 +237,7 @@ namespace HarvestMoon.Entities
             _toolingSprites.Add("sickle", heroSickleAnimation);
             _toolingSprites.Add("seeds", heroSeedsAnimation);
             _toolingSprites.Add("watering-can", heroWateringCanAnimation);
+            _toolingSprites.Add("milker", heroMilkerAnimation);
 
             _transform = new Transform2
             {
@@ -255,6 +263,7 @@ namespace HarvestMoon.Entities
             _holdingItemSprites.Add("hoe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hoe")));
             _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
             _holdingItemSprites.Add("watering-can", new Sprite(content.Load<Texture2D>("maps/tools-room/items/watering-can")));
+            _holdingItemSprites.Add("milker", new Sprite(content.Load<Texture2D>("maps/tools-room/items/milker")));
         }
 
         public void SetupActionBoundingRectangle(Vector2 withPosition)
@@ -754,6 +763,36 @@ namespace HarvestMoon.Entities
             }
         }
 
+        public void Milk()
+        {
+            if(_currentInteractable != null)
+            {
+                if(_currentInteractable is Cow)
+                {
+                    var harvest = new Milk(_contentManager, (_currentInteractable as Cow).BoundingRectangle.Center);
+
+                    if (harvest != null)
+                    {
+                        _entityManager.SubmitEntity(harvest);
+                        _carryingObject = harvest;
+
+                        var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+
+                        _tweener.Tween(harvest, carryingParameters, 0.25f)
+                                .Ease(Ease.ExpoInOut)
+                                .OnBegin(() =>
+                                {
+                                    Freeze();
+                                    _carryingObject.Planked = false;
+                                    _carryingObject.Priority = Priority;
+                                    _isCarrying = true;
+                                    _isPacking = true;
+                                });
+                    }
+                }
+            }
+        }
+
         public void Plant()
         {
             var grids = _entityManager.Entities.Where(e => e is Grid).Cast<Grid>().ToArray();
@@ -934,6 +973,10 @@ namespace HarvestMoon.Entities
                     else if (currentTool == "axe")
                     {
                         Axe();
+                    }
+                    else if(currentTool == "milker")
+                    {
+                        Milk();
                     }
 
                     if (currentTool.Contains("seeds"))

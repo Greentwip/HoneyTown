@@ -224,6 +224,7 @@ namespace HarvestMoon.GUI
             _holdingItemSprites.Add("hoe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/hoe")));
             _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
             _holdingItemSprites.Add("watering-can", new Sprite(content.Load<Texture2D>("maps/tools-room/items/watering-can")));
+            _holdingItemSprites.Add("milker", new Sprite(content.Load<Texture2D>("maps/tools-room/items/milker")));
 
             _window_11Texture = content.Load<Texture2D>("ui/window_10");
         }
