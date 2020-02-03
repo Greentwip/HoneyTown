@@ -1,9 +1,9 @@
-# Harvest Moon
+# Honey Town
 Xbox One Remake
 
-An open source engine remake of the SNES classic Harvest Moon released in the 90s
+An open source farming RPG engine written in C# with MonoGame.
 
-This project aim is to bring Harvest Moon towards the Open Source community. 
+The game vision is to redirect attention over the ambiental complications nowadays and the importance of beekeeping.
 
 To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One, be sure to also install the latest MonoGame libraries.
 
@@ -14,19 +14,19 @@ To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One, b
 * Hoe
 * Axe
 * Sickle
-* GUI (NPC dialogs work fine but need proper scaling)
+* GUI 
 * Shipping
 * Packing tools
 * Day / Season system
+* The town
+* Livestock (partially, only cows)
 
 ## What is left to do
 * Title Screen
-* The town
 * The mountain map and the NPCs
-* The hot spring
+* A hot spring
 * Dog
 * Horse
-* Livestock
 * Chickens
 
 

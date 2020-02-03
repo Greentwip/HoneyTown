@@ -92,8 +92,11 @@
     <Compile Include="Entities\Ranch\BarnDoor.cs" />
     <Compile Include="Entities\Ranch\RanchDoor.cs" />
     <Compile Include="Entities\Town\Anna.cs" />
+    <Compile Include="Entities\Town\Monica.cs" />
+    <Compile Include="Entities\Town\Edd.cs" />
     <Compile Include="Entities\Town\LivestockDealerStore.cs" />
     <Compile Include="Entities\Town\Pete.cs" />
+    <Compile Include="Entities\Town\Ted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\GUI\GUIManager.cs" Link="GUI\GUIManager.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Diary.cs" Link="Screens\Diary.cs" />

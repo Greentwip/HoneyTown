@@ -158,6 +158,19 @@ namespace HarvestMoon.Screens
                                 }
                             }
 
+                            if(obj.Name == "edd")
+                            {
+                                _entityManager.AddEntity(new Edd(Content, objectPosition, objectSize));
+                            }
+                            else if (obj.Name == "ted")
+                            {
+                                _entityManager.AddEntity(new Ted(Content, objectPosition, objectSize));
+                            }
+                            else if (obj.Name == "moinca")
+                            {
+                                _entityManager.AddEntity(new Monica(Content, objectPosition, objectSize));
+                            }
+                            else
                             {
                                 _entityManager.AddEntity(new BasicMessage(objectPosition, objectSize, objectMessage));
                             }

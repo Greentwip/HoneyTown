@@ -36,6 +36,7 @@ namespace MonoGame.Extended.Screens.Transitions
 
                     if (_currentSeconds >= _halfDuration)
                     {
+                        Draw(gameTime);
                         State = TransitionState.In;
                         StateChanged?.Invoke(this, EventArgs.Empty);
                     }
@@ -45,6 +46,8 @@ namespace MonoGame.Extended.Screens.Transitions
 
                     if (_currentSeconds <= 0.0f)
                     {
+                        Draw(gameTime);
+
                         Completed?.Invoke(this, EventArgs.Empty);
                     }
                     break;

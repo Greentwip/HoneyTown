@@ -161,6 +161,11 @@
 /processorParam:TextureFormat=Color
 /build:animations/doorsC.png
 
+#begin animations/eddMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/eddMap.xml
+
 #begin animations/hero.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -382,6 +387,35 @@
 /processor:PassThroughProcessor
 /build:animations/iconSetMap.xml
 
+#begin animations/monicaMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/monicaMap.xml
+
+#begin animations/NPC_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_01.png
+
+#begin animations/NPC_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_02.png
+
 #begin animations/NPC_03.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -393,6 +427,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/NPC_03.png
+
+#begin animations/NPC_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_03.png
+
+#begin animations/NPC_19.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_19.png
+
+#begin animations/NPC_25.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_25.png
 
 #begin animations/NPC_25.png
 /importer:TextureImporter
@@ -422,6 +492,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/sos.png
+
+#begin animations/tedMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/tedMap.xml
 
 #begin animations/title-squares.png
 /importer:TextureImporter

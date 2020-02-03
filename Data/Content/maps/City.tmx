@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="77" nextobjectid="57">
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="77" nextobjectid="60">
  <tileset firstgid="1" name="TileC_exterior_1" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="Tileset/TileC_exterior_1.png" width="512" height="512"/>
  </tileset>
@@ -4664,7 +4664,11 @@
    <object id="53" name="from-librarian" x="152" y="404" width="16" height="24"/>
    <object id="56" name="from-dealer" x="440" y="704" width="16" height="24"/>
   </objectgroup>
-  <objectgroup id="70" name="Interactables"/>
+  <objectgroup id="70" name="Interactables">
+   <object id="57" name="edd" type="npc" x="1256" y="1100" width="32" height="45"/>
+   <object id="58" name="ted" type="npc" x="1296" y="1100" width="32" height="45"/>
+   <object id="59" name="monica" type="npc" x="192" y="708" width="32" height="45"/>
+  </objectgroup>
   <objectgroup id="69" name="Walls">
    <object id="3" x="800" y="1308" width="16" height="292"/>
    <object id="4" x="800" y="1208" width="320" height="60"/>
