@@ -28,6 +28,7 @@ To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One, b
 * Dog
 * Horse
 * Chickens
+* Translations to Spanish, French and Italian
 
 
 
