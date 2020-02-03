@@ -630,7 +630,7 @@ namespace HarvestMoon.Screens
                         if (_clark.X == _clarkBPosition.X)
                         {
                             _clark.PlayAnimation("walk_up");
-                            _clark.Y++;
+                            _clark.Y--;
                         }
 
                         if (_clark.Y == _clarkAPosition.Y)
