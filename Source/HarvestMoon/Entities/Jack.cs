@@ -825,32 +825,32 @@ namespace HarvestMoon.Entities
                             Vector2 soilPosition = new Vector2(soilPiece.X, soilPiece.Y);
                             Vector2 targetPositionVector = new Vector2(targetPosition.X, targetPosition.Y);
 
-                            if (soilPosition == targetPositionVector)
+                            if (soilPosition == targetPositionVector && !soilPiece.IsPlanted)
                             {
                                 var currentTool = HarvestMoon.Instance.GetCurrentTool();
                                 if (currentTool.Contains("grass"))
                                 {
-                                    soilPiece.Plant("grass", 0, 0, HarvestMoon.Instance.Season);
+                                    soilPiece.Plant("grass", 0, 0);
                                 }
 
                                 if (currentTool.Contains("turnip"))
                                 {
-                                    soilPiece.Plant("turnip", 0, 0, HarvestMoon.Instance.Season);
+                                    soilPiece.Plant("turnip", 0, 0);
                                 }
 
                                 if (currentTool.Contains("potato"))
                                 {
-                                    soilPiece.Plant("potato", 0, 0, HarvestMoon.Instance.Season);
+                                    soilPiece.Plant("potato", 0, 0);
                                 }
 
                                 if (currentTool.Contains("tomato"))
                                 {
-                                    soilPiece.Plant("tomato", 0, 0, HarvestMoon.Instance.Season);
+                                    soilPiece.Plant("tomato", 0, 0);
                                 }
 
                                 if (currentTool.Contains("corn"))
                                 {
-                                    soilPiece.Plant("corn", 0, 0, HarvestMoon.Instance.Season);
+                                    soilPiece.Plant("corn", 0, 0);
                                 }
 
                                 if (soilPiece.IsWatered)
@@ -1199,6 +1199,7 @@ namespace HarvestMoon.Entities
                     currentTool = "seeds";
                 }
             }
+            HarvestMoon.Instance.Season = "Summer";
             HarvestMoon.Instance.Stamina = 50;
             HarvestMoon.Instance.Gold = 10000;
 

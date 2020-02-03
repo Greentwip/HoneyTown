@@ -347,6 +347,31 @@ namespace HarvestMoon.Screens
 
             }
 
+            var doors = _entityManager.Entities.Where(e => e is Door).Cast<Door>().ToArray();
+            var walls = _entityManager.Entities.Where(e => e is Wall).Cast<Wall>().ToArray();
+            var grids = _entityManager.Entities.Where(e => e is Grid).Cast<Grid>().ToArray();
+            var npcs = _entityManager.Entities.Where(e => e is NPC).Cast<NPC>().ToArray();
+
+            foreach (var door in doors)
+            {
+                _entityManager.Entities.Remove(door);
+            }
+
+            foreach (var wall in walls)
+            {
+                _entityManager.Entities.Remove(wall);
+            }
+
+            foreach (var grid in grids)
+            {
+                _entityManager.Entities.Remove(grid);
+            }
+
+            foreach (var npc in npcs)
+            {
+                _entityManager.Entities.Remove(npc);
+            }
+
             foreach (var layer in _map.ObjectLayers)
             {
                 if (layer.Name == "Doors")
@@ -515,6 +540,7 @@ namespace HarvestMoon.Screens
             }
 
             LoadPlayer();
+            _player.EntityManager = _entityManager;
         }
 
         private float _dayTime;
@@ -639,7 +665,26 @@ namespace HarvestMoon.Screens
             _spriteBatch.End();
 
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: _camera.GetViewMatrix());
-            _entityManager.Draw(_spriteBatch);
+            var soilPieces = _entityManager.Entities.Where(e => e is Soil).Cast<Soil>().ToList();
+
+            soilPieces = soilPieces.OrderBy(s => s.Y).ToList();
+
+            for (var i = 0; i < soilPieces.Count; ++i)
+            {
+                var soilPiece = soilPieces[i];
+                soilPiece.Draw(_spriteBatch);
+            }
+
+            var otherObjects = _entityManager.Entities.Where(e => { return !(e is Soil); }).Cast<Entity>().ToList();
+
+            for (var i = 0; i < otherObjects.Count; ++i)
+            {
+                var otherObject = otherObjects[i];
+                otherObject.Draw(_spriteBatch);
+            }
+
+            _player.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             _spriteBatch.Begin(transformMatrix: cameraMatrix, samplerState: SamplerState.PointClamp);

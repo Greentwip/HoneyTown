@@ -476,8 +476,7 @@ namespace HarvestMoon
                                                 saveGame.SoilSegments[i].IsPlanted,
                                                 saveGame.SoilSegments[i].CropType,
                                                 saveGame.SoilSegments[i].DaysWatered,
-                                                saveGame.SoilSegments[i].DaysPlanted,
-                                                saveGame.SoilSegments[i].SeasonPlanted));
+                                                saveGame.SoilSegments[i].DaysPlanted));
                 }
 
                 for (int i = 0; i < saveGame.WoodPieces.Count; ++i)
@@ -561,7 +560,7 @@ namespace HarvestMoon
 
             Instance.DayNumber++;
 
-            if(Instance.DayNumber >= 31)
+            if(Instance.DayNumber >= 30)
             {
                 Instance.DayNumber = 1;
                 if(Instance.Season == "Spring")

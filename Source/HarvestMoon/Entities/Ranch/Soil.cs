@@ -25,8 +25,6 @@ namespace HarvestMoon.Entities.Ranch
 
         public int DaysPlanted { get; set; }
 
-        public string SeasonPlanted { get; set; }
-
         private List<string> Seasons { get => _seasons; set => _seasons = value; }
 
         public string CropType { get; set; }
@@ -45,8 +43,7 @@ namespace HarvestMoon.Entities.Ranch
                     bool isPlanted = false, 
                     string cropType = default(string), 
                     int daysWatered = -1,
-                    int daysPlanted = -1,
-                    string seasonPlanted = default(string))
+                    int daysPlanted = -1)
         {
             _seasons = new List<string>();
 
@@ -85,7 +82,7 @@ namespace HarvestMoon.Entities.Ranch
             {
                 IsWatered = isWatered;
 
-                Plant(cropType, daysWatered, daysPlanted, seasonPlanted);
+                Plant(cropType, daysWatered, daysPlanted);
                 GrowAccordingly();
             }
 
@@ -140,7 +137,7 @@ namespace HarvestMoon.Entities.Ranch
                     cropMaturity = DaysPlanted;
                 }
 
-                if (Seasons.Contains(SeasonPlanted))
+                if (Seasons.Contains(HarvestMoon.Instance.Season))
                 {
                     if (IsWatered)
                     {
@@ -150,7 +147,7 @@ namespace HarvestMoon.Entities.Ranch
                     DaysPlanted++;
                 }
 
-                if (cropMaturity >= 2 && Seasons.Contains(SeasonPlanted)) // This should be Crop.CalculateMaturity(cropMaturity) == "a"
+                if (cropMaturity >= 2 && Seasons.Contains(HarvestMoon.Instance.Season)) // This should be Crop.CalculateMaturity(cropMaturity) == "a"
                 {
                     HasGrown = true;
                     HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, cropMaturity);
@@ -185,10 +182,12 @@ namespace HarvestMoon.Entities.Ranch
                         if (CropType == "tomato")
                         {
                             HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, 6);
+                            DaysWatered = 6;
                         }
                         else if (CropType == "corn")
                         {
                             HarvestCrop = new Crop(HarvestMoon.Instance.Content, new Vector2(X, Y), CropType, 9);
+                            DaysWatered = 9;
                         }
 
                         if (IsWatered)
@@ -295,13 +294,12 @@ namespace HarvestMoon.Entities.Ranch
 
         }
 
-        public void Plant(string cropType, int daysWatered, int daysPlanted, string seasonPlanted)
+        public void Plant(string cropType, int daysWatered, int daysPlanted)
         {
             IsPlanted = true;
             CropType = cropType;
             DaysWatered = daysWatered;
             DaysPlanted = daysPlanted;
-            SeasonPlanted = seasonPlanted;
 
             if(CropType != "grass")
             {

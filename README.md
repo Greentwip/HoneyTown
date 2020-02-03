@@ -8,7 +8,7 @@ The game vision is to redirect attention over the ambiental complications nowada
 To compile and run you need Visual Studio 2017, Windows 10 and/or an Xbox One, be sure to also install the latest MonoGame libraries.
 
 ## What works so far
-* Seeds (Turnips and potatos only, corn, tomato and grass seeds do not work)
+* Seeds (Turnips, potatos, corn and tomato, grass seeds are not tested)
 * Watering Can
 * Hammer
 * Hoe
