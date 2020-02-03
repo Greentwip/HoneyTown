@@ -680,18 +680,9 @@ namespace HarvestMoon.Screens
 
         private LeaderStatus _leaderStatus;
 
-
-        public override void Update(GameTime gameTime)
+        private void LeaderRoutine()
         {
-            base.Update(gameTime);
-
-            // TODO: Add your update logic here
-            // Update the map
-            // map Should be the `TiledMap`
-
-            ClarkRoutine();
-
-            if(_leader != null)
+            if (_leader != null)
             {
 
                 if (_leaderStatus == LeaderStatus.Onboarding)
@@ -766,7 +757,7 @@ namespace HarvestMoon.Screens
                         _leader.PlayAnimation("walk_up");
                     }
 
-                    if(_leader.Y == _leaderCPosition.Y)
+                    if (_leader.Y == _leaderCPosition.Y)
                     {
                         _leader.Destroy();
                         _leader = null;
@@ -774,6 +765,19 @@ namespace HarvestMoon.Screens
                     }
                 }
             }
+
+        }
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            // TODO: Add your update logic here
+            // Update the map
+            // map Should be the `TiledMap`
+
+            ClarkRoutine();
+
+            LeaderRoutine();
 
             if (!HarvestMoon.Instance.HasTriggeredCutscene("onboarding"))
             {
