@@ -12,6 +12,7 @@ using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Ranch;
+using HarvestMoon.Entities.Town;
 
 namespace HarvestMoon.Screens
 {
@@ -533,6 +534,30 @@ namespace HarvestMoon.Screens
                             {
                                 _entityManager.AddEntity(new ShippingBox(Content, objectPosition));
                             }
+                            else if(obj.Name == "leader-a")
+                            {
+                                _leaderAPosition = objectPosition;
+                            }
+                            else if(obj.Name == "leader-b")
+                            {
+                                _leaderBPosition = objectPosition;
+                            }
+                            else if(obj.Name == "leader-c")
+                            {
+                                _leaderCPosition = objectPosition;
+                            }
+                            else if(obj.Name == "clark-a")
+                            {
+                                _clarkAPosition = objectPosition;
+                            }
+                            else if(obj.Name == "clark-b")
+                            {
+                                _clarkBPosition = objectPosition;
+                            }
+                            else if(obj.Name == "clark-c")
+                            {
+                                _clarkCPosition = objectPosition;
+                            }
                         }
                     }
 
@@ -543,28 +568,81 @@ namespace HarvestMoon.Screens
             _player.EntityManager = _entityManager;
         }
 
+        private Vector2 _leaderAPosition;
+        private Vector2 _leaderBPosition;
+        private Vector2 _leaderCPosition;
+
+        private Vector2 _clarkAPosition;
+        private Vector2 _clarkBPosition;
+        private Vector2 _clarkCPosition;
+
+        private Leader _leader;
+        private Clark _clark;
+
         private float _dayTime;
 
-        public override void Update(GameTime gameTime)
+        private enum ClarkStatus
         {
-            base.Update(gameTime);
+            Entry,
+            Exit
+        }
 
-            // TODO: Add your update logic here
-            // Update the map
-            // map Should be the `TiledMap`
+        private ClarkStatus _clarkStatus;
 
-            var dayTimeEffect = HarvestMoon.Instance.DayTimeEffect;
+        private int _clarkWaitTicks;
 
-            var currentDayTimeColor = dayTimeEffect.DiffuseColor;
-
-
-            if (currentDayTimeColor == Color.DarkGray)
+        private void ClarkRoutine()
+        {
+            if (_clark != null)
             {
-                if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
+                if (_clarkStatus == ClarkStatus.Entry)
                 {
-                    if (!HarvestMoon.Instance.HasNightTriggered())
+                    if (_clark.X == _clarkAPosition.X)
                     {
-                        HarvestMoon.Instance.SetNightTriggered(true);
+                        _clark.Y++;
+                    }
+
+                    if (_clark.Y == _clarkBPosition.Y)
+                    {
+                        _clark.PlayAnimation("walk_left");
+                        _clark.X--;
+                    }
+
+                    if (_clark.X == _clarkCPosition.X)
+                    {
+                        _clark.PlayAnimation("walk_down");
+
+                        _clarkStatus = ClarkStatus.Exit;
+                    }
+
+                }
+                else
+                {
+                    if (_clarkWaitTicks >= 180)
+                    {
+
+                        if (_clark.X < _clarkBPosition.X)
+                        {
+                            _clark.PlayAnimation("walk_right");
+                            _clark.X++;
+                        }
+
+                        if (_clark.X == _clarkBPosition.X)
+                        {
+                            _clark.PlayAnimation("walk_up");
+                            _clark.Y++;
+                        }
+
+                        if (_clark.Y == _clarkAPosition.Y)
+                        {
+                            _clark.Destroy();
+                            _clark = null;
+                            _clarkWaitTicks = 0;
+                        }
+
+                    }
+                    else if (_clarkWaitTicks == 0)
+                    {
 
                         string harvest = "STR_NOSHIPPING";
 
@@ -584,6 +662,144 @@ namespace HarvestMoon.Screens
                             () => { _player.Freeze(); _player.Busy(); },
                             () => { _player.UnFreeze(); _player.Cooldown(); });
 
+                    }
+
+                    _clarkWaitTicks++;
+
+                }
+            }
+
+        }
+
+        private enum LeaderStatus
+        {
+            Onboarding,
+            Idle,
+            Exit
+        }
+
+        private LeaderStatus _leaderStatus;
+
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            // TODO: Add your update logic here
+            // Update the map
+            // map Should be the `TiledMap`
+
+            ClarkRoutine();
+
+            if(_leader != null)
+            {
+
+                if (_leaderStatus == LeaderStatus.Onboarding)
+                {
+                    Action onboardingStart = () => { _player.Freeze(); _player.Busy(); };
+                    Action onboardingEnd = () => { _leaderStatus = LeaderStatus.Exit; _player.UnFreeze(); _player.Cooldown(); };
+
+                    Action onboardingF = () =>
+                    {
+                        HarvestMoon.Instance.GUI.ShowMessage("I think we're done, please have a nice stay and enjoy everything Honey Town has for you!",
+                                                             onboardingStart,
+                                                             onboardingEnd);
+                    };
+
+                    Action onboardingE = () =>
+                    {
+                        HarvestMoon.Instance.GUI.ShowMessage("If you need to buy seeds you can do so at the town shop, if you want to buy cattle you must talk to the livestock dealer, also in the town.",
+                                                             onboardingStart,
+                                                             onboardingF);
+                    };
+
+                    Action onboardingD = () =>
+                    {
+                        HarvestMoon.Instance.GUI.ShowMessage("Talking about the harvest goods, there is a shipping box, you should ship all your harvest before night as Clark will come up and pick them, paying you the next day.",
+                                                             onboardingStart,
+                                                             onboardingE);
+                    };
+
+
+                    Action onboardingC = () =>
+                    {
+                        HarvestMoon.Instance.GUI.ShowMessage("There are also a few ladies, maybe you fall in love, who knows.",
+                                                             onboardingStart,
+                                                             onboardingD);
+                    };
+
+
+                    Action onboardingB = () =>
+                    {
+                        HarvestMoon.Instance.GUI.ShowMessage("While we're at this, it is worth mentioning that you can go to the town, located north from here and meet the villagers, befriend them.",
+                                                             onboardingStart,
+                                                             onboardingC);
+                    };
+
+
+                    Action onboardingA = () =>
+                    {
+                        HarvestMoon.Instance.GUI.ShowMessage("I'm the beekeeping guild leader and I'm pleased to welcome you, this is something we celebrate as previous owners of the farm decided to move out.",
+                                                             onboardingStart,
+                                                             onboardingB);
+                    };
+
+
+                    HarvestMoon.Instance.GUI.ShowMessage("Welcome to your new farm.",
+                                                         onboardingStart,
+                                                         onboardingA);
+
+                    _leaderStatus = LeaderStatus.Idle;
+
+                }
+                else if (_leaderStatus == LeaderStatus.Exit)
+                {
+                    if (_leader.X < _leaderBPosition.X)
+                    {
+                        _leader.X++;
+                        _leader.PlayAnimation("walk_right");
+                    }
+
+                    if (_leader.X == _leaderBPosition.X)
+                    {
+                        _leader.Y--;
+                        _leader.PlayAnimation("walk_up");
+                    }
+
+                    if(_leader.Y == _leaderCPosition.Y)
+                    {
+                        _leader.Destroy();
+                        _leader = null;
+                        _leaderStatus = LeaderStatus.Onboarding;
+                    }
+                }
+            }
+
+            if (!HarvestMoon.Instance.HasTriggeredCutscene("onboarding"))
+            {
+                _player.Freeze();
+
+                _leader = new Leader(Content, _leaderAPosition, new Size2(32, 45));
+
+                HarvestMoon.Instance.SetCutsceneTriggered("onboarding", true);
+
+                _leaderStatus = LeaderStatus.Onboarding;
+            }
+
+            var dayTimeEffect = HarvestMoon.Instance.DayTimeEffect;
+
+            var currentDayTimeColor = dayTimeEffect.DiffuseColor;
+
+            if (currentDayTimeColor == Color.DarkGray)
+            {
+                if (HarvestMoon.Instance.GetDayTime() == HarvestMoon.DayTime.Afternoon)
+                {
+                    if (!HarvestMoon.Instance.HasNightTriggered())
+                    {
+                        HarvestMoon.Instance.SetNightTriggered(true);
+
+                        _clark = new Clark(Content, _clarkAPosition, new Size2(32, 45));
+                        _clarkStatus = ClarkStatus.Entry;
                     }
 
                 }

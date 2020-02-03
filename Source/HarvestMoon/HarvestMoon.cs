@@ -42,7 +42,10 @@ namespace HarvestMoon
         public int Stamina { get; set; }
         public int MaxStamina { get; set; }
 
-        private ScreenManager ScreenManager = new ScreenManager();
+        public List<KeyValuePair<string, bool>> CutsceneTriggers { get; set; }
+
+
+        public ScreenManager ScreenManager = new ScreenManager();
         private bool _loaded = false;
 
         public enum Arrival
@@ -286,6 +289,8 @@ namespace HarvestMoon
             //public List<Crop> Crops { get; set; }
             public List<WoodPiece> WoodPieces { get; set; }
 
+            public List<KeyValuePair<string, bool>> CutsceneTriggers { get; set; }
+
             public int Cows { get; set; }
             public int Sheeps { get; set; }
             public int Chickens { get; set; }
@@ -314,6 +319,8 @@ namespace HarvestMoon
             sg.Chickens = Instance.Chickens;
 
             sg.MaxStamina = Instance.MaxStamina;
+
+            sg.CutsceneTriggers = Instance.CutsceneTriggers;
 
             sg.BigLogs = new List<BigLog>(Instance.RanchState.Entities.Where(e => e is BigLog).Cast<BigLog>().ToArray());
             sg.BigRocks = new List<BigRock>(Instance.RanchState.Entities.Where(e => e is BigRock).Cast<BigRock>().ToArray());
@@ -437,6 +444,13 @@ namespace HarvestMoon
 
                 Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 60;
 
+                var cutsceneTriggers = new List<KeyValuePair<string, bool>>();
+                cutsceneTriggers.Add(new KeyValuePair<string, bool>("onboarding", false));
+
+                Instance.CutsceneTriggers = saveGame.CutsceneTriggers.Count == 0 ?
+                    cutsceneTriggers : saveGame.CutsceneTriggers;
+                    
+
                 Instance.HasNotSeenTheRanch = saveGame.HasNotSeenTheRanch;
 
                 
@@ -509,6 +523,35 @@ namespace HarvestMoon
                 Instance.HasNotSeenTheRanch = true;
             }
 
+        }
+
+        public bool HasTriggeredCutscene(string cutsceneName)
+        {
+            bool triggered = false;
+
+            foreach(var keypair in CutsceneTriggers)
+            {
+                if(keypair.Key == cutsceneName)
+                {
+                    triggered = keypair.Value;
+                }
+            }
+
+            return triggered;
+        }
+
+        public void SetCutsceneTriggered(string cutsceneName, bool trigger)
+        {
+
+            for (int i = 0; i<CutsceneTriggers.Count; ++i)
+            {
+                var keypair = CutsceneTriggers[i];
+
+                if (keypair.Key == cutsceneName)
+                {
+                    CutsceneTriggers[i] = new KeyValuePair<string, bool>(cutsceneName, trigger);
+                }
+            }
         }
  
         public void ResetDay()

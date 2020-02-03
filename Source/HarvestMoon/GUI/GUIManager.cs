@@ -468,6 +468,7 @@ namespace HarvestMoon.GUI
                     if (_bookshelfList.SelectedIndex != _selectedIndex)
                     {
                         _bookshelfList.SelectedIndex = _selectedIndex;
+                        _bookshelfList.ScrollPosition = _selectedIndex - 1;
                     }
 
                 }

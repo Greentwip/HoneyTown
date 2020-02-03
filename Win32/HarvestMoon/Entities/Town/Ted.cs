@@ -37,6 +37,9 @@ namespace HarvestMoon.Entities.Town
 
             X = initialPosition.X;
             Y = initialPosition.Y;
+
+            BoundingBoxEnabled = true;
+
         }
         public string GetThankYouMessage()
         {

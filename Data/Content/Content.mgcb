@@ -61,6 +61,11 @@
 /processor:PassThroughProcessor
 /build:animations/annMap.xml
 
+#begin animations/clarkMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/clarkMap.xml
+
 #begin animations/cowMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -409,6 +414,11 @@
 /processor:PassThroughProcessor
 /build:animations/iconSetMap.xml
 
+#begin animations/leaderMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/leaderMap.xml
+
 #begin animations/monicaMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -425,6 +435,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/NPC_01.png
+
+#begin animations/NPC_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_01.png
+
+#begin animations/NPC_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_02.png
 
 #begin animations/NPC_02.png
 /importer:TextureImporter
@@ -462,6 +496,54 @@
 /processorParam:TextureFormat=Color
 /build:animations/NPC_03.png
 
+#begin animations/NPC_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_03.png
+
+#begin animations/NPC_06.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_06.png
+
+#begin animations/NPC_14.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_14.png
+
+#begin animations/NPC_14.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_14.png
+
 #begin animations/NPC_19.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -473,6 +555,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/NPC_19.png
+
+#begin animations/NPC_19.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_19.png
+
+#begin animations/NPC_25.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_25.png
 
 #begin animations/NPC_25.png
 /importer:TextureImporter

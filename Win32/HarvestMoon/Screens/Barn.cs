@@ -68,11 +68,11 @@ namespace HarvestMoon.Screens
                             objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
                             objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Entities.Town.Leader) as Entities.Town.Leader;
 
                             if (_player == null)
                             {
-                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                                _player = _entityManager.AddEntity(new Entities.Town.Leader(Content, _entityManager, this, objectPosition));
                             }
                             else
                             {
@@ -82,7 +82,7 @@ namespace HarvestMoon.Screens
 
                             _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
 
-                            _player.PlayerFacing = Jack.Facing.UP;
+                            _player.PlayerFacing = Entities.Town.Leader.Facing.UP;
                         }
 
                     }

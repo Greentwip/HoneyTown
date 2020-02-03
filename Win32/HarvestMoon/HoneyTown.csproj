@@ -95,7 +95,9 @@
     <Compile Include="Entities\Ranch\RanchDoor.cs" />
     <Compile Include="Entities\Tools\Milker.cs" />
     <Compile Include="Entities\Town\Anna.cs" />
+    <Compile Include="Entities\Town\Clark.cs" />
     <Compile Include="Entities\Town\HouseBookshelf.cs" />
+    <Compile Include="Entities\Town\Leader.cs" />
     <Compile Include="Entities\Town\Monica.cs" />
     <Compile Include="Entities\Town\Edd.cs" />
     <Compile Include="Entities\Town\LivestockDealerStore.cs" />
