@@ -46,6 +46,7 @@ namespace HarvestMoon.Entities.Ranch
                 {
                     HarvestMoon.Instance.TodayGold += item.SellPrice;
                     item.Destroy();
+                    onInteractionEnd();
                 }
             }            
         }

@@ -27,6 +27,8 @@ namespace HarvestMoon.Screens
 
         protected EntityManager _entityManager;
 
+        public EntityManager EntityManager => _entityManager;
+
         // The tile map
         protected TiledMap _map;
         // The renderer for the map

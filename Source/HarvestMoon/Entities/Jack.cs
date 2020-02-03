@@ -97,7 +97,9 @@ namespace HarvestMoon.Entities
         public Interactable CarryingObject => _carryingObject;
 
         private readonly ContentManager _contentManager;
-        private readonly EntityManager _entityManager;
+        private EntityManager _entityManager;
+
+        public EntityManager EntityManager { get => _entityManager; set => _entityManager = value; }
 
         private Vector2 _actionBoundingRectangleOffset = new Vector2(16, 20);
 
@@ -455,6 +457,7 @@ namespace HarvestMoon.Entities
                                .OnComplete(() =>
                                {
                                    UnFreeze();
+                                   Cooldown();
                                    _carryingObject.Planked = true;
                                    _carryingObject.Priority = 0;
                                    _isCarrying = false;
@@ -875,7 +878,6 @@ namespace HarvestMoon.Entities
 
         public override void Update(GameTime gameTime)
         {
-
             var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _sprite.Update(deltaSeconds);
 

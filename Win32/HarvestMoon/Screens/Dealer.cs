@@ -58,6 +58,7 @@ namespace HarvestMoon.Screens
                             else
                             {
                                 _entityManager.AddEntity(_player);
+                                _player.EntityManager = _entityManager;
                             }
 
                             _player.Position = new Vector2(objectPosition.X, objectPosition.Y);

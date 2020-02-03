@@ -514,7 +514,7 @@ namespace HarvestMoon.Screens
                 }
             }
 
-
+            LoadPlayer();
         }
 
         private float _dayTime;
