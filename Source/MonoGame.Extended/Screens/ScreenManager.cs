@@ -33,13 +33,13 @@ namespace MonoGame.Extended.Screens
             _activeScreen?.UnloadContent();
             _activeScreen?.Dispose();
 
+            _activeScreen = screen;
+
             screen.ScreenManager = this;
 
             screen.Initialize();
-
             screen.LoadContent();
 
-            _activeScreen = screen;
         }
 
         public override void Initialize()

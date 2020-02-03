@@ -163,6 +163,26 @@ namespace HarvestMoon.Screens
                         }
 
                     }
+                    if (intersection.Top - 2 <= interactable.BoundingRectangle.Top)
+                    {
+                        _player.Position = new Vector2(_player.Position.X, _player.Position.Y - 1);
+                    }
+
+                    if (intersection.Bottom + 2 >= interactable.BoundingRectangle.Bottom)
+                    {
+                        _player.Position = new Vector2(_player.Position.X, _player.Position.Y + 1);
+                    }
+
+                    if (intersection.Left - 2 <= interactable.BoundingRectangle.Left)
+                    {
+                        _player.Position = new Vector2(_player.Position.X - 1, _player.Position.Y);
+                    }
+
+                    if (intersection.Right + 2 >= interactable.BoundingRectangle.Right)
+                    {
+                        _player.Position = new Vector2(_player.Position.X + 1, _player.Position.Y);
+                    }
+
                 }
             }
 

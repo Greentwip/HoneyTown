@@ -17,8 +17,6 @@ namespace HarvestMoon.Screens
 {
     public class House : Map
     {
-        Song _song;
-
         private HarvestMoon.Arrival _arrival;
 
         public House(Game game, HarvestMoon.Arrival arrival)
@@ -37,9 +35,10 @@ namespace HarvestMoon.Screens
         {
             base.LoadContent();
 
-            _song = Content.Load<Song>("audio/music/ranch");
+            var song = Content.Load<Song>("audio/music/spring");
 
-            //MediaPlayer.Play(_song);
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
 
             if (_arrival == HarvestMoon.Arrival.Diary)
             {

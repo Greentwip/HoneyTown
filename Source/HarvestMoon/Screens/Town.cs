@@ -11,6 +11,7 @@ using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Town;
 using System.Collections.Generic;
 using HarvestMoon.Entities.Ranch;
+using Microsoft.Xna.Framework.Media;
 
 namespace HarvestMoon.Screens
 {
@@ -33,6 +34,12 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
             base.LoadContent();
+
+            var song = Content.Load<Song>("audio/music/town");
+
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+
 
             // Load the compiled map
             _map = Content.Load<TiledMap>("maps/City");

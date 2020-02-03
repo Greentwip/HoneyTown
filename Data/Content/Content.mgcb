@@ -644,6 +644,18 @@
 /processorParam:Quality=Best
 /build:audio/music/ranch.mp3
 
+#begin audio/music/spring.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/music/spring.wav
+
+#begin audio/music/town.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/music/town.mp3
+
 #begin GeonBit.UI/themes/editor/effects/disabled.fx
 /importer:EffectImporter
 /processor:EffectProcessor

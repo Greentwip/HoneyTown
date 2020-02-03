@@ -38,7 +38,15 @@ namespace HarvestMoon.Entities.Town
             X = initialPosition.X;
             Y = initialPosition.Y;
 
-            BoundingBoxEnabled = true;
+            if(HarvestMoon.Instance.ScreenManager.ActiveScreen is Screens.Library)
+            {
+                BoundingBoxEnabled = false;
+            }
+            else
+            {
+                BoundingBoxEnabled = true;
+            }
+
 
         }
         public string GetThankYouMessage()
