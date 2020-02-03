@@ -1,5 +1,5 @@
 # Honey Town
-Xbox One Remake
+Xbox One, Windows, Linux and Mac
 
 An open source farming RPG engine written in C# with MonoGame.
 
