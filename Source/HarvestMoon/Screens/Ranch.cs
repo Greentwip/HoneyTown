@@ -783,7 +783,7 @@ namespace HarvestMoon.Screens
             {
                 _player.Freeze();
 
-                _leader = new Leader(Content, _leaderAPosition, new Size2(32, 45));
+                _leader = _entityManager.AddEntity(new Leader(Content, _leaderAPosition, new Size2(32, 45)));
 
                 HarvestMoon.Instance.SetCutsceneTriggered("onboarding", true);
 
@@ -802,7 +802,7 @@ namespace HarvestMoon.Screens
                     {
                         HarvestMoon.Instance.SetNightTriggered(true);
 
-                        _clark = new Clark(Content, _clarkAPosition, new Size2(32, 45));
+                        _clark = _entityManager.AddEntity(new Clark(Content, _clarkAPosition, new Size2(32, 45)));
                         _clarkStatus = ClarkStatus.Entry;
                     }
 

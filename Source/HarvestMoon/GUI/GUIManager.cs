@@ -661,6 +661,8 @@ namespace HarvestMoon.GUI
                                 {
                                     _textAnimator.TextToType = _bufferedStrings.First();
                                     _bufferedStrings.Remove(_bufferedStrings.First());
+                                    _npcCoolDown = true;
+                                    _busy = true;
                                 }
                                 else
                                 {
@@ -671,7 +673,6 @@ namespace HarvestMoon.GUI
                                     _textAnimator = null;
 
                                     _onAfterConfirmCallback?.Invoke();
-                                    _onAfterConfirmCallback = null;
                                 }
                             }
                         }
@@ -911,7 +912,7 @@ namespace HarvestMoon.GUI
 
             _onAfterConfirmCallback = onAfterConfirmCallback;
 
-            _bufferedStrings = SplitByLength(message, 130);
+            _bufferedStrings = SplitByLength(message, 110);
 
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
