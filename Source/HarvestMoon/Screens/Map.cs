@@ -136,6 +136,7 @@ namespace HarvestMoon.Screens
                 if (interactable.BoundingRectangle.Intersects(_player.BoundingRectangle) && interactable.Planked)
                 {
                     var intersection = interactable.BoundingRectangle.Intersection(_player.BoundingRectangle);
+
                     if (intersection.Height > intersection.Width)
                     {
                         if (_player.Position.X > interactable.X)
@@ -240,6 +241,28 @@ namespace HarvestMoon.Screens
                         }
 
                     }
+
+                    if (intersection.Top - 2 <= wall.BoundingRectangle.Top)
+                    {
+                        _player.Position = new Vector2(_player.Position.X, _player.Position.Y - 1);
+                    }
+
+                    if(intersection.Bottom + 2 >= wall.BoundingRectangle.Bottom)
+                    {
+                        _player.Position = new Vector2(_player.Position.X, _player.Position.Y + 1);
+                    }
+
+                    if(intersection.Left - 2 <= wall.BoundingRectangle.Left)
+                    {
+                        _player.Position = new Vector2(_player.Position.X - 1, _player.Position.Y);
+                    }
+
+                    if (intersection.Right + 2 >= wall.BoundingRectangle.Right)
+                    {
+                        _player.Position = new Vector2(_player.Position.X + 1, _player.Position.Y);
+                    }
+
+
                 }
             }
 

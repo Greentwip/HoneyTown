@@ -148,7 +148,7 @@ namespace HarvestMoon.Screens
                             {
                                 _entityManager.AddEntity(new HouseBookshelf(objectPosition,
                                                                             objectSize,
-                                                                            "These are the game instructions. You can find more of this at the library.",
+                                                                            "Instructions using the tools.",
                                                                              "How-To"));
                             }
                         }

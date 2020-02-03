@@ -462,6 +462,14 @@ namespace HarvestMoon.GUI
                     }
 
                 }
+                else if(_npcMenu == NPCMenu.Bookshelf)
+                {
+                    if (_bookshelfList.SelectedIndex != _selectedIndex)
+                    {
+                        _bookshelfList.SelectedIndex = _selectedIndex;
+                    }
+
+                }
             }
 
             if(keyboardState.IsKeyDown(InputDevice.Keys.B) && !_isCancelButtonDown)
@@ -606,25 +614,33 @@ namespace HarvestMoon.GUI
                                         else
                                         {
                                             ShowBookshelf(_title, _items, _text, _bookshelfOnAfterConfirmCallback);
+                                            _textAnimator = null;
                                         }
                                     }
                                 } else
                                     {
                                         Bookshelf.Reading = true;
-                                        _bufferedStrings = SplitByLength(_text[_selectedIndex - 1], 130);
+                                        _bufferedStrings = SplitByLength(_text[_selectedIndex - 1], 300);
 
                                         _textAnimator = new TypeWriterAnimator();
 
                                         _textAnimator.TextToType = _bufferedStrings.First();
                                         _bufferedStrings.Remove(_bufferedStrings.First());
 
+                                        _textPanel.RemoveChild(_bookshelfList);
 
-                                        _bookshelfList.ClearItems();
+                                        var paragraph = new Paragraph("");
+                                        paragraph.AttachAnimator(_textAnimator);
+                                        float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
-                                        _bookshelfList.LockedItems[0] = true;
+                                        Panel panel = new Panel(new Vector2(0, 280 * scaleY));
 
-                                        _bookshelfList.AddItem(" ");
-                                        _bookshelfList.AttachAnimator(_textAnimator);
+                                        panel.AddChild(paragraph);
+
+                                        _textPanel.AddChild(panel);
+                                        _textPanel.Opacity = 0;
+                                        //_textPanel.Visible = false;
+
 
                                     }
 
@@ -650,6 +666,7 @@ namespace HarvestMoon.GUI
                                     _textPanel = null;
                                     _npcCoolDown = true;
                                     _busy = true;
+                                    _textAnimator = null;
 
                                     _onAfterConfirmCallback?.Invoke();
                                     _onAfterConfirmCallback = null;
@@ -739,13 +756,13 @@ namespace HarvestMoon.GUI
 
             // lock and create title
             _bookshelfList.LockedItems[0] = true;
-            _bookshelfList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4,-8} {5,-8} ", "{{RED}}", "-", "-", "Selection", "-", "-"));
+            _bookshelfList.AddItem(System.String.Format("{0}{1,-8}", "{{RED}}", "Selection"));
 
 
             for (int i = 0; i < items.Count; ++i)
             {
                 // add items as formatted table
-                _bookshelfList.AddItem(System.String.Format("{0,-8} {1,-8} {2, -10} {3,-8} {4,-8}", " ", " ", text[i], " ", " "));
+                _bookshelfList.AddItem(System.String.Format("{0,-8}", items[i]));
             }
 
             if (_bookshelfList.Items.Length >= 2)
