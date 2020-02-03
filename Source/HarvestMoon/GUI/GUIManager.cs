@@ -947,7 +947,7 @@ namespace HarvestMoon.GUI
             float scaleX = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Width / 640.0f;
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
-            var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + HarvestMoon.Instance.DayName;
+            var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + new string(HarvestMoon.Instance.DayName.Take(3).ToArray()) + ", " + HarvestMoon.Instance.Season;
             var goldText = HarvestMoon.Instance.Gold.ToString() + "G";
 
             // create a panel and position in bottom center of screen

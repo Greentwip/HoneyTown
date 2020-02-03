@@ -15,6 +15,7 @@ using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework.Input;
 using HarvestMoon.Input;
 using MonoGame.Extended.Sprites;
+using Microsoft.Xna.Framework.Media;
 
 namespace HarvestMoon.Screens
 {
@@ -63,6 +64,12 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
             base.LoadContent();
+
+            var song = Content.Load<Song>("audio/music/diary");
+
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+
 
             _sosTexture = new Sprite(Content.Load<Texture2D>("animations/sos"));
             _tilesTexture = new Sprite(Content.Load<Texture2D>("animations/title-squares"));

@@ -638,6 +638,12 @@
 /processorParam:TextureFormat=Color
 /build:animations/title-squares.png
 
+#begin audio/music/diary.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/music/diary.mp3
+
 #begin audio/music/ranch.mp3
 /importer:Mp3Importer
 /processor:SongProcessor

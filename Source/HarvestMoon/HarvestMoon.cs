@@ -108,6 +108,10 @@ namespace HarvestMoon
 
         public HarvestMoon()
         {
+            Season = "Spring";
+            DayName = "Monday";
+            DayNumber = 1;
+
             Graphics = new GraphicsDeviceManager(this);
 
             Content.RootDirectory = "Content";
