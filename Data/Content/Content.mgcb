@@ -5964,11 +5964,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/watering-can.png
 
-#begin maps/town/screen.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:maps/town/screen.tmx
-
 #begin ui/objects.png
 /importer:TextureImporter
 /processor:TextureProcessor
