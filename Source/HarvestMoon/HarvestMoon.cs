@@ -765,7 +765,7 @@ namespace HarvestMoon
                 _loaded = true;
                 ScreenManager.LoadScreen(new Diary(this), new FadeTransition(GraphicsDevice, Color.Black, 1.0f));
             }
-            if (ScreenManager.ActiveScreen is Ranch || ScreenManager.ActiveScreen is Town)
+            if ((ScreenManager.ActiveScreen is Ranch || ScreenManager.ActiveScreen is Town) && !GUI.IsPresenting)
             {
                 var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 

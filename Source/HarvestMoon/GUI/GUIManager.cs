@@ -100,6 +100,7 @@ namespace HarvestMoon.GUI
 
         private Texture2D _window_11Texture;
 
+        public bool IsPresenting => _textPanel != null;
 
         public GUIManager(ContentManager content)
         {
