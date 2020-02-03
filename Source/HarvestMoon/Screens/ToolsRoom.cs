@@ -9,6 +9,7 @@ using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.Tools;
+using HarvestMoon.Entities.Town;
 
 namespace HarvestMoon.Screens
 {
@@ -124,7 +125,34 @@ namespace HarvestMoon.Screens
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        if(obj.Type == "tool")
+                        if(obj.Type == "npc")
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            var objectSize = obj.Size;
+
+                            string objectMessage = "";
+
+                            foreach (var property in obj.Properties)
+                            {
+                                if (property.Key.Contains("message"))
+                                {
+                                    objectMessage = HarvestMoon.Instance.Strings.Get(property.Value);
+                                }
+                            }
+
+                            if (obj.Name == "how-to")
+                            {
+                                _entityManager.AddEntity(new HouseBookshelf(objectPosition,
+                                                                            objectSize,
+                                                                            "These are the game instructions. You can find more of this at the library.",
+                                                                             "How-To"));
+                            }
+                        }
+                        else if(obj.Type == "tool")
                         {
                             if (obj.Name == "sickle")
                             {

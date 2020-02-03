@@ -87,11 +87,13 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Program.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\HarvestMoon.cs" />
     <Compile Include="Animation\AnimationLoader.cs" />
+    <Compile Include="Entities\General\Bookshelf.cs" />
     <Compile Include="Entities\General\UpfrontStore.cs" />
     <Compile Include="Entities\Ranch\Cow.cs" />
     <Compile Include="Entities\Ranch\BarnDoor.cs" />
     <Compile Include="Entities\Ranch\RanchDoor.cs" />
     <Compile Include="Entities\Town\Anna.cs" />
+    <Compile Include="Entities\Town\HouseBookshelf.cs" />
     <Compile Include="Entities\Town\Monica.cs" />
     <Compile Include="Entities\Town\Edd.cs" />
     <Compile Include="Entities\Town\LivestockDealerStore.cs" />

@@ -166,7 +166,7 @@ namespace HarvestMoon.Screens
                             {
                                 _entityManager.AddEntity(new Ted(Content, objectPosition, objectSize));
                             }
-                            else if (obj.Name == "moinca")
+                            else if (obj.Name == "monica")
                             {
                                 _entityManager.AddEntity(new Monica(Content, objectPosition, objectSize));
                             }

@@ -30,6 +30,7 @@ namespace HarvestMoon.GUI
         public enum NPCMenu
         {
             YesNo,
+            Bookshelf,
             UpfrontStore
         }
 
@@ -39,6 +40,8 @@ namespace HarvestMoon.GUI
 
         Action _onAfterConfirmCallback;
         Action _storeOnAfterConfirmCallback;
+
+        Action _bookshelfOnAfterConfirmCallback;
 
         private List<string> _bufferedStrings;
 
@@ -61,6 +64,9 @@ namespace HarvestMoon.GUI
 
         private List<string> _menuStrings;
         private List<Action> _menuCallbacks;
+        // bookshelf
+        private string _title;
+        private List<string> _text;
 
 
         // upfront store
@@ -76,6 +82,7 @@ namespace HarvestMoon.GUI
         private Paragraph _totalParagraph;
 
         SelectList _upfrontStoreList;
+        SelectList _bookshelfList;
 
         private Func<List<string>, List<int>, int, string> _onPurchaseCallback;
 
@@ -411,6 +418,32 @@ namespace HarvestMoon.GUI
 
                             }
                             break;
+
+                        case NPCMenu.Bookshelf:
+                            if (!Bookshelf.Reading)
+                            {
+                                if (_isDownButtonDown)
+                                {
+                                    _selectedIndex++;
+
+                                    if (_selectedIndex == _bookshelfList.Items.Length)
+                                    {
+                                        _selectedIndex = 1;
+                                    }
+                                }
+
+                                if (_isUpButtonDown)
+                                {
+                                    _selectedIndex--;
+
+                                    if (_selectedIndex == 0)
+                                    {
+                                        _selectedIndex = _bookshelfList.Items.Length - 1;
+                                    }
+                                }
+
+                            }
+                            break;
                     }
                 }
             }
@@ -456,6 +489,21 @@ namespace HarvestMoon.GUI
 
                                 _storeOnAfterConfirmCallback?.Invoke();
                                 _storeOnAfterConfirmCallback = null;
+
+                            }
+                        }
+                        else if(_npcMenu == NPCMenu.Bookshelf)
+                        {
+                            if(!Bookshelf.Reading)
+                            {
+                                UserInterface.Active.RemoveEntity(_textPanel);
+                                _textPanel = null;
+                                _npcCoolDown = true;
+                                _busy = true;
+                                _isDisplayingMenu = false;
+
+                                _bookshelfOnAfterConfirmCallback?.Invoke();
+                                _bookshelfOnAfterConfirmCallback = null;
 
                             }
                         }
@@ -515,7 +563,7 @@ namespace HarvestMoon.GUI
 
                                 var result = _onPurchaseCallback?.Invoke(items, amounts, _selectedTotal);
 
-                                if(!UpfrontStore.ConfirmPurchase)
+                                if (!UpfrontStore.ConfirmPurchase)
                                 {
                                     for (int i = 0; i < _amounts.Count; ++i)
                                     {
@@ -540,6 +588,48 @@ namespace HarvestMoon.GUI
                                 {
                                     UpdateTotal(result);
                                 }
+                                break;
+
+                            case NPCMenu.Bookshelf:
+                            {
+                                _npcCoolDown = true;
+                                _busy = true;
+                                if (_textAnimator != null)
+                                {
+                                    if (_textAnimator.IsDone)
+                                    {
+                                        if (_bufferedStrings.Count > 0)
+                                        {
+                                            _textAnimator.TextToType = _bufferedStrings.First();
+                                            _bufferedStrings.Remove(_bufferedStrings.First());
+                                        }
+                                        else
+                                        {
+                                            ShowBookshelf(_title, _items, _text, _bookshelfOnAfterConfirmCallback);
+                                        }
+                                    }
+                                } else
+                                    {
+                                        Bookshelf.Reading = true;
+                                        _bufferedStrings = SplitByLength(_text[_selectedIndex - 1], 130);
+
+                                        _textAnimator = new TypeWriterAnimator();
+
+                                        _textAnimator.TextToType = _bufferedStrings.First();
+                                        _bufferedStrings.Remove(_bufferedStrings.First());
+
+
+                                        _bookshelfList.ClearItems();
+
+                                        _bookshelfList.LockedItems[0] = true;
+
+                                        _bookshelfList.AddItem(" ");
+                                        _bookshelfList.AttachAnimator(_textAnimator);
+
+                                    }
+
+                                }
+
                                 break;
                         }
                     }
@@ -606,6 +696,70 @@ namespace HarvestMoon.GUI
             parts.Add(part);
 
             return parts;
+        }
+        public void ShowBookshelf(string title,
+                                     List<string> items,
+                                     List<string> text,
+                                    Action onInteractionEnd)
+        {
+            _isDisplayingMenu = true;
+            Bookshelf.Reading = false;
+
+            if (_textPanel != null)
+            {
+                UserInterface.Active.RemoveEntity(_textPanel);
+                _textPanel = null;
+            }
+
+            _selectedIndex = 1;
+
+            _title = title;
+            _items = items;
+            _text = text;
+
+            _bookshelfOnAfterConfirmCallback = onInteractionEnd;
+
+
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+
+            // create panel and add to list of panels and manager
+            Panel panel = new Panel(new Vector2(620 * scaleY, -1));
+
+            _textPanel = panel;
+            _textPanel.SetCustomSkin(_window_11Texture);
+
+            UserInterface.Active.AddEntity(panel);
+
+            // list title
+            panel.AddChild(new Header(title));
+            panel.AddChild(new HorizontalLine());
+
+            // create the list
+            _bookshelfList = new SelectList(new Vector2(0, 280));
+
+            // lock and create title
+            _bookshelfList.LockedItems[0] = true;
+            _bookshelfList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4,-8} {5,-8} ", "{{RED}}", "-", "-", "Selection", "-", "-"));
+
+
+            for (int i = 0; i < items.Count; ++i)
+            {
+                // add items as formatted table
+                _bookshelfList.AddItem(System.String.Format("{0,-8} {1,-8} {2, -10} {3,-8} {4,-8}", " ", " ", text[i], " ", " "));
+            }
+
+            if (_bookshelfList.Items.Length >= 2)
+            {
+                _bookshelfList.SelectedIndex = _selectedIndex;
+            }
+            else
+            {
+                _selectedIndex = 0;
+            }
+
+            panel.AddChild(_bookshelfList);
+
+            _npcMenu = NPCMenu.Bookshelf;
         }
 
 
