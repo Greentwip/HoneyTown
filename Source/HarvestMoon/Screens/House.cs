@@ -35,10 +35,15 @@ namespace HarvestMoon.Screens
         {
             base.LoadContent();
 
-            var song = Content.Load<Song>("audio/music/spring");
 
-            MediaPlayer.Play(song);
-            MediaPlayer.IsRepeating = true;
+            if(MediaPlayer.State == MediaState.Stopped)
+            {
+                var song = Content.Load<Song>("audio/music/spring");
+
+                MediaPlayer.Play(song);
+                MediaPlayer.IsRepeating = true;
+            }
+
 
             if (_arrival == HarvestMoon.Arrival.Diary)
             {

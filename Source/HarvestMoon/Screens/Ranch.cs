@@ -13,6 +13,7 @@ using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.General;
 using HarvestMoon.Entities.Ranch;
 using HarvestMoon.Entities.Town;
+using Microsoft.Xna.Framework.Media;
 
 namespace HarvestMoon.Screens
 {
@@ -95,6 +96,8 @@ namespace HarvestMoon.Screens
         
         private HarvestMoon.Arrival _arrival;
 
+        private bool _mediaShouldFadeToTown;
+
         public Ranch(Game game, HarvestMoon.Arrival arrival)
             : base(game)
         {
@@ -111,6 +114,15 @@ namespace HarvestMoon.Screens
         public override void LoadContent()
         {
             base.LoadContent();
+
+            if (MediaPlayer.State == MediaState.Stopped)
+            {
+                var song = Content.Load<Song>("audio/music/spring");
+
+                MediaPlayer.Play(song);
+                MediaPlayer.IsRepeating = true;
+            }
+
 
             // Load the compiled map
             _map = Content.Load<TiledMap>("maps/Ranch");
@@ -450,9 +462,7 @@ namespace HarvestMoon.Screens
                                 if (!door.Triggered)
                                 {
                                     door.Triggered = true;
-                                    var screen = new Town(Game, HarvestMoon.Arrival.Ranch);
-                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                    ScreenManager.LoadScreen(screen, transition);
+                                    this._mediaShouldFadeToTown = true;
                                 }
                             });
                         }
@@ -784,9 +794,24 @@ namespace HarvestMoon.Screens
         {
             base.Update(gameTime);
 
-            // TODO: Add your update logic here
-            // Update the map
-            // map Should be the `TiledMap`
+            if (_mediaShouldFadeToTown)
+            {
+                if(MediaPlayer.Volume > 0.0f && MediaPlayer.State == MediaState.Playing)
+                {
+                    MediaPlayer.Volume -= 0.1f;
+                }
+
+                if(MediaPlayer.Volume <= 0.0f)
+                {
+                    MediaPlayer.Stop();
+                    MediaPlayer.Volume = 1.0f;
+
+                    var screen = new Town(Game, HarvestMoon.Arrival.Ranch);
+                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                    ScreenManager.LoadScreen(screen, transition);
+                }
+
+            }
 
             ClarkRoutine();
 

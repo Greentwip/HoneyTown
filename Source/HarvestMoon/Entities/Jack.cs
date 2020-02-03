@@ -1239,10 +1239,12 @@ namespace HarvestMoon.Entities
                     currentTool = "seeds";
                 }
             }
+
+#if DEBUG
             HarvestMoon.Instance.Season = "Summer";
             HarvestMoon.Instance.Stamina = 50;
             HarvestMoon.Instance.Gold = 10000;
-
+#endif
             if (movementHit)
             {
                 if (_isCarrying)

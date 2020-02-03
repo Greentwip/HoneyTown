@@ -19,6 +19,8 @@ namespace HarvestMoon.Screens
     {
         private HarvestMoon.Arrival _arrival;
 
+        private bool _mediaShouldFadeToRanch;
+
         public Town(Game game, HarvestMoon.Arrival arrival)
             : base(game)
         {
@@ -220,9 +222,7 @@ namespace HarvestMoon.Screens
                                 if (!door.Triggered)
                                 {
                                     door.Triggered = true;
-                                    var screen = new Ranch(Game, HarvestMoon.Arrival.Town);
-                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
-                                    ScreenManager.LoadScreen(screen, transition);
+                                    this._mediaShouldFadeToRanch = true;
                                 }
                             });
                         }
@@ -315,7 +315,26 @@ namespace HarvestMoon.Screens
         {
             base.Update(gameTime);
 
-            // TODO: Add your update logic here
+            if (_mediaShouldFadeToRanch)
+            {
+                if (MediaPlayer.Volume > 0.0f && MediaPlayer.State == MediaState.Playing)
+                {
+                    MediaPlayer.Volume -= 0.1f;
+                }
+
+                if (MediaPlayer.Volume <= 0.0f)
+                {
+                    MediaPlayer.Stop();
+                    MediaPlayer.Volume = 1.0f;
+
+                    var screen = new Ranch(Game, HarvestMoon.Arrival.Town);
+                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                    ScreenManager.LoadScreen(screen, transition);
+                }
+
+            }
+
+
             // Update the map
             // map Should be the `TiledMap`
             _mapRenderer.Update(gameTime);

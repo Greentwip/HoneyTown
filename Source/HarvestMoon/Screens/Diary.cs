@@ -227,9 +227,24 @@ namespace HarvestMoon.Screens
                     if (!_triggered)
                     {
                         _triggered = true;
-                        var screen = new House(Game, HarvestMoon.Arrival.Diary);
-                        var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
-                        ScreenManager.LoadScreen(screen, transition);
+                    }
+                    else
+                    {
+                        if(MediaPlayer.Volume > 0.0f && MediaPlayer.State == MediaState.Playing)
+                        {
+                            MediaPlayer.Volume -= 0.1f;
+                        }
+
+                        if(MediaPlayer.Volume <= 0)
+                        {
+                            MediaPlayer.Stop();
+                            MediaPlayer.Volume = 1.0f;
+
+                            var screen = new House(Game, HarvestMoon.Arrival.Diary);
+                            var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
+                            ScreenManager.LoadScreen(screen, transition);
+
+                        }
                     }
                 }
             }
