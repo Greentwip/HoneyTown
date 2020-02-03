@@ -22,7 +22,7 @@ namespace HarvestMoon.Entities.Town
         public Pete(ContentManager content, Vector2 initialPosition, Size2 size)
             : base(initialPosition, size)
         {
-            float frameDuration = 1.0f / 7.5f;
+            float frameDuration = 1.0f / 4.0f;
 
             var animatedSprite = AnimationLoader.LoadAnimatedSprite(content,
                                                                  "animations/NPC_03",
