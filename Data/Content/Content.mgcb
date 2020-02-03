@@ -650,11 +650,11 @@
 /processorParam:Quality=Best
 /build:audio/music/ranch.mp3
 
-#begin audio/music/spring.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin audio/music/spring.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:audio/music/spring.wav
+/build:audio/music/spring.mp3
 
 #begin audio/music/town.mp3
 /importer:Mp3Importer

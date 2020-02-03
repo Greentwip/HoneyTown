@@ -1036,7 +1036,7 @@ namespace HarvestMoon.GUI
 
             spriteBatch.End();
 
-            var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + HarvestMoon.Instance.DayName;
+            var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + new string(HarvestMoon.Instance.DayName.Take(3).ToArray()) + ", " + HarvestMoon.Instance.Season;
 
             _numberDaySeasonParagraph.Text = numberDaySeasonText;
 

@@ -42,7 +42,7 @@ namespace HarvestMoon
         public int Stamina { get; set; }
         public int MaxStamina { get; set; }
 
-        public List<KeyValuePair<string, bool>> CutsceneTriggers { get; set; }
+        public Dictionary<string, bool> CutsceneTriggers { get; set; }
 
 
         public ScreenManager ScreenManager = new ScreenManager();
@@ -293,7 +293,7 @@ namespace HarvestMoon
             //public List<Crop> Crops { get; set; }
             public List<WoodPiece> WoodPieces { get; set; }
 
-            public List<KeyValuePair<string, bool>> CutsceneTriggers { get; set; }
+            public Dictionary<string, bool> CutsceneTriggers { get; set; }
 
             public int Cows { get; set; }
             public int Sheeps { get; set; }
@@ -338,7 +338,7 @@ namespace HarvestMoon
             StorageFile sampleFile = localFolder.CreateFileAsync(diaryFile + ".xml", CreationCollisionOption.ReplaceExisting).AsTask().Result;
             var fileStream = sampleFile.OpenStreamForWriteAsync().Result;
 #else
-            string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HM");
+            string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HoneyTown");
 
             if (!Directory.Exists(appData))
             {
@@ -372,7 +372,7 @@ namespace HarvestMoon
                 StorageFile sampleFile = localFolder.GetFileAsync(diaryFile + ".xml").AsTask().Result;
                 var fileStream = sampleFile.OpenStreamForReadAsync().Result;
 #else
-                string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HM");
+                string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HoneyTown");
 
                 if (!Directory.Exists(appData))
                 {
@@ -411,7 +411,7 @@ namespace HarvestMoon
                 StorageFile sampleFile = localFolder.GetFileAsync(diaryFile + ".xml").AsTask().Result;
                 var fileStream = sampleFile.OpenStreamForReadAsync().Result;
 #else
-                string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HM");
+                string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HoneyTown");
 
                 if (!Directory.Exists(appData))
                 {
@@ -448,8 +448,8 @@ namespace HarvestMoon
 
                 Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 60;
 
-                var cutsceneTriggers = new List<KeyValuePair<string, bool>>();
-                cutsceneTriggers.Add(new KeyValuePair<string, bool>("onboarding", false));
+                var cutsceneTriggers = new Dictionary<string, bool>();
+                cutsceneTriggers.Add("onboarding", false);
 
                 Instance.CutsceneTriggers = saveGame.CutsceneTriggers.Count == 0 ?
                     cutsceneTriggers : saveGame.CutsceneTriggers;
@@ -547,14 +547,9 @@ namespace HarvestMoon
         public void SetCutsceneTriggered(string cutsceneName, bool trigger)
         {
 
-            for (int i = 0; i<CutsceneTriggers.Count; ++i)
+            if (CutsceneTriggers.ContainsKey(cutsceneName))
             {
-                var keypair = CutsceneTriggers[i];
-
-                if (keypair.Key == cutsceneName)
-                {
-                    CutsceneTriggers[i] = new KeyValuePair<string, bool>(cutsceneName, trigger);
-                }
+                CutsceneTriggers[cutsceneName] = trigger;
             }
         }
  
