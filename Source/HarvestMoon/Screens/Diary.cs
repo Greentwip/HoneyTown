@@ -213,7 +213,7 @@ namespace HarvestMoon.Screens
 
                 _panels.First(p => p != _selectionPanel).Opacity = 150;
 
-                if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown && !_triggered)
+                if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown)
                 {
                     if (_selectionPanel == _panels[0])
                     {
@@ -224,28 +224,27 @@ namespace HarvestMoon.Screens
                         HarvestMoon.Instance.Diary = "diary-2";
                     }
 
-                    if (!_triggered)
-                    {
-                        _triggered = true;
-                    }
-                    else
-                    {
-                        if(MediaPlayer.Volume > 0.0f && MediaPlayer.State == MediaState.Playing)
-                        {
-                            MediaPlayer.Volume -= 0.1f;
-                        }
+                    _triggered = true;
+                    
+                }
+            }
 
-                        if(MediaPlayer.Volume <= 0)
-                        {
-                            MediaPlayer.Stop();
-                            MediaPlayer.Volume = 1.0f;
+            if (_triggered)
+            {
+                if (MediaPlayer.Volume > 0.0f && MediaPlayer.State == MediaState.Playing)
+                {
+                    MediaPlayer.Volume -= 0.1f;
+                }
 
-                            var screen = new House(Game, HarvestMoon.Arrival.Diary);
-                            var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
-                            ScreenManager.LoadScreen(screen, transition);
+                if (MediaPlayer.Volume <= 0)
+                {
+                    MediaPlayer.Stop();
+                    MediaPlayer.Volume = 1.0f;
 
-                        }
-                    }
+                    var screen = new House(Game, HarvestMoon.Arrival.Diary);
+                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 2.0f);
+                    ScreenManager.LoadScreen(screen, transition);
+
                 }
             }
 
