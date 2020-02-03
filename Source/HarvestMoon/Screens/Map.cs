@@ -54,6 +54,7 @@ namespace HarvestMoon.Screens
         public void LoadPlayer()
         {
             _player.UnFreeze();
+            _player.Cooldown();
 
             if (_player.IsCarrying)
             {

@@ -27,6 +27,7 @@ namespace HarvestMoon.Entities.Items
                                                                  false);
 
 
+            AffectionPoints = 4;
 
             _sprite = cropItems;
 

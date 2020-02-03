@@ -11,6 +11,7 @@
     <Item><Key>sickle_001</Key><Value>24 120 24 24</Value></Item>
 
     <Item><Key>milker_001</Key><Value>0 24 24 24</Value></Item>
+    <Item><Key>sword_001</Key><Value>0 0 24 24</Value></Item>
 
     </Asset>
 </XnaContent>

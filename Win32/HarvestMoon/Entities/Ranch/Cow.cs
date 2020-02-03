@@ -19,6 +19,8 @@ namespace HarvestMoon.Entities.Ranch
     {
         private readonly AnimatedSprite _sprite;
 
+        public int Index { get; set; }
+
         private enum Movement
         {
             Up = 0,
@@ -41,6 +43,8 @@ namespace HarvestMoon.Entities.Ranch
         public Cow(ContentManager content, Vector2 initialPosition, Size2 size)
             : base(initialPosition, size)
         {
+            Index = -1;
+
             float frameDuration = 1.0f / 7.5f;
 
             _sprite = AnimationLoader.LoadAnimatedSprite(content,

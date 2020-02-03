@@ -392,6 +392,11 @@
 /processor:PassThroughProcessor
 /build:animations/heroSickleMap.xml
 
+#begin animations/heroSwordMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroSwordMap.xml
+
 #begin animations/heroWateringCanMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -423,6 +428,23 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:animations/monicaMap.xml
+
+#begin animations/mouse.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/mouse.png
+
+#begin animations/mouseMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/mouseMap.xml
 
 #begin animations/NPC_01.png
 /importer:TextureImporter
@@ -5994,6 +6016,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tools-room/items/sickle.png
+
+#begin maps/tools-room/items/sword.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tools-room/items/sword.png
 
 #begin maps/tools-room/items/tomato-seeds.png
 /importer:TextureImporter

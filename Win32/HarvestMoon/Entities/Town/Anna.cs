@@ -108,7 +108,7 @@ namespace HarvestMoon.Entities.Town
             {
                 bool isPositiveReaction = true;
 
-                if (item is Turnip)
+                if (item is Turnip || item is Potato || item is Corn || item is Tomato)
                 {
                     Affection += item.AffectionPoints;
                 }

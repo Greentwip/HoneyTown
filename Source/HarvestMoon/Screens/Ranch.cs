@@ -523,7 +523,20 @@ namespace HarvestMoon.Screens
 
                         }
 
-                        if(obj.Type == "special")
+                        if(obj.Type == "enemy")
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            var objectSize = obj.Size;
+
+                            _entityManager.AddEntity(new Mouse(Content, objectPosition, objectSize));
+
+                        }
+
+                        if (obj.Type == "special")
                         {
                             var objectPosition = obj.Position;
 

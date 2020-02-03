@@ -22,8 +22,86 @@ using HarvestMoon.GUI;
 using GeonBit.UI;
 using MonoGame.Extended.Tiled.Renderers;
 
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml.Serialization;
+
 namespace HarvestMoon
 {
+
+    [XmlRoot("dictionary")]
+    public class SerializableDictionary<TKey, TValue>
+        : Dictionary<TKey, TValue>, IXmlSerializable
+    {
+        public SerializableDictionary() { }
+        public SerializableDictionary(IDictionary<TKey, TValue> dictionary) : base(dictionary) { }
+        public SerializableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) : base(dictionary, comparer) { }
+        public SerializableDictionary(IEqualityComparer<TKey> comparer) : base(comparer) { }
+        public SerializableDictionary(int capacity) : base(capacity) { }
+        public SerializableDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(capacity, comparer) { }
+
+        #region IXmlSerializable Members
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(System.Xml.XmlReader reader)
+        {
+            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+
+            bool wasEmpty = reader.IsEmptyElement;
+            reader.Read();
+
+            if (wasEmpty)
+                return;
+
+            while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            {
+                reader.ReadStartElement("item");
+
+                reader.ReadStartElement("key");
+                TKey key = (TKey)keySerializer.Deserialize(reader);
+                reader.ReadEndElement();
+
+                reader.ReadStartElement("value");
+                TValue value = (TValue)valueSerializer.Deserialize(reader);
+                reader.ReadEndElement();
+
+                this.Add(key, value);
+
+                reader.ReadEndElement();
+                reader.MoveToContent();
+            }
+            reader.ReadEndElement();
+        }
+
+        public void WriteXml(System.Xml.XmlWriter writer)
+        {
+            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+
+            foreach (TKey key in this.Keys)
+            {
+                writer.WriteStartElement("item");
+
+                writer.WriteStartElement("key");
+                keySerializer.Serialize(writer, key);
+                writer.WriteEndElement();
+
+                writer.WriteStartElement("value");
+                TValue value = this[key];
+                valueSerializer.Serialize(writer, value);
+                writer.WriteEndElement();
+
+                writer.WriteEndElement();
+            }
+        }
+        #endregion
+    }
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -42,7 +120,10 @@ namespace HarvestMoon
         public int Stamina { get; set; }
         public int MaxStamina { get; set; }
 
-        public Dictionary<string, bool> CutsceneTriggers { get; set; }
+        public List<bool> MilkedList { get; set; }
+        public List<bool> EggList { get; set; }
+
+        public SerializableDictionary<string, bool> CutsceneTriggers { get; set; }
 
 
         public ScreenManager ScreenManager = new ScreenManager();
@@ -293,7 +374,7 @@ namespace HarvestMoon
             //public List<Crop> Crops { get; set; }
             public List<WoodPiece> WoodPieces { get; set; }
 
-            public Dictionary<string, bool> CutsceneTriggers { get; set; }
+            public SerializableDictionary<string, bool> CutsceneTriggers { get; set; }
 
             public int Cows { get; set; }
             public int Sheeps { get; set; }
@@ -448,7 +529,7 @@ namespace HarvestMoon
 
                 Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 60;
 
-                var cutsceneTriggers = new Dictionary<string, bool>();
+                var cutsceneTriggers = new SerializableDictionary<string, bool>();
                 cutsceneTriggers.Add("onboarding", false);
 
                 Instance.CutsceneTriggers = saveGame.CutsceneTriggers.Count == 0 ?
@@ -518,13 +599,19 @@ namespace HarvestMoon
                 // no save game file found
             }
 
-            if(saveGame.PlayerName == default(string))
+            if(saveGame.PlayerName == default(string)) // default when first game loads (no save file found)
             {
                 Instance.DayNumber = 1;
                 Instance.Season = "Spring";
                 Instance.DayName = "Monday";
                 Instance.YearNumber = 1;
                 Instance.HasNotSeenTheRanch = true;
+
+                var cutsceneTriggers = new SerializableDictionary<string, bool>();
+                cutsceneTriggers.Add("onboarding", false);
+
+                CutsceneTriggers = cutsceneTriggers;
+
             }
 
         }
@@ -567,6 +654,20 @@ namespace HarvestMoon
             _afternoon = (_day * 60.0f / 3) * 3;
 
             RanchDayTime = 0.0f;
+
+            MilkedList = new List<bool>();
+
+            for(int i = 0; i<8; ++i)
+            {
+                MilkedList.Add(false);
+            }
+
+            EggList = new List<bool>();
+
+            for (int i = 0; i < 8; ++i)
+            {
+                EggList.Add(false);
+            }
         }
 
         public void IncrementDay()

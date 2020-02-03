@@ -165,7 +165,8 @@ namespace HarvestMoon.Screens
 
             for(int i = 0; i<HarvestMoon.Instance.Cows; ++i)
             {
-                _entityManager.AddEntity(new Cow(Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
+                var cow = _entityManager.AddEntity(new Cow(Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
+                cow.Index = i;
             }
 
             LoadPlayer();

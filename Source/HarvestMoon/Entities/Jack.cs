@@ -233,6 +233,12 @@ namespace HarvestMoon.Entities
                                                                       frameDuration,
                                                                       false);
 
+            var heroSwordAnimation = AnimationLoader.LoadAnimatedSprite(content,
+                                                                      "animations/hero",
+                                                                      "animations/heroSwordMap",
+                                                                      "heroSword",
+                                                                      frameDuration,
+                                                                      false);
             _toolingSprites.Add("axe", heroAxeAnimation);
             _toolingSprites.Add("hammer", heroHammerAnimation);
             _toolingSprites.Add("hoe", heroHoeAnimation);
@@ -240,6 +246,7 @@ namespace HarvestMoon.Entities
             _toolingSprites.Add("seeds", heroSeedsAnimation);
             _toolingSprites.Add("watering-can", heroWateringCanAnimation);
             _toolingSprites.Add("milker", heroMilkerAnimation);
+            _toolingSprites.Add("sword", heroSwordAnimation);
 
             _transform = new Transform2
             {
@@ -266,6 +273,7 @@ namespace HarvestMoon.Entities
             _holdingItemSprites.Add("sickle", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sickle")));
             _holdingItemSprites.Add("watering-can", new Sprite(content.Load<Texture2D>("maps/tools-room/items/watering-can")));
             _holdingItemSprites.Add("milker", new Sprite(content.Load<Texture2D>("maps/tools-room/items/milker")));
+            _holdingItemSprites.Add("sword", new Sprite(content.Load<Texture2D>("maps/tools-room/items/sword")));
         }
 
         public void SetupActionBoundingRectangle(Vector2 withPosition)
@@ -766,32 +774,58 @@ namespace HarvestMoon.Entities
             }
         }
 
+        public void Sword()
+        {
+            if (_currentInteractable != null)
+            {
+                if (_currentInteractable is Ranch.Mouse)
+                {
+                    var mouse = _currentInteractable as Ranch.Mouse;
+                    var intersection = mouse.BoundingRectangle.Intersection(ActionBoundingRectangle);
+
+                    var normal = new Vector2(Position.X - intersection.Center.X, Position.Y - intersection.Center.Y);
+                    normal.Normalize();
+                    mouse.TakeDamage(1, normal);
+
+
+                }
+            }
+        }
+
+
         public void Milk()
         {
             if(_currentInteractable != null)
             {
                 if(_currentInteractable is Cow)
                 {
-                    var harvest = new Milk(_contentManager, (_currentInteractable as Cow).BoundingRectangle.Center);
+                    var cow = _currentInteractable as Cow;
 
-                    if (harvest != null)
+                    if (!HarvestMoon.Instance.MilkedList[cow.Index])
                     {
-                        _entityManager.SubmitEntity(harvest);
-                        _carryingObject = harvest;
+                        HarvestMoon.Instance.MilkedList[cow.Index] = true;
+                        var harvest = new Milk(_contentManager, (_currentInteractable as Cow).BoundingRectangle.Center);
 
-                        var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+                        if (harvest != null)
+                        {
+                            _entityManager.SubmitEntity(harvest);
+                            _carryingObject = harvest;
 
-                        _tweener.Tween(harvest, carryingParameters, 0.25f)
-                                .Ease(Ease.ExpoInOut)
-                                .OnBegin(() =>
-                                {
-                                    Freeze();
-                                    _carryingObject.Planked = false;
-                                    _carryingObject.Priority = Priority;
-                                    _isCarrying = true;
-                                    _isPacking = true;
-                                });
+                            var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+
+                            _tweener.Tween(harvest, carryingParameters, 0.25f)
+                                    .Ease(Ease.ExpoInOut)
+                                    .OnBegin(() =>
+                                    {
+                                        Freeze();
+                                        _carryingObject.Planked = false;
+                                        _carryingObject.Priority = Priority;
+                                        _isCarrying = true;
+                                        _isPacking = true;
+                                    });
+                        }
                     }
+
                 }
             }
         }
@@ -992,6 +1026,7 @@ namespace HarvestMoon.Entities
                     }
 
                     UnFreeze();
+                    Cooldown();
                 }
             }
 
@@ -1059,6 +1094,11 @@ namespace HarvestMoon.Entities
                         HarvestMoon.Instance.Stamina -= lessStamina;
                         _isTooling = true;
                         Freeze();
+
+                        if(currentTool == "sword")
+                        {
+                            Sword(); // sword is immediate.
+                        }
                     }
                     else
                     {

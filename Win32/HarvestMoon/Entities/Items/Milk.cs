@@ -27,7 +27,7 @@ namespace HarvestMoon.Entities.Items
                                                         1.0f / 7.5f,
                                                         false);
 
-
+            AffectionPoints = 8;
 
             _sprite = items;
 
