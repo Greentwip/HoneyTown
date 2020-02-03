@@ -183,8 +183,8 @@ namespace HarvestMoon.Screens
             _mapRenderer.Update(gameTime);
             var keyboardState = HarvestMoon.Instance.Input;
 
-            if ((keyboardState.IsKeyDown(InputDevice.Keys.Up) && !_isUpButtonDown) || 
-                (keyboardState.IsKeyDown(InputDevice.Keys.Down) && !_isDownButtonDown))
+            if (((keyboardState.IsKeyDown(InputDevice.Keys.Up) && !_isUpButtonDown) || 
+                (keyboardState.IsKeyDown(InputDevice.Keys.Down) && !_isDownButtonDown)) && !_triggered)
             {
                 if (keyboardState.IsKeyDown(InputDevice.Keys.Up))
                 {
@@ -213,7 +213,7 @@ namespace HarvestMoon.Screens
 
                 _panels.First(p => p != _selectionPanel).Opacity = 150;
 
-                if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown)
+                if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown && !_triggered)
                 {
                     if (_selectionPanel == _panels[0])
                     {
