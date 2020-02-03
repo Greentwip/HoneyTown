@@ -89,6 +89,50 @@ namespace HarvestMoon.Screens
 
                             _player.PlayerFacing = Jack.Facing.DOWN;
                         }
+                        else if (obj.Name == "from-librarian" && _arrival == HarvestMoon.Arrival.Librarian)
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if (_player == null)
+                            {
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
+
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                            _player.PlayerFacing = Jack.Facing.DOWN;
+                        }
+                        else if (obj.Name == "from-dealer" && _arrival == HarvestMoon.Arrival.Dealer)
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            _player = HarvestMoon.Instance.RanchState.Entities.FirstOrDefault(e => e is Jack) as Jack;
+
+                            if (_player == null)
+                            {
+                                _player = _entityManager.AddEntity(new Jack(Content, _entityManager, this, objectPosition));
+                            }
+                            else
+                            {
+                                _entityManager.AddEntity(_player);
+                            }
+
+                            _player.Position = new Vector2(objectPosition.X, objectPosition.Y);
+
+                            _player.PlayerFacing = Jack.Facing.DOWN;
+                        }
                     }
                 }
                 else if (layer.Name == "Interactables")
@@ -117,13 +161,6 @@ namespace HarvestMoon.Screens
                             if (obj.Name == "ann")
                             {
                                 _entityManager.AddEntity(new Ann(Content, objectPosition, objectSize));
-                            }
-                            else if (obj.Name == "livestock-dealer")
-                            {
-                                _entityManager.AddEntity(new LivestockDealerStore(objectPosition,
-                                                                                    objectSize,
-                                                                                    "All purchases will be delivered the same day you make them.",
-                                                                                    "Livestock"));
                             }
                             else
                             {
@@ -182,6 +219,48 @@ namespace HarvestMoon.Screens
                                 {
                                     door.Triggered = true;
                                     var screen = new Library(Game);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
+                        else if (obj.Name == "librarian")
+                        {
+                            var door = new RanchDoor(Content, objectPosition, objectSize);
+                            _entityManager.AddEntity(door);
+
+                            door.OnTriggerStart(() =>
+                            {
+                                _player.Freeze();
+                            });
+
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new Librarian(Game);
+                                    var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
+                                    ScreenManager.LoadScreen(screen, transition);
+                                }
+                            });
+                        }
+                        else if (obj.Name == "dealer")
+                        {
+                            var door = new RanchDoor(Content, objectPosition, objectSize);
+                            _entityManager.AddEntity(door);
+
+                            door.OnTriggerStart(() =>
+                            {
+                                _player.Freeze();
+                            });
+
+                            door.OnTriggerEnd(() =>
+                            {
+                                if (!door.Triggered)
+                                {
+                                    door.Triggered = true;
+                                    var screen = new Dealer(Game);
                                     var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                     ScreenManager.LoadScreen(screen, transition);
                                 }

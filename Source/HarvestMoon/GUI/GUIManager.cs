@@ -21,6 +21,7 @@ using HarvestMoon.Input;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
+using HarvestMoon.Entities.General;
 
 namespace HarvestMoon.GUI
 {
@@ -88,6 +89,7 @@ namespace HarvestMoon.GUI
         private Dictionary<string, Sprite> _holdingItemSprites = new Dictionary<string, Sprite>();
 
         private Paragraph _numberDaySeasonParagraph;
+        private Paragraph _goldParagraph;
 
         private Texture2D _window_11Texture;
 
@@ -286,26 +288,30 @@ namespace HarvestMoon.GUI
                     switch (_npcMenu)
                     {
                         case NPCMenu.UpfrontStore:
-                            _upfrontStoreList.ClearItems();
-
-                            _upfrontStoreList.LockedItems[0] = true;
-                            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
-
-                            _amounts[_selectedIndex - 1] = _amounts[_selectedIndex - 1] - 1;
-
-                            if (_amounts[_selectedIndex - 1] < 0)
+                            if (!UpfrontStore.ConfirmPurchase)
                             {
-                                _amounts[_selectedIndex - 1] = 0;
+                                _upfrontStoreList.ClearItems();
+
+                                _upfrontStoreList.LockedItems[0] = true;
+                                _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
+
+                                _amounts[_selectedIndex - 1] = _amounts[_selectedIndex - 1] - 1;
+
+                                if (_amounts[_selectedIndex - 1] < 0)
+                                {
+                                    _amounts[_selectedIndex - 1] = 0;
+                                }
+
+                                for (int i = 0; i < _items.Count; ++i)
+                                {
+                                    // add items as formatted table
+                                    _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                                }
+
+                                UpdateTotal();
+
+
                             }
-
-                            for (int i = 0; i < _items.Count; ++i)
-                            {
-                                // add items as formatted table
-                                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
-                            }
-
-                            UpdateTotal();
-
                             break;
                     }
 
@@ -323,26 +329,30 @@ namespace HarvestMoon.GUI
                     switch (_npcMenu)
                     {
                         case NPCMenu.UpfrontStore:
-                            _upfrontStoreList.ClearItems();
-
-                            _upfrontStoreList.LockedItems[0] = true;
-                            _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
-
-                            _amounts[_selectedIndex - 1] = _amounts[_selectedIndex - 1] + 1;
-
-                            if (_amounts[_selectedIndex - 1] > 10)
+                            if (!UpfrontStore.ConfirmPurchase)
                             {
-                                _amounts[_selectedIndex - 1] = 10;
+                                _upfrontStoreList.ClearItems();
+
+                                _upfrontStoreList.LockedItems[0] = true;
+                                _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
+
+                                _amounts[_selectedIndex - 1] = _amounts[_selectedIndex - 1] + 1;
+
+                                if (_amounts[_selectedIndex - 1] > 10)
+                                {
+                                    _amounts[_selectedIndex - 1] = 10;
+                                }
+
+                                for (int i = 0; i < _items.Count; ++i)
+                                {
+                                    // add items as formatted table
+                                    _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                                }
+
+                                UpdateTotal();
+
+
                             }
-
-                            for (int i = 0; i < _items.Count; ++i)
-                            {
-                                // add items as formatted table
-                                _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
-                            }
-
-                            UpdateTotal();
-
                             break;
                     }
                 }
@@ -377,24 +387,28 @@ namespace HarvestMoon.GUI
                             break;
 
                         case NPCMenu.UpfrontStore:
-                            if (_isDownButtonDown)
+                            if (!UpfrontStore.ConfirmPurchase)
                             {
-                                _selectedIndex++;
-
-                                if (_selectedIndex == _upfrontStoreList.Items.Length)
+                                if (_isDownButtonDown)
                                 {
-                                    _selectedIndex = 1;
+                                    _selectedIndex++;
+
+                                    if (_selectedIndex == _upfrontStoreList.Items.Length)
+                                    {
+                                        _selectedIndex = 1;
+                                    }
                                 }
-                            }
 
-                            if (_isUpButtonDown)
-                            {
-                                _selectedIndex--;
-
-                                if(_selectedIndex == 0)
+                                if (_isUpButtonDown)
                                 {
-                                    _selectedIndex = _upfrontStoreList.Items.Length - 1;
+                                    _selectedIndex--;
+
+                                    if (_selectedIndex == 0)
+                                    {
+                                        _selectedIndex = _upfrontStoreList.Items.Length - 1;
+                                    }
                                 }
+
                             }
                             break;
                     }
@@ -427,14 +441,23 @@ namespace HarvestMoon.GUI
                     {
                         if(_npcMenu == NPCMenu.UpfrontStore)
                         {
-                            UserInterface.Active.RemoveEntity(_textPanel);
-                            _textPanel = null;
-                            _npcCoolDown = true;
-                            _busy = true;
-                            _isDisplayingMenu = false;
+                            if (UpfrontStore.ConfirmPurchase)
+                            {
+                                UpdateTotal();
+                                UpfrontStore.ConfirmPurchase = false;
+                            }
+                            else
+                            {
+                                UserInterface.Active.RemoveEntity(_textPanel);
+                                _textPanel = null;
+                                _npcCoolDown = true;
+                                _busy = true;
+                                _isDisplayingMenu = false;
 
-                            _storeOnAfterConfirmCallback?.Invoke();
-                            _storeOnAfterConfirmCallback = null;
+                                _storeOnAfterConfirmCallback?.Invoke();
+                                _storeOnAfterConfirmCallback = null;
+
+                            }
                         }
                     }
                 }
@@ -492,25 +515,31 @@ namespace HarvestMoon.GUI
 
                                 var result = _onPurchaseCallback?.Invoke(items, amounts, _selectedTotal);
 
-                                for(int i = 0; i<_amounts.Count; ++i)
+                                if(!UpfrontStore.ConfirmPurchase)
                                 {
-                                    _amounts[i] = 0;
+                                    for (int i = 0; i < _amounts.Count; ++i)
+                                    {
+                                        _amounts[i] = 0;
+                                    }
+
+                                    UpdateTotal(result);
+
+                                    _upfrontStoreList.ClearItems();
+
+                                    _upfrontStoreList.LockedItems[0] = true;
+                                    _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
+
+                                    for (int i = 0; i < _items.Count; ++i)
+                                    {
+                                        // add items as formatted table
+                                        _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                                    }
+
                                 }
-
-                                UpdateTotal(result);
-
-                                _upfrontStoreList.ClearItems();
-
-                                _upfrontStoreList.LockedItems[0] = true;
-                                _upfrontStoreList.AddItem(System.String.Format("{0}{1,-8} {2,-8} {3, -10} {4, -10}", "{{RED}}", "Name", "Class", "Price", "Amount"));
-
-                                for (int i = 0; i < _items.Count; ++i)
+                                else
                                 {
-                                    // add items as formatted table
-                                    _upfrontStoreList.AddItem(System.String.Format("{0,-8} {1,-8} {2,-10} {3, -10}", _items[i], _classes[i], _prices[i].ToString(), _amounts[i].ToString()));
+                                    UpdateTotal(result);
                                 }
-
-
                                 break;
                         }
                     }
@@ -617,6 +646,7 @@ namespace HarvestMoon.GUI
             Panel panel = new Panel(new Vector2(620 * scaleY, -1));
 
             _textPanel = panel;
+            _textPanel.SetCustomSkin(_window_11Texture);
 
             UserInterface.Active.AddEntity(panel);
 
@@ -743,11 +773,15 @@ namespace HarvestMoon.GUI
             float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
 
             var numberDaySeasonText = HarvestMoon.Instance.DayNumber.ToString() + ", " + HarvestMoon.Instance.DayName;
+            var goldText = HarvestMoon.Instance.Gold.ToString() + "G";
 
             // create a panel and position in bottom center of screen
             _numberDaySeasonParagraph = new Paragraph(numberDaySeasonText, Anchor.TopLeft, null, new Vector2(12 * scaleX, (80 - 16) * scaleY));
 
+            _goldParagraph = new Paragraph(numberDaySeasonText, Anchor.BottomLeft, null, new Vector2(12 * scaleX, (80 - 16) * scaleY));
+
             UserInterface.Active.AddEntity(_numberDaySeasonParagraph);
+            UserInterface.Active.AddEntity(_goldParagraph);
 
         }
 
@@ -788,6 +822,19 @@ namespace HarvestMoon.GUI
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
+            var vHeight = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height;
+
+            var gRect = _goldSprite.GetBoundingRectangle(new Transform2(new Vector2(0, 0)));
+            gRect = _goldSprite.GetBoundingRectangle(
+                new Transform2(
+                    new Vector2(0 + gRect.Width + gRect.Width * 0.5f, 
+                                vHeight- gRect.Height)));
+            var gSize = new Vector2(gRect.Width, gRect.Height);
+            spriteBatch.Draw(_goldSprite, gRect.Position, 0, new Vector2(2, 2));
+
+            spriteBatch.End();
+
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
             var rectangle = _dayToolSprite.GetBoundingRectangle(new Transform2(new Vector2(0, 0)));
             spriteBatch.Draw(_dayToolSprite, new Vector2(rectangle.Width, rectangle.Height), 0, new Vector2(2, 2));
             var currentTool = HarvestMoon.Instance.GetCurrentTool();
@@ -818,6 +865,13 @@ namespace HarvestMoon.GUI
 
             _numberDaySeasonParagraph.Text = numberDaySeasonText;
 
+            var goldText = HarvestMoon.Instance.Gold.ToString() + "G";
+            _goldParagraph.Text = goldText;
+
+            float scaleX = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Width / 640.0f;
+            float scaleY = HarvestMoon.Instance.Graphics.GraphicsDevice.Viewport.Height / 480.0f;
+
+            _goldParagraph.Offset = new Vector2((gRect.Width / 2 + 32)*scaleX, (gRect.Height / 2 + 12)*scaleY);
 
             UserInterface.Active.Draw(spriteBatch);
         }

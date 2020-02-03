@@ -10,6 +10,9 @@ namespace MonoGame.Extended.Screens
         }
 
         private Screen _activeScreen;
+
+        public Screen ActiveScreen => _activeScreen;
+
         //private bool _isInitialized;
         //private bool _isLoaded;
         private Transition _activeTransition;

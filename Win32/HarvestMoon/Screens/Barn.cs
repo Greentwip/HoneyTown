@@ -32,7 +32,9 @@ namespace HarvestMoon.Screens
         {
             _arrival = arrival;
 
-            for(int i = 0; i<8; ++i)
+            _cowPlacements = new List<CowPlacement>();
+
+            for (int i = 0; i<8; ++i)
             {
                 _cowPlacements.Add(new CowPlacement());
             }

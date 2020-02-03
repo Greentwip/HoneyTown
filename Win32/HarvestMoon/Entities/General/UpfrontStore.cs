@@ -6,9 +6,12 @@ using MonoGame.Extended;
 
 namespace HarvestMoon.Entities.General
 {
-    class UpfrontStore: NPC
+    public class UpfrontStore: NPC
     {
         private string _title;
+
+        public static bool ConfirmPurchase;
+
 
         protected List<string> _items = new List<string>();
         protected List<string> _classes = new List<string>();

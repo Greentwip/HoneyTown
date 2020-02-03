@@ -42,7 +42,7 @@ namespace HarvestMoon.Entities
         private readonly AnimatedSprite _heroHoldSprite;
 
         private readonly AnimatedSprite _heroCarrySprite;
-        private readonly AnimatedSprite _heroRunSprite;
+        private readonly AnimatedSprite _heroRunSpriteA;
 
         private readonly Dictionary<string, AnimatedSprite> _toolingSprites = new Dictionary<string, AnimatedSprite>();
 
@@ -169,14 +169,12 @@ namespace HarvestMoon.Entities
                                                                  true);
 
 
-            _heroRunSprite = AnimationLoader.LoadAnimatedSprite(content,
-                                                                 "animations/heroRun",
-                                                                 "animations/heroRunMap",
-                                                                 "heroRun",
+            _heroRunSpriteA = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/heroRunA",
+                                                                 "animations/heroRunMapA",
+                                                                 "heroRunA",
                                                                  frameDuration,
                                                                  true);
-
-
 
             var heroAxeAnimation = AnimationLoader.LoadAnimatedSprite(content,
                                                                       "animations/heroAxe",
@@ -838,7 +836,9 @@ namespace HarvestMoon.Entities
 
         public override void Update(GameTime gameTime)
         {
+
             var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _sprite.Update(deltaSeconds);
 
             _tweener.Update(deltaSeconds);
 
@@ -909,7 +909,11 @@ namespace HarvestMoon.Entities
                     _toolTimer = 0.0f;
                     _isTooling = false;
 
-                    _sprite.CurrentAnimation.Rewind();
+                    if(_sprite.CurrentAnimation != null)
+                    {
+                        _sprite.CurrentAnimation.Rewind();
+                        _sprite.Update(gameTime);
+                    }
 
                     if (currentTool == "hoe")
                     {
@@ -956,7 +960,11 @@ namespace HarvestMoon.Entities
                 {
                     _holdTimer = 0.0f;
                     _isHolding = false;
-                    _sprite.CurrentAnimation.Rewind();
+                    if(_sprite.CurrentAnimation != null)
+                    {
+                        _sprite.CurrentAnimation.Rewind();
+                        _sprite.Update(gameTime);
+                    }
 
                     UnFreeze();
                 }
@@ -984,7 +992,7 @@ namespace HarvestMoon.Entities
             }
 
 
-            if (keyboardState.IsKeyDown(InputDevice.Keys.B) && !_isToolButtonDown && !_isCarrying && !_isFrozen)
+            if (keyboardState.IsKeyDown(InputDevice.Keys.B) && !_isToolButtonDown && !_isCarrying && !_isFrozen && !_busy)
             {
                 _isToolButtonDown = true;
 
@@ -1157,7 +1165,7 @@ namespace HarvestMoon.Entities
                 }
                 else if (isRunning)
                 {
-                    _sprite = _heroRunSprite;
+                    _sprite = _heroRunSpriteA;
                 }
                 else
                 {
@@ -1192,6 +1200,7 @@ namespace HarvestMoon.Entities
 
             }
 
+            string newAnimation = "";
 
             switch (_playerFacing)
             {
@@ -1200,15 +1209,15 @@ namespace HarvestMoon.Entities
                     {
                         if (_isCarrying)
                         {
-                            _sprite.Play("carry_up");
+                            newAnimation = ("carry_up");
                         }
                         else if (isRunning)
                         {
-                            _sprite.Play("run_up");
+                            newAnimation = ("run_up");
                         }
                         else
                         {
-                            _sprite.Play("walk_up");
+                            newAnimation = ("walk_up");
                         }
 
                     }
@@ -1216,23 +1225,23 @@ namespace HarvestMoon.Entities
                     {
                         if (_isCarrying && _isPacking)
                         {
-                            _sprite.Play("pack_up");
+                            newAnimation = ("pack_up");
                         }
                         else if (_isCarrying)
                         {
-                            _sprite.Play("carry_up_idle");
+                            newAnimation = ("carry_up_idle");
                         }
                         else if (_isTooling)
                         {
-                            _sprite.Play(currentTool + "_" + "up");
+                            newAnimation = (currentTool + "_" + "up");
                         }
                         else if (_isHolding)
                         {
-                            _sprite.Play("hold");
+                            newAnimation = ("hold");
                         }
                         else
                         {
-                            _sprite.Play("walk_up_idle");
+                            newAnimation = ("walk_up_idle");
                         }
                     }
                     break;
@@ -1242,38 +1251,38 @@ namespace HarvestMoon.Entities
                     {
                         if (_isCarrying)
                         {
-                            _sprite.Play("carry_down");
+                            newAnimation = ("carry_down");
                         }
                         else if (isRunning)
                         {
-                            _sprite.Play("run_down");
+                            newAnimation = ("run_down");
                         }
                         else
                         {
-                            _sprite.Play("walk_down");
+                            newAnimation = ("walk_down");
                         }
                     }
                     else
                     {
                         if (_isCarrying && _isPacking)
                         {
-                            _sprite.Play("pack_down");
+                            newAnimation = ("pack_down");
                         }
                         else if (_isCarrying)
                         {
-                            _sprite.Play("carry_down_idle");
+                            newAnimation = ("carry_down_idle");
                         }
                         else if (_isTooling)
                         {
-                            _sprite.Play(currentTool + "_" + "down");
+                            newAnimation = (currentTool + "_" + "down");
                         }
                         else if (_isHolding)
                         {
-                            _sprite.Play("hold");
+                            newAnimation = ("hold");
                         }
                         else
                         {
-                            _sprite.Play("walk_down_idle");
+                            newAnimation = ("walk_down_idle");
                         }
                     }
                     break;
@@ -1283,38 +1292,38 @@ namespace HarvestMoon.Entities
                     {
                         if (_isCarrying)
                         {
-                            _sprite.Play("carry_left");
+                            newAnimation = ("carry_left");
                         }
                         else if (isRunning)
                         {
-                            _sprite.Play("run_left");
+                            newAnimation = ("run_left");
                         }
                         else
                         {
-                            _sprite.Play("walk_left");
+                            newAnimation = ("walk_left");
                         }
                     }
                     else
                     {
                         if (_isCarrying && _isPacking)
                         {
-                            _sprite.Play("pack_left");
+                            newAnimation = ("pack_left");
                         }
                         else if (_isCarrying)
                         {
-                            _sprite.Play("carry_left_idle");
+                            newAnimation = ("carry_left_idle");
                         }
                         else if (_isTooling)
                         {
-                            _sprite.Play(currentTool + "_" + "left");
+                            newAnimation = (currentTool + "_" + "left");
                         }
                         else if (_isHolding)
                         {
-                            _sprite.Play("hold");
+                            newAnimation = ("hold");
                         }
                         else
                         {
-                            _sprite.Play("walk_left_idle");
+                            newAnimation = ("walk_left_idle");
                         }
                     }
                     break;
@@ -1324,43 +1333,60 @@ namespace HarvestMoon.Entities
                     {
                         if (_isCarrying)
                         {
-                            _sprite.Play("carry_right");
+                            newAnimation = ("carry_right");
                         }
                         else if (isRunning)
                         {
-                            _sprite.Play("run_right");
+                            newAnimation = ("run_right");
                         }
                         else
                         {
-                            _sprite.Play("walk_right");
+                            newAnimation = ("walk_right");
                         }
                     }
                     else
                     {
                         if (_isCarrying && _isPacking)
                         {
-                            _sprite.Play("pack_right");
+                            newAnimation = ("pack_right");
                         }
                         else if (_isCarrying)
                         {
-                            _sprite.Play("carry_right_idle");
+                            newAnimation = ("carry_right_idle");
                         }
                         else if (_isTooling)
                         {
-                            _sprite.Play(currentTool + "_" + "right");
+                            newAnimation = (currentTool + "_" + "right");
                         }
                         else if (_isHolding)
                         {
-                            _sprite.Play("hold");
+                            newAnimation = ("hold");
                         }
                         else
                         {
-                            _sprite.Play("walk_right_idle");
+                            newAnimation = ("walk_right_idle");
                         }
 
                     }
 
                     break;
+            }
+
+            if(newAnimation != "" && newAnimation != default(string))
+            {
+                if(_sprite.CurrentAnimation != null)
+                {
+                    if (_sprite.CurrentAnimation.Name != newAnimation)
+                    {
+                        _sprite.Play(newAnimation);
+                        _sprite.CurrentAnimation.Rewind();
+                        _sprite.Update(gameTime);
+                    }
+                }
+                else
+                {
+                    _sprite.Play(newAnimation);
+                }
             }
 
             if(_currentInteractable != null)
@@ -1382,10 +1408,6 @@ namespace HarvestMoon.Entities
             }
 
             Position += Velocity * deltaSeconds;
-
-
-
-            _sprite.Update(deltaSeconds);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -18,6 +18,7 @@ using System;
 using static HarvestMoon.Entities.General.NPC;
 using HarvestMoon.Entities.Ranch;
 using HarvestMoon.Input;
+using HarvestMoon.Entities.General;
 
 namespace HarvestMoon.Screens
 {
@@ -240,6 +241,50 @@ namespace HarvestMoon.Screens
 
                     }
                 }
+            }
+
+            var npcs = _entityManager.Entities.Where(e => e is NPC).Cast<NPC>().ToArray();
+
+            npcs = npcs.Where(e => e.BoundingBoxEnabled).Cast<NPC>().ToArray();
+
+            foreach(var npc in npcs)
+            {
+                foreach (var wall in walls)
+                {
+                    if (wall.BoundingRectangle.Intersects(npc.BoundingRectangle))
+                    {
+                        var intersection = wall.BoundingRectangle.Intersection(npc.BoundingRectangle);
+                        if (intersection.Height > intersection.Width)
+                        {
+                            if (npc.X > wall.Position.X)
+                            {
+                                npc.X = npc.X + intersection.Width;
+                                npc.Y = npc.Y;
+                            }
+                            else
+                            {
+                                npc.X = npc.X - intersection.Width;
+                                npc.Y = npc.Y;
+                            }
+
+                        }
+                        else
+                        {
+                            if (npc.Y > wall.Position.Y)
+                            {
+                                npc.X = npc.X;
+                                npc.Y = npc.Y + intersection.Height;
+                            }
+                            else
+                            {
+                                npc.X = npc.X;
+                                npc.Y = npc.Y - intersection.Height;
+                            }
+
+                        }
+                    }
+                }
+
             }
 
             var doors = _entityManager.Entities.Where(e => e is Door).Cast<Door>().ToArray();

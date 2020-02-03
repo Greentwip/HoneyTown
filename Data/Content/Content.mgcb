@@ -39,6 +39,11 @@
 /processorParam:TextureFormat=Color
 /build:animations/ann.png
 
+#begin animations/annaMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/annaMap.xml
+
 #begin animations/annMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -287,7 +292,7 @@
 /processor:PassThroughProcessor
 /build:animations/heroPackMap.xml
 
-#begin animations/heroRun.png
+#begin animations/heroRunA.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -297,12 +302,29 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:animations/heroRun.png
+/build:animations/heroRunA.png
 
-#begin animations/heroRunMap.xml
+#begin animations/heroRunB.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/heroRunB.png
+
+#begin animations/heroRunMapA.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
-/build:animations/heroRunMap.xml
+/build:animations/heroRunMapA.xml
+
+#begin animations/heroRunMapB.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/heroRunMapB.xml
 
 #begin animations/heroSeeds.png
 /importer:TextureImporter
@@ -359,6 +381,35 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:animations/iconSetMap.xml
+
+#begin animations/NPC_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_03.png
+
+#begin animations/NPC_25.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_25.png
+
+#begin animations/peteMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/peteMap.xml
 
 #begin animations/sos.png
 /importer:TextureImporter
@@ -5167,6 +5218,11 @@
 /processor:TiledMapProcessor
 /build:maps/City.tmx
 
+#begin maps/Dealer.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/Dealer.tmx
+
 #begin maps/diary/screen.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -5188,6 +5244,11 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:maps/House.tmx
+
+#begin maps/Librarian.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/Librarian.tmx
 
 #begin maps/Library.tmx
 /importer:TiledMapImporter

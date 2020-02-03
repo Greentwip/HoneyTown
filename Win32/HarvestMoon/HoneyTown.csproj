@@ -81,7 +81,6 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Tools\Hammer.cs" Link="Entities\Tools\Hammer.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Ranch\WoodPiece.cs" Link="Entities\Ranch\WoodPiece.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Entities\Jack.cs" Link="Entities\Jack.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Entities\Town\Ann.cs" Link="Entities\Town\Ann.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\GamepadInputDevice.cs" Link="Input\GamepadInputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\InputDevice.cs" Link="Input\InputDevice.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Input\KeyboardInputDevice.cs" Link="Input\KeyboardInputDevice.cs" />
@@ -92,7 +91,9 @@
     <Compile Include="Entities\Ranch\Cow.cs" />
     <Compile Include="Entities\Ranch\BarnDoor.cs" />
     <Compile Include="Entities\Ranch\RanchDoor.cs" />
+    <Compile Include="Entities\Town\Anna.cs" />
     <Compile Include="Entities\Town\LivestockDealerStore.cs" />
+    <Compile Include="Entities\Town\Pete.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\GUI\GUIManager.cs" Link="GUI\GUIManager.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Diary.cs" Link="Screens\Diary.cs" />
@@ -111,6 +112,8 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tweener.cs" Link="Tweening\Tweener.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Text\StringsManager.cs" Link="Text\StringsManager.cs" />
     <Compile Include="Screens\Barn.cs" />
+    <Compile Include="Screens\Dealer.cs" />
+    <Compile Include="Screens\Librarian.cs" />
     <Compile Include="Screens\Library.cs" />
   </ItemGroup>
   <ItemGroup>

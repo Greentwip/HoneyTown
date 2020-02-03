@@ -9,13 +9,12 @@ using HarvestMoon.Entities;
 using System.Linq;
 using MonoGame.Extended.Screens.Transitions;
 using HarvestMoon.Entities.Tools;
-using HarvestMoon.Entities.Town;
 
 namespace HarvestMoon.Screens
 {
-    public class Library : Map
+    public class Librarian : Map
     {
-        public Library(Game game)
+        public Librarian(Game game)
             : base(game)
         {
         }
@@ -31,7 +30,7 @@ namespace HarvestMoon.Screens
             base.LoadContent();
 
             // Load the compiled map
-            _map = Content.Load<TiledMap>("maps/Library");
+            _map = Content.Load<TiledMap>("maps/Librarian");
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
@@ -107,7 +106,7 @@ namespace HarvestMoon.Screens
                                 if (!door.Triggered)
                                 {
                                     door.Triggered = true;
-                                    var screen = new Town(Game, HarvestMoon.Arrival.Library);
+                                    var screen = new Town(Game, HarvestMoon.Arrival.Librarian);
                                     var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                     ScreenManager.LoadScreen(screen, transition);
                                 }
@@ -119,27 +118,6 @@ namespace HarvestMoon.Screens
                 {
                     foreach (var obj in layer.Objects)
                     {
-                        var objectPosition = obj.Position;
-
-                        objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                        objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                        var objectSize = obj.Size;
-
-                        string objectMessage = "";
-
-                        foreach (var property in obj.Properties)
-                        {
-                            if (property.Key.Contains("message"))
-                            {
-                                objectMessage = HarvestMoon.Instance.Strings.Get(property.Value);
-                            }
-                        }
-
-                        if (obj.Name == "anna")
-                        {
-                            _entityManager.AddEntity(new Anna(Content, objectPosition, objectSize));
-                        }
 
                     }
 

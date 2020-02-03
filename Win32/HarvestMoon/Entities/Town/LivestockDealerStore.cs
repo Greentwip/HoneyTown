@@ -32,12 +32,24 @@ namespace HarvestMoon.Entities.Town
             {
                 if (purchases.Count == 0)
                 {
+                    ConfirmPurchase = false;
                     return "There is nothing to buy";
                 }
 
                 if (total > HarvestMoon.Instance.Gold)
                 {
+                    ConfirmPurchase = false;
                     return "Not enough Gold";
+                }
+
+                if (!ConfirmPurchase)
+                {
+                    ConfirmPurchase = true;
+                    return "Please confirm purchase";
+                }
+                else
+                {
+                    ConfirmPurchase = false;
                 }
 
                 for (int i = 0; i < purchases.Count; ++i)
@@ -114,6 +126,7 @@ namespace HarvestMoon.Entities.Town
                 GetPrices(),
                 GetPurchaseCallback())
         {
+            ConfirmPurchase = false;
         }
     }
 }

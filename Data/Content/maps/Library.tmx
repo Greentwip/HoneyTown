@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="39" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="15">
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="39" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="16">
  <tileset firstgid="1" name="TileA2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
   <image source="Tileset/TileA2.png" width="512" height="384"/>
   <terraintypes>
@@ -442,6 +442,9 @@
    <object id="12" x="20" y="44" width="140" height="68"/>
    <object id="13" x="288" y="172" width="320" height="36"/>
    <object id="14" x="288" y="80" width="320" height="32"/>
+  </objectgroup>
+  <objectgroup id="20" name="Interactables">
+   <object id="15" name="anna" type="npc" x="24" y="92" width="32" height="45"/>
   </objectgroup>
   <objectgroup id="16" name="Arrivals">
    <object id="1" name="from-city" x="304" y="328" width="16" height="24"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="77" nextobjectid="52">
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="77" nextobjectid="57">
  <tileset firstgid="1" name="TileC_exterior_1" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="Tileset/TileC_exterior_1.png" width="512" height="512"/>
  </tileset>
@@ -4660,11 +4660,11 @@
  <group id="66" name="Objects">
   <objectgroup id="67" name="Arrivals">
    <object id="1" name="from-ranch" x="760" y="1512" width="16" height="24"/>
-   <object id="50" name="from-library" x="152" y="400" width="16" height="24"/>
+   <object id="50" name="from-library" x="296" y="400" width="16" height="24"/>
+   <object id="53" name="from-librarian" x="152" y="404" width="16" height="24"/>
+   <object id="56" name="from-dealer" x="440" y="704" width="16" height="24"/>
   </objectgroup>
-  <objectgroup id="70" name="Interactables">
-   <object id="51" name="livestock-dealer" type="npc" x="432" y="640" width="32" height="32"/>
-  </objectgroup>
+  <objectgroup id="70" name="Interactables"/>
   <objectgroup id="69" name="Walls">
    <object id="3" x="800" y="1308" width="16" height="292"/>
    <object id="4" x="800" y="1208" width="320" height="60"/>
@@ -4711,10 +4711,13 @@
    <object id="45" x="624" y="996" width="64" height="72"/>
    <object id="46" x="624" y="900" width="64" height="72"/>
    <object id="47" x="528" y="900" width="64" height="72"/>
+   <object id="52" x="728" y="1600" width="80" height="40"/>
   </objectgroup>
   <objectgroup id="68" name="Doors">
    <object id="2" name="ranch" x="736" y="1576" width="64" height="24"/>
-   <object id="48" name="library" x="144" y="336" width="32" height="46"/>
+   <object id="48" name="library" x="288" y="324" width="32" height="46"/>
+   <object id="54" name="librarian" x="144" y="336" width="32" height="46"/>
+   <object id="55" name="dealer" x="432" y="628" width="32" height="46"/>
   </objectgroup>
  </group>
 </map>

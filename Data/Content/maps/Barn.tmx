@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="38" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="42">
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="38" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="43">
  <tileset firstgid="1" name="TileA4" tilewidth="16" tileheight="16" tilecount="960" columns="32">
   <image source="Tileset/TileA4.png" width="512" height="480"/>
   <terraintypes>
@@ -338,6 +338,7 @@
    <object id="29" x="0" y="0" width="608" height="64"/>
    <object id="30" x="20" y="264" width="56" height="52"/>
    <object id="31" x="16" y="72" width="8" height="40"/>
+   <object id="42" x="272" y="384" width="80" height="40"/>
   </objectgroup>
   <objectgroup id="18" name="Special">
    <object id="41" name="cow-placement-7" x="216" y="192" width="47" height="46"/>

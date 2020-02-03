@@ -13,9 +13,9 @@ using HarvestMoon.Entities.Town;
 
 namespace HarvestMoon.Screens
 {
-    public class Library : Map
+    public class Dealer : Map
     {
-        public Library(Game game)
+        public Dealer(Game game)
             : base(game)
         {
         }
@@ -31,7 +31,7 @@ namespace HarvestMoon.Screens
             base.LoadContent();
 
             // Load the compiled map
-            _map = Content.Load<TiledMap>("maps/Library");
+            _map = Content.Load<TiledMap>("maps/Dealer");
             // Create the map renderer
             _mapRenderer = new TiledMapRenderer(GraphicsDevice, _map);
 
@@ -107,7 +107,7 @@ namespace HarvestMoon.Screens
                                 if (!door.Triggered)
                                 {
                                     door.Triggered = true;
-                                    var screen = new Town(Game, HarvestMoon.Arrival.Library);
+                                    var screen = new Town(Game, HarvestMoon.Arrival.Dealer);
                                     var transition = new FadeTransition(GraphicsDevice, Color.Black, 1.0f);
                                     ScreenManager.LoadScreen(screen, transition);
                                 }
@@ -136,9 +136,16 @@ namespace HarvestMoon.Screens
                             }
                         }
 
-                        if (obj.Name == "anna")
+                        if (obj.Name == "livestock-dealer")
                         {
-                            _entityManager.AddEntity(new Anna(Content, objectPosition, objectSize));
+                            _entityManager.AddEntity(new LivestockDealerStore(objectPosition,
+                                                                                objectSize,
+                                                                                "All purchases will be delivered the same day.",
+                                                                                "Livestock"));
+                        }
+                        else if(obj.Name == "pete")
+                        {
+                            _entityManager.AddEntity(new Pete(Content, objectPosition, objectSize));
                         }
 
                     }

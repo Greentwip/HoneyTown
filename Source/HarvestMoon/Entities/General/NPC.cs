@@ -13,12 +13,13 @@ namespace HarvestMoon.Entities.General
     {
         public int Affection { get; set; }
         public string Name { get; set; }
+        public bool BoundingBoxEnabled { get; set; }
 
         public NPC(Vector2 initialPosition,
                     Size2 size)
         {
-            BoundingRectangle = new RectangleF(new Vector2(initialPosition.X - 32,
-                                                            initialPosition.Y - 32),
+            BoundingRectangle = new RectangleF(new Vector2(initialPosition.X - size.Width * 0.5f,
+                                                            initialPosition.Y - size.Height * 0.5f),
                                                new Size2(size.Width, size.Height));
 
             X = initialPosition.X;
