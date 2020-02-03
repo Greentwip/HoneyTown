@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<XnaContent>
-    <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
-    <Item><Key>ann_idle_down_001.png</Key><Value>54 12 26 50</Value></Item>
-    <Item><Key>ann_idle_up_001.png</Key><Value>56 62 26 46</Value></Item>
-    <Item><Key>ann_idle_left_001.png</Key><Value>52 108 34 48</Value></Item>
-    <Item><Key>ann_idle_right_001.png</Key><Value>56 156 34 48</Value></Item>
-    </Asset>
-</XnaContent>
