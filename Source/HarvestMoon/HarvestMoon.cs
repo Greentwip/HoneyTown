@@ -231,7 +231,7 @@ namespace HarvestMoon
 
             Instance = this;
 
-            MaxStamina = 60;
+            MaxStamina = 120;
 
         }
 
@@ -527,7 +527,7 @@ namespace HarvestMoon
                 Instance.Sheeps = saveGame.Sheeps;
                 Instance.Chickens = saveGame.Chickens;
 
-                Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 60;
+                Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 120;
 
                 var cutsceneTriggers = new SerializableDictionary<string, bool>();
                 cutsceneTriggers.Add("onboarding", false);
@@ -612,6 +612,10 @@ namespace HarvestMoon
 
                 CutsceneTriggers = cutsceneTriggers;
 
+                Instance.MaxStamina = 120;
+                Instance.Stamina = 120;
+
+                Instance.Gold = 350;
             }
 
         }

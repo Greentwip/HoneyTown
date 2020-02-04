@@ -22,6 +22,7 @@ using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using HarvestMoon.Entities.General;
+using HarvestMoon.Animation;
 
 namespace HarvestMoon.GUI
 {
@@ -104,116 +105,66 @@ namespace HarvestMoon.GUI
 
         public GUIManager(ContentManager content)
         {
+
             float frameDuration = 1.0f / 7.5f;
 
-            var characterTexture = content.Load<Texture2D>("ui/objects");
-            var characterMap = content.Load<Dictionary<string, Rectangle>>("ui/uiMap");
-            var characterAtlas = new TextureAtlas("ui", characterTexture, characterMap);
-            var characterAnimationFactory = new SpriteSheet
-            {
-                TextureAtlas = characterAtlas,
-                Cycles =
-                {
-                    {
-                        "day_tool", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(0)
-                            }
-                        }
-                    },
-                    {
-                        "gold", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(1)
-                            }
-                        }
-                    },
-                    {
-                        "heart_full", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(2)
-                            }
-                        }
-                    },
-                    {
-                        "heart_quarter", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(3)
-                            }
-                        }
-                    },
-                    {
-                        "heart_half", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(4)
-                            }
-                        }
-                    },
-                    {
-                        "heart_three_quarters", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(5)
-                            }
-                        }
-                    },
-                    {
-                        "heart_empty", new SpriteSheetAnimationCycle
-                        {
-                            IsLooping = true,
-                            IsPingPong = false,
-                            FrameDuration = frameDuration,
-                            Frames =
-                            {
-                                // TODO: Fix per frame duration
-                                new SpriteSheetAnimationFrame(6)
-                            }
-                        }
-                    }
-                }
-            };
+            var dayToolSprite = AnimationLoader.LoadAnimatedSprite(content,
+                                                         "ui/objects",
+                                                         "ui/uiMap",
+                                                         "dayTool",
+                                                         frameDuration,
+                                                         true);
 
-            _dayToolSprite = new AnimatedSprite(characterAnimationFactory, "day_tool");
-            _goldSprite = new AnimatedSprite(characterAnimationFactory, "gold");
-            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
-            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
-            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
-            _staminaSprites.Add(new AnimatedSprite(characterAnimationFactory, "heart_full"));
+            var goldSprite = AnimationLoader.LoadAnimatedSprite(content,
+                                             "ui/objects",
+                                             "ui/uiMap",
+                                             "gold",
+                                             frameDuration,
+                                             true);
+
+            var staminaA = AnimationLoader.LoadAnimatedSprite(content,
+                                             "ui/objects",
+                                             "ui/uiMap",
+                                             "staminaA",
+                                             frameDuration,
+                                             true);
+
+            var staminaB = AnimationLoader.LoadAnimatedSprite(content,
+                                             "ui/objects",
+                                             "ui/uiMap",
+                                             "staminaB",
+                                             frameDuration,
+                                             true);
+
+            var staminaC = AnimationLoader.LoadAnimatedSprite(content,
+                                                         "ui/objects",
+                                                         "ui/uiMap",
+                                                         "staminaC",
+                                                         frameDuration,
+                                                         true);
+
+            var staminaD = AnimationLoader.LoadAnimatedSprite(content,
+                                             "ui/objects",
+                                             "ui/uiMap",
+                                             "staminaD",
+                                             frameDuration,
+                                             true);
+
+            dayToolSprite.Play("day_tool");
+            goldSprite.Play("gold");
+
+            _dayToolSprite = dayToolSprite;
+            _goldSprite = goldSprite;
+
+            staminaA.Play("heart_full");
+            staminaB.Play("heart_full");
+            staminaC.Play("heart_full");
+            staminaD.Play("heart_full");
+
+            _staminaSprites.Add(staminaA);
+            _staminaSprites.Add(staminaB);
+            _staminaSprites.Add(staminaC);
+            _staminaSprites.Add(staminaD);
 
             _holdingItemSprites.Add("axe", new Sprite(content.Load<Texture2D>("maps/tools-room/items/axe")));
             _holdingItemSprites.Add("grass-seeds", new Sprite(content.Load<Texture2D>("maps/tools-room/items/grass-seeds")));
@@ -966,7 +917,7 @@ namespace HarvestMoon.GUI
 
             if (HarvestMoon.Instance.MaxStamina >= 60 + offset)
             {
-                if (HarvestMoon.Instance.Stamina == 0 + offset)
+                if (HarvestMoon.Instance.Stamina <= 0 + offset)
                 {
                     staminaSprite.Play("heart_empty");
                 }

@@ -52,7 +52,7 @@ namespace HarvestMoon.Screens
 
             if (_arrival != HarvestMoon.Arrival.Ranch)
             {
-                HarvestMoon.Instance.Stamina = 60;
+                HarvestMoon.Instance.Stamina = HarvestMoon.Instance.MaxStamina;
 
                 HarvestMoon.Instance.Gold += HarvestMoon.Instance.TodayGold;
                 HarvestMoon.Instance.TodayGold = 0;

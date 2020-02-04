@@ -5527,6 +5527,18 @@
 /processor:TiledMapProcessor
 /build:maps/Ranch.tmx
 
+#begin maps/ranch/items/shipping-box.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/shipping-box.png
+
 #begin maps/Tileset/TileA1.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -128,19 +128,39 @@ namespace HarvestMoon.Screens
 
                         var objectSize = obj.Size;
 
-                        string objectMessage = "";
-
-                        foreach (var property in obj.Properties)
+                        if(obj.Type == "npc")
                         {
-                            if (property.Key.Contains("message"))
+                            string objectMessage = "";
+
+                            foreach (var property in obj.Properties)
                             {
-                                objectMessage = HarvestMoon.Instance.Strings.Get(property.Value);
+                                if (property.Key.Contains("message"))
+                                {
+                                    objectMessage = HarvestMoon.Instance.Strings.Get(property.Value);
+                                }
                             }
-                        }
 
-                        if (obj.Name == "anna")
-                        {
-                            _entityManager.AddEntity(new Anna(Content, objectPosition, objectSize));
+                            if (obj.Name == "anna")
+                            {
+                                _entityManager.AddEntity(new Anna(Content, objectPosition, objectSize));
+                            }
+                            
+                            if(obj.Name == "bee-anatomy")
+                            {
+                                _entityManager.AddEntity(new BeeAnatomyBookshelf(objectPosition,
+                                                                                objectSize,
+                                                                                "Useful info on bees' anatomy.",
+                                                                                 "Bee anatomy"));
+                            }
+
+                            if(obj.Name == "bee-social")
+                            {
+                                _entityManager.AddEntity(new BeeSocialBookshelf(objectPosition,
+                                                                                objectSize,
+                                                                                "Useful info on bees' social structure.",
+                                                                                 "Bee social"));
+                            }
+
                         }
 
                     }
