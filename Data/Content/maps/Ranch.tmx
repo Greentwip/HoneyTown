@@ -1902,7 +1902,7 @@
    <object id="42" name="city" x="736" y="0" width="64" height="16"/>
   </objectgroup>
   <objectgroup id="37" name="Plot">
-   <object id="5" x="136" y="352" width="608" height="576"/>
+   <object id="5" x="128" y="352" width="576" height="576"/>
   </objectgroup>
   <objectgroup id="40" name="Interactables">
    <object id="44" name="feed-signpost" type="npc" x="544" y="160" width="32" height="32">

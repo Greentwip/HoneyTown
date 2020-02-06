@@ -98,6 +98,8 @@ namespace HarvestMoon.Screens
 
         private bool _mediaShouldFadeToTown;
 
+        public static Random Random = new Random(Cow.Random.Next(256 + new Random().Next(128)));
+
         public Ranch(Game game, HarvestMoon.Arrival arrival)
             : base(game)
         {
@@ -109,6 +111,72 @@ namespace HarvestMoon.Screens
         {
             // call base initialize func
             base.Initialize();
+        }
+
+
+        private enum Randomization
+        {
+            SmallRock,
+            Bush,
+            BigRock,
+            WoodLog
+        }
+
+        private void Randomize(Grid container, int amount, Size2 objectSize, Randomization randomization)
+        {
+            for (int i = 0; i < amount; ++i) 
+            {
+                int chancesX = (int)(container.BoundingRectangle.Width / objectSize.Width);
+                int chancesY = (int)(container.BoundingRectangle.Height / objectSize.Height);
+
+                var objectPosition = new Vector2(container.BoundingRectangle.TopLeft.X + Random.Next(0, chancesX) * objectSize.Width,
+                                                 container.BoundingRectangle.TopLeft.Y + Random.Next(0, chancesY) * objectSize.Height);
+
+
+                objectPosition.X = objectPosition.X + objectSize.Width * 0.5f;
+                objectPosition.Y = objectPosition.Y + objectSize.Height * 0.5f;
+
+                Interactable newEntity = null;
+
+                if(randomization == Randomization.SmallRock)
+                {
+                    newEntity = new SmallRock(Content, objectPosition);
+                }
+                else if(randomization == Randomization.Bush)
+                {
+                    newEntity = new Bush(Content, objectPosition);
+                }
+                else if(randomization == Randomization.BigRock)
+                {
+                    newEntity = new BigRock(Content, objectPosition);
+                }
+                else if(randomization == Randomization.WoodLog)
+                {
+                    newEntity = new BigLog(Content, objectPosition);
+                }
+
+                bool intersects = false;
+
+                var entities = _entityManager.Entities.Where(e => e is Interactable).Cast<Interactable>().ToArray();
+
+                foreach (var entity in entities)
+                {
+                    if (entity.BoundingRectangle.Intersects(newEntity.BoundingRectangle))
+                    {
+                        intersects = true;
+                        break;
+                    }
+                }
+
+                if (intersects)
+                {
+                    i--;
+                }
+                else
+                {
+                    _entityManager.AddEntity(newEntity);
+                }
+            }
         }
 
         public override void LoadContent()
@@ -134,7 +202,33 @@ namespace HarvestMoon.Screens
             var ranchState = _entityManager as RanchState;
             if(!ranchState.IsLoaded || HarvestMoon.Instance.HasNotSeenTheRanch)
             {
-                HarvestMoon.Instance.HasNotSeenTheRanch = false;
+
+                if (HarvestMoon.Instance.HasNotSeenTheRanch)
+                {
+                    Grid grid = null;
+                    foreach (var layer in _map.ObjectLayers)
+                    {
+                        if (layer.Name == "Plot")
+                        {
+                            foreach (var obj in layer.Objects)
+                            {
+                                var objectPosition = obj.Position;
+
+                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                                grid = new Grid(objectPosition, obj.Size);
+                            }
+                        }
+                    }
+
+                    Randomize(grid, 30, new Size2(32, 32), Randomization.SmallRock);
+                    Randomize(grid, 30, new Size2(32, 32), Randomization.Bush);
+                    Randomize(grid, 15, new Size2(64, 64), Randomization.BigRock);
+                    Randomize(grid, 15, new Size2(64, 64), Randomization.WoodLog);
+
+                }
+
 
                 foreach (var layer in _map.ObjectLayers)
                 {
@@ -182,71 +276,7 @@ namespace HarvestMoon.Screens
                     }
                 }
                 
-                foreach (var layer in _map.ObjectLayers)
-                {
-                    if (layer.Name == "objects")
-                    {
-                        foreach (var obj in layer.Objects)
-                        {
-                           
-                            if (obj.Type == "wood")
-                            {
-
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _woodPieces.Add(_entityManager.AddEntity(new WoodPiece(Content, objectPosition)));
-                            }
-
-                            if (obj.Type == "rock-small")
-                            {
-
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _smallRocks.Add(_entityManager.AddEntity(new SmallRock(Content, objectPosition)));
-                            }
-
-                            if (obj.Type == "rock-big")
-                            {
-
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _bigRocks.Add(_entityManager.AddEntity(new BigRock(Content, objectPosition)));
-                            }
-
-                            if (obj.Type == "log-big")
-                            {
-
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _bigLogs.Add(_entityManager.AddEntity(new BigLog(Content, objectPosition)));
-                            }
-
-                            if (obj.Type == "bush")
-                            {
-
-                                var objectPosition = obj.Position;
-
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
-
-                                _bushes.Add(_entityManager.AddEntity(new Bush(Content, objectPosition)));
-                            }
-
-                        }
-                    }
-                }
+                HarvestMoon.Instance.HasNotSeenTheRanch = false;
 
                 ranchState.IsLoaded = true;
             }

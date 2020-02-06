@@ -27,18 +27,6 @@
 /processorParam:TextureFormat=Color
 /build:animations/animals.png
 
-#begin animations/animals.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/animals.png
-
 #begin animations/annaMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -71,23 +59,6 @@
 /processorParam:TextureFormat=Color
 /build:animations/cropsA.png
 
-#begin animations/cropsA.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/cropsA.png
-
-#begin animations/cropsAMap.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:animations/cropsAMap.xml
-
 #begin animations/cropsAMap.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -104,23 +75,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/cropsB.png
-
-#begin animations/cropsB.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/cropsB.png
-
-#begin animations/cropsBMap.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:animations/cropsBMap.xml
 
 #begin animations/cropsBMap.xml
 /importer:XmlImporter
@@ -441,18 +395,6 @@
 /processorParam:TextureFormat=Color
 /build:animations/NPC_01.png
 
-#begin animations/NPC_01.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_01.png
-
 #begin animations/NPC_02.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -464,42 +406,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/NPC_02.png
-
-#begin animations/NPC_02.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_02.png
-
-#begin animations/NPC_03.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_03.png
-
-#begin animations/NPC_03.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_03.png
 
 #begin animations/NPC_03.png
 /importer:TextureImporter
@@ -537,18 +443,6 @@
 /processorParam:TextureFormat=Color
 /build:animations/NPC_14.png
 
-#begin animations/NPC_14.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_14.png
-
 #begin animations/NPC_19.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -560,42 +454,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/NPC_19.png
-
-#begin animations/NPC_19.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_19.png
-
-#begin animations/NPC_25.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_25.png
-
-#begin animations/NPC_25.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:animations/NPC_25.png
 
 #begin animations/NPC_25.png
 /importer:TextureImporter
@@ -5527,6 +5385,54 @@
 /processor:TiledMapProcessor
 /build:maps/Ranch.tmx
 
+#begin maps/ranch/items/bush.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/bush.png
+
+#begin maps/ranch/items/log-big.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/log-big.png
+
+#begin maps/ranch/items/rock-big.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/rock-big.png
+
+#begin maps/ranch/items/rock-small.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/rock-small.png
+
 #begin maps/ranch/items/shipping-box.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5539,7 +5445,7 @@
 /processorParam:TextureFormat=Color
 /build:maps/ranch/items/shipping-box.png
 
-#begin maps/Tileset/TileA1.png
+#begin maps/ranch/items/shipping-box.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -5549,7 +5455,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:maps/Tileset/TileA1.png
+/build:maps/ranch/items/shipping-box.png
+
+#begin maps/ranch/items/wood.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/wood.png
+
+#begin maps/ranch/items/wood-broken.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/ranch/items/wood-broken.png
 
 #begin maps/Tileset/TileA1.png
 /importer:TextureImporter
@@ -5575,18 +5505,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileA2.png
 
-#begin maps/Tileset/TileA2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileA2.png
-
 #begin maps/Tileset/TileA3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5598,30 +5516,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileA3.png
-
-#begin maps/Tileset/TileA3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileA3.png
-
-#begin maps/Tileset/TileA4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileA4.png
 
 #begin maps/Tileset/TileA4.png
 /importer:TextureImporter
@@ -5647,18 +5541,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileA5.png
 
-#begin maps/Tileset/TileA5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileA5.png
-
 #begin maps/Tileset/TileB_exterior_1_spring.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5670,30 +5552,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileB_exterior_1_spring.png
-
-#begin maps/Tileset/TileB_exterior_1_spring.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileB_exterior_1_spring.png
-
-#begin maps/Tileset/TileB_interior_recolour.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileB_interior_recolour.png
 
 #begin maps/Tileset/TileB_interior_recolour.png
 /importer:TextureImporter
@@ -5719,30 +5577,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileC_exterior_1.png
 
-#begin maps/Tileset/TileC_exterior_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileC_exterior_1.png
-
-#begin maps/Tileset/TileC_interior.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileC_interior.png
-
 #begin maps/Tileset/TileC_interior.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5767,18 +5601,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileD_exterior_1.png
 
-#begin maps/Tileset/TileD_exterior_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileD_exterior_1.png
-
 #begin maps/Tileset/TileD_interior.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -5790,30 +5612,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/Tileset/TileD_interior.png
-
-#begin maps/Tileset/TileD_interior.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileD_interior.png
-
-#begin maps/Tileset/TileE.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/Tileset/TileE.png
 
 #begin maps/Tileset/TileE.png
 /importer:TextureImporter

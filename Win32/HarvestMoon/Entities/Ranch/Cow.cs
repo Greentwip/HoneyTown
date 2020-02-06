@@ -38,7 +38,7 @@ namespace HarvestMoon.Entities.Ranch
 
         private Movement _currentMovement = Movement.None;
 
-        private static Random Random = new Random();
+        public static Random Random = new Random();
 
         public Cow(ContentManager content, Vector2 initialPosition, Size2 size)
             : base(initialPosition, size)
