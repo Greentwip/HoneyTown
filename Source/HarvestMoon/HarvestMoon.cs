@@ -139,6 +139,7 @@ namespace HarvestMoon
             Ranch,
             Library,
             Dealer,
+            Florist,
             Librarian,
             Mountain,
             Hill,

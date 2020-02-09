@@ -102,9 +102,11 @@
     <Compile Include="Entities\Town\BeeAnatomyBookshelf.cs" />
     <Compile Include="Entities\Town\HouseBookshelf.cs" />
     <Compile Include="Entities\Town\Leader.cs" />
+    <Compile Include="Entities\Town\FloristStore.cs" />
     <Compile Include="Entities\Town\Monica.cs" />
     <Compile Include="Entities\Town\Edd.cs" />
     <Compile Include="Entities\Town\LivestockDealerStore.cs" />
+    <Compile Include="Entities\Town\George.cs" />
     <Compile Include="Entities\Town\Pete.cs" />
     <Compile Include="Entities\Town\Ted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +122,7 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Town.cs" Link="Screens\Town.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Text\StringsManager.cs" Link="Text\StringsManager.cs" />
     <Compile Include="Screens\Barn.cs" />
+    <Compile Include="Screens\Florist.cs" />
     <Compile Include="Screens\Dealer.cs" />
     <Compile Include="Screens\Librarian.cs" />
     <Compile Include="Screens\Library.cs" />

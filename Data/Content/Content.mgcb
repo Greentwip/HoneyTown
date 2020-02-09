@@ -125,6 +125,11 @@
 /processor:PassThroughProcessor
 /build:animations/gameItemsMap.xml
 
+#begin animations/georgeMap.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:animations/georgeMap.xml
+
 #begin animations/hero.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -430,6 +435,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:animations/NPC_06.png
+
+#begin animations/NPC_13.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:animations/NPC_13.png
 
 #begin animations/NPC_14.png
 /importer:TextureImporter
@@ -5456,6 +5473,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/ranch/items/shipping-box.png
+
+#begin maps/Tileset/!doors_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/Tileset/!doors_1.png
 
 #begin maps/Tileset/TileA1.png
 /importer:TextureImporter
