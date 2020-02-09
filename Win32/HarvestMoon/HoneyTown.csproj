@@ -118,16 +118,12 @@
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Ranch.cs" Link="Screens\Ranch.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Mountain.cs" Link="Screens\Mountain.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Screens\Town.cs" Link="Screens\Town.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Ease.cs" Link="Tweening\Ease.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberAccessor.cs" Link="Tweening\MemberAccessor.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Tweening\MemberLerper.cs" Link="Tweening\MemberLerper.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tween.cs" Link="Tweening\Tween.cs" />
-    <Compile Include=".\..\..\Source\HarvestMoon\Tweening\Tweener.cs" Link="Tweening\Tweener.cs" />
     <Compile Include=".\..\..\Source\HarvestMoon\Text\StringsManager.cs" Link="Text\StringsManager.cs" />
     <Compile Include="Screens\Barn.cs" />
     <Compile Include="Screens\Dealer.cs" />
     <Compile Include="Screens\Librarian.cs" />
     <Compile Include="Screens\Library.cs" />
+    <Compile Include="Tweening\Tweener.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">

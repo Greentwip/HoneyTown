@@ -29,6 +29,12 @@ namespace HarvestMoon.Screens
 
         private bool _triggered;
 
+        private bool _eraseTrigger;
+
+        private Paragraph _guiParagraph;
+        private Paragraph _diary1Paragraph;
+        private Paragraph _diary2Paragraph;
+
         private Sprite _sosTexture;
         private Sprite _tilesTexture;
 
@@ -126,6 +132,8 @@ namespace HarvestMoon.Screens
 
                                 _selectionPanel = textPanel;
 
+                                _diary1Paragraph = paragraph;
+
                                 //_panels[0].Offset = new Vector2(170, 120);
                                 //_panels[0].Size = new Vector2(470, 120);
 
@@ -133,6 +141,7 @@ namespace HarvestMoon.Screens
                             else
                             {
                                 _panels[1] = textPanel;
+                                _diary2Paragraph = paragraph;
                                 //_panels[1].Offset = new Vector2(170, 320);
                                 //_panels[1].Size = new Vector2(470, 120);
                             }
@@ -152,9 +161,9 @@ namespace HarvestMoon.Screens
 
                             UserInterface.Active.AddEntity(_guiTextPanel);
 
-                            var paragraph = new Paragraph("    " + obj.Properties.First(p => p.Key == "message").Value);
+                            _guiParagraph = new Paragraph("    " + "Choose Diary");
 
-                            _guiTextPanel.AddChild(paragraph);
+                            _guiTextPanel.AddChild(_guiParagraph);
 
 
                             //_guiTextPanel.Size = new Vector2(470, 70);
@@ -165,6 +174,8 @@ namespace HarvestMoon.Screens
                 }
                 
             }
+
+            HarvestMoon.Instance.Diary = "diary-1";
         }
 
         public override void UnloadContent()
@@ -199,10 +210,12 @@ namespace HarvestMoon.Screens
                 if (_selectionPanel == _panels[0])
                 {
                     _selectionPanel = _panels[1];
+                    HarvestMoon.Instance.Diary = "diary-1";
                 }
                 else
                 {
                     _selectionPanel = _panels[0];
+                    HarvestMoon.Instance.Diary = "diary-2";
                 }
 
             }
@@ -215,6 +228,7 @@ namespace HarvestMoon.Screens
 
                 if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isActionButtonDown && !_triggered)
                 {
+                    _isActionButtonDown = true;
                     if (_selectionPanel == _panels[0])
                     {
                         HarvestMoon.Instance.Diary = "diary-1";
@@ -225,7 +239,47 @@ namespace HarvestMoon.Screens
                     }
 
                     _triggered = true;
-                    
+                }
+
+                if (keyboardState.IsKeyDown(InputDevice.Keys.X) && !_isRunButtonDown && !_eraseTrigger)
+                {
+                    _isRunButtonDown = true;
+
+                    var diary = HarvestMoon.Instance.GetDiary(HarvestMoon.Instance.Diary);
+
+                    if (diary.PlayerName != default(string))
+                    {
+                        _guiParagraph.Text = "Erase Diary?";
+                        _eraseTrigger = true;
+                    }
+                }
+                else if (keyboardState.IsKeyDown(InputDevice.Keys.X) && !_isRunButtonDown && _eraseTrigger)
+                {
+                    _isRunButtonDown = true;
+
+                    var diary = HarvestMoon.Instance.GetDiary(HarvestMoon.Instance.Diary);
+
+                    if (diary.PlayerName != default(string))
+                    {
+                        HarvestMoon.Instance.EraseDiary(HarvestMoon.Instance.Diary);
+                        _guiParagraph.Text = "Choose Diary";
+
+                        string displayString = "\n         No Diary";
+
+                        if (_selectionPanel == _panels[0])
+                        {
+                            _diary1Paragraph.Text = displayString;
+                        }
+                        else
+                        {
+                            _diary2Paragraph.Text = displayString;
+                        }
+
+
+                        _eraseTrigger = false;
+
+
+                    }
                 }
             }
 

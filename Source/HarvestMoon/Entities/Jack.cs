@@ -13,7 +13,6 @@ using System.Linq;
 
 using MonoGame.Extended.Content;
 using Microsoft.Xna.Framework.Content;
-using Glide;
 using MonoGame.Extended.Collisions;
 using System;
 using HarvestMoon.Entities.Ranch;
@@ -22,6 +21,7 @@ using HarvestMoon.Entities.General;
 using HarvestMoon.Input;
 using HarvestMoon.Animation;
 using HarvestMoon.Entities.Items;
+using HarvestMoon.Tweening;
 
 namespace HarvestMoon.Entities
 {
@@ -342,15 +342,14 @@ namespace HarvestMoon.Entities
 
                 _carryingObject = _currentInteractable;
 
-                var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+                var carryingParameters = new Vector2{ X = _carryingPosition.X, Y = _carryingPosition.Y };
 
                 if (_currentInteractable.Packable)
                 {
-                    carryingParameters = new { X = _packingPosition.X, Y = _packingPosition.Y };
+                    carryingParameters = new Vector2{ X = _packingPosition.X, Y = _packingPosition.Y };
                 }
 
-                _tweener.Tween(_currentInteractable, carryingParameters, 0.25f)
-                        .Ease(Ease.ExpoInOut)
+                _tweener.Tween(_currentInteractable, carryingParameters, 0.125f)
                         .OnBegin(() =>
                         {
                             Freeze();
@@ -397,10 +396,9 @@ namespace HarvestMoon.Entities
                     _entityManager.SubmitEntity(harvest);
                     _carryingObject = harvest;
 
-                    var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+                    var carryingParameters = new Vector2{ X = _carryingPosition.X, Y = _carryingPosition.Y };
 
-                    _tweener.Tween(harvest, carryingParameters, 0.25f)
-                            .Ease(Ease.ExpoInOut)
+                    _tweener.Tween(harvest, carryingParameters, 0.125f)
                             .OnBegin(() =>
                             {
                                 Freeze();
@@ -459,9 +457,8 @@ namespace HarvestMoon.Entities
 
                     Freeze();
                     _tweener.Tween(_carryingObject,
-                           new { X = boundPosition.X, Y = boundPosition.Y },
+                           new Vector2{ X = boundPosition.X, Y = boundPosition.Y },
                            0.125f)
-                               .Ease(Ease.ExpoInOut)
                                .OnComplete(() =>
                                {
                                    UnFreeze();
@@ -566,9 +563,8 @@ namespace HarvestMoon.Entities
                             {
                                 Freeze();
                                 _tweener.Tween(_carryingObject,
-                                       new { X = targetPosition.X, Y = targetPosition.Y },
+                                       new Vector2 { X = targetPosition.X, Y = targetPosition.Y },
                                        0.125f)
-                                           .Ease(Ease.ExpoInOut)
                                            .OnComplete(() =>
                                            {
                                                UnFreeze();
@@ -579,8 +575,6 @@ namespace HarvestMoon.Entities
                                                _carryingObject.OnInteractableDrop();
 
                                                _carryingObject = null;
-
-
                                            });
 
                             }
@@ -811,10 +805,9 @@ namespace HarvestMoon.Entities
                             _entityManager.SubmitEntity(harvest);
                             _carryingObject = harvest;
 
-                            var carryingParameters = new { X = _carryingPosition.X, Y = _carryingPosition.Y };
+                            var carryingParameters = new Vector2{ X = _carryingPosition.X, Y = _carryingPosition.Y };
 
-                            _tweener.Tween(harvest, carryingParameters, 0.25f)
-                                    .Ease(Ease.ExpoInOut)
+                            _tweener.Tween(harvest, carryingParameters, 0.125f)
                                     .OnBegin(() =>
                                     {
                                         Freeze();
@@ -1491,8 +1484,11 @@ namespace HarvestMoon.Entities
 
             if (_carryingObject != null && _isCarrying)
             {
-                _carryingObject.X = _carryingPosition.X;
-                _carryingObject.Y = _carryingPosition.Y;
+                if (!_tweener.Tweening)
+                {
+                    _carryingObject.X = _carryingPosition.X;
+                    _carryingObject.Y = _carryingPosition.Y;
+                }
             }
 
             Position += Velocity * deltaSeconds;

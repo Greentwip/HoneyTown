@@ -850,7 +850,7 @@ namespace HarvestMoon.GUI
 
             _textPanel.AddChild(_textParagraph);
 
-            _textPanel.Opacity = 200;
+            //_textPanel.Opacity = 200;
 
             _npcMenu = NPCMenu.YesNo;
         }
@@ -887,7 +887,7 @@ namespace HarvestMoon.GUI
 
             _textPanel.AddChild(paragraph);
 
-            _textPanel.Opacity = 200;
+            //_textPanel.Opacity = 200;
 
             onStartCallback();
 

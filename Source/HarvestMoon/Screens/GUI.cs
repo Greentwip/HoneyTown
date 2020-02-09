@@ -34,6 +34,8 @@ namespace HarvestMoon.Screens
         protected ViewportAdapter _viewportAdapter;
 
         protected bool _isActionButtonDown = false;
+        protected bool _isRunButtonDown = false;
+        protected bool _isInteractionButtonDown = false;
         protected bool _isUpButtonDown = false;
         protected bool _isDownButtonDown = false;
 
@@ -97,6 +99,17 @@ namespace HarvestMoon.Screens
             {
                 _isActionButtonDown = false;
             }
+
+            if (keyboardState.IsKeyUp(InputDevice.Keys.X))
+            {
+                _isRunButtonDown = false;
+            }
+
+            if (keyboardState.IsKeyUp(InputDevice.Keys.B))
+            {
+                _isInteractionButtonDown = false;
+            }
+
 
             if (keyboardState.IsKeyUp(InputDevice.Keys.Up))
             {

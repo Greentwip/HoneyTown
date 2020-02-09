@@ -190,6 +190,11 @@ namespace HarvestMoon.Entities.Ranch
                 harvest = null;
             }
 
+            if(harvest != null)
+            {
+                harvest.Update(HarvestMoon.Instance.GameTime);
+            }
+
             return harvest;
         }
 

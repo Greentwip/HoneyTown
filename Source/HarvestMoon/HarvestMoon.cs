@@ -388,7 +388,7 @@ namespace HarvestMoon
         {
             SaveGame sg = new SaveGame();
 
-            sg.PlayerName = "Kai";
+            sg.PlayerName = "Player";
             sg.DayNumber = Instance.DayNumber;
             sg.DayName = Instance.DayName;
             sg.Season = Instance.Season;
@@ -479,6 +479,23 @@ namespace HarvestMoon
             }
 
             return saveGame;
+        }
+
+        public void EraseDiary(string diaryFile)
+        {
+            string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify), "HoneyTown");
+
+            if (!Directory.Exists(appData))
+            {
+                Directory.CreateDirectory(appData);
+            }
+
+            string savefile = Path.Combine(appData, diaryFile + ".xml");
+
+            if (File.Exists(savefile))
+            {
+                File.Delete(savefile);
+            }
         }
 
         public void LoadGameState(string diaryFile)
@@ -856,6 +873,7 @@ namespace HarvestMoon
 
         }
 
+        public GameTime GameTime;
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -864,6 +882,8 @@ namespace HarvestMoon
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            GameTime = gameTime;
+
             if (!_loaded)
             {
                 _loaded = true;
