@@ -295,6 +295,24 @@ namespace HarvestMoon
             return lastTool;
         }
 
+        public string PackOtherTool(string toolName)
+        {
+            var lastTool = GetOtherTool();
+
+            _tools.Add(toolName);
+
+            if (_tools.Count == 3)
+            {
+                _tools.Remove(lastTool);
+            }
+            else if (_tools.Count == 1 || _tools.Count == 2)
+            {
+                lastTool = "none";
+            }
+
+            return lastTool;
+        }
+
         public static HarvestMoon Instance { get; private set; }
 
         public enum DayTime
@@ -669,7 +687,7 @@ namespace HarvestMoon
             _dayTimeTriggers[DayTime.Evening] = false;
             _dayTimeTriggers[DayTime.Afternoon] = false;
 
-            _day = 2.5f;
+            _day = 5.0f;
 
             _morning = (_day * 60.0f / 3) * 1;
             _evening = (_day * 60.0f / 3) * 2;

@@ -214,57 +214,72 @@ namespace HarvestMoon.Screens
                             if (obj.Name == "grass-seeds")
                             {
 
-                                var objectPosition = obj.Position;
+                                if(HarvestMoon.Instance.GrassSeeds > 0)
+                                {
+                                    var objectPosition = obj.Position;
 
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                                _entityManager.AddEntity(new GrassSeeds(Content, objectPosition)); //Not working yet
+                                    _entityManager.AddEntity(new GrassSeeds(Content, objectPosition)); //Not working yet
+                                }
                             }
 
                             if (obj.Name == "turnip-seeds")
                             {
 
-                                var objectPosition = obj.Position;
+                                if(HarvestMoon.Instance.TurnipSeeds > 0)
+                                {
+                                    var objectPosition = obj.Position;
 
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                                _entityManager.AddEntity(new TurnipSeeds(Content, objectPosition));
+                                    _entityManager.AddEntity(new TurnipSeeds(Content, objectPosition));
+                                }
                             }
 
 
                             if (obj.Name == "potato-seeds")
                             {
+                                if(HarvestMoon.Instance.PotatoSeeds > 0)
+                                {
 
-                                var objectPosition = obj.Position;
+                                    var objectPosition = obj.Position;
 
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                                _entityManager.AddEntity(new PotatoSeeds(Content, objectPosition));
+                                    _entityManager.AddEntity(new PotatoSeeds(Content, objectPosition));
+                                }
                             }
 
                             if (obj.Name == "corn-seeds")
                             {
 
-                                var objectPosition = obj.Position;
+                                if(HarvestMoon.Instance.CornSeeds > 0)
+                                {
+                                    var objectPosition = obj.Position;
 
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                                _entityManager.AddEntity(new CornSeeds(Content, objectPosition));
+                                    _entityManager.AddEntity(new CornSeeds(Content, objectPosition));
+                                }
                             }
 
                             if (obj.Name == "tomato-seeds")
                             {
 
-                                var objectPosition = obj.Position;
+                                if (HarvestMoon.Instance.TomatoSeeds > 0)
+                                {
+                                    var objectPosition = obj.Position;
 
-                                objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
-                                objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+                                    objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                                    objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
 
-                                _entityManager.AddEntity(new TomatoSeeds(Content, objectPosition));
+                                    _entityManager.AddEntity(new TomatoSeeds(Content, objectPosition));
+                                }
                             }
 
                             if (obj.Name == "milker")

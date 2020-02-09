@@ -1491,6 +1491,92 @@ namespace HarvestMoon.Entities
                 }
             }
 
+            if(currentTool != default(string))
+            {
+                if (currentTool.Contains("seeds"))
+                {
+                    if(currentTool == "grass-seeds")
+                    {
+                        if(HarvestMoon.Instance.GrassSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackTool("none");
+                        }
+                    }
+                    else if (currentTool == "turnip-seeds")
+                    {
+                        if (HarvestMoon.Instance.TurnipSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackTool("none");
+                        }
+                    }
+                    else if (currentTool == "potato-seeds")
+                    {
+                        if (HarvestMoon.Instance.PotatoSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackTool("none");
+                        }
+                    }
+                    else if (currentTool == "corn-seeds")
+                    {
+                        if (HarvestMoon.Instance.CornSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackTool("none");
+                        }
+                    }
+                    else if (currentTool == "tomato-seeds")
+                    {
+                        if (HarvestMoon.Instance.TomatoSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackTool("none");
+                        }
+                    }
+                }
+            }
+
+            var otherTool = HarvestMoon.Instance.GetOtherTool();
+
+            if(otherTool != default(string))
+            {
+                if (otherTool.Contains("seeds"))
+                {
+                    if (otherTool == "grass-seeds")
+                    {
+                        if (HarvestMoon.Instance.GrassSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackOtherTool("none");
+                        }
+                    }
+                    else if (otherTool == "turnip-seeds")
+                    {
+                        if (HarvestMoon.Instance.TurnipSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackOtherTool("none");
+                        }
+                    }
+                    else if (otherTool == "potato-seeds")
+                    {
+                        if (HarvestMoon.Instance.PotatoSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackOtherTool("none");
+                        }
+                    }
+                    else if (otherTool == "corn-seeds")
+                    {
+                        if (HarvestMoon.Instance.CornSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackOtherTool("none");
+                        }
+                    }
+                    else if (otherTool == "tomato-seeds")
+                    {
+                        if (HarvestMoon.Instance.TomatoSeeds == 0)
+                        {
+                            HarvestMoon.Instance.PackOtherTool("none");
+                        }
+                    }
+                }
+            }
+
             Position += Velocity * deltaSeconds;
         }
 

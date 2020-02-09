@@ -13,17 +13,32 @@ namespace HarvestMoon.Entities.Town
     {
         static List<string> GetItems()
         {
-            return new List<string> { "Cow", "Sheep", "Chicken" };
+            if(HarvestMoon.Instance.Season == "Spring")
+            {
+                return new List<string> { "Grass Seeds", "Turnip Seeds", "Potato Seeds" };
+            }
+            else
+            {
+                return new List<string> { "Grass Seeds", "Corn Seeds", "Tomato Seeds" };
+            }
         }
 
         static List<string> GetClasses()
         {
-            return new List<string> { "Cattle", "Cattle", "Poultry" }; 
+            return new List<string> { "Crop", "Crop", "Crop" }; 
         }
 
         static List<int> GetPrices()
         {
-            return new List<int> { 5000, 3000, 1000 };
+            if (HarvestMoon.Instance.Season == "Spring")
+            {
+                return new List<int> { 300, 120, 180};
+            }
+            else
+            {
+                return new List<int> { 300, 350, 300 };
+            }
+
         }
 
         static Func<List<string>, List<int>, int, string> GetPurchaseCallback()
@@ -52,57 +67,37 @@ namespace HarvestMoon.Entities.Town
                     ConfirmPurchase = false;
                 }
 
-                for (int i = 0; i < purchases.Count; ++i)
-                {
-                    string purchase = purchases[i].ToLower();
-
-                    if (purchase == "cow")
-                    {
-                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
-                        {
-                            return "You can't have more than 10 Cows";
-                        }
-                    }
-
-
-                    if (purchase == "sheep")
-                    {
-                        if (amounts[i] + HarvestMoon.Instance.Sheeps > 10)
-                        {
-                            return "You can't have more than 10 Sheeps";
-                        }
-                    }
-
-
-                    if (purchase == "chicken")
-                    {
-                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
-                        {
-                            return "You can't have more than 10 Chickens";
-                        }
-                    }
-
-                }
 
                 for (int i = 0; i < purchases.Count; ++i)
                 {
                     string purchase = purchases[i].ToLower();
 
-                    if (purchase == "cow")
+                    if (purchase == "grass seeds")
                     {
-                        HarvestMoon.Instance.Cows += amounts[i];
+                        HarvestMoon.Instance.GrassSeeds += amounts[i];
                     }
 
 
-                    if (purchase == "sheep")
+                    if (purchase == "turnip seeds")
                     {
-                        HarvestMoon.Instance.Sheeps += amounts[i];
+                        HarvestMoon.Instance.TurnipSeeds += amounts[i];
                     }
 
 
-                    if (purchase == "chicken")
+                    if (purchase == "potato seeds")
                     {
-                        HarvestMoon.Instance.Chickens += amounts[i];
+                        HarvestMoon.Instance.PotatoSeeds += amounts[i];
+                    }
+
+                    if (purchase == "corn seeds")
+                    {
+                        HarvestMoon.Instance.CornSeeds += amounts[i];
+                    }
+
+
+                    if (purchase == "tomato seeds")
+                    {
+                        HarvestMoon.Instance.TomatoSeeds += amounts[i];
                     }
 
                 }
