@@ -48,7 +48,15 @@ namespace HarvestMoon.Entities.Ranch
                     item.Destroy();
                     onInteractionEnd();
                 }
-            }            
+                else
+                {
+                    onInteractionEnd();
+                }
+            }
+            else
+            {
+                onInteractionEnd();
+            }
         }
 
     }

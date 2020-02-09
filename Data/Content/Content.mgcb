@@ -5341,6 +5341,11 @@
 /processorParam:TextureFormat=Color
 /build:maps/diary/tileset.png
 
+#begin maps/Florist.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/Florist.tmx
+
 #begin maps/House.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor

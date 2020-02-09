@@ -354,7 +354,7 @@ namespace HarvestMoon.Entities
                         {
                             Freeze();
                             _carryingObject.Planked = false;
-                            _carryingObject.Priority = Priority;
+                            _carryingObject.Priority = Priority + 1;
                             _isCarrying = true;
                             _isPacking = true;
                         });
@@ -370,7 +370,23 @@ namespace HarvestMoon.Entities
 
                 if (_carryingObject is Item)
                 {
-                    npc.Interact(_carryingObject as Item, () => { Freeze(); Busy(); }, () => { UnFreeze(); Cooldown(); });
+                    _tweener.Tween(_carryingObject,
+                           new Vector2(npc.BoundingRectangle.Center.X, npc.BoundingRectangle.Center.Y),
+                           0.125f)
+                               .OnComplete(() =>
+                               {
+                                   UnFreeze();
+                                   Cooldown();
+                                   _carryingObject.Planked = true;
+                                   _carryingObject.Priority = 0;
+                                   _isCarrying = false;
+
+                                   _carryingObject.OnInteractableDrop();
+
+                                   npc.Interact(_carryingObject as Item, () => { Freeze(); Busy(); }, () => { UnFreeze(); Cooldown(); });
+
+                                   _carryingObject = null;
+                               });
                 }
                 else
                 {
@@ -519,7 +535,7 @@ namespace HarvestMoon.Entities
 
                             var interactablesButSoil = _entityManager
                                                         .Entities
-                                                        .Where(e => { return e is Interactable && !(e is Soil); })
+                                                        .Where(e => { return e is Interactable && !(e is Soil) && e != _carryingObject; })
                                                         .Cast<Interactable>().ToArray();
                             bool collides = false;
                             foreach (var interactable in interactablesButSoil)
@@ -830,18 +846,27 @@ namespace HarvestMoon.Entities
             {
                 List<Vector3> boundPositions = new List<Vector3>();
 
-                boundPositions.Add(new Vector3(Position.X, Position.Y, 0));
-                boundPositions.Add(new Vector3(Position.X + 32, Position.Y, 0));
-                boundPositions.Add(new Vector3(Position.X - 32, Position.Y, 0));
-                boundPositions.Add(new Vector3(Position.X, Position.Y - 32, 0));
-                boundPositions.Add(new Vector3(Position.X + 32, Position.Y -32, 0));
-                boundPositions.Add(new Vector3(Position.X - 32, Position.Y -32, 0));
-                boundPositions.Add(new Vector3(Position.X, Position.Y + 32, 0));
-                boundPositions.Add(new Vector3(Position.X - 32, Position.Y + 32, 0));
-                boundPositions.Add(new Vector3(Position.X + 32, Position.Y + 32, 0));
-                foreach(var boundPosition in boundPositions)
+                var soilTargetPosition = new Vector3(BoundingRectangle.Center, 0);
+                CollisionGridCell soilCellAtPosition = grid.CollisionGridSet.GetCellAtPosition(soilTargetPosition);
+                if (soilCellAtPosition.Flag == CollisionGridCellFlag.Solid)
                 {
-                    var cellAtPosition = grid.CollisionGridSet.GetCellAtPosition(boundPosition);
+                    var targetPosition = soilCellAtPosition.BoundingBox.Center + grid.CollisionGridSet.GridPosition;
+
+                    boundPositions.Add(new Vector3(targetPosition.X, targetPosition.Y, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X + 32, targetPosition.Y, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X - 32, targetPosition.Y, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X, targetPosition.Y - 32, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X + 32, targetPosition.Y - 32, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X - 32, targetPosition.Y - 32, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X, targetPosition.Y + 32, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X - 32, targetPosition.Y + 32, 0));
+                    boundPositions.Add(new Vector3(targetPosition.X + 32, targetPosition.Y + 32, 0));
+
+                }
+
+                foreach (var boundPosition in boundPositions)
+                {
+                    CollisionGridCell cellAtPosition = grid.CollisionGridSet.GetCellAtPosition(boundPosition);
                     if (cellAtPosition.Flag == CollisionGridCellFlag.Solid)
                     {
                         var targetPosition = cellAtPosition.BoundingBox.Center + grid.CollisionGridSet.GridPosition;

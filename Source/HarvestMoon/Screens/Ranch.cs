@@ -965,13 +965,15 @@ namespace HarvestMoon.Screens
 
             var otherObjects = _entityManager.Entities.Where(e => { return !(e is Soil); }).Cast<Entity>().ToList();
 
+            otherObjects = otherObjects.OrderBy(o => o.Priority).ToList();
+
             for (var i = 0; i < otherObjects.Count; ++i)
             {
                 var otherObject = otherObjects[i];
                 otherObject.Draw(_spriteBatch);
             }
 
-            _player.Draw(_spriteBatch);
+            //_player.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

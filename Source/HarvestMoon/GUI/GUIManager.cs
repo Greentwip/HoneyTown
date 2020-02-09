@@ -969,16 +969,22 @@ namespace HarvestMoon.GUI
 
             if (currentTool != default(string))
             {
-                var currentToolSprite = _holdingItemSprites[currentTool];
+                if(currentTool != "none")
+                {
+                    var currentToolSprite = _holdingItemSprites[currentTool];
 
-                spriteBatch.Draw(currentToolSprite, new Vector2(28, 32));
+                    spriteBatch.Draw(currentToolSprite, new Vector2(28, 32));
+                }
             }
 
             if (otherTool != default(string) && otherTool != currentTool)
             {
-                var currentToolSprite = _holdingItemSprites[otherTool];
+                if(currentTool != "none")
+                {
+                    var currentToolSprite = _holdingItemSprites[otherTool];
 
-                spriteBatch.Draw(currentToolSprite, new Vector2(82, 32));
+                    spriteBatch.Draw(currentToolSprite, new Vector2(82, 32));
+                }
             }
 
             DrawHeart(spriteBatch, _staminaSprites[0], 0, new Vector2(128, 16));

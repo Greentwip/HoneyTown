@@ -15,11 +15,11 @@ namespace HarvestMoon.Entities.Town
         {
             if(HarvestMoon.Instance.Season == "Spring")
             {
-                return new List<string> { "Grass Seeds", "Turnip Seeds", "Potato Seeds" };
+                return new List<string> { "Grass", "Turnip", "Potato" };
             }
             else
             {
-                return new List<string> { "Grass Seeds", "Corn Seeds", "Tomato Seeds" };
+                return new List<string> { "Grass", "Corn", "Tomato" };
             }
         }
 
@@ -72,30 +72,30 @@ namespace HarvestMoon.Entities.Town
                 {
                     string purchase = purchases[i].ToLower();
 
-                    if (purchase == "grass seeds")
+                    if (purchase == "grass")
                     {
                         HarvestMoon.Instance.GrassSeeds += amounts[i];
                     }
 
 
-                    if (purchase == "turnip seeds")
+                    if (purchase == "turnip")
                     {
                         HarvestMoon.Instance.TurnipSeeds += amounts[i];
                     }
 
 
-                    if (purchase == "potato seeds")
+                    if (purchase == "potato")
                     {
                         HarvestMoon.Instance.PotatoSeeds += amounts[i];
                     }
 
-                    if (purchase == "corn seeds")
+                    if (purchase == "corn")
                     {
                         HarvestMoon.Instance.CornSeeds += amounts[i];
                     }
 
 
-                    if (purchase == "tomato seeds")
+                    if (purchase == "tomato")
                     {
                         HarvestMoon.Instance.TomatoSeeds += amounts[i];
                     }
