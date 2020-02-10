@@ -605,6 +605,68 @@ namespace HarvestMoon
                 Instance.Sheeps = saveGame.Sheeps;
                 Instance.Chickens = saveGame.Chickens;
 
+
+                if (saveGame.CowFooderList == null)
+                {
+                    saveGame.CowFooderList = new List<bool>();
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        saveGame.CowFooderList.Add(false);
+                    }
+
+                }
+                else if (saveGame.CowFooderList.Count == 0)
+                {
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        saveGame.CowFooderList.Add(false);
+                    }
+
+                }
+
+                if (saveGame.CowAliveList == null)
+                {
+                    saveGame.CowAliveList = new List<bool>();
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        saveGame.CowAliveList.Add(false);
+                    }
+
+                }
+                else if (saveGame.CowAliveList.Count == 0)
+                {
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        saveGame.CowAliveList.Add(false);
+                    }
+
+                }
+
+
+                if (saveGame.CowStarvingList == null)
+                {
+                    saveGame.CowStarvingList = new List<int>();
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        saveGame.CowStarvingList.Add(0);
+                    }
+
+                }
+                else if (saveGame.CowStarvingList.Count == 0)
+                {
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        saveGame.CowStarvingList.Add(0);
+                    }
+
+                }
+
+                if(saveGame.CowNameIndexDictionary == null)
+                {
+                    saveGame.CowNameIndexDictionary = new SerializableDictionary<string, int>();
+                }
+
+
                 Instance.CowFooderList = saveGame.CowFooderList;
 
                 Instance.CowAliveList = saveGame.CowAliveList;

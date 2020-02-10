@@ -95,7 +95,7 @@ namespace HarvestMoon.Entities.Town
                         {
                             if (!HarvestMoon.Instance.CowAliveList[j])
                             {
-                                openIndex = i;
+                                openIndex = j;
                                 break;
                             }
                         }

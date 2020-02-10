@@ -70,6 +70,7 @@ namespace HarvestMoon.Entities
             {
                 item.Destroy();
                 _fed = true;
+                HarvestMoon.Instance.CowFooderList[Index] = true;
             }
 
 
@@ -81,7 +82,7 @@ namespace HarvestMoon.Entities
 
         public override void Update(GameTime gameTime)
         {
-
+            _sprite.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
