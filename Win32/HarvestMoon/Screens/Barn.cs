@@ -193,7 +193,7 @@ namespace HarvestMoon.Screens
             foreach (var kvp in HarvestMoon.Instance.CowNameIndexDictionary)
             {
                 var i = kvp.Value;
-                var cow = _entityManager.AddEntity(new Cow(Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
+                var cow = _entityManager.AddEntity(new Cow(_player, Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
                 cow.Index = i;
             }
 
