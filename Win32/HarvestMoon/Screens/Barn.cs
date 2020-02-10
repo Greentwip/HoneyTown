@@ -184,11 +184,15 @@ namespace HarvestMoon.Screens
 
             for(int i = 0; i<_cowPlacements.Count; ++i)
             {
-                _entityManager.AddEntity(new Fooder(_player, Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
+                var fooder = _entityManager.AddEntity(new Fooder(_player, Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
+                fooder.Index = i;
+
+                fooder.Feed(HarvestMoon.Instance.CowFooderList[i]);
             }
 
-            for (int i = 0; i<HarvestMoon.Instance.Cows; ++i)
+            foreach (var kvp in HarvestMoon.Instance.CowNameIndexDictionary)
             {
+                var i = kvp.Value;
                 var cow = _entityManager.AddEntity(new Cow(Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
                 cow.Index = i;
             }

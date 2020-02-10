@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using HarvestMoon.Entities.General;
 using System;
 using HarvestMoon.Entities.Items;
+using HarvestMoon.Animation;
 
 namespace HarvestMoon.Entities
 {
@@ -14,6 +15,12 @@ namespace HarvestMoon.Entities
     {
         private Jack _player;
         private ContentManager _content;
+
+        private readonly AnimatedSprite _sprite;
+
+        private bool _fed;
+
+        public int Index { get; set; }
 
         public Fooder(Jack player, ContentManager content, Vector2 initialPosition, Size2 size): base(initialPosition, size)
         {
@@ -37,6 +44,24 @@ namespace HarvestMoon.Entities
 
             TypeName = "fooder";
 
+            var cropItems = AnimationLoader.LoadAnimatedSprite(content,
+                                                                 "animations/iconSet",
+                                                                 "animations/cropItemsMap",
+                                                                 "wheatItem",
+                                                                 1.0f / 7.5f,
+                                                                 false);
+
+            _sprite = cropItems;
+
+
+            _sprite.Play("grass_normal");
+
+            Index = -1;
+        }
+
+        public void Feed(bool fed)
+        {
+            _fed = fed;
         }
 
         public override void Interact(Item item, Action onInteractionStart, Action onInteractionEnd)
@@ -44,6 +69,7 @@ namespace HarvestMoon.Entities
             if(item is Wheat)
             {
                 item.Destroy();
+                _fed = true;
             }
 
 
@@ -55,10 +81,15 @@ namespace HarvestMoon.Entities
 
         public override void Update(GameTime gameTime)
         {
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (_fed)
+            {
+                spriteBatch.Draw(_sprite, BoundingRectangle.Center, 0.0f, new Vector2(1, 1));
+            }
         }
     }
 

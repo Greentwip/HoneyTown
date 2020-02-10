@@ -66,7 +66,7 @@ namespace HarvestMoon.Entities.Ranch
         {
             string Message = "";
 
-            Message = "There, there, you're doing fine";
+            Message = "Hi " + HarvestMoon.Instance.GetCowName(Index) + ". There, there, you're doing fine";
 
             return Message;
         }

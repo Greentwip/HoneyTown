@@ -58,18 +58,18 @@ namespace HarvestMoon.Entities.Town
 
                     if (purchase == "cow")
                     {
-                        if (amounts[i] + HarvestMoon.Instance.Cows > 10)
+                        if (amounts[i] + HarvestMoon.Instance.Cows > 8)
                         {
-                            return "You can't have more than 10 Cows";
+                            return "You can't have more than 8 Cows";
                         }
                     }
 
 
                     if (purchase == "sheep")
                     {
-                        if (amounts[i] + HarvestMoon.Instance.Sheeps > 10)
+                        if (amounts[i] + HarvestMoon.Instance.Sheeps > 8)
                         {
-                            return "You can't have more than 10 Sheeps";
+                            return "You can't have more than 8 Sheeps";
                         }
                     }
 
@@ -90,9 +90,19 @@ namespace HarvestMoon.Entities.Town
 
                     if (purchase == "cow")
                     {
-                        HarvestMoon.Instance.Cows += amounts[i];
-                    }
+                        int openIndex = -1;
+                        for (int j = 0; j < HarvestMoon.Instance.CowAliveList.Count; ++j)
+                        {
+                            if (!HarvestMoon.Instance.CowAliveList[j])
+                            {
+                                openIndex = i;
+                                break;
+                            }
+                        }
 
+                        HarvestMoon.Instance.CowAliveList[openIndex] = true;
+                        HarvestMoon.Instance.CowNameIndexDictionary.Add("cow-" + openIndex.ToString(), openIndex);
+                    }
 
                     if (purchase == "sheep")
                     {

@@ -113,7 +113,7 @@ namespace HarvestMoon
         public int PotatoSeeds { get; set; }
         public int CornSeeds { get; set; }
         public int TomatoSeeds { get; set; }
-        public int Cows { get; set; }
+
         public int Sheeps { get; set; }
         public int Chickens { get; set; }
 
@@ -121,7 +121,14 @@ namespace HarvestMoon
         public int MaxStamina { get; set; }
 
         public List<bool> MilkedList { get; set; }
+        public List<bool> CowFooderList { get; set; }
         public List<bool> EggList { get; set; }
+
+        public List<bool> CowAliveList { get; set; }
+        public List<int> CowStarvingList { get; set; }
+
+        public SerializableDictionary<string, int> CowNameIndexDictionary { get; set; }
+
 
         public SerializableDictionary<string, bool> CutsceneTriggers { get; set; }
 
@@ -234,6 +241,28 @@ namespace HarvestMoon
 
             MaxStamina = 120;
 
+            CowFooderList = new List<bool>();
+
+            for (int i = 0; i < 8; ++i)
+            {
+                CowFooderList.Add(false);
+            }
+
+            CowStarvingList = new List<int>();
+
+            for (int i = 0; i < 8; ++i)
+            {
+                CowStarvingList.Add(0);
+            }
+
+            CowAliveList = new List<bool>();
+
+            for (int i = 0; i < 8; ++i)
+            {
+                CowAliveList.Add(false);
+            }
+
+            CowNameIndexDictionary = new SerializableDictionary<string, int>();
         }
 
 
@@ -395,9 +424,15 @@ namespace HarvestMoon
 
             public SerializableDictionary<string, bool> CutsceneTriggers { get; set; }
 
-            public int Cows { get; set; }
             public int Sheeps { get; set; }
             public int Chickens { get; set; }
+
+            public List<bool> CowFooderList { get; set; }
+            public List<bool> CowAliveList { get; set; }
+
+            public List<int> CowStarvingList { get; set; }
+
+            public SerializableDictionary<string, int> CowNameIndexDictionary { get; set; }
 
             public int FeedPieces { get; set; }
             public int Planks { get; set; }
@@ -418,13 +453,21 @@ namespace HarvestMoon
             sg.FeedPieces = Instance.FeedPieces;
             sg.Planks = Instance.Planks;
             sg.HasNotSeenTheRanch = Instance.HasNotSeenTheRanch;
-            sg.Cows = Instance.Cows;
+
+
             sg.Sheeps = Instance.Sheeps;
             sg.Chickens = Instance.Chickens;
 
             sg.MaxStamina = Instance.MaxStamina;
 
             sg.CutsceneTriggers = Instance.CutsceneTriggers;
+
+            sg.CowFooderList = Instance.CowFooderList;
+
+            sg.CowStarvingList = Instance.CowStarvingList;
+            sg.CowAliveList = Instance.CowAliveList;
+
+            sg.CowNameIndexDictionary = Instance.CowNameIndexDictionary;
 
             sg.BigLogs = new List<BigLog>(Instance.RanchState.Entities.Where(e => e is BigLog).Cast<BigLog>().ToArray());
             sg.BigRocks = new List<BigRock>(Instance.RanchState.Entities.Where(e => e is BigRock).Cast<BigRock>().ToArray());
@@ -559,9 +602,15 @@ namespace HarvestMoon
                 Instance.Planks = saveGame.Planks;
                 Instance.Tools = saveGame.Tools;
 
-                Instance.Cows = saveGame.Cows;
                 Instance.Sheeps = saveGame.Sheeps;
                 Instance.Chickens = saveGame.Chickens;
+
+                Instance.CowFooderList = saveGame.CowFooderList;
+
+                Instance.CowAliveList = saveGame.CowAliveList;
+                Instance.CowStarvingList = saveGame.CowStarvingList;
+
+                Instance.CowNameIndexDictionary = saveGame.CowNameIndexDictionary;
 
                 Instance.MaxStamina = saveGame.MaxStamina != 0 ? saveGame.MaxStamina : 120;
 
@@ -652,8 +701,48 @@ namespace HarvestMoon
                 Instance.Stamina = 120;
 
                 Instance.Gold = 350;
+
+                Instance.CowFooderList = new List<bool>();
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    Instance.CowFooderList.Add(false);
+                }
+
+
+                Instance.CowAliveList = new List<bool>();
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    Instance.CowAliveList.Add(false);
+                }
+
+                Instance.CowStarvingList = new List<int>();
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    Instance.CowStarvingList.Add(0);
+                }
+
+                Instance.CowNameIndexDictionary = new SerializableDictionary<string, int>();
             }
 
+        }
+
+        public string GetCowName(int index)
+        {
+            string name = "";
+
+            foreach(var kvp in Instance.CowNameIndexDictionary)
+            {
+                if(kvp.Value == index)
+                {
+                    name = kvp.Key;
+                    break;
+                }
+            }
+
+            return name;
         }
 
         public bool HasTriggeredCutscene(string cutsceneName)
