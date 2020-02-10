@@ -729,6 +729,11 @@ namespace HarvestMoon
 
         }
 
+        public int GetNumberOfCows()
+        {
+            return Instance.CowNameIndexDictionary.Count;
+        }
+
         public string GetCowName(int index)
         {
             string name = "";

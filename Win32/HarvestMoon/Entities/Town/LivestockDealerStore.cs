@@ -58,7 +58,7 @@ namespace HarvestMoon.Entities.Town
 
                     if (purchase == "cow")
                     {
-                        if (amounts[i] + HarvestMoon.Instance.Cows > 8)
+                        if (amounts[i] + HarvestMoon.Instance.GetNumberOfCows() > 8)
                         {
                             return "You can't have more than 8 Cows";
                         }
