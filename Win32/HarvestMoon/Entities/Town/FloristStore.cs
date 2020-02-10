@@ -36,7 +36,7 @@ namespace HarvestMoon.Entities.Town
             }
             else
             {
-                return new List<int> { 300, 350, 300 };
+                return new List<int> { 300, 280, 240 };
             }
 
         }

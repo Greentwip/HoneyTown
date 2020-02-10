@@ -161,13 +161,39 @@ namespace HarvestMoon.Screens
                     }
 
                 }
+                else if (layer.Name == "Interactables")
+                {
+                    foreach (var obj in layer.Objects)
+                    {
+                        if(obj.Name == "fooder")
+                        {
+                            var objectPosition = obj.Position;
+
+                            objectPosition.X = obj.Position.X + obj.Size.Width * 0.5f;
+                            objectPosition.Y = obj.Position.Y + obj.Size.Height * 0.5f;
+
+                            var objectSize = obj.Size;
+
+                            _entityManager.AddEntity(new FooderBin(_player, Content, objectPosition, objectSize));
+                        }
+
+                    }
+
+                }
             }
 
-            for(int i = 0; i<HarvestMoon.Instance.Cows; ++i)
+            for(int i = 0; i<_cowPlacements.Count; ++i)
+            {
+                _entityManager.AddEntity(new Fooder(_player, Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
+            }
+
+            for (int i = 0; i<HarvestMoon.Instance.Cows; ++i)
             {
                 var cow = _entityManager.AddEntity(new Cow(Content, _cowPlacements[i].Position, _cowPlacements[i].Size));
                 cow.Index = i;
             }
+
+
 
             LoadPlayer();
         }

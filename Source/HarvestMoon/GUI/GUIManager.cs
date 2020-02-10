@@ -979,7 +979,7 @@ namespace HarvestMoon.GUI
 
             if (otherTool != default(string) && otherTool != currentTool)
             {
-                if(currentTool != "none")
+                if(otherTool != "none")
                 {
                     var currentToolSprite = _holdingItemSprites[otherTool];
 

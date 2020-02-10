@@ -839,6 +839,25 @@ namespace HarvestMoon.Entities
             }
         }
 
+        public void Give(Item item)
+        {
+            _entityManager.SubmitEntity(item);
+            _carryingObject = item;
+
+            var carryingParameters = new Vector2 { X = _carryingPosition.X, Y = _carryingPosition.Y };
+
+            _tweener.Tween(item, carryingParameters, 0.125f)
+                    .OnBegin(() =>
+                    {
+                        Freeze();
+                        _carryingObject.Planked = false;
+                        _carryingObject.Priority = Priority;
+                        _isCarrying = true;
+                        _isPacking = true;
+                    });
+
+        }
+
         public void Plant()
         {
             var grids = _entityManager.Entities.Where(e => e is Grid).Cast<Grid>().ToArray();
@@ -1670,9 +1689,16 @@ namespace HarvestMoon.Entities
             {
                 var currentTool = HarvestMoon.Instance.GetCurrentTool();
 
-                var currentToolSprite = _holdingItemSprites[currentTool];
+                if(currentTool != default(string))
+                {
+                    if (currentTool != "none")
+                    {
+                        var currentToolSprite = _holdingItemSprites[currentTool];
 
-                spriteBatch.Draw(currentToolSprite, _carryingPosition);
+                        spriteBatch.Draw(currentToolSprite, _carryingPosition);
+                    }
+
+                }
             }
 
         }

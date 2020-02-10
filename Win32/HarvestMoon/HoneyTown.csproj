@@ -90,6 +90,9 @@
     <Compile Include="Entities\General\Bookshelf.cs" />
     <Compile Include="Entities\General\UpfrontStore.cs" />
     <Compile Include="Entities\Items\Milk.cs" />
+    <Compile Include="Entities\Items\Wheat.cs" />
+    <Compile Include="Entities\Ranch\Fooder.cs" />
+    <Compile Include="Entities\Ranch\FooderBin.cs" />
     <Compile Include="Entities\Ranch\Mouse.cs" />
     <Compile Include="Entities\Ranch\Cow.cs" />
     <Compile Include="Entities\Ranch\BarnDoor.cs" />
