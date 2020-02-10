@@ -361,7 +361,7 @@ namespace HarvestMoon.Entities
 
 
             }
-            else if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && _currentInteractable.IsNPC && _currentInteractable.Interacts && !_busy)
+            else if (keyboardState.IsKeyDown(InputDevice.Keys.A) && !_isInteractButtonDown && _currentInteractable.IsNPC && _currentInteractable.Interacts && !_busy && !HarvestMoon.Instance.GUI.IsPresenting)
             {
                 _busy = true;
                 _isInteractButtonDown = true;
@@ -949,6 +949,10 @@ namespace HarvestMoon.Entities
 
         public override void Update(GameTime gameTime)
         {
+            if (_isFrozen)
+            {
+                _busy = true;
+            }
             var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _sprite.Update(deltaSeconds);
 
@@ -1514,7 +1518,7 @@ namespace HarvestMoon.Entities
                 }
             }
 
-            if(_currentInteractable != null)
+            if(_currentInteractable != null && !_busy)
             {
                 CheckInteractions();
             }

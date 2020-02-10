@@ -52,7 +52,7 @@ namespace HarvestMoon.GUI
 
         private float _coolingTimer = 0;
 
-        private float _npcCoolingDelay = 0.3f;
+        private float _npcCoolingDelay = 1.0f;
 
         private bool _isActionButtonDown = false;
         private bool _isCancelButtonDown = false;
@@ -101,7 +101,7 @@ namespace HarvestMoon.GUI
 
         private Texture2D _window_11Texture;
 
-        public bool IsPresenting => _textPanel != null;
+        public bool IsPresenting => _textPanel != null && !_busy;
 
         public GUIManager(ContentManager content)
         {

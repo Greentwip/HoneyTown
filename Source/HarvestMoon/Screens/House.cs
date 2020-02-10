@@ -316,7 +316,7 @@ namespace HarvestMoon.Screens
 
                         //@TODO display cow starved to death message here
                         HarvestMoon.Instance.GUI.ShowMessage(toRemove + " passed away.", 
-                            () => { _player.Freeze(); }, () => {
+                            () => { _player.Freeze(); _player.Busy(); }, () => {
                             _player.UnFreeze();
                             _player.Cooldown();
                         });
