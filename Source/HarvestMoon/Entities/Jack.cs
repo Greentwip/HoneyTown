@@ -1113,7 +1113,7 @@ namespace HarvestMoon.Entities
             {
                 _isToolButtonDown = true;
 
-                if(currentTool != default(string))
+                if(currentTool != default(string) && currentTool != "none")
                 {
                     int lessStamina = 0;
 
