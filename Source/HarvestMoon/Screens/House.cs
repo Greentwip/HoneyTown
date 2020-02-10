@@ -299,6 +299,7 @@ namespace HarvestMoon.Screens
 
                     if (HarvestMoon.Instance.CowStarvingList[i] >= 5)
                     {
+                        HarvestMoon.Instance.CowStarvingList[i] = 0;
                         HarvestMoon.Instance.CowAliveList[i] = false;
 
                         string toRemove = "";
@@ -315,7 +316,7 @@ namespace HarvestMoon.Screens
                         HarvestMoon.Instance.CowNameIndexDictionary.Remove(toRemove);
 
                         //@TODO display cow starved to death message here
-                        HarvestMoon.Instance.GUI.ShowMessage(toRemove + " passed away.", 
+                        HarvestMoon.Instance.GUI.ShowMessage("Some of the cows passed away.", 
                             () => { _player.Freeze(); _player.Busy(); }, () => {
                             _player.UnFreeze();
                             _player.Cooldown();
