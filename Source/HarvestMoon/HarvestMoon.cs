@@ -1006,7 +1006,7 @@ namespace HarvestMoon
         {
             _dayTime = 0.0f;
 
-            _day = 2.5f;
+            _day = 5.0f;
 
             _morning = (_day * 60.0f / 3) * 1;
             _evening = (_day * 60.0f / 3) * 2;

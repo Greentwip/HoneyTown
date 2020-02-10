@@ -49,66 +49,6 @@ namespace HarvestMoon.Screens
             {
                 HarvestMoon.Instance.LoadGameState(HarvestMoon.Instance.Diary);
             }
-
-            if (_arrival != HarvestMoon.Arrival.Ranch)
-            {
-                HarvestMoon.Instance.Stamina = HarvestMoon.Instance.MaxStamina;
-
-                HarvestMoon.Instance.Gold += HarvestMoon.Instance.TodayGold;
-                HarvestMoon.Instance.TodayGold = 0;
-
-                var soilSegments = HarvestMoon.Instance.RanchState.Entities.Where(e => e is Soil).Cast<Soil>().ToArray();
-
-                foreach (var soilSegment in soilSegments)
-                {
-                    soilSegment.GrowAccordingly();
-                    soilSegment.Dry();
-                }
-
-                for(int i = 0; i<HarvestMoon.Instance.CowAliveList.Count; ++i)
-                {
-                    bool fed = HarvestMoon.Instance.CowFooderList[i];
-
-                    if (!fed)
-                    {
-                        if (HarvestMoon.Instance.CowAliveList[i])
-                        {
-                            HarvestMoon.Instance.CowStarvingList[i] += 1;
-                        }
-                    }
-                    else
-                    {
-                        HarvestMoon.Instance.CowStarvingList[i] = 0;
-                        HarvestMoon.Instance.CowFooderList[i] = false;
-                    }
-
-                    if(HarvestMoon.Instance.CowStarvingList[i] > 5)
-                    {
-                        HarvestMoon.Instance.CowAliveList[i] = false;
-
-                        List<string> toRemove = new List<string>();
-
-                        foreach (var kvp in HarvestMoon.Instance.CowNameIndexDictionary)
-                        {
-                            if(kvp.Value == i)
-                            {
-                                toRemove.Add(kvp.Key);
-                            }
-                        }
-
-                        foreach(var data in toRemove)
-                        {
-                            HarvestMoon.Instance.CowNameIndexDictionary.Remove(data);
-                        }
-
-                        //@TODO display cow starved to death message here
-                    }
-
-
-
-                }
-
-            }
             
 
             // Load the compiled map
@@ -323,6 +263,71 @@ namespace HarvestMoon.Screens
             }
 
             LoadPlayer();
+
+
+            if (_arrival != HarvestMoon.Arrival.Ranch)
+            {
+                HarvestMoon.Instance.Stamina = HarvestMoon.Instance.MaxStamina;
+
+                HarvestMoon.Instance.Gold += HarvestMoon.Instance.TodayGold;
+                HarvestMoon.Instance.TodayGold = 0;
+
+                var soilSegments = HarvestMoon.Instance.RanchState.Entities.Where(e => e is Soil).Cast<Soil>().ToArray();
+
+                foreach (var soilSegment in soilSegments)
+                {
+                    soilSegment.GrowAccordingly();
+                    soilSegment.Dry();
+                }
+
+                for (int i = 0; i < HarvestMoon.Instance.CowAliveList.Count; ++i)
+                {
+                    bool fed = HarvestMoon.Instance.CowFooderList[i];
+
+                    if (!fed)
+                    {
+                        if (HarvestMoon.Instance.CowAliveList[i])
+                        {
+                            HarvestMoon.Instance.CowStarvingList[i] += 1;
+                        }
+                    }
+                    else
+                    {
+                        HarvestMoon.Instance.CowStarvingList[i] = 0;
+                        HarvestMoon.Instance.CowFooderList[i] = false;
+                    }
+
+                    if (HarvestMoon.Instance.CowStarvingList[i] >= 5)
+                    {
+                        HarvestMoon.Instance.CowAliveList[i] = false;
+
+                        string toRemove = "";
+
+                        foreach (var kvp in HarvestMoon.Instance.CowNameIndexDictionary)
+                        {
+                            if (kvp.Value == i)
+                            {
+                                toRemove = kvp.Key;
+                                break;
+                            }
+                        }
+
+                        HarvestMoon.Instance.CowNameIndexDictionary.Remove(toRemove);
+
+                        //@TODO display cow starved to death message here
+                        HarvestMoon.Instance.GUI.ShowMessage(toRemove + " passed away.", 
+                            () => { _player.Freeze(); }, () => {
+                            _player.UnFreeze();
+                            _player.Cooldown();
+                        });
+
+                    }
+
+
+
+                }
+
+            }
         }
 
         public override void Update(GameTime gameTime)

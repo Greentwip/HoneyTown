@@ -218,6 +218,9 @@ namespace HarvestMoon.Screens
                     HarvestMoon.Instance.Diary = "diary-2";
                 }
 
+                _eraseTrigger = false;
+                _guiParagraph.Text = "Choose Diary";
+
             }
 
             if (_selectionPanel != null)
@@ -252,6 +255,12 @@ namespace HarvestMoon.Screens
                         _guiParagraph.Text = "Erase Diary?";
                         _eraseTrigger = true;
                     }
+                }
+                else if(keyboardState.IsKeyDown(InputDevice.Keys.B) && !_isInteractionButtonDown && _eraseTrigger)
+                {
+                    _eraseTrigger = false;
+                    _guiParagraph.Text = "Choose Diary";
+
                 }
                 else if (keyboardState.IsKeyDown(InputDevice.Keys.X) && !_isRunButtonDown && _eraseTrigger)
                 {

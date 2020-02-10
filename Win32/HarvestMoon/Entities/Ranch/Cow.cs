@@ -40,9 +40,14 @@ namespace HarvestMoon.Entities.Ranch
 
         public static Random Random = new Random();
 
-        public Cow(ContentManager content, Vector2 initialPosition, Size2 size)
+        private Jack _player;
+
+        private int _pushTicks;
+
+        public Cow(Jack player, ContentManager content, Vector2 initialPosition, Size2 size)
             : base(initialPosition, size)
         {
+            _player = player;
             Index = -1;
 
             float frameDuration = 1.0f / 7.5f;
@@ -117,6 +122,43 @@ namespace HarvestMoon.Entities.Ranch
                 _moving = true;
             }
 
+            if (_player.BoundingRectangle.Intersects(BoundingRectangle))
+            {
+                _pushTicks++;
+
+                if(_pushTicks >= 60)
+                {
+                    if (_player.PlayerFacing == Jack.Facing.DOWN)
+                    {
+                        _currentMovement = Movement.Up;
+
+                    }
+
+                    if (_player.PlayerFacing == Jack.Facing.UP)
+                    {
+                        _currentMovement = Movement.Down;
+                    }
+
+                    if (_player.PlayerFacing == Jack.Facing.LEFT)
+                    {
+                        _currentMovement = Movement.Right;
+                    }
+
+                    if (_player.PlayerFacing == Jack.Facing.RIGHT)
+                    {
+                        _currentMovement = Movement.Left;
+                    }
+
+                    _leftToMove = 8;
+                    _moving = true;
+
+                }
+            }
+            else
+            {
+                _pushTicks = 0;
+            }
+
             switch (_currentMovement)
             {
                 case Movement.None:
@@ -175,7 +217,9 @@ namespace HarvestMoon.Entities.Ranch
 
         public override void Interact(Item item, Action onInteractionStart, Action onInteractionEnd)
         {
-            HarvestMoon.Instance.GUI.ShowMessage(GetInteractionMessage(), onInteractionStart, onInteractionEnd);
+            if(item == null){
+                HarvestMoon.Instance.GUI.ShowMessage(GetInteractionMessage(), onInteractionStart, onInteractionEnd);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
