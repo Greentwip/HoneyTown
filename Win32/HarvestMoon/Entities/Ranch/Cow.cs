@@ -130,28 +130,33 @@ namespace HarvestMoon.Entities.Ranch
                 {
                     if (_player.PlayerFacing == Jack.Facing.DOWN)
                     {
-                        _currentMovement = Movement.Up;
+                        _currentMovement = Movement.Down;
 
                     }
 
                     if (_player.PlayerFacing == Jack.Facing.UP)
                     {
-                        _currentMovement = Movement.Down;
+                        _currentMovement = Movement.Up;
                     }
 
                     if (_player.PlayerFacing == Jack.Facing.LEFT)
                     {
-                        _currentMovement = Movement.Right;
+                        _currentMovement = Movement.Left;
                     }
 
                     if (_player.PlayerFacing == Jack.Facing.RIGHT)
                     {
-                        _currentMovement = Movement.Left;
+                        _currentMovement = Movement.Right;
                     }
 
                     _leftToMove = 8;
                     _moving = true;
 
+                }
+                else
+                {
+                    _leftToMove = 0;
+                    _moving = false;
                 }
             }
             else

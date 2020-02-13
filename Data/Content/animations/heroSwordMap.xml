@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <XnaContent>
     <Asset Type="System.Collections.Generic.Dictionary[System.String, Microsoft.Xna.Framework.Rectangle]">
-    <Item><Key>sword_down_001</Key><Value>0 0 32 45</Value></Item>
-    <Item><Key>sword_down_002</Key><Value>32 0 32 45</Value></Item>
-    <Item><Key>sword_down_003</Key><Value>64 0 32 45</Value></Item>
-    <Item><Key>sword_down_004</Key><Value>32 0 32 45</Value></Item>
+    <Item><Key>sword_down_001</Key><Value>0 0 48 49</Value></Item>
+    <Item><Key>sword_down_002</Key><Value>48 0 48 49</Value></Item>
+    <Item><Key>sword_down_003</Key><Value>96 0 48 49</Value></Item>
+    <Item><Key>sword_down_004</Key><Value>48 0 48 49</Value></Item>
 
-    <Item><Key>sword_left_001</Key><Value>0 45 32 45</Value></Item>
-    <Item><Key>sword_left_002</Key><Value>32 45 32 45</Value></Item>
-    <Item><Key>sword_left_003</Key><Value>64 45 32 45</Value></Item>
-    <Item><Key>sword_left_004</Key><Value>32 45 32 45</Value></Item>
+    <Item><Key>sword_left_001</Key><Value>0 49 48 49</Value></Item>
+    <Item><Key>sword_left_002</Key><Value>48 49 48 49</Value></Item>
+    <Item><Key>sword_left_003</Key><Value>96 49 48 49</Value></Item>
+    <Item><Key>sword_left_004</Key><Value>48 49 48 49</Value></Item>
 
-    <Item><Key>sword_right_001</Key><Value>0 90 32 45</Value></Item>
-    <Item><Key>sword_right_002</Key><Value>32 90 32 45</Value></Item>
-    <Item><Key>sword_right_003</Key><Value>64 90 32 45</Value></Item>
-    <Item><Key>sword_right_004</Key><Value>32 90 32 45</Value></Item>
+    <Item><Key>sword_right_001</Key><Value>0 98 48 49</Value></Item>
+    <Item><Key>sword_right_002</Key><Value>48 98 48 49</Value></Item>
+    <Item><Key>sword_right_003</Key><Value>96 98 48 49</Value></Item>
+    <Item><Key>sword_right_004</Key><Value>48 98 48 49</Value></Item>
 
-    <Item><Key>sword_up_001</Key><Value>0 135 32 45</Value></Item>
-    <Item><Key>sword_up_002</Key><Value>32 135 32 45</Value></Item>
-    <Item><Key>sword_up_003</Key><Value>64 135 32 45</Value></Item>
-    <Item><Key>sword_up_004</Key><Value>32 135 32 45</Value></Item>
+    <Item><Key>sword_up_001</Key><Value>0 147 48 49</Value></Item>
+    <Item><Key>sword_up_002</Key><Value>48 147 48 49</Value></Item>
+    <Item><Key>sword_up_003</Key><Value>96 147 48 49</Value></Item>
+    <Item><Key>sword_up_004</Key><Value>48 147 48 49</Value></Item>
     </Asset>
 </XnaContent>

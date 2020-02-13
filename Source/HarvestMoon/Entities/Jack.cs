@@ -227,14 +227,14 @@ namespace HarvestMoon.Entities
                                                                       false);
 
             var heroMilkerAnimation = AnimationLoader.LoadAnimatedSprite(content,
-                                                                      "animations/hero",
+                                                                      "animations/heroMilker",
                                                                       "animations/heroMilkerMap",
                                                                       "heroMilker",
                                                                       frameDuration,
                                                                       false);
 
             var heroSwordAnimation = AnimationLoader.LoadAnimatedSprite(content,
-                                                                      "animations/hero",
+                                                                      "animations/heroSword",
                                                                       "animations/heroSwordMap",
                                                                       "heroSword",
                                                                       frameDuration,
@@ -953,6 +953,10 @@ namespace HarvestMoon.Entities
             {
                 _busy = true;
             }
+            else
+            {
+                Cooldown();
+            }
             var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _sprite.Update(deltaSeconds);
 
@@ -1661,14 +1665,30 @@ namespace HarvestMoon.Entities
                 }
                 else
                 {
-
-                    if (_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                    if(currentTool == "milker")
                     {
-                        spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 8), 0.0f, new Vector2(scale, scale));
+                        if (_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                        {
+                            spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y), 0.0f, new Vector2(scale, scale));
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y), 0.0f, new Vector2(scale, scale));
+
+                        }
+
                     }
                     else
                     {
-                        spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 4), 0.0f, new Vector2(scale, scale));
+                        if (_playerFacing == Facing.UP || _playerFacing == Facing.DOWN)
+                        {
+                            spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 8), 0.0f, new Vector2(scale, scale));
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(_sprite, new Vector2(Position.X, Position.Y - 4), 0.0f, new Vector2(scale, scale));
+
+                        }
 
                     }
 
